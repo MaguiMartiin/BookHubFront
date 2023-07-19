@@ -1,0 +1,44 @@
+.container{
+    background-color: rgba(255, 152, 139, 1);
+    height: 100vh;
+    width: 98.3vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.div1{
+    color: white;
+    font-size: 2rem;
+    font-family: 'Baloo', sans-serif;
+    display: flex;
+    align-items: center;
+    margin-left: 3rem;
+}
+
+.botonInicio{
+    width: 10rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    background-color: rgba(255, 191, 183, 1);
+    color: rgba(255, 152, 139, 1);
+    font-family: 'Baloo', sans-serif;
+    border: 0;
+    margin-left: 60rem;
+    transition: all 0.2s;
+}
+.botonInicio:hover {
+    transform: scale(1.1);
+}
+
+.div2{
+    color: white;
+}
+
+.h1{
+    font-family: 'Abel', sans-serif;
+}
+
+.h2{
+    font-family: 'Alegreya Sans', sans-serif;
+}
