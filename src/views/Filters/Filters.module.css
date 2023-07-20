@@ -1,0 +1,43 @@
+.filtersContainer {
+    margin-top: 10px;
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .selectOrder{
+    background-color: #FF988B;
+    color: #FFD8D4;
+    border-radius: 9999px;
+    width: 200px;
+    text-align: center;
+    padding: 8px;
+    font-weight: bold;
+  }
+  .selectGender {
+    background-color: #FF988B;
+    color: #FFD8D4;
+    border-radius: 9999px;
+    width: 200px;
+    text-align: center;
+    padding: 8px;
+    font-weight: bold;
+  }
+  
+  .resetButton {
+    background-color: #FF988B;
+    color: #FFD8D4;
+    width: 80px;
+    border-radius: 9999px;
+  }
+  
+  .resetButtonContent {
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+  
