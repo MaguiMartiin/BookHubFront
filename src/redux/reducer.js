@@ -20,6 +20,8 @@ const rootReducer = (state = initialState, action) => {
                 AllBooks: [...state.AllBooks, action.payload],
                 copyState: [...state.copyState, action.payload]
             }
+        default:
+            return state;
     }
 }
 

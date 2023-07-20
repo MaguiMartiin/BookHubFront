@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 const NavBar = () => {
     return (
-        <div>
+        <div className='h-[80px]'>
             <Link to="/home">Inicio</Link>
             <Link to="/carrito">Carrito</Link>
         </div>
