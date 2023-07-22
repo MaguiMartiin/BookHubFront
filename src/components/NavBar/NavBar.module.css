@@ -1,0 +1,45 @@
+.contain{
+    font-family: 'Baloo', sans-serif;
+    background-color: rgba(255, 152, 139, 1);
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.h1{
+    color: white;
+    font-size: 3rem;
+    flex: 1rem;
+}
+
+.link{
+    color: rgba(255, 216, 212, 1);
+    font-size: 2rem;
+    margin-right: 5rem;
+    transition: color 0.2s; 
+}
+.link:hover {
+    color:  white;
+}
+
+.div{
+    align-items: center;
+    display: flex;  
+    flex: 1;
+}
+
+.botonInicio{
+    width: 10rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    background-color: rgba(255, 191, 183, 1);
+    color: rgba(255, 152, 139, 1);
+    border: 0;
+    margin-left: 20rem;
+    transition: all 0.2s;
+}
+.botonInicio:hover {
+    transform: scale(1.1);
+}

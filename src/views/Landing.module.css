@@ -1,19 +1,20 @@
 .container{
     background-color: rgba(255, 152, 139, 1);
+    padding: 1rem;
     height: 100vh;
-    width: 98.3vw;
+    width: 100vw;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    overflow: auto;
 }
 
 .div1{
     color: white;
-    font-size: 2rem;
+    font-size: 3rem;
     font-family: 'Baloo', sans-serif;
     display: flex;
     align-items: center;
-    margin-left: 3rem;
 }
 
 .botonInicio{
@@ -24,7 +25,7 @@
     color: rgba(255, 152, 139, 1);
     font-family: 'Baloo', sans-serif;
     border: 0;
-    margin-left: 60rem;
+    margin-left: auto;
     transition: all 0.2s;
 }
 .botonInicio:hover {
@@ -32,13 +33,121 @@
 }
 
 .div2{
+    z-index: 0;
     color: white;
+    display: flex; 
+    justify-content: center;
+}
+
+.h{
+    flex-direction: column;
+    align-items: center;
+}
+
+.img1{
+    width: 20%;
+    height: auto;
+    margin-left: -1rem;
 }
 
 .h1{
     font-family: 'Abel', sans-serif;
+    font-size: 4rem;
+    margin-left: 2rem;
 }
 
 .h2{
     font-family: 'Alegreya Sans', sans-serif;
+    margin-top: 1rem;
+    font-size: 2rem;
+    margin-left: 2rem;
+}
+
+.botonHome{
+    width: 10rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    background-color: rgba(255, 191, 183, 1);
+    color: rgba(255, 152, 139, 1);
+    font-family: 'Baloo', sans-serif;
+    border: 0;
+    margin-left: 40rem;
+    transition: all 0.2s;
+}
+.botonHome:hover {
+    transform: scale(1.1);
+}
+
+.div3{
+    z-index: 0;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    font-size: 3rem;
+    font-family: 'Baloo', sans-serif;
+    padding: 1rem;
+}
+
+.hCont {
+    flex-direction: column;
+    align-items: flex-start;
+}
+.hCont h1 {
+    margin-bottom: 1rem;
+}
+.hCont h2 {
+    margin-bottom: 1.5rem; 
+    font-size: 2rem;
+    margin-left: 18.5rem;
+    color:rgba(255, 191, 183, 1);
+}
+
+.img2{
+    width: 20%;
+    height: 75%;
+    margin-right: -2rem;
+}
+
+.div4{
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: -5rem;
+}
+.div4 h1 {
+    color: white;
+    font-size: 2rem;
+    font-family: 'Baloo', sans-serif;
+    justify-content: center;
+    display: flex;
+}
+
+.cat {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    align-items: center; 
+    margin-top: 1rem;
+}
+
+.botonCat{
+    width: 20%;
+    height: 50%;
+    background-color: rgba(255, 191, 183, 1);
+    color: rgba(255, 152, 139, 1);
+    font-family: 'Baloo', sans-serif;
+    font-size: 2rem;
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.div5{
+    justify-content: center;
+    display: flex;
+    margin-top: 3rem;
+}
+.div5 h1 {
+    color: white;
+    font-size: 2rem;
+    font-family: 'Baloo', sans-serif;
+    
 }

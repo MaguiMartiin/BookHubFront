@@ -1,0 +1,38 @@
+.customPaginationContainer {
+    display: flex;
+    gap: 10px;
+    margin: 0 auto;
+    background-color: #FFD8D4;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .customPaginationButtons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .customPaginationButton {
+    background-color: #FF988B;
+    width: 100px;
+    padding: 10px;
+    margin: 20px 0;
+    text-align: center;
+    color: white;
+    border-radius: 999px;
+  }
+  
+  .customPaginationPage {
+    margin-top: 20px;
+    padding: 10px;
+    width: 100px;
+    text-align: center;
+    background-color: #FF988B;
+    color: white;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+  }
+  
