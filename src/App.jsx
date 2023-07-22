@@ -10,7 +10,7 @@ function App() {
   const location = useLocation()
   return (
     <div>
-      {location.pathname !== "/" && <NavBar/>}
+      {/*location.pathname !== "/" && <NavBar/>*/}
       <Routes>
         <Route path='/home' element={<Home/>}/>
         <Route exact path = "/" element={<Landing/>}/>
