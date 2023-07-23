@@ -1,9 +1,9 @@
-import {GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS} from './action-types'
+import {GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS, GET_AUTHOR} from './action-types'
 import axios from 'axios';
 
 export const getAllBooks = () => {
-  return (dispatch) => {
-    setTimeout(() => {
+  return async (dispatch) => {
+   /* setTimeout(() => {
       const singleBook =  [
         {
           name: "Product Aaaaaa",
@@ -78,7 +78,10 @@ export const getAllBooks = () => {
       ]
       
       dispatch({ type: GET_BOOKS, payload: singleBook });
-    }, 1100);
+    }, 1100);*/
+    const response = await axios.get("http://localhost:3001/book")
+    //console.log("djdj", response.data)
+    return dispatch({ type: GET_BOOKS, payload: response.data })
   };
 };
 // export const getAllBooks = () => {
@@ -107,10 +110,50 @@ export const createBook = (payload) =>{
   }
 
   
-  export const filter = (book) =>{
-  return { type: FILTER, payload:book };
-};
-
+  export const filter = (book) => {
+    return async (dispatch) => {
+      try {
+        console.log("--->", book.search);
+  
+        let params = {};
+  
+        if (book.gender === "gender") {
+          params.gender = encodeURIComponent(book.dataGender);
+        }
+  
+        if (book.author === "author") {
+          params.author = encodeURIComponent(book.dataAuthor);
+        }
+  
+        if (book.price === "price" && book.dataPrice[0].minimo && book.dataPrice[0].maximo) {
+          const minimo = book.dataPrice[0].minimo;
+          const maximo = book.dataPrice[0].maximo;
+          params.price = `${minimo},${maximo}`;
+        }
+  
+        if (book.releaseDate === "releaseDate" && book.dataReleateDate.length === 2) {
+          const startDate = encodeURIComponent(book.dataReleateDate[0]);
+          const endDate = encodeURIComponent(book.dataReleateDate[1]);
+          params.releaseDate = `${startDate},${endDate}`;
+        }
+  
+        if (book.search === "search") {
+          params.search = encodeURIComponent(book.dataSearch);
+        }
+  
+        const queryString = Object.entries(params)
+          .map(([key, value]) => `${key}=${value}`)
+          .join("&");
+  
+        const response = await axios.get(`http://localhost:3001/filter?${queryString}`);
+        //console.log("filter", response.data)
+        return dispatch({ type: FILTER, payload: response.data });
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+  };
+  
 
 
 export const getGenders = () =>{
@@ -118,6 +161,17 @@ export const getGenders = () =>{
     try {
       const response = await axios.get(`http://localhost:3001/gender`)
       return dispatch({ type: GET_GENDERS, payload: response.data })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+export const getAuthor = () =>{
+  return async (dispatch) =>{
+    try {
+      const response = await axios.get(`http://localhost:3001/author`)
+      return dispatch({ type: GET_AUTHOR, payload: response.data })
     } catch (error) {
       console.log(error);
     }

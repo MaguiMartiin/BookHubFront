@@ -2,25 +2,55 @@ import style from './Filters.module.css'
 import React from 'react';
 import { useState,useEffect} from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { filter, getAllBooks, getGenders } from '../../redux/actions';
+import { filter, getAllBooks, getAuthor, getGenders } from '../../redux/actions';
 
 const Filters = ({setPage}) => {
   const dispatch = useDispatch();
 
   const copyState = useSelector((state) => state.copyState)
-  const allBooks = useSelector((state) => state.allBooks)
+  //const allBooks = useSelector((state) => state.allBooks)
   const genders = useSelector((state) => state.genders)
-
+  const authors = useSelector((state) => state.authors)
 
   useEffect(() => {
     dispatch(getGenders());
+    dispatch(getAuthor());
   }, [dispatch]);
 
   const [order, setOrder] = useState('');
   const [filterByGender, setFilterByGender] = useState('');
-  const [filteredBooks, setFilteredBooks] = useState([]);
+  //const [filteredBooks, setFilteredBooks] = useState([]);
+  const [filtro, setFiltro] = useState({
+      gender:"", 
+      dataGender: "",
+      author:"", 
+      dataAuthor: "",
+      price:"",
+      dataPrice: [{minimo: 0, maximo: 0}],
+      releaseDate: "",
+      dataReleateDate: [],
+      search: "",
+      dataSearch: ""
+  });
 
+ 
+  const years = [];
+  for (let year = 2000; year <= 2023; year++) {
+    years.push(year);
+  }
 
+//fecha
+  const handleChange = (event) => {
+    console.log("fecha",event.target.value)
+    const { value } = event.target;
+    const startDate = `${value}-01-01`;
+    const endDate = `${value}-12-31`;
+    setFiltro({
+      ...filtro,
+      releaseDate: "releaseDate",
+      dataReleateDate: [startDate, endDate]
+    })
+  };
   const handleOrder = () => {
     let books = [...copyState];
     if(order === 'high') books = books.sort((a, b) => b.price - a.price);
@@ -30,22 +60,63 @@ const Filters = ({setPage}) => {
     dispatch(filter(books));
   }
 
-
+  //genero
   const selectGender = (event) => {
-    const selectedGender = event.target.value;
-    setFilterByGender(selectedGender);
-  
-    if (selectedGender === 'all') {
-      dispatch(getAllBooks());
-      
-    } else {
-      const filteredBooks = allBooks?.filter((book) => book.Gender.name === selectedGender);
-      setFilteredBooks(filteredBooks);
-      dispatch(filter(filteredBooks));
-    }
+    console.log(event.target.value)
+    const { value } = event.target;
+    setFiltro({
+      ...filtro,
+      gender:"gender", 
+      dataGender: value
+    })
     setPage(1);
   };
   
+  //autor
+  const selectAuthor = (event) => {
+    const { value } = event.target;
+    setFiltro({
+      ...filtro,
+      author: "author", 
+      dataAuthor: value
+    })   
+    setPage(1);
+  };
+
+  //precio minimo
+  const handleMinimo = (event) => {
+    const { value } = event.target;
+    const updatedMinimo = Math.min(value, filtro.dataPrice[0].maximo);
+    // Actualizar solo si el valor cambia
+    if (updatedMinimo !== filtro.dataPrice[0].minimo) {
+      setFiltro({
+        ...filtro,
+        price: "price",
+        dataPrice: [{ ...filtro.dataPrice[0], minimo: updatedMinimo, maximo: filtro.dataPrice[0].maximo }]
+      });
+      setPage(1);
+    }
+  };
+  
+  //precio maximo
+  const handleMaximo = (event) => {
+    const { value } = event.target;
+    const updatedMaximo = Math.max(value, filtro.dataPrice[0].minimo);
+    // Actualizar solo si el valor cambia
+    if (updatedMaximo !== filtro.dataPrice[0].maximo) {
+      setFiltro({
+        ...filtro,
+        price: "price",
+        dataPrice: [{ ...filtro.dataPrice[0], minimo: filtro.dataPrice[0].minimo, maximo: updatedMaximo }]
+      });
+      setPage(1);
+    }
+  };
+
+  useEffect(() => {
+    console.log("aaa", filtro);
+    dispatch(filter(filtro));
+  }, [filtro]);
 
 
   const reset = () =>{
@@ -63,16 +134,22 @@ const Filters = ({setPage}) => {
 
   return (
     <div className={style.filtersContainer}>
-      <select value={order} onChange={(event) => setOrder(event.target.value)} className={style.selectOrder}>
-        <option value="">Año</option>
-        <option value="asc">Nuevos</option>
-        <option value="desc">Antiguos</option>
+      <select id="yearSelect" onChange={handleChange} className={style.selectOrder}>
+        <option value="">-- Año --</option>
+        {years.map((year) => (
+          <option key={year} value={year}>
+            {year}
+          </option>
+        ))}
       </select>
 
-      <select className={style.selectOrder}>
-        <option value="">Autor</option>
-        <option value="">autor1</option>
-        <option value="">autor2</option>
+      <select className={style.selectOrder} onChange={selectAuthor}>
+        <option value="all">Autor</option>
+        {authors?.map((e, i)=>
+          <option key={i} value={e}>
+          {e}
+        </option>
+        )}
       </select>
 
       <select value={filterByGender} className={style.selectGender} onChange={selectGender}>
@@ -84,12 +161,9 @@ const Filters = ({setPage}) => {
           )}
       </select>
 
+      <input type="number" placeholder='Mínimo' onChange={handleMinimo}/>
 
-      <select value={order} onChange={(event) => setOrder(event.target.value)} className={style.selectOrder}>
-        <option value="">Precio</option>
-        <option value="high">High price</option>
-        <option value="low">Low price</option>
-      </select>
+      <input type="number" placeholder='Máximo' onChange={handleMaximo}/>
 
       <button className={style.resetButton} >
         <div className={style.resetButtonContent}>
