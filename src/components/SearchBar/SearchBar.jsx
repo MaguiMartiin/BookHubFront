@@ -29,7 +29,7 @@ const SearchBar = ({copyState, updateFilter}) => {
     );
     if (filtered.length === 0) {
       Swal.fire({
-        title: 'book not found',
+        title: 'Book not found',
         icon: 'error',
       });
     } else {
