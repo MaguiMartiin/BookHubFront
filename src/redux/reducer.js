@@ -1,4 +1,4 @@
-import { GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS, GET_AUTHOR } from "./action-types"
+import { GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS, BOOK_ID, GET_BOOK_NAME,  GET_GENDERS, GET_AUTHOR } from "./action-types"
 
 
 const initialState = {
@@ -6,6 +6,7 @@ const initialState = {
     copyState: [],
     genders: [],
     authors: [],
+    bookId: [],
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -37,6 +38,17 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 authors: action.payload,
             };    
+
+        case BOOK_ID:
+            return{
+                ...state, 
+                bookId: action.payload};
+
+        case GET_BOOK_NAME:
+            return{
+                ...state,
+                copyState:action.payload,
+            };
 
         default:
             return state;

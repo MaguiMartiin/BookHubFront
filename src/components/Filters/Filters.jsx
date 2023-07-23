@@ -55,8 +55,8 @@ const Filters = ({setPage}) => {
     let books = [...copyState];
     if(order === 'high') books = books.sort((a, b) => b.price - a.price);
     if(order === 'low') books = books.sort((a, b) => a.price - b.price);
-    if(order === 'asc') books = books.sort((a, b) => b.releaseDate - a.releaseDate);
-    if(order === 'desc') books = books.sort((a, b) => a.releaseDate - b.releaseDate);
+    if (order === 'asc') books = books.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate));
+    if (order === 'desc') books = books.sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
     dispatch(filter(books));
   }
 

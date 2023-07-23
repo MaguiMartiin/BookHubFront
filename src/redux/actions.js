@@ -1,102 +1,5 @@
-import {GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS, GET_AUTHOR} from './action-types'
+import {GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS, BOOK_ID, GET_BOOK_NAME, GET_GENDERS, GET_AUTHOR} from './action-types'
 import axios from 'axios';
-
-export const getAllBooks = () => {
-  return async (dispatch) => {
-   /* setTimeout(() => {
-      const singleBook =  [
-        {
-          name: "Product Aaaaaa",
-          price: 24.99,
-          image: "https://images.cdn1.buscalibre.com/fit-in/360x360/fd/d6/fdd63c483d85776e32e397d1fdd108f7.jpg",
-          releaseDate: 2019,
-          Gender: { "name": "Accion" }
-        },
-        {
-          name: "Product Bbbbadbbb",
-          price: 39.95,
-          image: "https://images.cdn1.buscalibre.com/fit-in/360x360/fd/d6/fdd63c483d85776e32e397d1fdd108f7.jpg",
-          releaseDate: 2018,
-          Gender: { "name": "Accion" }
-        },
-        {
-          name: "Product Cccvcc",
-          price: 12.49,
-          image: "https://images.cdn1.buscalibre.com/fit-in/360x360/fd/d6/fdd63c483d85776e32e397d1fdd108f7.jpg",
-          releaseDate: 2017,
-          Gender: { "name": "Aventura" }
-        },
-        {
-          name: "Product Ddasdddd",
-          price: 59.99,
-          image: "https://images.cdn1.buscalibre.com/fit-in/360x360/fd/d6/fdd63c483d85776e32e397d1fdd108f7.jpg",
-          releaseDate: 2016,
-          Gender: { "name": "ciencia ficción" }
-        },
-        {
-          name: "Product Eeeasddee",
-          price: 18.75,
-          image: "https://images.cdn1.buscalibre.com/fit-in/360x360/fd/d6/fdd63c483d85776e32e397d1fdd108f7.jpg",
-          releaseDate: 2015,
-          Gender: { "name": "misterio" }
-        },
-        {
-          name: "Product Fffaff",
-          price: 34.95,
-          image: "https://images.cdn1.buscalibre.com/fit-in/360x360/fd/d6/fdd63c483d85776e32e397d1fdd108f7.jpg",
-          releaseDate: 2014,
-          Gender: { "name": "misterio" }
-        },
-        {
-          name: "Product Gggdggg",
-          price: 9.99,
-          image: "https://images.cdn1.buscalibre.com/fit-in/360x360/fd/d6/fdd63c483d85776e32e397d1fdd108f7.jpg",
-          releaseDate: 2013,
-          Gender: { "name": "Suspenso" }
-        },
-        {
-          name: "Product Hhasdshh",
-          price: 49.50,
-          image: "https://images.cdn1.buscalibre.com/fit-in/360x360/fd/d6/fdd63c483d85776e32e397d1fdd108f7.jpg",
-          releaseDate: 2012,
-          Gender: { "name": "Female" }
-        },
-        {
-          name: "Product Iiiii",
-          price: 29.99,
-          image: "https://images.cdn1.buscalibre.com/fit-in/360x360/fd/d6/fdd63c483d85776e32e397d1fdd108f7.jpg",
-          releaseDate: 2011,
-          Gender: { "name": "Romance" }
-        },
-        {
-          name: "Product Jjsdasjj",
-          price: 15.25,
-          image: "https://images.cdn1.buscalibre.com/fit-in/360x360/fd/d6/fdd63c483d85776e32e397d1fdd108f7.jpg",
-          releaseDate: 2010,
-          Gender: { "name": "Terror" }
-        }
-      ]
-      
-      dispatch({ type: GET_BOOKS, payload: singleBook });
-    }, 1100);*/
-    const response = await axios.get("http://localhost:3001/book")
-    //console.log("djdj", response.data)
-    return dispatch({ type: GET_BOOKS, payload: response.data })
-  };
-};
-// export const getAllBooks = () => {
-//     return async (dispatch) => {
-//         try {
-//           const response = await axios.get(`http://localhost:3001/book`);
-//           return dispatch({ type: GET_BOOKS, payload: response.data });
-//         } catch (error) {
-//           console.log(error);
-//         }
-//       };
-// }
-
-
-
 
 export const createBook = (payload) =>{
   return async (dispatch) =>{
@@ -108,6 +11,18 @@ export const createBook = (payload) =>{
         }
     }
   }
+
+
+export const getAllBooks = () => {
+    return async (dispatch) => {
+        try {
+          const response = await axios.get(`https://servidor-libreria.onrender.com/book`);
+          return dispatch({ type: GET_BOOKS, payload: response.data });
+        } catch (error) {
+          console.log(error);
+        }
+      };
+}
 
   
   export const filter = (book) => {
@@ -159,7 +74,7 @@ export const createBook = (payload) =>{
 export const getGenders = () =>{
   return async (dispatch) =>{
     try {
-      const response = await axios.get(`http://localhost:3001/gender`)
+      const response = await axios.get(`https://servidor-libreria.onrender.com/gender`)
       return dispatch({ type: GET_GENDERS, payload: response.data })
     } catch (error) {
       console.log(error);
@@ -204,6 +119,17 @@ export const getAuthor = () =>{
     id: 7,
     name: "Terror"
   }
-};*/
+}
 
-// const repeatedBooks = Array(18).fill(singleBook);
+
+export const getBookByName = (name) =>{
+  return async (dispatch) => {
+    try {
+        const response = await axios.get(`https://servidor-libreria.onrender.com/book/?name=${name}`);
+        return dispatch({ type: GET_BOOK_NAME, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+}*/
