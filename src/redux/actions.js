@@ -1,7 +1,7 @@
-import {GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS} from './action-types'
+import {GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS, BOOK_ID} from './action-types'
 import axios from 'axios';
 
-export const getAllBooks = () => {
+/* export const getAllBooks = () => {
   return (dispatch) => {
     setTimeout(() => {
       const singleBook =  [
@@ -80,17 +80,17 @@ export const getAllBooks = () => {
       dispatch({ type: GET_BOOKS, payload: singleBook });
     }, 1100);
   };
-};
-// export const getAllBooks = () => {
-//     return async (dispatch) => {
-//         try {
-//           const response = await axios.get(`http://localhost:3001/book`);
-//           return dispatch({ type: GET_BOOKS, payload: response.data });
-//         } catch (error) {
-//           console.log(error);
-//         }
-//       };
-// }
+}; */
+export const getAllBooks = () => {
+  return async (dispatch) => {
+        try {
+          const response = await axios.get(`https://servidor-libreria.onrender.com/book`);
+          return dispatch({ type: GET_BOOKS, payload: response.data });
+        } catch (error) {
+          console.log(error);
+        }
+       };
+}
 
 
 
@@ -124,7 +124,15 @@ export const getGenders = () =>{
   }
 }
 
-
+export const bookId = (id) => {
+  return async function (dispatch){
+    try{
+      const bookDetail = (await axios.get(`https://servidor-libreria.onrender.com/book/${id}`)).data
+      return dispatch ({type: BOOK_ID, payload: bookDetail})
+    }
+    catch(error){console.log(error)}
+  }
+}
 
 
 
