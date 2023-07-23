@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux';
 import style from './SearchBar.module.css'
 import React from 'react';
 import { useEffect, useState } from 'react';

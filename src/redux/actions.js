@@ -1,4 +1,4 @@
-import {GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS, BOOK_ID, GET_BOOK_NAME, GET_GENDERS, GET_AUTHOR} from './action-types'
+import {GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS, BOOK_ID, GET_BOOK_NAME, GET_AUTHOR} from './action-types'
 import axios from 'axios';
 
 export const createBook = (payload) =>{
@@ -24,6 +24,15 @@ export const getAllBooks = () => {
       };
 }
 
+export const bookId = (id) => {
+  return async function (dispatch){
+    try{
+      const bookDetail = (await axios.get(`https://servidor-libreria.onrender.com/book/${id}`)).data
+      return dispatch ({type: BOOK_ID, payload: bookDetail})
+    }
+    catch(error){console.log(error)}
+  }
+}
   
   export const filter = (book) => {
     return async (dispatch) => {
@@ -120,7 +129,7 @@ export const getAuthor = () =>{
     name: "Terror"
   }
 }
-
+*/
 
 export const getBookByName = (name) =>{
   return async (dispatch) => {
@@ -132,4 +141,4 @@ export const getBookByName = (name) =>{
     }
 
   }
-}*/
+}
