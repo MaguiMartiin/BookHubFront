@@ -1,23 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import cloudinary from "./Cloudinary";
-import { getGenders } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { getGenders, getAuthor } from "../../redux/actions";
 
 const FormRegistro = () => {
+	const dispatch = useDispatch();
+
+	const genders = useSelector((state) => state.genders);
+	const authors = useSelector((state) => state.authors);
+
+	useEffect(() => {
+		dispatch(getGenders());
+		dispatch(getAuthor());
+	}, [dispatch]);
+
+	console.log(authors, "gender_stado_global");
+
 	const [formGo, setFormGo] = useState(false);
 
 	const validationSchema = Yup.object().shape({
 		image: Yup.mixed().required("Image is required"),
-		date: Yup.date().required("Date is required"),
+		releaseDate: Yup.date().required("Date is required"),
 		// Add more validation rules for other form fields if needed
 	});
 
 	const handleSubmit = async (values, { resetForm, setSubmitting }) => {
 		try {
 			console.log(values);
-			const response = await axios.post("http://localhost:3001/book", values);
+			const modifiedValues = {
+				...values,
+				GenderId:Number(values.GenderId), 
+				AuthorId:Number(values.AuthorId), 
+			};
+			const response = await axios.post(
+				"http://localhost:3001/book",
+				modifiedValues
+			);
+			resetForm();
+
+			console.log(response);
 
 			if (response.status === 200) {
 				console.log("Formulario enviado:", values);
@@ -52,10 +76,9 @@ const FormRegistro = () => {
 						price: "",
 						available: "",
 						image: null,
-						author: "",
-						gender: "",
+						AuthorId: "",
+						GenderId: "",
 						releaseDate: "",
-						date: "",
 					}}
 					onSubmit={handleSubmit}>
 					{({ errors, setFieldValue, isSubmitting }) => (
@@ -148,14 +171,77 @@ const FormRegistro = () => {
 									)}
 								/>
 							</div>
+							{/* gender */}
+							<div className="mb-5">
+								<label
+									htmlFor="gender"
+									className="block text-gray-700 text-sm uppercase font-bold mb-2">
+									Género
+								</label>
+								<Field
+									as="select"
+									id="gender"
+									name="GenderId" // Change "gender" to "GenderId"
+									className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-400 focus:shadow-outline">
+									<option value="" disabled>
+										Selecciona un género
+									</option>
+									{genders &&
+										genders.map((gender, index) => (
+											<option key={index} value={index + 1}>
+												{gender}
+											</option>
+										))}
+								</Field>
+								<ErrorMessage
+									name="GenderId" // Change "gender" to "GenderId"
+									component={() => (
+										<p className="text-red-500 text-xs italic">
+											{errors.GenderId} {/* Change "gender" to "GenderId" */}
+										</p>
+									)}
+								/>
+							</div>
+
+							{/* author */}
+							<div className="mb-5">
+								<label
+									htmlFor="author"
+									className="block text-gray-700 text-sm uppercase font-bold mb-2">
+									Autor
+								</label>
+								<Field
+									as="select"
+									id="author"
+									name="AuthorId" // Change "author" to "AuthorId"
+									className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-400 focus:shadow-outline">
+									<option value="" disabled>
+										Selecciona un autor
+									</option>
+									{authors &&
+										authors.map((author, index) => (
+											<option key={index} value={index + 1}>
+												{author}
+											</option>
+										))}
+								</Field>
+								<ErrorMessage
+									name="AuthorId" // Change "author" to "AuthorId"
+									component={() => (
+										<p className="text-red-500 text-xs italic">
+											{errors.AuthorId} {/* Change "author" to "AuthorId" */}
+										</p>
+									)}
+								/>
+							</div>
 							{/* fecha */}
 							<div className="mb-5">
 								<label
-									htmlFor="date"
+									htmlFor="releaseDate"
 									className="block text-gray-700 text-sm uppercase font-bold mb-2">
 									Fecha
 								</label>
-								<Field name="date">
+								<Field name="releaseDate">
 									{({ field }) => (
 										<>
 											{/* Use the input type="date" to enable the native date picker */}
@@ -168,9 +254,11 @@ const FormRegistro = () => {
 									)}
 								</Field>
 								<ErrorMessage
-									name="date"
+									name="releaseDate"
 									component={() => (
-										<p className="text-red-500 text-xs italic">{errors.date}</p>
+										<p className="text-red-500 text-xs italic">
+											{errors.releaseDate}
+										</p>
 									)}
 									className="text-red-500 text-xs italic"
 								/>

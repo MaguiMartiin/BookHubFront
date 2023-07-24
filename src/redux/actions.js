@@ -1,4 +1,4 @@
-import {GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS, GET_BOOK_NAME} from './action-types'
+import {GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS, GET_BOOK_NAME, GET_AUTHORS} from './action-types'
 import axios from 'axios';
 
 
@@ -53,6 +53,16 @@ export const getGenders = () =>{
   }
 }
 
+export const getAuthor = () => {
+  return async (dispatch) =>{
+    try {
+      const response = await axios.get(`http://localhost:3001/author`)
+      return dispatch({ type: GET_AUTHORS, payload: response.data });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
 
 
 
