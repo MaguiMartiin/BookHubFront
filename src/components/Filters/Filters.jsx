@@ -2,77 +2,143 @@ import style from './Filters.module.css'
 import React from 'react';
 import { useState,useEffect} from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { filter, getAllBooks, getGenders } from '../../redux/actions';
+import { filter, getAllBooks, getAuthor, getGenders } from '../../redux/actions';
+import SearchBar from '../SearchBar/SearchBar';
 
 const Filters = ({setPage}) => {
   const dispatch = useDispatch();
 
-  const copyState = useSelector((state) => state.copyState)
-  const allBooks = useSelector((state) => state.allBooks)
   const genders = useSelector((state) => state.genders)
-
+  const authors = useSelector((state) => state.authors)
 
   useEffect(() => {
     dispatch(getGenders());
+    dispatch(getAuthor());
   }, [dispatch]);
 
-  const [order, setOrder] = useState('');
+
   const [filterByGender, setFilterByGender] = useState('');
-  const [filteredBooks, setFilteredBooks] = useState([]);
+  const [filtro, setFiltro] = useState({
+      gender:"", 
+      dataGender: "",
+      author:"", 
+      dataAuthor: "",
+      price:"",
+      dataPrice: [{minimo: "", maximo: ""}],
+      releaseDate: "",
+      dataReleateDate: [],
+  });
 
-
-  const handleOrder = () => {
-    let books = [...copyState];
-    if(order === 'high') books = books.sort((a, b) => b.price - a.price);
-    if(order === 'low') books = books.sort((a, b) => a.price - b.price);
-    if (order === 'asc') books = books.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate));
-    if (order === 'desc') books = books.sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
-    dispatch(filter(books));
+ 
+  const decades = [];
+  for (let startYear = 1950; startYear <= 2019; startYear += 10) {
+    const endYear = startYear + 9;
+    const decade = `${startYear}-${endYear}`;
+    decades.push(decade);
   }
 
+  const handleChange1 = (event) => {
+    const { value } = event.target;
+    const startYear = parseInt(value);
+    const endYear = startYear + 9;
+    const startDate = `${startYear}-01-01`;
+    const endDate = `${endYear}-12-31`;
+    setFiltro({
+      ...filtro,
+      releaseDate: 'releaseDate',
+      dataReleateDate: [startDate, endDate],
+    });
+  };
 
+  //genero
   const selectGender = (event) => {
-    const selectedGender = event.target.value;
-    setFilterByGender(selectedGender);
-  
-    if (selectedGender === 'all') {
-      dispatch(getAllBooks());
-      
-    } else {
-      const filteredBooks = allBooks?.filter((book) => book.Gender.name === selectedGender);
-      setFilteredBooks(filteredBooks);
-      dispatch(filter(filteredBooks));
-    }
+    //console.log(event.target.value)
+    const { value } = event.target;
+    setFiltro({
+      ...filtro,
+      gender:"gender", 
+      dataGender: value
+    })
     setPage(1);
   };
   
+  //autor
+  const selectAuthor = (event) => {
+    const { value } = event.target;
+    setFiltro({
+      ...filtro,
+      author: "author", 
+      dataAuthor: value
+    })   
+    setPage(1);
+  };
+
+  //precio minimo
+  const handleMinimo = (event) => {
+    const { value } = event.target;
+      setFiltro({
+        ...filtro,
+        price: "price",
+        dataPrice: [{ ...filtro.dataPrice[0], minimo: value, maximo: filtro.dataPrice[0].maximo }]
+      });
+      setPage(1);
+  };
+  
+  //precio maximo
+  const handleMaximo = (event) => {
+    const { value } = event.target;
+    setFiltro({
+      ...filtro,
+      price: "price",
+      dataPrice: [{ ...filtro.dataPrice[0], minimo: filtro.dataPrice[0].minimo, maximo: value }]
+    });
+    setPage(1);
+  };
+
+  useEffect(() => {
+    //console.log("aaa", filtro);
+    dispatch(filter(filtro));
+  }, [filtro, dispatch]);
 
 
   const reset = () =>{
-    setOrder('');
     setFilterByGender('');
     dispatch(getAllBooks());
+    setFiltro({      
+    gender:"", 
+    dataGender: "",
+    author:"", 
+    dataAuthor: "",
+    price:"",
+    dataPrice: [{minimo: "", maximo: ""}],
+    releaseDate: "",
+    dataReleateDate: [],
+    search: "",
+    dataSearch: ""
+  })
     setPage(1);
   }
 
-  
-  useEffect(() => {
-    handleOrder()
-    setPage(1)
-  }, [order]);
 
   return (
     <div className={style.filtersContainer}>
-      <select value={order} onChange={(event) => setOrder(event.target.value)} className={style.selectOrder}>
+      <SearchBar filtro={filtro}/>
+      <select id="yearSelect" onChange={handleChange1} className={style.selectOrder}>
         <option value="">Año</option>
-        <option value="asc">Nuevos</option>
-        <option value="desc">Antiguos</option>
+        {decades.map((decade) => (
+          <option key={decade} value={decade.split('-')[0]}>
+            {decade}
+          </option>
+        ))}
       </select>
 
-      <select className={style.selectOrder}>
-        <option value="">Autor</option>
-        <option value="">autor1</option>
-        <option value="">autor2</option>
+      <select className={style.selectOrder} onChange={selectAuthor}>
+        <option value="all">Autor</option>
+        {authors?.map((e, i)=>
+          <option key={i} value={e}>
+          {e}
+        </option>
+        )}
       </select>
 
       <select value={filterByGender} className={style.selectGender} onChange={selectGender}>
@@ -84,12 +150,9 @@ const Filters = ({setPage}) => {
           )}
       </select>
 
+      <input type="number" min="1" value={filtro.dataPrice[0].minimo} placeholder='Mínimo' onChange={handleMinimo}/>
 
-      <select value={order} onChange={(event) => setOrder(event.target.value)} className={style.selectOrder}>
-        <option value="">Precio</option>
-        <option value="high">High price</option>
-        <option value="low">Low price</option>
-      </select>
+      <input type="number" min="1" value={filtro.dataPrice[0].maximo} placeholder='Máximo' onChange={handleMaximo}/>
 
       <button className={style.resetButton} >
         <div className={style.resetButtonContent}>

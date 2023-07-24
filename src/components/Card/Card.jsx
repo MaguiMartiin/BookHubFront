@@ -6,13 +6,13 @@ const Card = ({ book }) => {
   return (
     <div className={style.cards}>
       <div className={style.info}>
-        <img src={book.image} className={style.image} alt={book.name} />
+        <img src={book?.image} className={style.image} alt={book?.name} />
         <div className={style.detailsContainer}>
-          <p className={style.name}>{book.name}</p>
-          <p className={style.genre}>{book.Gender.name}</p>
-          <p className={style.price}>${book.price}</p>
+          <p className={style.name}>{book?.name}</p>
+          <p className={style.genre}>{book.Gender?.name}</p>
+          <p className={style.price}>${book?.price}</p>
           <div className={style.buttons}>
-            <button className={style.details}>Ver detalles</button>
+            <Link to={`/home/${book.id}`}><button className={style.details}>Ver detalle</button></Link>            
             <button className={style.addCar}>Agregar al carro</button>
           </div>
         </div>

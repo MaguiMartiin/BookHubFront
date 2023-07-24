@@ -1,0 +1,33 @@
+.div {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    background-color: bisque;
+    height: 300px;
+    flex-direction: row;
+}
+
+.name {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+.des {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+.boton {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    background-color: brown;
+    border-radius: 5px;
+}
