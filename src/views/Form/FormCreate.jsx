@@ -80,7 +80,15 @@ const FormRegistro = () => {
 						GenderId: "",
 						releaseDate: "",
 					}}
-					validate={({ name, description, price, available, image, author, gender }) => {
+					validate={({
+						name,
+						description,
+						price,
+						available,
+						image,
+						author,
+						gender,
+					}) => {
 						let errors = {};
 						if (!name) {
 							errors.name = "Required name";
@@ -103,7 +111,6 @@ const FormRegistro = () => {
 						if (!gender) {
 							errors.gender = "Required gender";
 						}
-
 
 						return errors; // Add this line to return the errors object
 					}}
@@ -175,29 +182,7 @@ const FormRegistro = () => {
 									)}
 								/>
 							</div>
-							<div className="mb-5">
-								<label
-									htmlFor="description"
-									className="block text-gray-700 text-sm uppercase font-bold mb-2">
-									Descripción
-								</label>
-								<Field
-									id="description"
-									as="textarea"
-									type="text"
-									name="description"
-									className="shadow appearance-none border placeholder-gray-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-400 focus:shadow-outline h-40"
-									placeholder="Descripción..."
-								/>
-								<ErrorMessage
-									name="description"
-									component={() => (
-										<p className="text-red-500 text-xs italic">
-											{errors.description}
-										</p>
-									)}
-								/>
-							</div>
+
 							{/* gender */}
 							<div className="mb-5">
 								<label
@@ -290,6 +275,33 @@ const FormRegistro = () => {
 									className="text-red-500 text-xs italic"
 								/>
 							</div>
+
+							{/* Descripcion */}
+
+							<div className="mb-5">
+								<label
+									htmlFor="description"
+									className="block text-gray-700 text-sm uppercase font-bold mb-2">
+									Descripción
+								</label>
+								<Field
+									id="description"
+									as="textarea"
+									type="text"
+									name="description"
+									className="shadow appearance-none border placeholder-gray-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-400 focus:shadow-outline h-40"
+									placeholder="Descripción..."
+								/>
+								<ErrorMessage
+									name="description"
+									component={() => (
+										<p className="text-red-500 text-xs italic">
+											{errors.description}
+										</p>
+									)}
+								/>
+							</div>
+							
 							{/* image */}
 							<div className="mb-5">
 								<label
