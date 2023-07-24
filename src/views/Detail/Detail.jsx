@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { bookId } from "../../redux/actions"
 import style from './Detail.module.css'
+import { Link } from "react-router-dom"
+import { FaEdit } from 'react-icons/fa';
 
 const Detail = () => {
     const dispatch = useDispatch()
@@ -13,13 +15,17 @@ const Detail = () => {
     }, [dispatch, id]) 
 
     const bookDetail = useSelector(state => state.bookId)
-    console.log(bookDetail);
 
     return (
         <div className={style.contain}>
             <img src={bookDetail.image} alt={bookDetail.name} className={style.img}/>
             <div className={style.info}>
-                <h1 className={style.h1}>{bookDetail.name}</h1>
+                <div className={style.titleContainer}>
+                    <h1 className={style.h1}>{bookDetail.name}</h1>
+                    <Link to={`/editar/${bookDetail.id}`} className={style.iconoEditar}>
+                        <FaEdit />
+                    </Link>
+                </div>
                 <h2>Autor: {bookDetail.Author?.name}</h2>
                 <h2>Genero: {bookDetail.Gender?.name}</h2>
                 <div className={style.info2}>  

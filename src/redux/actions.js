@@ -1,4 +1,4 @@
-import {GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS, BOOK_ID, GET_BOOK_NAME, GET_AUTHORS} from './action-types'
+import {GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS, BOOK_ID, GET_BOOK_NAME, GET_AUTHORS, EDIT_BOOK} from './action-types'
 
 import axios from 'axios';
 
@@ -103,6 +103,15 @@ export const getAuthor = () =>{
   }
 }
 
+export const editBook = (id, bookData) => {
+  return async function (dispatch){
+    try{
+      const bookEdit = await axios.put(`https://servidor-libreria.onrender.com/book/${id}`, bookData)
+      return dispatch ({type: EDIT_BOOK, payload: bookEdit.data})
+    }
+    catch(error){console.log(error)}
+  }
+}
 
 
 
