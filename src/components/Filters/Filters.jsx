@@ -18,7 +18,6 @@ const Filters = ({setPage}) => {
 
 
   const [filterByGender, setFilterByGender] = useState('');
-  //const [filteredBooks, setFilteredBooks] = useState([]);
   const [filtro, setFiltro] = useState({
       gender:"", 
       dataGender: "",
@@ -51,20 +50,6 @@ const Filters = ({setPage}) => {
     });
   };
 
-//fecha
-/*  const handleChange = (event) => {
-    console.log("fecha",event.target.value)
-    const { value } = event.target;
-    const startDate = `${value}-01-01`;
-    const endDate = `${value}-12-31`;
-    setFiltro({
-      ...filtro,
-      releaseDate: "releaseDate",
-      dataReleateDate: [startDate, endDate]
-    })
-  };*/
-
-
   //genero
   const selectGender = (event) => {
     //console.log(event.target.value)
@@ -91,34 +76,29 @@ const Filters = ({setPage}) => {
   //precio minimo
   const handleMinimo = (event) => {
     const { value } = event.target;
-
       setFiltro({
         ...filtro,
         price: "price",
         dataPrice: [{ ...filtro.dataPrice[0], minimo: value, maximo: filtro.dataPrice[0].maximo }]
       });
       setPage(1);
-
   };
   
   //precio maximo
   const handleMaximo = (event) => {
     const { value } = event.target;
-
     setFiltro({
       ...filtro,
       price: "price",
       dataPrice: [{ ...filtro.dataPrice[0], minimo: filtro.dataPrice[0].minimo, maximo: value }]
     });
     setPage(1);
-
-    
   };
 
   useEffect(() => {
     //console.log("aaa", filtro);
     dispatch(filter(filtro));
-  }, [filtro]);
+  }, [filtro, dispatch]);
 
 
   const reset = () =>{
@@ -172,7 +152,7 @@ const Filters = ({setPage}) => {
 
       <input type="number" min="1" value={filtro.dataPrice[0].minimo} placeholder='Mínimo' onChange={handleMinimo}/>
 
-      <input type="number" value={filtro.dataPrice[0].maximo} placeholder='Máximo' onChange={handleMaximo}/>
+      <input type="number" min="1" value={filtro.dataPrice[0].maximo} placeholder='Máximo' onChange={handleMaximo}/>
 
       <button className={style.resetButton} >
         <div className={style.resetButtonContent}>

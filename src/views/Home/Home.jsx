@@ -45,9 +45,9 @@ const max = Math.ceil(copyState?.length / perPage);
 
 return (
   <div className={style.booksContainer}>
-    {/*<header className={style.searchContainer}>
-      <SearchBar copyState={allBooks} updateFilter={updateFilter}/>
-</header>*/}
+   <header className={style.searchContainer}>
+      <SearchBar />
+</header>
     
     <div className={style.cardContainer}>
       <div className={style.row}>
@@ -65,9 +65,9 @@ return (
         ))}
       </div>
     </div>
-    <aside className={style.FilterContainer}>
+    {/*<aside className={style.FilterContainer}>
     <Filters copyState ={copyState} updateFilterSelect={updateFilterSelect} setPage={setPage}/>
-    </aside>
+        </aside>*/}
     <Pagination page={page} setPage={setPage} perPage={perPage} max={max} />
   </div>
 );
