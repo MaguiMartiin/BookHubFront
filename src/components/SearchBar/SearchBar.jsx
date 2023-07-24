@@ -121,7 +121,7 @@ useEffect(()=>{
     </div>
   );
 };*/
-const SearchBar = (props) => {
+const SearchBar = ({setPage}) => {
   const dispatch = useDispatch()
   const [filtro, setFiltro] = useState({
     gender:"", 
@@ -137,7 +137,6 @@ const SearchBar = (props) => {
 });
   const genders = useSelector((state) => state.genders)
   const authors = useSelector((state) => state.authors)
-  console.log("props--", props.filtro)
   const handleName = (e) => {
     const {value} = e.target;
     setFiltro({
@@ -145,6 +144,7 @@ const SearchBar = (props) => {
       search: "search",  
       dataSearch: value
     })
+    setPage(1);
     //console.log(name)
   }
 useEffect(()=>{
@@ -183,6 +183,7 @@ useEffect(()=>{
       releaseDate: 'releaseDate',
       dataReleateDate: [startDate, endDate],
     });
+    setPage(1);
   };
 
   //genero
@@ -311,10 +312,8 @@ useEffect(()=>{
       onChange={handleMaximo}
       className={style.selectMaximo}/>
 
-      <button className={style.resetButton} >
-        <div className={style.resetButtonContent}>
-          <button onClick={reset}>Reset</button>
-        </div>
+      <button onClick={reset} className={style.resetButton} >
+        Reset
       </button>
     </div>
   );
