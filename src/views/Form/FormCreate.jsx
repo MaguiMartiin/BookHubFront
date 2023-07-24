@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
+import axios  from "axios";
 
 const FormRegistro = () => {
 	const [formGo, setFormGo] = useState(false);
@@ -9,6 +9,32 @@ const FormRegistro = () => {
 		image: Yup.mixed().nullable(),
 		// image: Yup.mixed().required("Image is required"),
 	});
+
+	const handleSubmit = async (values, { resetForm }) => {
+		try {
+			console.log(values);
+			// const valor = values.image.name
+			const response = await axios.post("http://localhost:3001/book", {
+				body: values,
+				
+			});
+			// Si la solicitud fue exitosa (código 2xx), mostrar el mensaje de éxito y limpiar el formulario
+			if (response.ok) {
+				console.log("Formulario enviado:", values);
+				resetForm();
+				setFormGo(true);
+
+				setTimeout(() => {
+					setFormGo(false);
+				}, 5000);
+			} else {
+				// En caso de error en la solicitud, mostrar el mensaje de error (opcional)
+				console.error("Error en la solicitud:", response.statusText);
+			}
+		} catch (error) {
+			console.error("Error en la solicitud:", error);
+		}
+	};
 
 	return (
 		<div className="mt-12 md:flex flex justify-center items-center ">
@@ -25,6 +51,8 @@ const FormRegistro = () => {
 						price: "",
 						available: "",
 						image: null,
+						author: "",
+						gender: ""
 					}}
 					validate={({ name, description, price, available, image, author, gender }) => {
 						let errors = {};
@@ -49,19 +77,10 @@ const FormRegistro = () => {
 						if (!gender) {
 							errors.gender = "Required gender";
 						}
-
-
 						return errors; // Add this line to return the errors object
 					}}
-					onSubmit={(values, { resetForm }) => {
-						resetForm();
-						setFormGo(true);
-
-						setTimeout(() => {
-							setFormGo(false);
-						}, 5000);
-						// console.log("Formulario enviado:", values);
-					}}>
+					onSubmit = {handleSubmit}
+					>
 					{({ errors, setFieldValue }) => (
 						<Form className="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
 							<div className="mb-5">
@@ -75,7 +94,7 @@ const FormRegistro = () => {
 									className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-400 focus:shadow-outline"
 									type="text"
 									name="name"
-									placeholder="Nombre de la name"
+									placeholder="Nombre de la libro"
 								/>
 								<ErrorMessage
 									name="name"
