@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+.custom-select {
+  @apply relative inline-block;
+}
+
+.selected-button {
+  @apply px-2 py-2 text-lg font-bold  bg-primary border border-gray-400 cursor-pointer;
+}
+
+.option-button {
+  @apply px-2 py-2   text-sm font-bold bg-primary border-b border-gray-400 w-80 cursor-pointer;
+}
+
+.option-button:last-child {
+  @apply border-b-0;
+}
+
+
+
+
+
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
