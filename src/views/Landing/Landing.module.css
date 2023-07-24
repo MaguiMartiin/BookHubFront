@@ -21,7 +21,7 @@
     width: 10rem;
     height: 3rem;
     font-size: 1.5rem;
-    background-color: rgba(255, 191, 183, 1);
+    background-color: rgba(255, 216, 212, 1);
     color: rgba(255, 152, 139, 1);
     font-family: 'Baloo', sans-serif;
     border: 0;
@@ -67,7 +67,7 @@
     width: 10rem;
     height: 3rem;
     font-size: 1.5rem;
-    background-color: rgba(255, 191, 183, 1);
+    background-color: rgba(255, 216, 212, 1);
     color: rgba(255, 152, 139, 1);
     font-family: 'Baloo', sans-serif;
     border: 0;
@@ -86,6 +86,7 @@
     font-size: 3rem;
     font-family: 'Baloo', sans-serif;
     padding: 1rem;
+    margin-top: 3rem;
 }
 
 .hCont {
@@ -99,12 +100,12 @@
     margin-bottom: 1.5rem; 
     font-size: 2rem;
     margin-left: 18.5rem;
-    color:rgba(255, 191, 183, 1);
+    color:rgba(255, 216, 212, 1);
 }
 
 .img2{
     width: 20%;
-    height: 75%;
+    height: auto;
     margin-right: -2rem;
 }
 
@@ -115,7 +116,7 @@
 }
 .div4 h1 {
     color: white;
-    font-size: 2rem;
+    font-size: 3rem;
     font-family: 'Baloo', sans-serif;
     justify-content: center;
     display: flex;
@@ -143,11 +144,86 @@
 .div5{
     justify-content: center;
     display: flex;
+    flex-direction: column;
+    align-items: center; 
     margin-top: 3rem;
+    background-color: rgba(255, 191, 183, 1);
 }
+
 .div5 h1 {
     color: white;
     font-size: 2rem;
     font-family: 'Baloo', sans-serif;
+}
+
+.div5 h2 {
+    color: white;
+    font-size: 2rem;
+    font-family: 'Baloo', sans-serif;
+}
+
+.div5 h3 {
+    color: white;
+    font-size: 3rem;
+    font-family: 'Baloo', sans-serif;
+}
+
+.testimonio {
+    display: flex;
+    align-items: center; 
+    padding: 2rem;
+}
+
+.imgTestimonio {
+    width: 20%; 
+    height: auto;
     
+}
+
+.imgReseña{
+    width: 20%; 
+    height: auto;
+}
+
+.testimonioContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin-left: 2rem; 
+} 
+
+.div6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: rgba(255, 216, 212, 1);
+    font-family: 'Baloo', sans-serif;
+    padding: 1rem;
+    color: rgba(255, 152, 139, 1);
+    font-size: 2rem;
+}
+  
+.div6 div {
+    flex: 1; 
+    padding: 0 1rem;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.botonInicio2{
+    width: 10rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    background-color: rgba(255, 152, 139, 1);
+    color: white;
+    font-family: 'Baloo', sans-serif;
+    border: 0;
+    margin-top: 1rem;
+    transition: all 0.2s;
+}
+.botonInicio2:hover {
+    transform: scale(1.1);
 }
