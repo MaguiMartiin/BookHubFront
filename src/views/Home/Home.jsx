@@ -14,28 +14,19 @@ const Home = () => {
 
 const dispatch = useDispatch();
 
-const allBooks = useSelector((state) => state.allBooks);
+
 const copyState = useSelector((state) => state.copyState);
-console.log(allBooks, "OASDFOASFHASO");
+
 
 const [page, setPage] = useState(1);
 const [perPage, setPerPage] = useState(6);
-const [filteredCopy, setFilteredCopy] = useState(copyState);
+
 
 useEffect(() => {
   dispatch(getAllBooks());
   setPage(1);
 }, []);
 
-
-const updateFilter = (filteredData) => {
-  setFilteredCopy(filteredData);
-};
-
-
-const updateFilterSelect = (filteredData) => {
-  setFilteredCopy(filteredData);
-};
 
 const idxLast = page * perPage;
 const idxFirst = idxLast - perPage;
@@ -45,12 +36,10 @@ const max = Math.ceil(copyState?.length / perPage);
 
 return (
   <div className={style.booksContainer}>
-    <header className={style.searchContainer}>
-      <SearchBar copyState={allBooks} updateFilter={updateFilter}/>
-    </header>
-    <aside className={style.FilterContainer}>
-    <Filters copyState ={copyState} updateFilterSelect={updateFilterSelect} setPage={setPage}/>
-    </aside>
+   <header className={style.searchContainer}>
+      <SearchBar setPage={setPage}/>
+</header>
+    
     <div className={style.cardContainer}>
       <div className={style.row}>
         {currentData?.slice(0, 3).map((book, idx) => (

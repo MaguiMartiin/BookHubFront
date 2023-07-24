@@ -8,11 +8,12 @@ const NavBar = () => {
     }
 
     return (
-        <div className={style.contain}>
-            <h1 className={style.h1}>BookHub</h1>
+        <div className={style.contain}>    
+            <Link to="/" className={style.h1}> BookHub  </Link>
             <div className={style.div}>
                 <Link to="/home" className={style.link}>Inicio</Link>
                 <Link to="/carrito" className={style.link}>Carrito</Link>
+                <Link to="/Form" className={style.link}>Vender Libro</Link>
             </div>
             <button className={style.botonInicio} onClick={toInicio}>Inicia sesión</button>
         </div>
