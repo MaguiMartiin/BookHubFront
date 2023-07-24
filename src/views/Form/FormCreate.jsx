@@ -5,9 +5,12 @@ import axios from "axios";
 import cloudinary from "./Cloudinary";
 import { useDispatch, useSelector } from "react-redux";
 import { getGenders, getAuthor } from "../../redux/actions";
+import Swal from "sweetalert2";
+import { useNavigate } from 'react-router-dom';
 
 const FormRegistro = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const genders = useSelector((state) => state.genders);
 	const authors = useSelector((state) => state.authors);
@@ -20,6 +23,22 @@ const FormRegistro = () => {
 	console.log(authors, "gender_stado_global");
 
 	const [formGo, setFormGo] = useState(false);
+
+	useEffect(() => {
+		if (formGo) {
+		  // Mostrar la alerta si el formulario se envió con éxito
+		  Swal.fire({
+			icon: "success",
+			title: "Libro creado correctamente",
+			confirmButtonText: 'Accept',
+			timer: 2000,
+		  }).then(() => {
+			// Redirigir a la ruta '/home' después de mostrar la alerta
+			navigate("/home");
+		  });
+		}
+	  }, [formGo, navigate]);
+	
 
 	const validationSchema = Yup.object().shape({
 		image: Yup.mixed().required("Image is required"),
@@ -38,20 +57,23 @@ const FormRegistro = () => {
 			const response = await axios.post(
 				"http://localhost:3001/book",
 				modifiedValues
-			);
-			resetForm();
+			).then(() =>{
+				Swal.fire({
+					icon: "success",
+					title: "Libro creado correctamente",
+					showConfirmButton: false,
+					timer: 2000,
+				})
+			}).then(() =>{
+				navigate('/home');
+			})
 
 			console.log(response);
 
 			if (response.status === 200) {
 				console.log("Formulario enviado:", values);
-				setFormGo(true);
+				setFormGo(true)
 
-				setTimeout(() => {
-					setFormGo(false);
-				}, 5000);
-
-				resetForm();
 			} else {
 				console.error("Error en la solicitud:", response.data);
 			}
@@ -94,7 +116,7 @@ const FormRegistro = () => {
 									className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-400 focus:shadow-outline"
 									type="text"
 									name="name"
-									placeholder="Nombre de la libro"
+									placeholder="Nombre del libro"
 								/>
 								<ErrorMessage
 									name="name"
@@ -137,7 +159,7 @@ const FormRegistro = () => {
 									className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-400 focus:shadow-outline"
 									type="number"
 									name="available"
-									placeholder="Ingresa el disponible"
+									placeholder="Libros disponibles "
 								/>
 								<ErrorMessage
 									name="available"
@@ -317,7 +339,6 @@ const FormRegistro = () => {
 					)}
 				</Formik>
 			</div>
-			'
 		</div>
 	);
 };
