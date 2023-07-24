@@ -8,8 +8,6 @@ import SearchBar from '../SearchBar/SearchBar';
 const Filters = ({setPage}) => {
   const dispatch = useDispatch();
 
-  const copyState = useSelector((state) => state.copyState)
-  //const allBooks = useSelector((state) => state.allBooks)
   const genders = useSelector((state) => state.genders)
   const authors = useSelector((state) => state.authors)
 
@@ -18,7 +16,7 @@ const Filters = ({setPage}) => {
     dispatch(getAuthor());
   }, [dispatch]);
 
-  const [order, setOrder] = useState('');
+
   const [filterByGender, setFilterByGender] = useState('');
   //const [filteredBooks, setFilteredBooks] = useState([]);
   const [filtro, setFiltro] = useState({
@@ -30,18 +28,31 @@ const Filters = ({setPage}) => {
       dataPrice: [{minimo: "", maximo: ""}],
       releaseDate: "",
       dataReleateDate: [],
-      search: "",
-      dataSearch: ""
   });
 
  
-  const years = [];
-  for (let year = 2000; year <= 2023; year++) {
-    years.push(year);
+  const decades = [];
+  for (let startYear = 1950; startYear <= 2019; startYear += 10) {
+    const endYear = startYear + 9;
+    const decade = `${startYear}-${endYear}`;
+    decades.push(decade);
   }
 
+  const handleChange1 = (event) => {
+    const { value } = event.target;
+    const startYear = parseInt(value);
+    const endYear = startYear + 9;
+    const startDate = `${startYear}-01-01`;
+    const endDate = `${endYear}-12-31`;
+    setFiltro({
+      ...filtro,
+      releaseDate: 'releaseDate',
+      dataReleateDate: [startDate, endDate],
+    });
+  };
+
 //fecha
-  const handleChange = (event) => {
+/*  const handleChange = (event) => {
     console.log("fecha",event.target.value)
     const { value } = event.target;
     const startDate = `${value}-01-01`;
@@ -51,19 +62,12 @@ const Filters = ({setPage}) => {
       releaseDate: "releaseDate",
       dataReleateDate: [startDate, endDate]
     })
-  };
-  const handleOrder = () => {
-    let books = [...copyState];
-    if(order === 'high') books = books.sort((a, b) => b.price - a.price);
-    if(order === 'low') books = books.sort((a, b) => a.price - b.price);
-    if (order === 'asc') books = books.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate));
-    if (order === 'desc') books = books.sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
-    dispatch(filter(books));
-  }
+  };*/
+
 
   //genero
   const selectGender = (event) => {
-    console.log(event.target.value)
+    //console.log(event.target.value)
     const { value } = event.target;
     setFiltro({
       ...filtro,
@@ -112,13 +116,12 @@ const Filters = ({setPage}) => {
   };
 
   useEffect(() => {
-    console.log("aaa", filtro);
+    //console.log("aaa", filtro);
     dispatch(filter(filtro));
   }, [filtro]);
 
 
   const reset = () =>{
-    setOrder('');
     setFilterByGender('');
     dispatch(getAllBooks());
     setFiltro({      
@@ -136,20 +139,15 @@ const Filters = ({setPage}) => {
     setPage(1);
   }
 
-  
-  useEffect(() => {
-    handleOrder()
-    setPage(1)
-  }, [order]);
 
   return (
     <div className={style.filtersContainer}>
       <SearchBar filtro={filtro}/>
-      <select id="yearSelect" onChange={handleChange} className={style.selectOrder}>
-        <option value=""> Año </option>
-        {years.map((year) => (
-          <option key={year} value={year}>
-            {year}
+      <select id="yearSelect" onChange={handleChange1} className={style.selectOrder}>
+        <option value="">Año</option>
+        {decades.map((decade) => (
+          <option key={decade} value={decade.split('-')[0]}>
+            {decade}
           </option>
         ))}
       </select>

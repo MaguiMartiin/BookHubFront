@@ -74,33 +74,33 @@ const SearchBar = (props) => {
       author:"", 
       dataAuthor: "",
       price:"",
-      dataPrice: [{minimo: 0, maximo: 0}],
+      dataPrice: [{minimo: "", maximo: ""}],
       releaseDate: "",
       dataReleateDate: [],
-    search: "",
-    dataSearch: ""
+      search: "",
+      dataSearch: ""
   })
   console.log("props--", props.filtro)
   const handleName = (e) => {
     const {value} = e.target;
     setName({
       ...name,
-      author:props.filtro.author, 
-      dataAuthor:props.filtro.dataAuthor,
-      dataGender:props.filtro.dataGender,
+      author: props.filtro.author, 
+      dataAuthor: props.filtro.dataAuthor,
+      dataGender: props.filtro.dataGender,
       dataPrice: props.filtro.dataPrice,
-      dataReleateDate:props.filtro.dataReleateDate,
-      dataSearch:props.filtro.dataSearch,
-      gender:props.filtro.gender,
-      price:props.filtro.price,
-      releaseDate:props.filtro.releaseDate,
+      dataReleateDate: props.filtro.dataReleateDate,
+      dataSearch: props.filtro.dataSearch,
+      gender: props.filtro.gender,
+      price: props.filtro.price,
+      releaseDate: props.filtro.releaseDate,
       search: "search",  
       dataSearch: value
     })
-    console.log(name)
+    //console.log(name)
   }
 useEffect(()=>{
-  console.log("name",name)
+  //console.log("name",name)
   dispatch(filter(name))
 },[name])
 
@@ -114,7 +114,7 @@ useEffect(()=>{
           value={name.dataSearch}
           onChange={handleName}
           className={style.searchBarInput}
-          placeholder='SEARCH A BOOK...'
+          placeholder='BUSCAR LIBROS...'
         />
         
       </form>
