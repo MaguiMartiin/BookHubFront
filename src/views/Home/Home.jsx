@@ -14,28 +14,19 @@ const Home = () => {
 
 const dispatch = useDispatch();
 
-const allBooks = useSelector((state) => state.allBooks);
+
 const copyState = useSelector((state) => state.copyState);
-//console.log(allBooks, "OASDFOASFHASO");
+
 
 const [page, setPage] = useState(1);
 const [perPage, setPerPage] = useState(6);
-const [filteredCopy, setFilteredCopy] = useState(copyState);
+
 
 useEffect(() => {
   dispatch(getAllBooks());
   setPage(1);
 }, []);
 
-
-const updateFilter = (filteredData) => {
-  setFilteredCopy(filteredData);
-};
-
-
-const updateFilterSelect = (filteredData) => {
-  setFilteredCopy(filteredData);
-};
 
 const idxLast = page * perPage;
 const idxFirst = idxLast - perPage;
@@ -65,9 +56,6 @@ return (
         ))}
       </div>
     </div>
-    {/*<aside className={style.FilterContainer}>
-    <Filters copyState ={copyState} updateFilterSelect={updateFilterSelect} setPage={setPage}/>
-        </aside>*/}
     <Pagination page={page} setPage={setPage} perPage={perPage} max={max} />
   </div>
 );
