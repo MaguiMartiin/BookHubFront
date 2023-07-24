@@ -45,12 +45,10 @@ const max = Math.ceil(copyState?.length / perPage);
 
 return (
   <div className={style.booksContainer}>
-    <header className={style.searchContainer}>
+    {/*<header className={style.searchContainer}>
       <SearchBar copyState={allBooks} updateFilter={updateFilter}/>
-    </header>
-    <aside className={style.FilterContainer}>
-    <Filters copyState ={copyState} updateFilterSelect={updateFilterSelect} setPage={setPage}/>
-    </aside>
+</header>*/}
+    
     <div className={style.cardContainer}>
       <div className={style.row}>
         {currentData?.slice(0, 3).map((book, idx) => (
@@ -67,6 +65,9 @@ return (
         ))}
       </div>
     </div>
+    <aside className={style.FilterContainer}>
+    <Filters copyState ={copyState} updateFilterSelect={updateFilterSelect} setPage={setPage}/>
+    </aside>
     <Pagination page={page} setPage={setPage} perPage={perPage} max={max} />
   </div>
 );

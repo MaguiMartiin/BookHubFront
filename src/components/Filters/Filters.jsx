@@ -3,6 +3,7 @@ import React from 'react';
 import { useState,useEffect} from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { filter, getAllBooks, getAuthor, getGenders } from '../../redux/actions';
+import SearchBar from '../SearchBar/SearchBar';
 
 const Filters = ({setPage}) => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ const Filters = ({setPage}) => {
       author:"", 
       dataAuthor: "",
       price:"",
-      dataPrice: [{minimo: 0, maximo: 0}],
+      dataPrice: [{minimo: "", maximo: ""}],
       releaseDate: "",
       dataReleateDate: [],
       search: "",
@@ -86,31 +87,28 @@ const Filters = ({setPage}) => {
   //precio minimo
   const handleMinimo = (event) => {
     const { value } = event.target;
-    const updatedMinimo = Math.min(value, filtro.dataPrice[0].maximo);
-    // Actualizar solo si el valor cambia
-    if (updatedMinimo !== filtro.dataPrice[0].minimo) {
+
       setFiltro({
         ...filtro,
         price: "price",
-        dataPrice: [{ ...filtro.dataPrice[0], minimo: updatedMinimo, maximo: filtro.dataPrice[0].maximo }]
+        dataPrice: [{ ...filtro.dataPrice[0], minimo: value, maximo: filtro.dataPrice[0].maximo }]
       });
       setPage(1);
-    }
+
   };
   
   //precio maximo
   const handleMaximo = (event) => {
     const { value } = event.target;
-    const updatedMaximo = Math.max(value, filtro.dataPrice[0].minimo);
-    // Actualizar solo si el valor cambia
-    if (updatedMaximo !== filtro.dataPrice[0].maximo) {
-      setFiltro({
-        ...filtro,
-        price: "price",
-        dataPrice: [{ ...filtro.dataPrice[0], minimo: filtro.dataPrice[0].minimo, maximo: updatedMaximo }]
-      });
-      setPage(1);
-    }
+
+    setFiltro({
+      ...filtro,
+      price: "price",
+      dataPrice: [{ ...filtro.dataPrice[0], minimo: filtro.dataPrice[0].minimo, maximo: value }]
+    });
+    setPage(1);
+
+    
   };
 
   useEffect(() => {
@@ -123,6 +121,18 @@ const Filters = ({setPage}) => {
     setOrder('');
     setFilterByGender('');
     dispatch(getAllBooks());
+    setFiltro({      
+    gender:"", 
+    dataGender: "",
+    author:"", 
+    dataAuthor: "",
+    price:"",
+    dataPrice: [{minimo: "", maximo: ""}],
+    releaseDate: "",
+    dataReleateDate: [],
+    search: "",
+    dataSearch: ""
+  })
     setPage(1);
   }
 
@@ -134,8 +144,9 @@ const Filters = ({setPage}) => {
 
   return (
     <div className={style.filtersContainer}>
+      <SearchBar filtro={filtro}/>
       <select id="yearSelect" onChange={handleChange} className={style.selectOrder}>
-        <option value="">-- Año --</option>
+        <option value=""> Año </option>
         {years.map((year) => (
           <option key={year} value={year}>
             {year}
@@ -161,9 +172,9 @@ const Filters = ({setPage}) => {
           )}
       </select>
 
-      <input type="number" placeholder='Mínimo' onChange={handleMinimo}/>
+      <input type="number" min="1" value={filtro.dataPrice[0].minimo} placeholder='Mínimo' onChange={handleMinimo}/>
 
-      <input type="number" placeholder='Máximo' onChange={handleMaximo}/>
+      <input type="number" value={filtro.dataPrice[0].maximo} placeholder='Máximo' onChange={handleMaximo}/>
 
       <button className={style.resetButton} >
         <div className={style.resetButtonContent}>
