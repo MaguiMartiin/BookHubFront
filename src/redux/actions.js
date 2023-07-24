@@ -70,7 +70,7 @@ export const bookId = (id) => {
           .map(([key, value]) => `${key}=${value}`)
           .join("&");
   
-        const response = await axios.get(`http://localhost:3001/filter?${queryString}`);
+        const response = await axios.get(`https://servidor-libreria.onrender.com/filter?${queryString}`);
         //console.log("filter", response.data)
         return dispatch({ type: FILTER, payload: response.data });
       } catch (error) {
@@ -95,7 +95,7 @@ export const getGenders = () =>{
 export const getAuthor = () =>{
   return async (dispatch) =>{
     try {
-      const response = await axios.get(`http://localhost:3001/author`)
+      const response = await axios.get(`https://servidor-libreria.onrender.com/author`)
       return dispatch({ type: GET_AUTHORS, payload: response.data });
     } catch (error) {
       console.log(error);
