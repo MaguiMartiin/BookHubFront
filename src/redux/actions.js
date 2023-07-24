@@ -5,7 +5,7 @@ import axios from 'axios';
 export const createBook = (payload) =>{
   return async (dispatch) =>{
         try {
-            const response = await axios.post(`http://localhost:3001/`, payload)
+            const response = await axios.post(`https://servidor-libreria.onrender.com/`, payload)
             return dispatch({type: CREATE_BOOK, payload: response.data})
         } catch (error) {
             console.log(error);
