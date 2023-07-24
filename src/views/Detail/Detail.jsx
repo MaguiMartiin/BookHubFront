@@ -1,11 +1,11 @@
 import React from "react"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
-import { bookId } from "../../redux/actions"
+import { useNavigate, useParams } from "react-router-dom"
+import { bookId, bookDelete } from "../../redux/actions"
 import style from './Detail.module.css'
 import { Link } from "react-router-dom"
-import { FaEdit } from 'react-icons/fa';
+import { FaEdit, FaTrash } from 'react-icons/fa'
 
 const Detail = () => {
     const dispatch = useDispatch()
@@ -16,6 +16,13 @@ const Detail = () => {
 
     const bookDetail = useSelector(state => state.bookId)
 
+    const navigate = useNavigate()
+    const handleDelete = () => {
+        dispatch(bookDelete(id));
+        alert(`El libro ${bookDetail.name} a sido eliminado!`)
+        navigate("/home");
+      };
+
     return (
         <div className={style.contain}>
             <img src={bookDetail.image} alt={bookDetail.name} className={style.img}/>
@@ -25,6 +32,9 @@ const Detail = () => {
                     <Link to={`/editar/${bookDetail.id}`} className={style.iconoEditar}>
                         <FaEdit />
                     </Link>
+                    <button className={style.iconoEditar} onClick={handleDelete}>
+                    <FaTrash />
+                    </button>
                 </div>
                 <h2>Autor: {bookDetail.Author?.name}</h2>
                 <h2>Genero: {bookDetail.Gender?.name}</h2>

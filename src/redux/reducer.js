@@ -1,14 +1,13 @@
 import { GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS, BOOK_ID, GET_BOOK_NAME, GET_AUTHORS, EDIT_BOOK } from "./action-types"
 
 
-
 const initialState = {
     allBooks: [],
     copyState: [],
     genders: [],
     bookId: [],
-    authors: [],
     bookEdit: [],
+    authors: [],
 }
 
 const rootReducer = (state = initialState, action) => {
