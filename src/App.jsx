@@ -8,7 +8,8 @@ import React from 'react'
 // import NavBar from './components/NavBar'
 // import Home from './views/Home'
 import Form from "./views/Form/FormCreate"
-
+// user
+import Login from './views/User/Login'
 function App() {
   // const location = useLocation()
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/home' element={<Home/>}/>
         <Route exact path = "/" element={<Landing/>}/>
         <Route path="/form" element={<Form/>}/>
+        <Route path='/login' element={<Login/>} ></Route>
       </Routes>
     </div>
   )
