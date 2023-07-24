@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import { editBook, bookId } from "../../redux/actions";
+import { editBook, bookId, getGenders, getAuthor } from "../../redux/actions";
+import style from "./EditDetail.module.css"
 
     const EditDetail = () => {
     const { id } = useParams()
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const bookDetail = useSelector((state) => state.bookId)
+    const genders = useSelector((state) => state.genders)
+    console.log(genders);
+    const authors = useSelector((state) => state.authors)
     console.log(bookDetail);
 
     const [form, setForm] = useState({
@@ -20,6 +24,8 @@ import { editBook, bookId } from "../../redux/actions";
 
     useEffect(() => {
         dispatch(bookId(id))
+        dispatch(getGenders())
+        dispatch(getAuthor())
     }, [dispatch, id])
 
     useEffect(() => {
@@ -48,31 +54,45 @@ import { editBook, bookId } from "../../redux/actions";
 
     return (
         <div>
-            <form onSubmit={handleEdit}>
-                <div>
+            <form onSubmit={handleEdit} className={style.div}>
+                <div className={style.name}>
+                    {/*Nombre */}
                     <label htmlFor="name">Nombre del libro: </label>
                     <input type="text" value={form.name} onChange={handlerChange}
                     name="name"/>
                 </div>
 
-                <div>
+                <div className={style.des}>
+                    {/*Genero y autor */}
                     <label htmlFor="Gender">Género: </label>
-                    <input type="text" value={form.Gender} onChange={handlerChange} name="Gender"/>
+                    <select onChange={handlerChange}>
+                    <option  htmlFor="Gender">{form.Gender}</option>
+                    {genders?.map((e) => {
+                        return (<option type="text" value={form.Gender} name="Gender">{e}</option>)
+                    })}
+                    </select>
                     <label htmlFor="Author">Autor: </label>
-                    <input type="text" value={form.Author} onChange={handlerChange} name="Author"/>
+                    <select onChange={handlerChange}>
+                    <option htmlFor="Author">{form.Author}</option>
+                    {authors?.map((e) =>{
+                        return (<option type="text" value={form.Author} name="Author">{e}</option>)
+                    })}
+                   </select>
                 </div>
 
                 <div>
+                    {/*Descripcion */}
                     <label htmlFor="description">Descripción: </label> 
                     <input type="text" value={form.description} onChange={handlerChange} name="description"/>
                 </div>
 
                 <div>
+                    {/*Precio */}
                     <label htmlFor="price">Precio: </label> 
-                    <input type="text" value={form.price} onChange={handlerChange} name="price"/>
+                    <input type="text" min="1" value={form.price} onChange={handlerChange} name="price"/>
                 </div>
 
-                <button type="submit">Guardar cambios</button>
+                <button className={style.boton} type="submit">Guardar cambios</button>
             </form>
         </div>
   );
