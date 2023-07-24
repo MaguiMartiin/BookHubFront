@@ -14,8 +14,9 @@ const Home = () => {
 
 const dispatch = useDispatch();
 
+const allBooks = useSelector((state) => state.allBooks);
 const copyState = useSelector((state) => state.copyState);
-console.log(copyState);
+console.log(allBooks, "OASDFOASFHASO");
 
 const [page, setPage] = useState(1);
 const [perPage, setPerPage] = useState(6);
@@ -24,7 +25,12 @@ const [filteredCopy, setFilteredCopy] = useState(copyState);
 useEffect(() => {
   dispatch(getAllBooks());
   setPage(1);
-}, [dispatch]);
+}, []);
+
+
+const updateFilter = (filteredData) => {
+  setFilteredCopy(filteredData);
+};
 
 
 const updateFilterSelect = (filteredData) => {
@@ -40,7 +46,7 @@ const max = Math.ceil(copyState?.length / perPage);
 return (
   <div className={style.booksContainer}>
     <header className={style.searchContainer}>
-      <SearchBar/>
+      <SearchBar copyState={allBooks} updateFilter={updateFilter}/>
     </header>
     <aside className={style.FilterContainer}>
     <Filters copyState ={copyState} updateFilterSelect={updateFilterSelect} setPage={setPage}/>
