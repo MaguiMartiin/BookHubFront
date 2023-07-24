@@ -1,4 +1,4 @@
-import {GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS, BOOK_ID, GET_BOOK_NAME, GET_AUTHORS} from './action-types'
+import {GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS, BOOK_ID, GET_BOOK_NAME, EDIT_BOOK, DELETE_BOOK, GET_AUTHORS} from './action-types'
 
 import axios from 'axios';
 
@@ -103,6 +103,25 @@ export const getAuthor = () =>{
   }
 }
 
+export const editBook = (id, bookData) => {
+  return async function (dispatch){
+    try{
+      const bookEdit = await axios.put(`https://servidor-libreria.onrender.com/book/${id}`, bookData)
+      return dispatch ({type: EDIT_BOOK, payload: bookEdit.data})
+    }
+    catch(error){console.log(error)}
+  }
+}
+
+export const bookDelete = (id) => {
+  return async function (dispatch){
+    try{
+      const bookDelete = (await axios.delete(`https://servidor-libreria.onrender.com/book/${id}`)).data
+      return dispatch ({type: DELETE_BOOK, payload: bookDelete})
+    }
+    catch(error){console.log(error)}
+  }
+}
 
 
 

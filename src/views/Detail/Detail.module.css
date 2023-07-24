@@ -16,93 +16,107 @@
 .info {
     display: flex;
     flex-direction: column;
-    margin-left: 2rem; 
+    margin-left: 2rem;
 }
+  
+.titleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 20rem;
+  }
   
 .info h1 {
     text-align: center;
     color: rgba(255, 152, 139, 1);
     font-size: 3rem;
-    font-family: 'Baloo', sans-serif;
-    margin-left: 6rem;
+    font-family: "Baloo", sans-serif;
 }
-
-.info h2{
+  
+.info h2 {
     color: rgba(255, 152, 139, 1);
-    font-family: 'Baloo', sans-serif;
+    font-family: "Baloo", sans-serif;
     font-size: 1.5rem;
 }
-
-.info button{
+  
+.info button {
     background-color: rgba(255, 216, 212, 1);
     width: 20rem;
     height: 3rem;
     color: rgba(255, 152, 139, 1);
-    font-family: 'Baloo', sans-serif;
+    font-family: "Baloo", sans-serif;
     font-size: 1.5rem;
     margin-top: 2rem;
 }
-
-.info h3{
+  
+.info h3 {
     margin-top: 1rem;
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
     font-size: 1rem;
     color: rgba(255, 152, 139, 1);
-    font-family: 'Abel', sans-serif;
+    font-family: "Abel", sans-serif;
 }
-
-.info li{
+  
+.info li {
     margin-top: 1rem;
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
     font-size: 1rem;
     color: rgba(255, 152, 139, 1);
-    font-family: 'Alegreya Sans', sans-serif;
-
+    font-family: "Alegreya Sans", sans-serif;
 }
-
-.info2{
+  
+.info2 {
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
     width: 100%;
 }
   
-.description{
-        display: flex;
-        flex-direction: column;
-        margin-top: 2rem;
-        flex-basis: 50%; 
-        flex-grow: 1; 
-        margin-top: 2rem;
-        
-}
-
-.detail{
+.description {
     display: flex;
     flex-direction: column;
     margin-top: 2rem;
-    flex-basis: 50%; 
+    flex-basis: 50%;
+    flex-grow: 1;
+    margin-top: 2rem;
+}
+  
+.detail {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    flex-basis: 50%;
     flex-grow: 1;
     margin-top: 2rem;
     margin-left: 2rem;
 }
-
+  
 .info3 {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 2rem;
-  }
+}
   
-  .info3 h4 {
+.info3 h4 {
     background-color: rgba(255, 216, 212, 1);
     width: 15rem;
     height: 2.5rem;
     color: rgba(255, 152, 139, 1);
-    font-family: 'Baloo', sans-serif;
+    font-family: "Baloo", sans-serif;
     font-size: 1.5rem;
     text-align: center;
     margin-top: 2rem;
-  }
+}
+  
+.iconoEditar {
+    background-color: rgba(255, 216, 212, 1);
+    width: auto;
+    height: 2rem;
+    color: rgba(255, 152, 139, 1);
+    font-family: "Baloo", sans-serif;
+    font-size: 2rem;
+}
+  
