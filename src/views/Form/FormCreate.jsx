@@ -1,49 +1,50 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import axios  from "axios";
+import axios from "axios";
+import cloudinary from "./Cloudinary";
+import { getGenders } from "../../redux/actions";
 
 const FormRegistro = () => {
 	const [formGo, setFormGo] = useState(false);
+
 	const validationSchema = Yup.object().shape({
-		image: Yup.mixed().nullable(),
-		// image: Yup.mixed().required("Image is required"),
+		image: Yup.mixed().required("Image is required"),
+		date: Yup.date().required("Date is required"),
+		// Add more validation rules for other form fields if needed
 	});
 
-	const handleSubmit = async (values, { resetForm }) => {
+	const handleSubmit = async (values, { resetForm, setSubmitting }) => {
 		try {
 			console.log(values);
-			// const valor = values.image.name
-			const response = await axios.post("http://localhost:3001/book", {
-				body: values,
-				
-			});
-			// Si la solicitud fue exitosa (código 2xx), mostrar el mensaje de éxito y limpiar el formulario
-			if (response.ok) {
+			const response = await axios.post("http://localhost:3001/book", values);
+
+			if (response.status === 200) {
 				console.log("Formulario enviado:", values);
-				resetForm();
 				setFormGo(true);
 
 				setTimeout(() => {
 					setFormGo(false);
 				}, 5000);
+
+				resetForm();
 			} else {
-				// En caso de error en la solicitud, mostrar el mensaje de error (opcional)
-				console.error("Error en la solicitud:", response.statusText);
+				console.error("Error en la solicitud:", response.data);
 			}
 		} catch (error) {
 			console.error("Error en la solicitud:", error);
+		} finally {
+			setSubmitting(false);
 		}
 	};
 
 	return (
 		<div className="mt-12 md:flex flex justify-center items-center ">
-			<div className=" md:w-1/2 mr-2 mb-4   ">
-				<h2 className=" font-black text-3xl text-center text-black/75 ">
+			<div className="md:w-1/2 mr-2 mb-4">
+				<h2 className="font-black text-3xl text-center text-black/75">
 					Registro de libros
 				</h2>
 				<Formik
-					// initialValues={{ image: null }}
 					validationSchema={validationSchema}
 					initialValues={{
 						name: "",
@@ -52,36 +53,12 @@ const FormRegistro = () => {
 						available: "",
 						image: null,
 						author: "",
-						gender: ""
+						gender: "",
+						releaseDate: "",
+						date: "",
 					}}
-					validate={({ name, description, price, available, image, author, gender }) => {
-						let errors = {};
-						if (!name) {
-							errors.name = "Required name";
-						}
-						if (!description) {
-							errors.description = "Required description";
-						}
-						if (!price) {
-							errors.price = "Required price";
-						}
-						if (!available) {
-							errors.available = "Required available";
-						}
-						if (!image) {
-							errors.image = "Required image";
-						}
-						if (!author) {
-							errors.author = "Required author";
-						}
-						if (!gender) {
-							errors.gender = "Required gender";
-						}
-						return errors; // Add this line to return the errors object
-					}}
-					onSubmit = {handleSubmit}
-					>
-					{({ errors, setFieldValue }) => (
+					onSubmit={handleSubmit}>
+					{({ errors, setFieldValue, isSubmitting }) => (
 						<Form className="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
 							<div className="mb-5">
 								<label
@@ -102,47 +79,6 @@ const FormRegistro = () => {
 										<p className="text-red-500 text-xs italic">{errors.name}</p>
 									)}
 								/>
-							</div>
-							<div className="mb-5">
-								<label
-									htmlFor="author"
-									className="block text-gray-700 text-sm uppercase font-bold mb-2">
-									Autor
-								</label>
-								<Field
-									id="author"
-									className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-400 focus:shadow-outline"
-									type="text"
-									name="author"
-									placeholder="Descripción"
-								/>
-								<ErrorMessage
-									name="author"
-									component={() => (
-										<p className="text-red-500 text-xs italic">{errors.author}</p>
-									)}
-								/>
-							</div>
-							<div className="mb-5">
-								<label
-									htmlFor="gender"
-									className="block text-gray-700 text-sm uppercase font-bold mb-2">
-									Género
-								</label>
-								<Field
-									id="gender"
-									className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-400 focus:shadow-outline"
-									type="text"
-									name="gender"
-									placeholder="Descripción"
-								/>
-								<ErrorMessage
-									name="gender"
-									component={() => (
-										<p className="text-red-500 text-xs italic">{errors.gender}</p>
-									)}
-								/>
-
 							</div>
 
 							<div className="mb-5">
@@ -167,7 +103,6 @@ const FormRegistro = () => {
 									)}
 								/>
 							</div>
-
 							<div className="mb-5">
 								<label
 									htmlFor="available"
@@ -190,7 +125,6 @@ const FormRegistro = () => {
 									)}
 								/>
 							</div>
-
 							<div className="mb-5">
 								<label
 									htmlFor="description"
@@ -214,6 +148,33 @@ const FormRegistro = () => {
 									)}
 								/>
 							</div>
+							{/* fecha */}
+							<div className="mb-5">
+								<label
+									htmlFor="date"
+									className="block text-gray-700 text-sm uppercase font-bold mb-2">
+									Fecha
+								</label>
+								<Field name="date">
+									{({ field }) => (
+										<>
+											{/* Use the input type="date" to enable the native date picker */}
+											<input
+												type="date"
+												{...field}
+												className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-400 focus:shadow-outline"
+											/>
+										</>
+									)}
+								</Field>
+								<ErrorMessage
+									name="date"
+									component={() => (
+										<p className="text-red-500 text-xs italic">{errors.date}</p>
+									)}
+									className="text-red-500 text-xs italic"
+								/>
+							</div>
 							{/* image */}
 							<div className="mb-5">
 								<label
@@ -229,9 +190,10 @@ const FormRegistro = () => {
 											<input
 												type="file"
 												accept="image/*"
-												onChange={(event) => {
+												onChange={async (event) => {
 													const file = event.currentTarget.files[0];
-													setFieldValue("image", file);
+													const response = await cloudinary(file);
+													setFieldValue("image", response);
 												}}
 											/>
 											{field.value && field.value.name && (
@@ -250,12 +212,12 @@ const FormRegistro = () => {
 									className="text-red-500 text-xs italic"
 								/>
 							</div>
-
 							<div>
 								<button
 									className="bg-primary hover:bg-secondary text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-									type="submit">
-									Guardar
+									type="submit"
+									disabled={isSubmitting}>
+									{isSubmitting ? "Submitting..." : "Guardar"}
 								</button>
 								{formGo && (
 									<p className="exito">Formulario enviado con éxito!</p>
