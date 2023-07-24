@@ -247,6 +247,8 @@ const FormRegistro = () => {
 											{/* Use the input type="date" to enable the native date picker */}
 											<input
 												type="date"
+												min="1950-01-01"
+												max="2023-12-31"
 												{...field}
 												className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-400 focus:shadow-outline"
 											/>
