@@ -1,4 +1,4 @@
-import { GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS, BOOK_ID, GET_BOOK_NAME, EDIT_BOOK, GET_AUTHORS  } from "./action-types"
+import { GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS, BOOK_ID, GET_BOOK_NAME, GET_AUTHORS, EDIT_BOOK } from "./action-types"
 
 
 const initialState = {
