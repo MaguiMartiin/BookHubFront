@@ -93,8 +93,8 @@ const Login = () => {
 							</p>
 						</div>
 						<div className="flex justify-center">Registrarte con google</div>
-						<div class="flex flex-col mt-8">
-							<div class="text-center flex-row my-1">
+						<div className="flex flex-col mt-8">
+							<div className="text-center flex-row my-1">
 								¿No tenes cuenta?{" "}
 								<Link to="/signup" className="text-primary">
 									Registrate.

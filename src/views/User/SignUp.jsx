@@ -17,8 +17,15 @@ const SignUp = () => {
 					passwordKey: "",
 					passwordConfirm: "",
 				}}
-				onSubmit={(values) => {
-					console.log(values);
+				onSubmit={ async (values) => {
+                    try {
+                        const respose = await  axios.post("http://localhost:3001/sign", {
+                            email: values.email,
+                        });
+                    } catch (error) {
+                        console.log(error);
+                    }
+
 				}}
 				validate={(values) => {
 					const errors = {};
@@ -111,24 +118,16 @@ const SignUp = () => {
 								<label htmlFor="password">Password</label>
 								<div className="flex flex-col justify-between  relative w-full">
 									<Field
-										type="password"
+										type={isPasswordShow ? `text` : `password`}
 										name="passwordKey"
 										className="border p-1"
 									/>
 									<div className="absolute inset-y-0 right-0 flex items-end pr-2 pb-1 ">
 										<button onClick={toggleShowPassword} type="button">
 											{isPasswordShow ? (
-												<AiFillEyeInvisible
-													size="1.5rem"
-													color="#ff988b"
-													// color="#18181b"
-												/>
+												<AiFillEye size="1.5rem" color="#ff988b" />
 											) : (
-												<AiFillEye
-													size="1.5rem"
-													color="#ff988b"
-													// color="#18181b"
-												/>
+												<AiFillEyeInvisible size="1.5rem" color="#ff988b" />
 											)}
 										</button>
 									</div>
@@ -169,8 +168,8 @@ const SignUp = () => {
 								className="bg-primary text-white px-4 py-2 rounded hover:bg-red-400 w-full">
 								siguiente
 							</button>
-							<div class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
-								<p class="mx-4 mb-0 text-center font-semibold dark:text-text">
+							<div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
+								<p className="mx-4 mb-0 text-center font-semibold dark:text-text">
 									OR
 								</p>
 							</div>
