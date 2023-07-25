@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import { editBook, bookId } from "../../redux/actions";
+import { editBook, bookId, getGenders, getAuthor } from "../../redux/actions";
 import style from "./EditDetail.module.css"
 
     const EditDetail = () => {
@@ -9,6 +9,9 @@ import style from "./EditDetail.module.css"
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const bookDetail = useSelector((state) => state.bookId)
+    const genders = useSelector((state) => state.genders)
+    console.log(genders);
+    const authors = useSelector((state) => state.authors)
     console.log(bookDetail);
 
     const [form, setForm] = useState({
@@ -21,6 +24,8 @@ import style from "./EditDetail.module.css"
 
     useEffect(() => {
         dispatch(bookId(id))
+        dispatch(getGenders())
+        dispatch(getAuthor())
     }, [dispatch, id])
 
     useEffect(() => {
@@ -60,9 +65,19 @@ import style from "./EditDetail.module.css"
                 <div className={style.des}>
                     {/*Genero y autor */}
                     <label htmlFor="Gender">Género: </label>
-                    <input type="text" value={form.Gender} onChange={handlerChange} name="Gender"/>
+                    <select onChange={handlerChange}>
+                    <option  htmlFor="Gender">{form.Gender}</option>
+                    {genders?.map((e) => {
+                        return (<option type="text" value={form.Gender} name="Gender">{e}</option>)
+                    })}
+                    </select>
                     <label htmlFor="Author">Autor: </label>
-                    <input type="text" value={form.Author} onChange={handlerChange} name="Author"/>
+                    <select onChange={handlerChange}>
+                    <option htmlFor="Author">{form.Author}</option>
+                    {authors?.map((e) =>{
+                        return (<option type="text" value={form.Author} name="Author">{e}</option>)
+                    })}
+                   </select>
                 </div>
 
                 <div>
