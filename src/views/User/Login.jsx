@@ -1,5 +1,6 @@
 import React from "react";
 import { Formik, Form, ErrorMessage, Field } from "formik";
+import { Link } from "react-router-dom";
 
 const Login = () => {
 	return (
@@ -95,9 +96,9 @@ const Login = () => {
 						<div class="flex flex-col mt-8">
 							<div class="text-center flex-row my-1">
 								¿No tenes cuenta?{" "}
-								<a class="link" href="/signup">
+								<Link to="/signup" className="text-primary">
 									Registrate.
-								</a>
+								</Link>
 							</div>
 							<div class="text-center flex-row my-">
 								Volver al{" "}

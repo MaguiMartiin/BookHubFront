@@ -10,12 +10,14 @@ import Form from "./views/Form/FormCreate"
 // user
 import Login from './views/User/Login'
 import EditDetail from './views/Detail/EditDetail'
+import SignUp from './views/User/SignUp'
 
 function App() {
    const location = useLocation()
   return (
 		<div>
-			{location.pathname !== "/" && location.pathname !== "/login" && (
+			{location.pathname !== "/" && location.pathname !== "/login" &&
+			location.pathname !== "/signup" && (
 				<NavBar />
 			)}
 			<Routes>
