@@ -7,24 +7,32 @@ import NavBar from './components/NavBar/NavBar'
 import Detail from './views/Detail/Detail'
 //import Landing from './views/Landing'
 import Form from "./views/Form/FormCreate"
+// user
+import Login from './views/User/Login'
 import EditDetail from './views/Detail/EditDetail'
+import SignUp from './views/User/SignUp'
 import Carrito from './views/Carrito/Carrito'
 
 function App() {
    const location = useLocation()
   return (
-    <div>
-      {location.pathname !== "/" && <NavBar/>}
-      <Routes>
-        <Route exact path = "/" element={<Landing/>}/>
-        <Route path="/home" element={<Home/>}/>
-        <Route path="/home/:id" element={<Detail/>}/>
-        <Route path="/editar/:id" element={<EditDetail/>}></Route>
-        <Route path="/form" element={<Form/>}/>
-        <Route path="/Carrito" element={<Carrito/>}/>
-      </Routes>
-    </div>
-  )
+		<div>
+			{location.pathname !== "/" && location.pathname !== "/login" &&
+			location.pathname !== "/signup" && (
+				<NavBar />
+			)}
+			<Routes>
+				<Route exact path="/" element={<Landing />} />
+				<Route path="/home" element={<Home />} />
+				<Route path="/home/:id" element={<Detail />} />
+				<Route path="/editar/:id" element={<EditDetail />}></Route>
+				<Route path="/form" element={<Form />} />
+				<Route path="/login" element={<Login />}></Route>
+				<Route path="/signup" element={<SignUp />}></Route>
+			    <Route path="/Carrito" element={<Carrito/>}/>
+			</Routes>
+		</div>
+	);
 }
 
 export default App;
