@@ -4,7 +4,7 @@ import style from './NavBar.module.css'
 
 const NavBar = () => {
     const toInicio = () => {
-        window.location.href = '/inicioSesion'
+        window.location.href = '/login'
     }
 
     return (
@@ -13,7 +13,7 @@ const NavBar = () => {
             <div className={style.div}>
                 <Link to="/home" className={style.link}>Inicio</Link>
                 <Link to="/carrito" className={style.link}>Carrito</Link>
-                <Link to="/Form" className={style.link}>Vender Libro</Link>
+                <Link to="/form" className={style.link}>Vender Libro</Link>
             </div>
             <button className={style.botonInicio} onClick={toInicio}>Inicia sesión</button>
         </div>

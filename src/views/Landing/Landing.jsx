@@ -10,7 +10,7 @@ import reseña from './Reseña.png'
 const Landing = () => {
 
     const toInicio = () => {
-        window.location.href = '/inicioSesion';
+        window.location.href = '/login';
     }
 
     const toHome = () => {
