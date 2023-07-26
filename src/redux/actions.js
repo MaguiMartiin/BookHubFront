@@ -106,7 +106,7 @@ export const getAuthor = () =>{
 export const editBook = (id, bookData) => {
   return async function (dispatch){
     try{
-      const bookEdit = await axios.put(`https://servidor-libreria.onrender.com/book/${id}`, bookData)
+      const bookEdit = await axios.put(`http://localhost:3001/book/${id}`, bookData)
       return dispatch ({type: EDIT_BOOK, payload: bookEdit.data})
     }
     catch(error){console.log(error)}
