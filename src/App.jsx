@@ -8,6 +8,7 @@ import Detail from './views/Detail/Detail'
 //import Landing from './views/Landing'
 import Form from "./views/Form/FormCreate"
 import EditDetail from './views/Detail/EditDetail'
+import Carrito from './views/Carrito/Carrito'
 
 function App() {
    const location = useLocation()
@@ -20,6 +21,7 @@ function App() {
         <Route path="/home/:id" element={<Detail/>}/>
         <Route path="/editar/:id" element={<EditDetail/>}></Route>
         <Route path="/form" element={<Form/>}/>
+        <Route path="/Carrito" element={<Carrito/>}/>
       </Routes>
     </div>
   )
