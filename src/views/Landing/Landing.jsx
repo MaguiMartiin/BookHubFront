@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
-import { getGenders } from '../redux/actions'
+import { getGenders } from '../../redux/actions'
 import style from './Landing.module.css'
 import img from './Landing.png'
 import img2 from './Landing2.png'
+import testimonio from './Testimonio.png'
+import reseña from './Reseña.png'
 
 const Landing = () => {
 
@@ -61,21 +63,39 @@ const Landing = () => {
             </div>
             
             <div className={style.div5}>
-                <h1>Testimonios y reseñas</h1>
+                <h3>Testimonios y reseñas</h3>
                 {/* ver lo de carru */}
+                <div className={style.testimonio}>
+                    <img src={testimonio} alt="testimonio Ana G" className={style.imgTestimonio}/>
+                    <div className={style.testimonioContent}>   
+                        <h1>Testimonio de Ana G.</h1>
+                        <h2>
+                            "BookHub es mi refugio literario. Con su amplia selección de géneros y temáticas, siempre encuentro algo que se ajusta a mi estado de ánimo. Además, vender mis libros usados y recomendar lecturas es muy gratificante. Esta app ha reavivado mi pasión por la lectura y me ha conectado con una comunidad increíble."
+                        </h2>
+                    </div>
+                </div>
+                <div className={style.testimonio}>
+                    <div className={style.testimonioContent}>   
+                        <h1>"La Última Noche en París" de Sarah Morgan</h1>
+                        <h2>                    
+                            Una emotiva historia de amor y segundas oportunidades ambientada en la hermosa ciudad de París. Sarah Morgan nos deleita con personajes entrañables y una narrativa que te atrapará desde el principio. Una lectura perfecta para los amantes del romance y los viajes. ¡No podrás dejar de leer hasta el último suspiro!
+                        </h2>
+                    </div>
+                    <img src={reseña} alt="testimonio Ana G" className={style.imgReseña}/>
+                </div>
             </div>
 
-            <div>
+            <div className={style.div6}>
                 <div>
                     <h1>Para acceder a funciones personalizadas, no olvides...</h1>
-                    <button>Iniciar Sesión</button>
+                    <button className={style.botonInicio2} onClick={toInicio}>Iniciar Sesión</button>
                 </div>
                 <div>
                     <h1>Soporte</h1>
-                    <li>
-                        <ul>Via mail: soporte@bookhub.com</ul>
-                        <ul>WhatsApp: +54123456789</ul>
-                    </li>
+                    <ul>
+                        <li>Via mail: soporte@bookhub.com</li>
+                        <li>WhatsApp: +54123456789</li>
+                    </ul>
                 </div>
             </div>
 
