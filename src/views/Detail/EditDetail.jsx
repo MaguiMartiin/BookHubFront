@@ -49,6 +49,8 @@ import style from "./EditDetail.module.css"
     const handlerChange = (event) => {
         const property = event.target.name
         const value = event.target.value
+        console.log("name", property)
+        console.log("value", value)
         setForm({...form, [property]: value})
     };
 
@@ -65,17 +67,17 @@ import style from "./EditDetail.module.css"
                 <div className={style.des}>
                     {/*Genero y autor */}
                     <label htmlFor="Gender">Género: </label>
-                    <select onChange={handlerChange}>
+                    <select onChange={handlerChange} name="Gender">
                     <option  htmlFor="Gender">{form.Gender}</option>
                     {genders?.map((e) => {
-                        return (<option type="text" value={form.Gender} name="Gender">{e}</option>)
+                        return (<option type="text" value={e} placeholder={form.Gender} name="Gender">{e}</option>)
                     })}
                     </select>
                     <label htmlFor="Author">Autor: </label>
-                    <select onChange={handlerChange}>
+                    <select onChange={handlerChange} name="Author">
                     <option htmlFor="Author">{form.Author}</option>
                     {authors?.map((e) =>{
-                        return (<option type="text" value={form.Author} name="Author">{e}</option>)
+                        return (<option type="text" value={e} placeholder={form.Author} name="Author">{e}</option>)
                     })}
                    </select>
                 </div>
