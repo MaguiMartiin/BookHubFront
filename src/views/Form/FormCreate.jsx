@@ -102,6 +102,40 @@ const FormRegistro = () => {
 						GenderId: "",
 						releaseDate: "",
 					}}
+					validate={({
+						name,
+						description,
+						price,
+						available,
+						image,
+						author,
+						gender,
+					}) => {
+						let errors = {};
+						if (!name) {
+							errors.name = "Required name";
+						}
+						if (!description) {
+							errors.description = "Required description";
+						}
+						if (!price) {
+							errors.price = "Required price";
+						}
+						if (!available) {
+							errors.available = "Required available";
+						}
+						if (!image) {
+							errors.image = "Required image";
+						}
+						if (!author) {
+							errors.author = "Required author";
+						}
+						if (!gender) {
+							errors.gender = "Required gender";
+						}
+
+						return errors; // Add this line to return the errors object
+					}}
 					onSubmit={handleSubmit}>
 					{({ errors, setFieldValue, isSubmitting }) => (
 						<Form className="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
