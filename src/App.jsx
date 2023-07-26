@@ -16,10 +16,9 @@ function App() {
    const location = useLocation()
   return (
 		<div>
-			{location.pathname !== "/" && location.pathname !== "/login" &&
-			location.pathname !== "/signup" && (
-				<NavBar />
-			)}
+			{location.pathname !== "/" &&
+				location.pathname !== "/login" &&
+				location.pathname !== "/signup" && <NavBar />}
 			<Routes>
 				<Route exact path="/" element={<Landing />} />
 				<Route path="/home" element={<Home />} />
