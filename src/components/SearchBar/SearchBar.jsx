@@ -133,7 +133,8 @@ const SearchBar = ({setPage}) => {
     releaseDate: "",
     dataReleateDate: [],
     search: "",
-    dataSearch: ""
+    dataSearch: "",
+    fecha: ""
 });
   const genders = useSelector((state) => state.genders)
   const authors = useSelector((state) => state.authors)
@@ -158,12 +159,6 @@ useEffect(()=>{
     dispatch(getAuthor());
   }, [dispatch]);
 
-
-  const [filterByGender, setFilterByGender] = useState('');
-  const [filterByAuthor, setFilterByAuthor] = useState('');
-  const [filterByAño, setFilterByAño] = useState('');
-
-
  
   const decades = [];
   for (let startYear = 1950; startYear <= 2019; startYear += 10) {
@@ -182,6 +177,7 @@ useEffect(()=>{
       ...filtro,
       releaseDate: 'releaseDate',
       dataReleateDate: [startDate, endDate],
+      fecha: `${startYear}`
     });
     setPage(1);
   };
@@ -238,7 +234,6 @@ useEffect(()=>{
 
 
   const reset = () =>{
-    setFilterByGender('');
     dispatch(getAllBooks());
     setFiltro({      
     gender:"", 
@@ -250,11 +245,11 @@ useEffect(()=>{
     releaseDate: "",
     dataReleateDate: [],
     search: "",
-    dataSearch: ""
+    dataSearch: "",
+    fecha: ""
   })
     setPage(1);
   }
-
 
   return (
     <div className={style.searchBarContainer}>
@@ -269,16 +264,16 @@ useEffect(()=>{
         />
         
       </form>
-      <select id="yearSelect" value={filterByAño} onChange={handleChange1} className={style.selectOrder}>
-        <option value="">Año</option>
-        {decades.map((decade) => (
-          <option key={decade} value={decade.split('-')[0]}>
+      <select onChange={handleChange1} className={style.selectOrder} value={filtro.fecha}>
+        <option value="all">Año</option>
+        {decades.map((decade, i) => (
+          <option key={i} value={decade.split('-')[0]}>
             {decade}
           </option>
         ))}
       </select>
 
-      <select value={filterByAuthor} className={style.selectOrder} onChange={selectAuthor}>
+      <select value={filtro.dataAuthor} className={style.selectOrder} onChange={selectAuthor}>
         <option value="all">Autor</option>
         {authors?.map((e, i)=>
           <option key={i} value={e}>
@@ -287,7 +282,7 @@ useEffect(()=>{
         )}
       </select>
 
-      <select value={filterByGender} className={style.selectGender} onChange={selectGender}>
+      <select value={filtro.dataGender} className={style.selectGender} onChange={selectGender}>
         <option value="all">Género</option>
           {genders?.map((gender, idx) => 
             <option key={idx} value={gender}>
