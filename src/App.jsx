@@ -11,6 +11,7 @@ import Form from "./views/Form/FormCreate"
 import Login from './views/User/Login'
 import EditDetail from './views/Detail/EditDetail'
 import SignUp from './views/User/SignUp'
+import Carrito from './views/Carrito/Carrito'
 
 function App() {
    const location = useLocation()
@@ -28,6 +29,7 @@ function App() {
 				<Route path="/form" element={<Form />} />
 				<Route path="/login" element={<Login />}></Route>
 				<Route path="/signup" element={<SignUp />}></Route>
+			    <Route path="/Carrito" element={<Carrito/>}/>
 			</Routes>
 		</div>
 	);
