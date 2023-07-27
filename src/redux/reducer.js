@@ -8,6 +8,8 @@ import {
 	GET_AUTHORS,
 	EDIT_BOOK,
 	USERS_SIGN_UP_STEP_SET,
+	ADD_TO_CART,
+	DELETE_FROM_CART
 } from "./action-types";
 
 const initialState = {
@@ -17,6 +19,7 @@ const initialState = {
 	bookId: [],
 	bookEdit: [],
 	authors: [],
+	cart: [],
 
 	// user
 	signUpStep: 1,
@@ -71,6 +74,18 @@ const rootReducer = (state = initialState, action) => {
 			};
 		case USERS_SIGN_UP_STEP_SET:
 			return { ...state, signUpStep: action.payload };
+
+		case ADD_TO_CART:
+			return{
+				...state,
+				cart: [...state.cart, action.payload],
+			}
+		case DELETE_FROM_CART:
+			const updateItems = state.cart.filter((item) => item.id !== action.payload)
+      		return {
+        	...state,
+        	cart: updateItems,
+      		};	
 
 		default:
 			return state;
