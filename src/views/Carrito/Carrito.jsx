@@ -14,7 +14,9 @@ const Carrito = () => {
 
  
   const [totalPrice, setTotalPrice] = useState(0);
+  console.log(totalPrice);
   const [selectedQuantities, setSelectedQuantities] = useState({});
+ 
 
   useEffect(() => {
     if (!cart.length){
@@ -46,6 +48,7 @@ const Carrito = () => {
     setSelectedQuantities(initialQuantities);
   }, [cart]);
 
+
   const handleQuantityChange = (bookId, value) => {
     setSelectedQuantities((prevQuantities) => ({
       ...prevQuantities,
@@ -56,6 +59,25 @@ const Carrito = () => {
   const handleDeleteItem = (itemId) => {
     dispatch(deleteFromCart(itemId))
   }
+
+  const itemsMapped = cart.map((item) => ({
+    item_id: item.id,
+    title: item.name,
+    quantity: cart.length, 
+    totalAmount: totalPrice,
+  }));
+  
+
+   const handleClick = () => {
+    axios.post('http://localhost:3001/payment',itemsMapped)
+    .then((response) => {
+      return response.data
+    })
+    .then((data) => {
+      window.location.href = data.init_point
+    })
+  }
+
 
   return (
     <div className={style.cartContainer}>
@@ -92,6 +114,7 @@ const Carrito = () => {
       <div className={style.totalPriceContainer}>
         <h3>Total:</h3>
         <p className={style.totalPrice}>${totalPrice}</p>
+        <button onClick={handleClick} > PAY! </button>
       </div>
     </div>
   );
