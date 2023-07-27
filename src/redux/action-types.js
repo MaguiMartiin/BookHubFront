@@ -7,3 +7,9 @@ export const GET_BOOK_NAME = 'GET_BOOK_NAME'
 export const EDIT_BOOK = 'EDIT_BOOK'
 export const DELETE_BOOK = 'DELETE_BOOK'
 export const GET_AUTHORS = 'GET_AUTHORS'
+export const ADD_TO_CART = 'ADD_TO_CART'
+export const DELETE_FROM_CART = 'DELETE_FROM_CART'
+
+// user..
+
+export const USERS_SIGN_UP_STEP_SET = "USERS_SIGN_UP_STEP_SET";

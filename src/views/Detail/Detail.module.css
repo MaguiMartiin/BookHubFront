@@ -1,8 +1,8 @@
 .contain {
     display: flex;
     background-color: rgba(255, 242, 241, 1);
-    height: auto;
-    width: 98.8vw;
+    height: 92vh;
+    width: 100vw;
     align-items: center;
     justify-content: center;
     padding: 4rem;

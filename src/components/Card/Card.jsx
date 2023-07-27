@@ -13,7 +13,6 @@ const Card = ({ book }) => {
           <p className={style.price}>${book?.price}</p>
           <div className={style.buttons}>
             <Link to={`/home/${book.id}`}><button className={style.details}>Ver detalle</button></Link>            
-            <button className={style.addCar}>Agregar al carro</button>
           </div>
         </div>
       </div>
