@@ -2,26 +2,46 @@ import React from "react"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
-import { bookId, bookDelete } from "../../redux/actions"
+import { bookId, bookDelete, addToCart } from "../../redux/actions"
 import style from './Detail.module.css'
 import { Link } from "react-router-dom"
 import { FaEdit, FaTrash } from 'react-icons/fa'
+import Swal from "sweetalert2"
 
 const Detail = () => {
     const dispatch = useDispatch()
     const {id} = useParams()
+    const navigate = useNavigate()
+    
+    const bookDetail = useSelector(state => state.bookId);
+    const cart = useSelector((state) => state.cart);
+    console.log('ashdhjkasd', cart);
+
     useEffect(() => {
         dispatch(bookId(id))
     }, [dispatch, id]) 
 
-    const bookDetail = useSelector(state => state.bookId)
-
-    const navigate = useNavigate()
     const handleDelete = () => {
         dispatch(bookDelete(id));
         alert(`El libro ${bookDetail.name} a sido eliminado!`)
         navigate("/home");
       };
+
+    const addCart = () => {
+        const isBookInCart = cart.find((item) => item.id === bookDetail.id);
+        if (isBookInCart){
+            Swal.fire({
+                title: 'The product is already in the cart',
+                icon: 'warning',
+            });
+        } else {
+            dispatch(addToCart(bookDetail));
+            Swal.fire({
+                title: 'Item added',
+                icon: 'success',
+            });
+        };
+    };
 
     return (
         <div className={style.contain}>
@@ -56,7 +76,7 @@ const Detail = () => {
                 </div>
                 <div className={style.info3}>
                     <h4>Precio {bookDetail.price}</h4>
-                    <button>Agregar al carrito</button>
+                    <button onClick={addCart}>Agregar al carrito</button>
                 </div>
             </div>
         </div>
