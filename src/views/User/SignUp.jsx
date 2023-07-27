@@ -15,21 +15,21 @@ const SignUp = () => {
 
 	const [userData, setUserData] = useState({
 		email: "",
-		password: "",
+		passwordKey: "",
 	});
 
-	const setFormData1 = ({ email, password }) => {
+	const setFormData1 = ({ email, passwordKey }) => {
 		setUserData({
 			...userData,
 			email,
-			password,
+			passwordKey,
 		});
 		setSignUpStep(2); // Cambiar al segundo paso (SignUpForm2)
 	};
 
 	return (
 		<div className="w-full h-screen flex flex-col justify-center items-center">
-			<div className="flex flex-col w-96 py-8 px-4 bg-secondaryLight dark:bg-secondary rounded-xl border border-secondaryBorderLight dark:border-secondaryBorder">
+			<div className="flex flex-col w-96 py-8 px-4 bg-secondaryLight dark:bg-secondary rounded-xl border border-secondaryBorderLight dark:border-secondaryBorder ">
 				{/* Forms */}
 				{signUpStep === 1 && <SignUpForm1 callBack={setFormData1} />}
 				{signUpStep === 2 && <SignUpForm2 userData={userData} />}
@@ -45,13 +45,13 @@ const SignUp = () => {
 				<div className="flex flex-col mt-8">
 					<div className="text-center flex-row my-1">
 						Ya tenes una cuenta?{" "}
-						<Link className="text-primary" to="/login">
+						<Link className="text-customColor1 font-semibold" to="/login">
 							Inicia sesión.
 						</Link>
 					</div>
 					<div className="text-center flex-row my-">
 						Volver al{" "}
-						<Link className="text-primary" to="/">
+						<Link className="text-customColor1 font-semibold" to="/">
 							home.
 						</Link>
 					</div>

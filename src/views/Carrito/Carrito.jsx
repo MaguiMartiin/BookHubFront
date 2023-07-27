@@ -1,39 +1,57 @@
 import style from './Carrito.module.css'
 import React from 'react';
-import { getAllBooks } from '../../redux/actions';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
+import { deleteFromCart } from '../../redux/actions';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Carrito = () => {
   const dispatch = useDispatch();
-  const copyState = useSelector((state) => state.copyState);
-  console.log(copyState);
+  const navigate = useNavigate();
+  const cart = useSelector((state) => state.cart);
+  console.log(cart);
+
+ 
+  const [totalPrice, setTotalPrice] = useState(0);
+  console.log(totalPrice);
+  const [selectedQuantities, setSelectedQuantities] = useState({});
+
 
   useEffect(() => {
-    dispatch(getAllBooks());
-  }, []);
-
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [selectedQuantities, setSelectedQuantities] = useState({});
+    if (totalPrice === 0) {
+      const timer = setTimeout(() => {
+        Swal.fire({
+          title: 'The cart is empty',
+          icon: 'warning',
+        }).then(() => {
+          navigate('/home');
+        });
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [totalPrice, navigate]);
 
   useEffect(() => {
     const calculateTotalPrice = () => {
       let total = 0;
-      copyState?.slice(0, 5).forEach((book) => {
+      cart?.forEach((book) => {
         total += book.price * selectedQuantities[book.id];
       });
       setTotalPrice(total);
     };
     calculateTotalPrice();
-  }, [copyState, selectedQuantities]);
+  }, [cart, selectedQuantities]);
 
   useEffect(() => {
-    const initialQuantities = copyState?.slice(0, 5).reduce((quantities, book) => {
+    const initialQuantities = cart?.reduce((quantities, book) => {
       quantities[book.id] = 1;
       return quantities;
     }, {});
     setSelectedQuantities(initialQuantities);
-  }, [copyState]);
+  }, [cart]);
+
 
   const handleQuantityChange = (bookId, value) => {
     setSelectedQuantities((prevQuantities) => ({
@@ -42,10 +60,35 @@ const Carrito = () => {
     }));
   };
 
+  const handleDeleteItem = (itemId) => {
+    dispatch(deleteFromCart(itemId))
+    const updatedCart = cart.filter((item) => item.id !== itemId);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+  }
+
+  const itemsMapped = cart.map((item) => ({
+    item_id: item.id,
+    title: item.name,
+    quantity: cart.length, 
+    totalAmount: totalPrice,
+  }));
+  
+
+   const handleClick = () => {
+    axios.post('http://localhost:3001/payment',itemsMapped)
+    .then((response) => {
+      return response.data
+    })
+    .then((data) => {
+      window.location.href = data.init_point
+    })
+  }
+
+
   return (
     <div className={style.cartContainer}>
       <div className={style.cardContainer}>
-        {copyState?.slice(0, 5).map((book) => (
+        {cart?.map((book) => (
           <div key={book.id} className={style.card}>
             <div className={style.imageContainer}>
               <img src={book.image} alt={book.name} className={style.bookImage} />
@@ -56,6 +99,9 @@ const Carrito = () => {
               <p>Disponibles: {book.available}</p>
               <p>Género: {book.Gender?.name}</p>
               <p>Autor: {book.Author?.name}</p>
+              <div className={style.deleteButtonContainer}>
+              <button className={style.deleteButton} onClick={() => handleDeleteItem(book.id)}>X</button>
+              </div>
               <div className={style.quantityControls}>
                 <button className={style.quantityButton} onClick={() => handleQuantityChange(book.id, -1)}>-</button>
                 <input
@@ -74,9 +120,11 @@ const Carrito = () => {
       <div className={style.totalPriceContainer}>
         <h3>Total:</h3>
         <p className={style.totalPrice}>${totalPrice}</p>
+        <button className={style.payButton} onClick={handleClick} > PAY! </button>
       </div>
     </div>
   );
 }
 
 export default Carrito;
+
