@@ -39,15 +39,27 @@ const Login = () => {
 
 					return errors;
 				}}>
-				{({ errors }) => (
+				{({ errors, touched }) => (
 					<Form className="shadow rounded-lg bg-white p-6 flex flex-col w-96 ">
 						<div className="mb-5">
 							<div className="mb-5 text-center">
-								<h1 className="text-3xl">Bienvenido!</h1>
+								<h1 className="text-3xl text-customColor4 font-bold">
+									Bienvenido!
+								</h1>
 							</div>
 							<div className=" flex flex-col justify-between">
 								<label htmlFor="email">Email</label>
-								<Field type="email" name="email" className="border p-1" />
+								<Field
+									type="email"
+									name="email"
+									className={
+										touched.email && errors.email
+											? "inputError"
+											: touched.email && !errors.email
+											? "inputSuccess"
+											: "input"
+									}
+								/>
 							</div>
 							<div>
 								<ErrorMessage
@@ -65,7 +77,17 @@ const Login = () => {
 								<label htmlFor="password">Password</label>
 							</div>
 							<div className="flex flex-col justify-center">
-								<Field type="password" name="password" className="border p-1" />
+								<Field
+									type="password"
+									name="password"
+									className={
+										touched.email && errors.email
+											? "inputError"
+											: touched.email && !errors.email
+											? "inputSuccess"
+											: "input"
+									}
+								/>
 							</div>
 							<div>
 								<ErrorMessage
@@ -78,9 +100,11 @@ const Login = () => {
 								/>
 							</div>
 						</div>
-						<a class="text-center text-sm mb-2 link" href="/changepassword">
+						<Link
+							className="text-center text-sm mb-2 link text-customColor4"
+							to="/changepassword">
 							¿Olvidaste tu contraseña?
-						</a>
+						</Link>
 						<button
 							type="submit"
 							className="bg-primary text-white px-4 py-2 rounded hover:bg-red-400 w-full">
@@ -96,15 +120,15 @@ const Login = () => {
 						<div className="flex flex-col mt-8">
 							<div className="text-center flex-row my-1">
 								¿No tenes cuenta?{" "}
-								<Link to="/signup" className="text-primary">
+								<Link to="/signup" className="text-customColor1 font-semibold">
 									Registrate.
 								</Link>
 							</div>
 							<div class="text-center flex-row my-">
 								Volver al{" "}
-								<a class="link" href="/">
+								<Link to="/" className="text-customColor1 font-semibold">
 									home.
-								</a>
+								</Link>
 							</div>
 						</div>
 					</Form>

@@ -38,4 +38,8 @@
 	.inputSuccess {
 		@apply h-8 px-4 py-4 w-full text-black border border-green-500 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-green-700 focus:border-transparent;
 	}
+	 .input {
+        @apply h-8 px-4 py-4 w-full text-black border border-secondaryBorderLight dark:border-customColor1 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-customColor2 focus:border-transparent;
+    }
 }
+
