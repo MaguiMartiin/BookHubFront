@@ -9,7 +9,8 @@ import {
 	EDIT_BOOK,
 	USERS_SIGN_UP_STEP_SET,
 	ADD_TO_CART,
-	DELETE_FROM_CART
+	DELETE_FROM_CART,
+	REFRESH_CART
 } from "./action-types";
 
 const initialState = {
@@ -86,6 +87,11 @@ const rootReducer = (state = initialState, action) => {
         	...state,
         	cart: updateItems,
       		};	
+		case REFRESH_CART:
+			return {
+				...state,
+				cart: action.payload,
+			}	
 
 		default:
 			return state;
