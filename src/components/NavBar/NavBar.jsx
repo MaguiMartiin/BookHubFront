@@ -8,7 +8,7 @@ const NavBar = () => {
   const cart = useSelector((state) => state.cart);
 
   const toInicio = () => {
-    window.location.href = "/inicioSesion";
+    window.location.href = "/login";
   };
 
   return (

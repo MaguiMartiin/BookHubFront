@@ -4,13 +4,21 @@ import { Link } from "react-router-dom";
 import { useToggle } from "../../components/user/UseToggle";
 import { AiFillEye } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
-// import GoogleLogin from "react-google-login"; // Import the react-google-login component
+import GoogleLogin from "react-google-login"; 
 import axios from "axios"; 
 
 const Login = () => {
-	 const [isPasswordShow, toggleShowPassword] = useToggle();
+	const [isPasswordShow, toggleShowPassword] = useToggle();
 
-
+	const handelGo = async () => {
+		try {
+		  const res = await axios.get("https://servidor-libreria.onrender.com/auth/google");
+		  // Redireccionar al usuario a la URL de autenticación de Google
+		  window.location.href = res.data.authUrl;
+		} catch (error) {
+		  console.error("Error al obtener la URL de autenticación de Google:", error);
+		}
+	  };
 	
 	return (
 		<div className="container flex flex-col h-screen justify-center items-center">
@@ -157,7 +165,9 @@ const Login = () => {
 				<div class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
 					<p class="mx-4 mb-0 text-center font-semibold dark:text-text">OR</p>
 				</div>
-				<div className="flex justify-center">Registrarte con google</div>
+				<div className="flex justify-center">
+					<button onClick={handelGo}><GoogleLogin buttonText="Acceder con Google"/></button>
+				</div>
 				<div className="flex flex-col mt-8">
 					<div className="text-center flex-row my-1">
 						¿No tenes cuenta?{" "}
@@ -167,7 +177,7 @@ const Login = () => {
 					</div>
 					<div class="text-center flex-row my-">
 						Volver al{" "}
-						<Link to="/" className="text-customColor1 font-semibold">
+						<Link to="/home" className="text-customColor1 font-semibold">
 							home.
 						</Link>
 					</div>
