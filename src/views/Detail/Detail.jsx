@@ -40,6 +40,10 @@ const Detail = () => {
                 title: 'Item added',
                 icon: 'success',
             });
+
+            const updatedCart = [...cart, bookDetail];
+            localStorage.setItem('cart', JSON.stringify(updatedCart));
+
         };
     };
 

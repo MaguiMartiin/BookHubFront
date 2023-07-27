@@ -60,7 +60,7 @@
   }
 
   .totalPriceContainer {
-    flex: 1; 
+    flex: 1;
     background-color: #fff;
     border: 1px solid #ddd;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -73,7 +73,10 @@
     width: 100%;
     max-width: 300px;
     margin-top: 20px;
-    margin-right: 50px;
+    position: fixed;
+    right: 50px;
+    top: 25%;
+    transform: translateY(-50%);
   }
   
   .totalPriceContainer h3 {
@@ -152,5 +155,22 @@
   .deleteButton:hover {
     background-color: #e95510;
   }
+
+  .payButton{
+    padding: 10px 20px;
+  background-color: #74ac8a; 
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px; 
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease-in-out;
+  }
   
 
+  
+.payButton:hover {
+  background-color: #639170;
+}
