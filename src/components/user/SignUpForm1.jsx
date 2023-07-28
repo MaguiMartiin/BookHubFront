@@ -2,13 +2,10 @@ import React from "react";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useToggle } from "./UseToggle";
-import axios from "axios";
 import * as Yup from "yup";
 
-const SignUpFrorm1 = ({
-    callBack,
-}) => {
-	const [isPasswordShow, toggleShowPassword] = useToggle();
+const SignUpFrorm1 = ({ callBack }) => {
+		const [isPasswordShow, toggleShowPassword] = useToggle();
 
 	const validationSchema = Yup.object().shape({
 		// Falta validación email ya existe
@@ -29,8 +26,9 @@ const SignUpFrorm1 = ({
 			}),
 	});
 
+
+
 	return (
-		// <div className="container flex flex-col h-screen justify-center items-center">
 		<Formik
 			initialValues={{
 				email: "",
@@ -39,29 +37,42 @@ const SignUpFrorm1 = ({
 			}}
 			onSubmit={async (values, { resetForm, setSubmitting }) => {
 				try {
-					const respose = await axios.post("http://localhost:3001/sign", {
-						email: values.email,
-					});
-                    callBack({
-                        email: values.email.trim(),
-                        password: values.passwordKey
-                    })
-
+					const formData = {
+						email: values.email.trim(),
+						passwordKey: values.passwordKey,
+					}
+					callBack(formData);
 				} catch (error) {
 					console.log(error);
 				}
-                setSubmitting(false);
-                resetForm();
+				setSubmitting(false);
+				resetForm();
 			}}
 			validationSchema={validationSchema}>
 			{({ errors, touched }) => (
 				<Form>
 					{/* <div className="mb-5"> */}
-					<h2 className="text-xl text-center ">Crear cuenta</h2>
+					<h2 className="text-3xl text-center text-customColor4 font-bold ">
+						Crear cuenta
+					</h2>
 
 					<div className="flex flex-col my-2">
-						<label htmlFor="email">Email</label>
-						<Field type="email" name="email" className="border p-1" />
+						<label htmlFor="email" className="block my-1 font-semibold">
+							Email
+						</label>
+						<Field
+							className={
+								touched.email && errors.email
+									? "inputError"
+									: touched.email && !errors.email
+									? "inputSuccess"
+									: "input"
+							}
+							type="email"
+							name="email"
+							placeholder="Tu email"
+							autoComplete="false"
+						/>
 
 						<ErrorMessage
 							name="email"
@@ -71,12 +82,21 @@ const SignUpFrorm1 = ({
 						/>
 					</div>
 					<div className="flex flex-col my-2">
-						<label htmlFor="password">Password</label>
+						<label htmlFor="password" className="block my-1 font-semibold">
+							Password
+						</label>
 						<div className="flex flex-col justify-between  relative w-full">
 							<Field
+								placeholder="Tu contraseña"
 								type={isPasswordShow ? `text` : `password`}
 								name="passwordKey"
-								className="border p-1"
+								className={
+									touched.passwordKey && errors.passwordKey
+										? "inputError"
+										: touched.passwordKey && !errors.passwordKey
+										? "inputSuccess"
+										: "input"
+								}
 							/>
 							<div className="absolute inset-y-0 right-0 flex items-end pr-2 pb-1 ">
 								<button onClick={toggleShowPassword} type="button">
@@ -107,7 +127,13 @@ const SignUpFrorm1 = ({
 						</label>
 
 						<Field
-							className="border p-1"
+							className={
+								touched.passwordConfirm && errors.passwordConfirm
+									? "inputError"
+									: touched.passwordConfirm && !errors.passwordConfirm
+									? "inputSuccess"
+									: "input"
+							}
 							type={isPasswordShow ? `text` : `password`}
 							name="passwordConfirm"
 							placeholder="Repetí tu contraseña"
@@ -124,7 +150,7 @@ const SignUpFrorm1 = ({
 					</div>
 					<button
 						type="submit"
-						className="bg-primary text-white px-4 py-2 rounded hover:bg-red-400 w-full">
+						className="bg-primary text-white px-4 py-2 rounded hover:bg-red-400 w-full mt-4">
 						siguiente
 					</button>
 				</Form>

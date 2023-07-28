@@ -1,6 +1,5 @@
 
 import SearchBar from '../../components/SearchBar/SearchBar';
-import Filters from '../../components/Filters/Filters';
 import Card from '../../components/Card/Card';
 import Pagination from '../../components/Pagination/Pagination';
 import React from 'react';

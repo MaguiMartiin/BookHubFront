@@ -7,4 +7,20 @@ export const setSignUpStep = (step) => {
 	};
 };
 
+export const signIn = ({email, password}) => {
+  return async (dispatch) => {
+	try {
+	  const response = await axios.post("/login", {
+		email: email,
+		password: password,
+	  });
+
+	  console.log(response);
+
+	} catch (error) {
+	  console.log(error);
+	}
+  }
+}
+
 
