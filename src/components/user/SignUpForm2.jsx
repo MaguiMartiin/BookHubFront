@@ -12,25 +12,29 @@ import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
 	name: Yup.string().required("Este campo es requerido."),
-	lastname: Yup.string().required("Este campo es requerido."),
+	lastName: Yup.string().required("Este campo es requerido."),
 });
 
 const SingUpForm2 = ({ userData, setSignUpStep }) => {
+	const navigate = useNavigate();
+
 	return (
 		<Formik
 			initialValues={{
 				name: "",
-				lastname: "",
+				lastName: "",
 			}}
-			onSubmit={async (values) => {
+			onSubmit={async (values, { setSubmitting, resetForm }) => {
 				const user = {
 					...userData,
 					name: values.name,
-					lastname: values.lastname,
+					lastName: values.lastName,
 				};
+				console.log(user);
 
 				try {
-					await axios.post("http://localhost:3001/user", user);
+					await axios.post("https://servidor-libreria.onrender.com/user/", user);
+					navigate("/login");
 				} catch (error) {
 					console.log(error);
 				}
@@ -39,19 +43,55 @@ const SingUpForm2 = ({ userData, setSignUpStep }) => {
 				resetForm();
 			}}
 			validationSchema={validationSchema}>
-			{({ errors, touched }) => (
+			{({ errors, touched, isSubmitting }) => (
 				<Form>
 					<h2 className="text-xl text-center my-2">Últimos datos &#128513;</h2>
-					<div className="flex flex-col my-2">
-                        <label htmlFor="name">Nombre</label>
-                        <Field type="text" name="name" />
-                        <ErrorMessage name="name" />
-                    </div>
-                    <div className="flex flex-col my-2">
-                        <label htmlFor="lastname">Apellido</label>
-                        <Field type="text" name="lastname" />
-                        <ErrorMessage name="lastname" />
-                    </div>
+					<div className="flex flex-col justify-between  relative w-full my-2">
+						<label htmlFor="name">Nombre</label>
+						<Field
+							type="text"
+							name="name"
+							className={
+								touched.passwordConfirm && errors.passwordConfirm
+									? "inputError"
+									: touched.passwordConfirm && !errors.passwordConfirm
+									? "inputSuccess"
+									: "input"
+							}
+						/>
+						<ErrorMessage
+							name="name"
+							component={() => (
+								<p className="text-red-500 text-xm italic">{errors.name}</p>
+							)}
+						/>
+					</div>
+					<div className="flex flex-col justify-between  relative w-full my-2">
+						<label htmlFor="lastName">Apellido</label>
+						<Field
+							type="text"
+							name="lastName"
+							className={
+								touched.passwordConfirm && errors.passwordConfirm
+									? "inputError"
+									: touched.passwordConfirm && !errors.passwordConfirm
+									? "inputSuccess"
+									: "input"
+							}
+						/>
+						<ErrorMessage
+							name="lastName"
+							component={() => (
+								<p className="text-red-500 text-xm italic">{errors.lastName}</p>
+							)}
+						/>
+					</div>
+					<button
+						className="bg-primary w-full  hover:bg-secondary text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"
+						type="submit"
+						disabled={isSubmitting}>
+						{isSubmitting ? "Enviando..." : "Guardar"}
+					</button>
 				</Form>
 			)}
 		</Formik>

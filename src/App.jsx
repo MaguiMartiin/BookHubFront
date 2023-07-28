@@ -1,6 +1,9 @@
 import './App.css'
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { refreshCart } from './redux/actions'
 import { Route, Routes, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import Landing from './views/Landing/Landing'
 import Home from './views/Home/Home'
 import NavBar from './components/NavBar/NavBar'
@@ -14,7 +17,17 @@ import SignUp from './views/User/SignUp'
 import Carrito from './views/Carrito/Carrito'
 
 function App() {
-   const location = useLocation()
+   const location = useLocation();
+   const dispatch = useDispatch();
+
+   useEffect(() => {
+    const carrito = localStorage.getItem('cart');
+    const carritoRefresh = JSON.parse(carrito);
+    if (carritoRefresh ) {
+      dispatch(refreshCart(carritoRefresh));
+    }
+  }, [dispatch]);
+
   return (
 		<div>
 			{location.pathname !== "/" &&
@@ -28,7 +41,7 @@ function App() {
 				<Route path="/form" element={<Form />} />
 				<Route path="/login" element={<Login />}></Route>
 				<Route path="/signup" element={<SignUp />}></Route>
-			    <Route path="/Carrito" element={<Carrito/>}/>
+			    <Route path="/carrito" element={<Carrito/>}/>
 			</Routes>
 		</div>
 	);
