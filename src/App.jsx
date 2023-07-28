@@ -15,6 +15,7 @@ import Login from './views/User/Login'
 import EditDetail from './views/Detail/EditDetail'
 import SignUp from './views/User/SignUp'
 import Carrito from './views/Carrito/Carrito'
+import MyBooks from './views/MyBooks/MyBooks'
 
 function App() {
    const location = useLocation();
@@ -41,7 +42,8 @@ function App() {
 				<Route path="/form" element={<Form />} />
 				<Route path="/login" element={<Login />}></Route>
 				<Route path="/signup" element={<SignUp />}></Route>
-			    <Route path="/carrito" element={<Carrito/>}/>
+				<Route path="/MyBooks" element={<MyBooks/>}/
+			   <Route path="/carrito" element={<Carrito/>}/>
 			</Routes>
 		</div>
 	);
