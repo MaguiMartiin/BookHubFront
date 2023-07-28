@@ -11,7 +11,7 @@ const Login = () => {
 	const navigate = useNavigate()
 	const handelGo = async () => {
 		try {
-		  const res = await axios.get("https://servidor-libreria.onrender.com/auth/google");
+		  const res = await axios.get("/auth/google");
 		  // Redireccionar al usuario a la URL de autenticación de Google
 		  window.location.href = res.data.authUrl;
 		} catch (error) {
@@ -30,7 +30,7 @@ const Login = () => {
 					onSubmit={async (values) => {
 						console.log(values);
 						try {
-							const response = await axios.post("https://servidor-libreria.onrender.com/login", {
+							const response = await axios.post("/login", {
 								email: values.email,
 								password: values.password,
 							});

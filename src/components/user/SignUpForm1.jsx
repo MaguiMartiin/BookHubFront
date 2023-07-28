@@ -2,7 +2,6 @@ import React from "react";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useToggle } from "./UseToggle";
-import axios from "axios";
 import * as Yup from "yup";
 
 const SignUpFrorm1 = ({ callBack }) => {
@@ -30,7 +29,6 @@ const SignUpFrorm1 = ({ callBack }) => {
 
 
 	return (
-		// <div className="container flex flex-col h-screen justify-center items-center">
 		<Formik
 			initialValues={{
 				email: "",
