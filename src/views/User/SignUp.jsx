@@ -4,6 +4,7 @@ import SignUpForm2 from "../../components/user/SignUpForm2";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSignUpStep as setSignUpStepAction } from "../../redux/userAction";
+import axios from "axios";
 
 const SignUp = () => {
 	const dispatch = useDispatch();
@@ -27,6 +28,16 @@ const SignUp = () => {
 		setSignUpStep(2); // Cambiar al segundo paso (SignUpForm2)
 	};
 
+	const handelGo = async () => {
+		try {
+		  const res = await axios.get("https://servidor-libreria.onrender.com/auth/google");
+		  // Redireccionar al usuario a la URL de autenticación de Google
+		  window.location.href = res.data.authUrl;
+		} catch (error) {
+		  console.error("Error al obtener la URL de autenticación de Google:", error);
+		}
+	}; 
+
 	return (
 		<div className="w-full h-screen flex flex-col justify-center items-center">
 			<div className="flex flex-col w-96 py-8 px-4 bg-secondaryLight dark:bg-secondary rounded-xl border border-secondaryBorderLight dark:border-secondaryBorder ">
@@ -40,7 +51,9 @@ const SignUp = () => {
 						OR
 					</p>
 				</div>
-				<div className="flex justify-center">Registrarte con google</div>
+				<div className="flex justify-center">
+					<button onClick={handelGo}>Registrate con Google</button>
+				</div>
 
 				<div className="flex flex-col mt-8">
 					<div className="text-center flex-row my-1">
@@ -51,7 +64,7 @@ const SignUp = () => {
 					</div>
 					<div className="text-center flex-row my-">
 						Volver al{" "}
-						<Link className="text-customColor1 font-semibold" to="/">
+						<Link className="text-customColor1 font-semibold" to="/home">
 							home.
 						</Link>
 					</div>

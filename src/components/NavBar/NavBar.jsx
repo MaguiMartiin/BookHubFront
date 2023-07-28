@@ -8,7 +8,7 @@ const NavBar = () => {
   const cart = useSelector((state) => state.cart);
 
   const toInicio = () => {
-    window.location.href = "/inicioSesion";
+    window.location.href = "/login";
   };
 
   return (
@@ -30,7 +30,7 @@ const NavBar = () => {
             <FaCartArrowDown />
           )}
         </Link>
-        <Link to="/Form" className={style.link}>
+        <Link to="/form" className={style.link}>
           Vender Libro
         </Link>
       </div>

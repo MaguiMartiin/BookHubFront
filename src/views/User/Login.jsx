@@ -1,16 +1,23 @@
 import React from "react";
 import { Formik, Form, ErrorMessage, Field } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useToggle } from "../../components/user/UseToggle";
 import { AiFillEye } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
-// import GoogleLogin from "react-google-login"; // Import the react-google-login component
 import axios from "axios"; 
 
 const Login = () => {
-	 const [isPasswordShow, toggleShowPassword] = useToggle();
-
-
+	const [isPasswordShow, toggleShowPassword] = useToggle();
+	const navigate = useNavigate()
+	const handelGo = async () => {
+		try {
+		  const res = await axios.get("https://servidor-libreria.onrender.com/auth/google");
+		  // Redireccionar al usuario a la URL de autenticación de Google
+		  window.location.href = res.data.authUrl;
+		} catch (error) {
+		  console.error("Error al obtener la URL de autenticación de Google:", error);
+		}
+	}
 	
 	return (
 		<div className="container flex flex-col h-screen justify-center items-center">
@@ -20,15 +27,15 @@ const Login = () => {
 						email: "",
 						password: "",
 					}}
-					onSubmit={(values, { resetForm, setSubmitting }) => {
+					onSubmit={async (values) => {
 						console.log(values);
 						try {
-							const response = axios.post("http://localhost:3001/login", {
+							const response = await axios.post("https://servidor-libreria.onrender.com/login", {
 								email: values.email,
 								password: values.password,
 							});
-
-							console.log(response);
+							navigate("/home")
+							console.log(response.data);
 						} catch (error) {
 							console.log({
 								error: error.message,
@@ -102,7 +109,7 @@ const Login = () => {
 							{/* Password */}
 							<div className="flex flex-col my-2">
 								<label htmlFor="password" className="block my-1 font-semibold">
-									Password
+									Contraseña
 								</label>
 								<div className="flex flex-col justify-between  relative w-full">
 									<Field
@@ -157,7 +164,9 @@ const Login = () => {
 				<div class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
 					<p class="mx-4 mb-0 text-center font-semibold dark:text-text">OR</p>
 				</div>
-				<div className="flex justify-center">Registrarte con google</div>
+				<div className="flex justify-center">
+					<button onClick={handelGo} className="bg-primary text-white px-4 py-2 rounded hover:bg-red-400 w-full">Acceder con Google</button>
+				</div>
 				<div className="flex flex-col mt-8">
 					<div className="text-center flex-row my-1">
 						¿No tenes cuenta?{" "}
@@ -167,7 +176,7 @@ const Login = () => {
 					</div>
 					<div class="text-center flex-row my-">
 						Volver al{" "}
-						<Link to="/" className="text-customColor1 font-semibold">
+						<Link to="/home" className="text-customColor1 font-semibold">
 							home.
 						</Link>
 					</div>

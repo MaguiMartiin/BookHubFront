@@ -24,7 +24,7 @@ const SingUpForm2 = ({ userData, setSignUpStep }) => {
 				name: "",
 				lastName: "",
 			}}
-			onSubmit={async (values) => {
+			onSubmit={async (values, { setSubmitting, resetForm }) => {
 				const user = {
 					...userData,
 					name: values.name,
@@ -33,7 +33,7 @@ const SingUpForm2 = ({ userData, setSignUpStep }) => {
 				console.log(user);
 
 				try {
-					await axios.post("http://localhost:3001/user", user);
+					await axios.post("https://servidor-libreria.onrender.com/user/", user);
 					navigate("/login");
 				} catch (error) {
 					console.log(error);

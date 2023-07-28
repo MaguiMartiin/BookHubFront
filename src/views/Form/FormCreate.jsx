@@ -66,7 +66,7 @@ const FormRegistro = () => {
 				AuthorId: Number(values.AuthorId),
 			};
 			const response = await axios
-				.post("http://localhost:3001/book", modifiedValues)
+				.post("https://servidor-libreria.onrender.com/book", modifiedValues)
 				.then(() => {
 					Swal.fire({
 						icon: "success",
