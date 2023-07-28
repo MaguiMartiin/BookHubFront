@@ -28,6 +28,21 @@ function App() {
     }
   }, [dispatch]);
 
+  useEffect(() => {
+    // Obtener el token de la URL si está presente
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+
+    if (params.token) {
+      // Guardar el token en el localStorage
+      localStorage.setItem("accessToken", params.token);
+      
+      // Redireccionar a la página principal o a donde desees después del inicio de sesión exitoso
+      // Aquí redirecciono al componente Home, pero puedes ajustarlo según tu estructura de enrutamiento
+      window.location.href = "/home";
+    }
+  }, []);
+
   return (
 		<div>
 			{location.pathname !== "/" &&
