@@ -1,12 +1,8 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
-// import { useDispatch, useSelector } from "react-redux";
-
 import { setSignUpStep } from "../../redux/userAction";
 import { connect } from "react-redux";
-
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -33,7 +29,7 @@ const SingUpForm2 = ({ userData, setSignUpStep }) => {
 				console.log(user);
 
 				try {
-					await axios.post("https://servidor-libreria.onrender.com/user/", user);
+					await axios.post("/user/", user);
 					navigate("/login");
 				} catch (error) {
 					console.log(error);

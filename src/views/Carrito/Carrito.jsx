@@ -75,7 +75,7 @@ const Carrito = () => {
   
 
    const handleClick = () => {
-    axios.post('http://localhost:3001/payment',itemsMapped)
+    axios.post('/payment',itemsMapped)
     .then((response) => {
       return response.data
     })

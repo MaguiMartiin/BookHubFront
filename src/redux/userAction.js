@@ -10,7 +10,7 @@ export const setSignUpStep = (step) => {
 export const signIn = ({email, password}) => {
   return async (dispatch) => {
 	try {
-	  const response = await axios.post("http://localhost:3001/login", {
+	  const response = await axios.post("/login", {
 		email: email,
 		password: password,
 	  });
