@@ -39,13 +39,11 @@ const SignUpFrorm1 = ({ callBack }) => {
 			}}
 			onSubmit={async (values, { resetForm, setSubmitting }) => {
 				try {
-					const respose = await axios.post("http://localhost:3001/user/sign", {
-						email: values.email,
-					});
-					callBack({
+					const formData = {
 						email: values.email.trim(),
-						password: values.passwordKey,
-					});
+						passwordKey: values.passwordKey,
+					}
+					callBack(formData);
 				} catch (error) {
 					console.log(error);
 				}

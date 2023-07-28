@@ -4,7 +4,6 @@ import SignUpForm2 from "../../components/user/SignUpForm2";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setSignUpStep as setSignUpStepAction } from "../../redux/userAction";
-import GoogleLogin from "react-google-login"; 
 import axios from "axios";
 
 const SignUp = () => {
@@ -37,7 +36,7 @@ const SignUp = () => {
 		} catch (error) {
 		  console.error("Error al obtener la URL de autenticación de Google:", error);
 		}
-	  }; 
+	}; 
 
 	return (
 		<div className="w-full h-screen flex flex-col justify-center items-center">
@@ -53,7 +52,7 @@ const SignUp = () => {
 					</p>
 				</div>
 				<div className="flex justify-center">
-					<button onClick={handelGo}><GoogleLogin buttonText="Registrate con Google"/></button>
+					<button onClick={handelGo}>Registrate con Google</button>
 				</div>
 
 				<div className="flex flex-col mt-8">
@@ -65,7 +64,7 @@ const SignUp = () => {
 					</div>
 					<div className="text-center flex-row my-">
 						Volver al{" "}
-						<Link className="text-customColor1 font-semibold" to="/">
+						<Link className="text-customColor1 font-semibold" to="/home">
 							home.
 						</Link>
 					</div>
