@@ -10,9 +10,7 @@ import style from "./EditDetail.module.css"
     const navigate = useNavigate()
     const bookDetail = useSelector((state) => state.bookId)
     const genders = useSelector((state) => state.genders)
-    console.log(genders);
     const authors = useSelector((state) => state.authors)
-    console.log(bookDetail);
 
     const [form, setForm] = useState({
         name: bookDetail.name || "",

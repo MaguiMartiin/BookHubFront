@@ -57,42 +57,30 @@ const FormRegistro = () => {
 
 	const handleSubmit = async (values, { resetForm, setSubmitting }) => {
 		console.log(values);
-
+	  
 		try {
-			console.log(values);
-			const modifiedValues = {
-				...values,
-				GenderId: Number(values.GenderId),
-				AuthorId: Number(values.AuthorId),
-			};
-			const response = await axios
-				.post("http://localhost:3001/book", modifiedValues)
-				.then(() => {
-					Swal.fire({
-						icon: "success",
-						title: "Libro creado correctamente",
-						showConfirmButton: false,
-						timer: 2000,
-					});
-				})
-				.then(() => {
-					navigate("/home");
-				});
-
-			console.log(response);
-			resetForm();
-			if (response.status === 200) {
-				console.log("Formulario enviado:", values);
-				setFormGo(true);
-			} else {
-				console.error("Error en la solicitud:", response.data);
-			}
+		  console.log(values);
+		  const modifiedValues = {
+			...values,
+			GenderId: Number(values.GenderId),
+			AuthorId: Number(values.AuthorId),
+		  };
+		  await axios.post("/book", modifiedValues);
+		  Swal.fire({
+			icon: "success",
+			title: "Libro creado correctamente",
+			confirmButtonText: "Accept",
+			timer: 2000,
+		  }).then(() => {
+			navigate("/home");
+		  });
+		  setFormGo(true);
 		} catch (error) {
-			console.error("Error en la solicitud:", error);
+		  console.error("Error en la solicitud:", error);
 		} finally {
-			setSubmitting(false);
+		  setSubmitting(false);
 		}
-	};
+	  };
 
 	return (
 		<div className="w-screen min-h-[100vh] p-10">

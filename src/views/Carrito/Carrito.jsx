@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { deleteFromCart } from '../../redux/actions';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Carrito = () => {
   const dispatch = useDispatch();
@@ -14,18 +15,23 @@ const Carrito = () => {
 
  
   const [totalPrice, setTotalPrice] = useState(0);
+  console.log(totalPrice);
   const [selectedQuantities, setSelectedQuantities] = useState({});
 
+
   useEffect(() => {
-    if (!cart.length){
-      Swal.fire({
-        title: 'The cart is empty',
-        icon: 'warning',
-      }).then(() =>{
-        navigate('/home')
-      })
+    if (totalPrice === 0) {
+      const timer = setTimeout(() => {
+        Swal.fire({
+          title: 'The cart is empty',
+          icon: 'warning',
+        }).then(() => {
+          navigate('/home');
+        });
+      }, 300);
+      return () => clearTimeout(timer);
     }
-  }, [cart, navigate])
+  }, [totalPrice, navigate]);
 
   useEffect(() => {
     const calculateTotalPrice = () => {
@@ -46,6 +52,7 @@ const Carrito = () => {
     setSelectedQuantities(initialQuantities);
   }, [cart]);
 
+
   const handleQuantityChange = (bookId, value) => {
     setSelectedQuantities((prevQuantities) => ({
       ...prevQuantities,
@@ -55,7 +62,28 @@ const Carrito = () => {
 
   const handleDeleteItem = (itemId) => {
     dispatch(deleteFromCart(itemId))
+    const updatedCart = cart.filter((item) => item.id !== itemId);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
   }
+
+  const itemsMapped = cart.map((item) => ({
+    item_id: item.id,
+    title: item.name,
+    quantity: cart.length, 
+    totalAmount: totalPrice,
+  }));
+  
+
+   const handleClick = () => {
+    axios.post('/payment',itemsMapped)
+    .then((response) => {
+      return response.data
+    })
+    .then((data) => {
+      window.location.href = data.init_point
+    })
+  }
+
 
   return (
     <div className={style.cartContainer}>
@@ -92,6 +120,7 @@ const Carrito = () => {
       <div className={style.totalPriceContainer}>
         <h3>Total:</h3>
         <p className={style.totalPrice}>${totalPrice}</p>
+        <button className={style.payButton} onClick={handleClick} > PAY! </button>
       </div>
     </div>
   );
