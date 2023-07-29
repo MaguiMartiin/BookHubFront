@@ -6,15 +6,15 @@ import { useSelector } from "react-redux";
 
 const NavBar = () => {
   const cart = useSelector((state) => state.cart);
-  //const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const toInicio = () => {
     window.location.href = "/login";
   };
-  /*useEffect(() => {
+  useEffect(() => {
     const token = localStorage.getItem("accessToken");
     const userIsLoggedIn = !!token;
     setIsLoggedIn(userIsLoggedIn);
-  }, []);*/
+  }, []);
 
   return (
     <div className={style.contain}>
@@ -39,12 +39,9 @@ const NavBar = () => {
           Vender Libro
         </Link>
       </div>
-     <button className={style.botonInicio} onClick={toInicio}>
+     {!isLoggedIn&& <button className={style.botonInicio} onClick={toInicio}>
         Inicia sesión
-      </button>
-     {/*!isLoggedIn&& <button className={style.botonInicio} onClick={toInicio}>
-        Inicia sesión
-          </button>*/}
+          </button>}
     </div>
   );
 };
