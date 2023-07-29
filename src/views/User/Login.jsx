@@ -4,11 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useToggle } from "../../components/user/UseToggle";
 import { AiFillEye } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
-import axios from "axios"; 
+import axios from "axios";
 
 const Login = () => {
-	const [isPasswordShow, toggleShowPassword] = useToggle();
-	const navigate = useNavigate()
+  const [isPasswordShow, toggleShowPassword] = useToggle();
+  const navigate = useNavigate();
+
 	const handelGo = async () => {
 		try {
 		  const res = await axios.get("/auth/google");
@@ -17,7 +18,8 @@ const Login = () => {
 		} catch (error) {
 		  console.error("Error al obtener la URL de autenticación de Google:", error);
 		}
-	}
+	  };
+	
 	
 	return (
 		<div className="container flex flex-col h-screen justify-center items-center">
