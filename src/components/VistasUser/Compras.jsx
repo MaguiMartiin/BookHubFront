@@ -1,11 +1,15 @@
 import React from "react"
 import axios from "axios"
 
-const Compras = async () => {
-    try {
-        const compras = await axios.get("/perfil")
-    } catch (error) {
-        
+const Compras = () => {
+
+    const compra = async () => {
+
+        try {
+            const compras = await axios.get("/perfil/myBooks")
+        } catch (error) {
+            
+        }
     }
 
     return ( 
