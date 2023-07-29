@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { getGenders } from '../../redux/actions'
 import style from './Landing.module.css'
@@ -8,10 +8,15 @@ import testimonio from './Testimonio.png'
 import reseña from './Reseña.png'
 
 const Landing = () => {
-
+   // const [isLoggedIn, setIsLoggedIn] = useState(false);
     const toInicio = () => {
-        window.location.href = '/login';
-    }
+      window.location.href = "/login";
+    };
+ /*   useEffect(() => {
+      const token = localStorage.getItem("accessToken");
+      const userIsLoggedIn = !!token;
+      setIsLoggedIn(userIsLoggedIn);
+    }, []);*/
 
     const toHome = () => {
         window.location.href = '/home';
@@ -28,7 +33,10 @@ const Landing = () => {
         <div className={style.container}>
             <div className={style.div1}>
                 <h1>BookHub</h1>
-                <button className={style.botonInicio} onClick={toInicio}>Inicia Sesión</button>
+               <button className={style.botonInicio} onClick={toInicio}>Inicia Sesión</button>
+            
+               {/*!isLoggedIn&& <button className={style.botonInicio} onClick={toInicio}>Inicia Sesión</button>
+            */}
             </div>
 
             <div className={style.div2}>
