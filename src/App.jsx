@@ -8,19 +8,17 @@ import Landing from './views/Landing/Landing'
 import Home from './views/Home/Home'
 import NavBar from './components/NavBar/NavBar'
 import Detail from './views/Detail/Detail'
-//import Landing from './views/Landing'
 import Form from "./views/Form/FormCreate"
-// user
 import Login from './views/User/Login'
 import EditDetail from './views/Detail/EditDetail'
 import SignUp from './views/User/SignUp'
 import Carrito from './views/Carrito/Carrito'
+import MyBooks from './views/MyBooks/MyBooks'
+import Compras from './components/VistasUser/Compras'
 import axios from 'axios';
+import Ventas from './components/VistasUser/Ventas'
 
 axios.defaults.baseURL = "https://servidor-libreria.onrender.com"
-
-import MyBooks from './views/MyBooks/MyBooks'
-
 
 function App() {
    const location = useLocation();
@@ -35,16 +33,11 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    // Obtener el token de la URL si está presente
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
 
     if (params.token) {
-      // Guardar el token en el localStorage
       localStorage.setItem("accessToken", params.token);
-      
-      // Redireccionar a la página principal o a donde desees después del inicio de sesión exitoso
-      // Aquí redirecciono al componente Home, pero puedes ajustarlo según tu estructura de enrutamiento
       window.location.href = "/home";
     }
   }, []);
@@ -63,7 +56,9 @@ function App() {
 				<Route path="/login" element={<Login />}></Route>
 				<Route path="/signup" element={<SignUp />}></Route>
 				<Route path="/MyBooks" element={<MyBooks/>}/>
-			   <Route path="/carrito" element={<Carrito/>}/>
+			  <Route path="/carrito" element={<Carrito/>}/>
+        <Route path="/compras" element={<Compras/>}/>
+        <Route path="/publicaciones" element={<Ventas/>}/>
 			</Routes>
 		</div>
 	);
