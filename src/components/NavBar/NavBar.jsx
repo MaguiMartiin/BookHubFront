@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import style from "./NavBar.module.css";
 import { FaCartArrowDown } from "react-icons/fa";
@@ -10,6 +10,7 @@ const NavBar = () => {
   const toInicio = () => {
     window.location.href = "/login";
   };
+
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     const userIsLoggedIn = !!token;
@@ -39,9 +40,13 @@ const NavBar = () => {
           Vender Libro
         </Link>
       </div>
-     {!isLoggedIn&& <button className={style.botonInicio} onClick={toInicio}>
-        Inicia sesión
-          </button>}
+      {isLoggedIn ? (
+        <p className={style.userName}>Usuario</p>
+      ) : (
+        <button className={style.botonInicio} onClick={toInicio}>
+          Inicia sesión
+        </button>
+      )}
     </div>
   );
 };

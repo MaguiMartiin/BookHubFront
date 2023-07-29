@@ -21,6 +21,19 @@ const FormRegistro = () => {
 	const authors = useSelector((state) => state.authors);
     console.log("token", token)
 	useEffect(() => {
+		const token = localStorage.getItem("accessToken");
+		if(!token){
+			Swal.fire({
+				title: 'Necesitas inciar sesión para vender un libro',
+          		icon: 'warning',
+			})
+			.then(() =>{
+				navigate('/home');
+			})
+		}
+	}, [navigate])
+
+	useEffect(() => {
 		dispatch(getGenders());
 		dispatch(getAuthor());
 	}, [dispatch]);
