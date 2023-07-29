@@ -16,10 +16,10 @@ import { FaDollarSign, FaHashtag } from "react-icons/fa";
 const FormRegistro = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
+	const token = localStorage.getItem("accessToken");
 	const genders = useSelector((state) => state.genders);
 	const authors = useSelector((state) => state.authors);
-
+    console.log("token", token)
 	useEffect(() => {
 		dispatch(getGenders());
 		dispatch(getAuthor());
@@ -65,7 +65,11 @@ const FormRegistro = () => {
 			GenderId: Number(values.GenderId),
 			AuthorId: Number(values.AuthorId),
 		  };
-		  await axios.post("/book", modifiedValues);
+		  await axios.post("/book", modifiedValues,{
+			headers: {
+				Authorization: `Bearer ${token}`, // Agrega el token en el encabezado Authorization
+			  },
+		  });
 		  Swal.fire({
 			icon: "success",
 			title: "Libro creado correctamente",
