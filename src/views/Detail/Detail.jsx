@@ -15,7 +15,6 @@ const Detail = () => {
     
     const bookDetail = useSelector(state => state.bookId);
     const cart = useSelector((state) => state.cart);
-    console.log('ashdhjkasd', cart);
 
     useEffect(() => {
         dispatch(bookId(id))

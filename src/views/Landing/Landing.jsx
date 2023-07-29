@@ -22,7 +22,6 @@ const Landing = () => {
         dispatch(getGenders())
     }, [dispatch])
     const genders = useSelector((state) => state.genders)
-    console.log(genders);
 
     return (
         <div className={style.container}>
