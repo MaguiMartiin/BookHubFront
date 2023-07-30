@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import style from "./NavBar.module.css";
 import { FaCartArrowDown } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import VistaUser from '../VistasUser/VistaUser'
+import { FaUser } from 'react-icons/fa';
 
 const NavBar = () => {
   const cart = useSelector((state) => state.cart);
@@ -16,6 +18,16 @@ const NavBar = () => {
     const userIsLoggedIn = !!token;
     setIsLoggedIn(userIsLoggedIn);
   }, []);
+
+  const [showVistaUser, setShowVistaUser] = useState(false);
+  const handleUserButtonClick = () => {
+    setShowVistaUser(!showVistaUser);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken")
+    setIsLoggedIn(false)
+  }
 
   return (
     <div className={style.contain}>
@@ -36,17 +48,25 @@ const NavBar = () => {
             <FaCartArrowDown />
           )}
         </Link>
+        {isLoggedIn &&
         <Link to="/form" className={style.link}>
           Vender Libro
         </Link>
+        }
       </div>
-      {isLoggedIn ? (
-        <p className={style.userName}>Usuario</p>
-      ) : (
-        <button className={style.botonInicio} onClick={toInicio}>
-          Inicia sesión
+        {!isLoggedIn&& <button className={style.botonInicio} onClick={toInicio}>
+        Inicia sesión
+        </button>}
+      
+      {isLoggedIn&& 
+      <div>
+        <button onClick={handleUserButtonClick} className={style.userButton}>
+          <FaUser size={32}/> 
         </button>
-      )}
+        {showVistaUser && <VistaUser onLogout={handleLogout}/>}
+      </div>
+      }
+
     </div>
   );
 };

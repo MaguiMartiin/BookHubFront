@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import { bookId, bookDelete, addToCart } from "../../redux/actions"
 import style from './Detail.module.css'
-import { Link } from "react-router-dom"
-import { FaEdit, FaTrash } from 'react-icons/fa'
 import Swal from "sweetalert2"
 import { useState } from "react"
 
@@ -16,7 +14,7 @@ const Detail = () => {
     
     const bookDetail = useSelector(state => state.bookId);
     const cart = useSelector((state) => state.cart);
-    console.log('ashdhjkasd', cart);
+
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
@@ -25,17 +23,12 @@ const Detail = () => {
         setIsLoggedIn(userIsLoggedIn);
       }, []);
     
-
     useEffect(() => {
         dispatch(bookId(id))
     }, [dispatch, id]) 
 
-    const handleDelete = () => {
-        dispatch(bookDelete(id));
-        alert(`El libro ${bookDetail.name} a sido eliminado!`)
-        navigate("/home");
-      };
-      const addCart = () => {
+    const addCart = () => {
+
         if (!isLoggedIn) {
           Swal.fire({
             title: "Debes iniciar sesión para agregar productos al carrito",
@@ -67,12 +60,12 @@ const Detail = () => {
             <div className={style.info}>
                 <div className={style.titleContainer}>
                     <h1 className={style.h1}>{bookDetail.name}</h1>
-                    <Link to={`/editar/${bookDetail.id}`} className={style.iconoEditar}>
+                    {/* <Link to={`/editar/${bookDetail.id}`} className={style.iconoEditar}>
                         <FaEdit />
                     </Link>
                     <button className={style.iconoEditar} onClick={handleDelete}>
                     <FaTrash />
-                    </button>
+                    </button> */}
                 </div>
                 <h2>Autor: {bookDetail.Author?.name}</h2>
                 <h2>Genero: {bookDetail.Gender?.name}</h2>
