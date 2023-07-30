@@ -1,11 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const VistaUser = ({ onLogout }) => {
 
+  const navigate = useNavigate()
   const handleLogoutClick = () => {
     const confirmed = window.confirm("¿Estás seguro que deseas cerrar sesión?");
     if (confirmed) {
       onLogout();
+      navigate("/home")
     }
   };
 

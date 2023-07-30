@@ -53,7 +53,7 @@ const Detail = () => {
             <div className={style.info}>
                 <div className={style.titleContainer}>
                     <h1 className={style.h1}>{bookDetail.name}</h1>
-{/*                     <Link to={`/editar/${bookDetail.id}`} className={style.iconoEditar}>
+                    {/* <Link to={`/editar/${bookDetail.id}`} className={style.iconoEditar}>
                         <FaEdit />
                     </Link>
                     <button className={style.iconoEditar} onClick={handleDelete}>
