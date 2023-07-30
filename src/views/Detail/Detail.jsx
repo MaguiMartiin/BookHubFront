@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import { bookId, bookDelete, addToCart } from "../../redux/actions"
 import style from './Detail.module.css'
-import { Link } from "react-router-dom"
-import { FaEdit, FaTrash } from 'react-icons/fa'
 import Swal from "sweetalert2"
 
 const Detail = () => {
@@ -15,7 +13,6 @@ const Detail = () => {
     
     const bookDetail = useSelector(state => state.bookId);
     const cart = useSelector((state) => state.cart);
-    console.log('ashdhjkasd', cart);
 
     useEffect(() => {
         dispatch(bookId(id))
