@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import style from "./NavBar.module.css";
 import { FaCartArrowDown } from "react-icons/fa";
@@ -12,6 +12,7 @@ const NavBar = () => {
   const toInicio = () => {
     window.location.href = "/login";
   };
+
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     const userIsLoggedIn = !!token;
@@ -65,6 +66,7 @@ const NavBar = () => {
         {showVistaUser && <VistaUser onLogout={handleLogout}/>}
       </div>
       }
+
     </div>
   );
 };

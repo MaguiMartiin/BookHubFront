@@ -36,10 +36,9 @@ const Login = () => {
 								email: values.email,
 								password: values.password,
 							});
-
-      						const { accesoWJT: token } = response.data;
+              
+							const { accesoWJT: token } = response.data;
       						localStorage.setItem('accessToken', token);
-
 							navigate("/home")
 							console.log(response.data);
 						} catch (error) {

@@ -15,13 +15,20 @@ const Detail = () => {
     const bookDetail = useSelector(state => state.bookId);
     const cart = useSelector((state) => state.cart);
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem("accessToken");
+        const userIsLoggedIn = !!token;
+        setIsLoggedIn(userIsLoggedIn);
+      }, []);
+    
     useEffect(() => {
         dispatch(bookId(id))
     }, [dispatch, id]) 
 
- 
-
     const addCart = () => {
+
         if (!isLoggedIn) {
           Swal.fire({
             title: "Debes iniciar sesión para agregar productos al carrito",
