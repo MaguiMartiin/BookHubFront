@@ -54,23 +54,24 @@ import style from "./EditDetail.module.css"
 
     return (
         <div>
-            <form onSubmit={handleEdit} className={style.div}>
+            <form onSubmit={handleEdit} className={style.divContainer}>
+                <div>
                 <div className={style.name}>
-                    <label htmlFor="name">Nombre del libro: </label>
+                    <label htmlFor="name" className={style.label}>Nombre del libro: </label>
                     <input type="text" value={form.name} onChange={handlerChange}
-                    name="name"/>
+                    name="name" className={style.inputName}/>
                 </div>
 
-                <div className={style.des}>
-                    <label htmlFor="Gender">Género: </label>
-                    <select onChange={handlerChange} name="Gender">
+                <div className={style.segundoDiv}>
+                    <label htmlFor="Gender" className={style.label}>Género: </label>
+                    <select onChange={handlerChange} name="Gender" className={style.select}>
                     <option  htmlFor="Gender">{form.Gender}</option>
                     {genders?.map((e, index) => {
-                        return (<option key={index} type="text" value={e} placeholder={form.Gender} name="Gender">{e}</option>)
+                        return (<option key={index} type="text" value={e} placeholder={form.Gender} name="Gender" >{e}</option>)
                     })}
                     </select>
-                    <label htmlFor="Author">Autor: </label>
-                    <select onChange={handlerChange} name="Author">
+                    <label htmlFor="Author" className={style.label}>Autor: </label>
+                    <select onChange={handlerChange} name="Author" className={style.select}>
                     <option htmlFor="Author">{form.Author}</option>
                     {authors?.map((e, index) =>{
                         return (<option key={index}type="text" value={e} placeholder={form.Author} name="Author">{e}</option>)
@@ -78,17 +79,18 @@ import style from "./EditDetail.module.css"
                    </select>
                 </div>
 
-                <div>
-                    <label htmlFor="description">Descripción: </label> 
-                    <input type="text" value={form.description} onChange={handlerChange} name="description"/>
+                <div className={style.tercerDiv}>
+                    <label htmlFor="description" className={style.label}>Descripción: </label> 
+                    <input type="text" value={form.description} onChange={handlerChange} name="description" className={style.inputDesc}/>
                 </div>
 
-                <div>
-                    <label htmlFor="price">Precio: </label> 
-                    <input type="text" min="1" value={form.price} onChange={handlerChange} name="price"/>
+                <div className={style.tercerDiv}>
+                    <label htmlFor="price" className={style.label}>Precio: </label> 
+                    <input type="text" min="1" value={form.price} onChange={handlerChange} name="price" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-400 focus:shadow-outline"/>
                 </div>
 
-                <button className={style.boton} type="submit">Guardar cambios</button>
+                <button className={style.boton} type="submit" class="bg-primary w-full hover:bg-secondary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Guardar cambios</button>
+                </div>
             </form>
         </div>
   );
