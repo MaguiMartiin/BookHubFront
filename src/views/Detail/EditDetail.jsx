@@ -56,14 +56,12 @@ import style from "./EditDetail.module.css"
         <div>
             <form onSubmit={handleEdit} className={style.div}>
                 <div className={style.name}>
-                    {/*Nombre */}
                     <label htmlFor="name">Nombre del libro: </label>
                     <input type="text" value={form.name} onChange={handlerChange}
                     name="name"/>
                 </div>
 
                 <div className={style.des}>
-                    {/*Genero y autor */}
                     <label htmlFor="Gender">Género: </label>
                     <select onChange={handlerChange} name="Gender">
                     <option  htmlFor="Gender">{form.Gender}</option>
@@ -81,13 +79,11 @@ import style from "./EditDetail.module.css"
                 </div>
 
                 <div>
-                    {/*Descripcion */}
                     <label htmlFor="description">Descripción: </label> 
                     <input type="text" value={form.description} onChange={handlerChange} name="description"/>
                 </div>
 
                 <div>
-                    {/*Precio */}
                     <label htmlFor="price">Precio: </label> 
                     <input type="text" min="1" value={form.price} onChange={handlerChange} name="price"/>
                 </div>

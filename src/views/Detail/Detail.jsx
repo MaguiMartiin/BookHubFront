@@ -16,26 +16,21 @@ const Detail = () => {
     
     const bookDetail = useSelector(state => state.bookId);
     const cart = useSelector((state) => state.cart);
-    console.log('ashdhjkasd', cart);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+    
     useEffect(() => {
         const token = localStorage.getItem("accessToken");
         const userIsLoggedIn = !!token;
         setIsLoggedIn(userIsLoggedIn);
       }, []);
-    
 
     useEffect(() => {
         dispatch(bookId(id))
     }, [dispatch, id]) 
 
-    const handleDelete = () => {
-        dispatch(bookDelete(id));
-        alert(`El libro ${bookDetail.name} a sido eliminado!`)
-        navigate("/home");
-      };
-      const addCart = () => {
+ 
+
+    const addCart = () => {
         if (!isLoggedIn) {
           Swal.fire({
             title: "Debes iniciar sesión para agregar productos al carrito",
@@ -67,7 +62,7 @@ const Detail = () => {
             <div className={style.info}>
                 <div className={style.titleContainer}>
                     <h1 className={style.h1}>{bookDetail.name}</h1>
-{/*                     <Link to={`/editar/${bookDetail.id}`} className={style.iconoEditar}>
+                    {/* <Link to={`/editar/${bookDetail.id}`} className={style.iconoEditar}>
                         <FaEdit />
                     </Link>
                     <button className={style.iconoEditar} onClick={handleDelete}>

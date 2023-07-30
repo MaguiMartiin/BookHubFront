@@ -36,9 +36,10 @@ const Login = () => {
 								email: values.email,
 								password: values.password,
 							});
-							
-							const { accesoWJT: token } = response.data;
+
+      						const { accesoWJT: token } = response.data;
       						localStorage.setItem('accessToken', token);
+
 							navigate("/home")
 							console.log(response.data);
 						} catch (error) {
@@ -170,7 +171,7 @@ const Login = () => {
 					<p class="mx-4 mb-0 text-center font-semibold dark:text-text">OR</p>
 				</div>
 				<div className="flex justify-center">
-					<button onClick={handelGo} className="bg-primary text-white px-4 py-2 rounded hover:bg-red-400 w-full">Acceder con Google</button>
+					<button onClick={handelGo} className="bg-primary text-white px-4 py-2 rounded hover:bg-red-400 w-full">Ingresa con Google</button>
 				</div>
 				<div className="flex flex-col mt-8">
 					<div className="text-center flex-row my-1">

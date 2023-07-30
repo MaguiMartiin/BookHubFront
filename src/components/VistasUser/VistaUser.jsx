@@ -1,6 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const VistaUser = () => {
+const VistaUser = ({ onLogout }) => {
+
+  const navigate = useNavigate()
+  const handleLogoutClick = () => {
+    const confirmed = window.confirm("¿Estás seguro que deseas cerrar sesión?");
+    if (confirmed) {
+      onLogout();
+      navigate("/home")
+    }
+  };
+
   return (
     <div className="relative">
         <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
@@ -17,9 +28,9 @@ const VistaUser = () => {
             <a href="MiPerfil" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
               Mi perfil
             </a>
-            <a className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+            <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={handleLogoutClick}>
               Cerrar sesión
-            </a>
+            </button>
           </div>
         </div>
     </div>

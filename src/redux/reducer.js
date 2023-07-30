@@ -10,7 +10,8 @@ import {
 	USERS_SIGN_UP_STEP_SET,
 	ADD_TO_CART,
 	DELETE_FROM_CART,
-	REFRESH_CART
+	REFRESH_CART, 
+	PUBLICACIONES_ID
 } from "./action-types";
 
 const initialState = {
@@ -21,7 +22,7 @@ const initialState = {
 	bookEdit: [],
 	authors: [],
 	cart: [],
-
+	bookPublic: [],
 	// user
 	signUpStep: 1,
 };
@@ -92,6 +93,11 @@ const rootReducer = (state = initialState, action) => {
 				...state,
 				cart: action.payload,
 			}	
+		case PUBLICACIONES_ID:
+			return {
+				...state,
+				bookPublic: action.payload
+			}
 
 		default:
 			return state;

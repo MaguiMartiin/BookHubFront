@@ -24,6 +24,11 @@ const NavBar = () => {
     setShowVistaUser(!showVistaUser);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken")
+    setIsLoggedIn(false)
+  }
+
   return (
     <div className={style.contain}>
       <Link to="/" className={style.h1}>
@@ -58,7 +63,7 @@ const NavBar = () => {
         <button onClick={handleUserButtonClick} className={style.userButton}>
           <FaUser size={32}/> 
         </button>
-        {showVistaUser && <VistaUser />}
+        {showVistaUser && <VistaUser onLogout={handleLogout}/>}
       </div>
       }
 
