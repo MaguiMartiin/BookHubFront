@@ -64,3 +64,11 @@
     align-items: center;
     justify-content: center;
   }
+
+.userButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: white; 
+    margin-right: 10rem;
+}
