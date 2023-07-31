@@ -21,7 +21,7 @@ const Carrito = () => {
     if (totalPrice === 0) {
       const timer = setTimeout(() => {
         Swal.fire({
-          title: 'The cart is empty',
+          title: 'El carrito está vacío',
           icon: 'warning',
         }).then(() => {
           navigate('/home');

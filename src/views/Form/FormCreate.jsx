@@ -21,6 +21,19 @@ const FormRegistro = () => {
 	const authors = useSelector((state) => state.authors);
 
 	useEffect(() => {
+		const token = localStorage.getItem("accessToken");
+		if(!token){
+			Swal.fire({
+				title: 'Necesitas inciar sesión para vender un libro',
+          		icon: 'warning',
+			})
+			.then(() =>{
+				navigate('/home');
+			})
+		}
+	}, [navigate])
+
+	useEffect(() => {
 		dispatch(getGenders());
 		dispatch(getAuthor());
 	}, [dispatch]);
@@ -54,6 +67,9 @@ const FormRegistro = () => {
 		AuthorId: Yup.number().required("Requiere autor"),
 	});
 
+	const token = localStorage.getItem("accessToken");
+	console.log(token);
+
 	const handleSubmit = async (values, { resetForm, setSubmitting }) => {
 	  
 		try {
@@ -62,7 +78,9 @@ const FormRegistro = () => {
 			GenderId: Number(values.GenderId),
 			AuthorId: Number(values.AuthorId),
 		  };
-		  await axios.post("/book", modifiedValues);
+		  await axios.post("/book", modifiedValues, {headers: {
+			Authorization: `Bearer ${token}`,
+		  }})
 		  Swal.fire({
 			icon: "success",
 			title: "Libro creado correctamente",

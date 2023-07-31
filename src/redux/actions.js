@@ -1,6 +1,8 @@
-import {GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS, BOOK_ID, GET_BOOK_NAME, EDIT_BOOK, DELETE_BOOK, GET_AUTHORS, ADD_TO_CART, DELETE_FROM_CART, REFRESH_CART} from './action-types'
+import {GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS, BOOK_ID, GET_BOOK_NAME, EDIT_BOOK, DELETE_BOOK, GET_AUTHORS, ADD_TO_CART, DELETE_FROM_CART, REFRESH_CART, PUBLICACIONES_ID} from './action-types'
 
 import axios from 'axios';
+
+const token = localStorage.getItem("accessToken");
 
 export const createBook = (payload) =>{
   return async (dispatch) =>{
@@ -142,7 +144,16 @@ export const bookDelete = (id) => {
   }
 }
 
-
+export const publicId = () => {
+  return async function (dispatch) {
+    try {
+      const bookPublic = (await axios.get("/perfil/myBooks", {headers: {
+        Authorization: `Bearer ${token}`,
+        }})).data
+      return dispatch({type: PUBLICACIONES_ID, payload: bookPublic})
+    } catch (error) { console.log(error) }
+  }
+}
 
 export const getByAuthor = (name) =>{
   return async (dispatch) => {
