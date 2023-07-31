@@ -40,8 +40,8 @@ const Login = () => {
 							});
  
 							const { accesoWJT: token } = response.data;
-      						localStorage.setItem('accessToken', token);
-							navigate("/home")
+							localStorage.setItem("accessToken", token);
+							navigate("/home");
 							console.log(response.data);
 
 						} catch (error) {
@@ -173,10 +173,8 @@ const Login = () => {
 					<p class="mx-4 mb-0 text-center font-semibold dark:text-text">OR</p>
 				</div>
 				<div className="flex justify-center">
-
 					<button onClick={handelGo} className="bg-primary text-white px-4 py-2 rounded hover:bg-red-400 w-full">Ingresa con Google</button>
-				
-       </div>
+				</div>
 				<div className="flex flex-col mt-8">
 					<div className="text-center flex-row my-1">
 						¿No tenes cuenta?{" "}
@@ -195,19 +193,5 @@ const Login = () => {
 		</div>
 	);
 };
-// const mapStateToProps = (state) => {
-// 	return {
-// 		userSignError: state.userSignError,
-// 		isLogin: state.isLogin,
-// 	};
-// };
-
-// const mapDispatchToProps = (dispatch) => {
-// 	return {
-// 		signIn: (userData) => dispatch(signIn(userData)),
-// 	};
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
 export default Login;

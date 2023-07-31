@@ -1,4 +1,19 @@
-import {GET_BOOKS, CREATE_BOOK, FILTER, GET_GENDERS, BOOK_ID, GET_BOOK_NAME, EDIT_BOOK, DELETE_BOOK, GET_AUTHORS, ADD_TO_CART, DELETE_FROM_CART, REFRESH_CART, PUBLICACIONES_ID} from './action-types'
+import {
+	GET_BOOKS,
+	CREATE_BOOK,
+	FILTER,
+	GET_GENDERS,
+	BOOK_ID,
+	GET_BOOK_NAME,
+	EDIT_BOOK,
+	DELETE_BOOK,
+	GET_AUTHORS,
+	ADD_TO_CART,
+	DELETE_FROM_CART,
+	REFRESH_CART,
+	PUBLICACIONES_ID,
+	REMOVE_TO_CART,
+} from "./action-types";
 
 import axios from 'axios';
 
@@ -183,8 +198,15 @@ export const getBookByName = (name) =>{
 }
 
 export const addToCart = (data) =>{
-  return { type: ADD_TO_CART, payload: data };
+  if (data){
+    return { type: ADD_TO_CART, payload: data }
+    
+  }
+      console.log("cart");
+
+  return { type: REMOVE_TO_CART };
 }
+
 
 
 export const deleteFromCart = (itemId) => {
@@ -192,5 +214,9 @@ export const deleteFromCart = (itemId) => {
 }
 
 export const refreshCart = (cart) => {
-  return { type: REFRESH_CART, payload: cart}
+  if (cart) {
+      return { type: REFRESH_CART, payload: cart}
+		}
+    console.log("cart");
+		return { type: REMOVE_TO_CART };
 }
