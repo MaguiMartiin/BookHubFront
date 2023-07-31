@@ -4,6 +4,7 @@ import { publicId, bookDelete } from "../../redux/actions";
 import { FaDollarSign } from "react-icons/fa";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaEdit, FaTrash } from 'react-icons/fa'
+import Swal from "sweetalert2"
 
 const Ventas = () => {
   const dispatch = useDispatch();
@@ -20,10 +21,19 @@ const Ventas = () => {
   const publicaciones = useSelector((state) => state.bookPublic);
 
   const handleDelete = (id) => {
-    dispatch(bookDelete(id));
-    alert(`El libro ha sido eliminado!`);
-    dispatch(publicId()); // Vuelve a obtener las publicaciones después de eliminar
-  };
+    dispatch(bookDelete(id))
+    .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Libro eliminado!",
+          text: "El libro ha sido eliminado exitosamente.",
+          confirmButtonText: "Aceptar",
+        }).then(() => {
+          dispatch(publicId());
+        })
+      })
+    .catch((error) => {console.error("Error al eliminar el libro:", error)})
+};
 
   if (loading) {
     return (

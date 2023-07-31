@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { editBook, bookId, getGenders, getAuthor } from "../../redux/actions";
 import style from "./EditDetail.module.css"
+import Swal from "sweetalert2"
 
     const EditDetail = () => {
     const { id } = useParams()
@@ -37,12 +38,19 @@ import style from "./EditDetail.module.css"
         })
     }, [bookDetail])
 
-    const handleEdit = (event) => {
+    const handleEdit = async (event) => {
         event.preventDefault();
-        dispatch(editBook(id, form));
-        alert("Libro actualizado!");
-        navigate("/publicaciones");
-    };
+        try {
+          await dispatch(editBook(id, form));
+          await Swal.fire({
+            icon: "success",
+            title: "Libro actualizado!",
+            text: "El libro ha sido actualizado exitosamente.",
+            confirmButtonText: "Aceptar",
+          });
+          navigate("/publicaciones");
+        } catch (error) {console.error("Error al actualizar el libro:", error)}
+      }
 
     const handlerChange = (event) => {
         const property = event.target.name
