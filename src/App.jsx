@@ -1,3 +1,4 @@
+
 import './App.css'
 import React from 'react'
 import { useDispatch } from 'react-redux'
@@ -18,7 +19,7 @@ import Compras from './components/VistasUser/Compras'
 import axios from 'axios';
 import Ventas from './components/VistasUser/Ventas'
 
-axios.defaults.baseURL = "https://servidor-libreria.onrender.com"
+axios.defaults.baseURL = "https://servidor-libreria.onrender.com";
 
 
 function App() {
@@ -33,18 +34,17 @@ function App() {
 		}
 	}, [dispatch]);
 
+	useEffect(() => {
+		const urlSearchParams = new URLSearchParams(window.location.search);
+		const params = Object.fromEntries(urlSearchParams.entries());
 
-  useEffect(() => {
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries());
+		if (params.token) {
+			localStorage.setItem("accessToken", params.token);
+			window.location.href = "/home";
+		}
+	}, []);
 
-    if (params.token) {
-      localStorage.setItem("accessToken", params.token);
-      window.location.href = "/home";
-    }
-  }, []);
-
-  return (
+	return (
 		<div>
 			{location.pathname !== "/" &&
 				location.pathname !== "/login" &&
@@ -53,14 +53,14 @@ function App() {
 				<Route exact path="/" element={<Landing />} />
 				<Route path="/home" element={<Home />} />
 				<Route path="/home/:id" element={<Detail />} />
-				<Route path="/editar/:id" element={<EditDetail />}/>
+				<Route path="/editar/:id" element={<EditDetail />} />
 				<Route path="/form" element={<Form />} />
-				<Route path="/login" element={<Login />}/>
-				<Route path="/signup" element={<SignUp />}/>
-				<Route path="/MyBooks" element={<MyBooks/>}/>
-			  <Route path="/carrito" element={<Carrito/>}/>
-        <Route path="/compras" element={<Compras/>}/>
-        <Route path="/publicaciones" element={<Ventas/>}/>
+				<Route path="/login" element={<Login />} />
+				<Route path="/signup" element={<SignUp />} />
+				<Route path="/MyBooks" element={<MyBooks />} />
+				<Route path="/carrito" element={<Carrito />} />
+				<Route path="/compras" element={<Compras />} />
+				<Route path="/publicaciones" element={<Ventas />} />
 			</Routes>
 		</div>
 	);
