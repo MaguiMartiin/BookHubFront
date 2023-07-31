@@ -16,10 +16,10 @@ import { FaDollarSign, FaHashtag } from "react-icons/fa";
 const FormRegistro = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
+	const token = localStorage.getItem("accessToken");
 	const genders = useSelector((state) => state.genders);
 	const authors = useSelector((state) => state.authors);
-
+    console.log("token", token)
 	useEffect(() => {
 		const token = localStorage.getItem("accessToken");
 		if(!token){
@@ -67,8 +67,6 @@ const FormRegistro = () => {
 		AuthorId: Yup.number().required("Requiere autor"),
 	});
 
-	const token = localStorage.getItem("accessToken");
-	console.log(token);
 
 	const handleSubmit = async (values, { resetForm, setSubmitting }) => {
 	  
