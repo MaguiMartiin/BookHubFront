@@ -51,10 +51,10 @@ function App() {
 				<Route exact path="/" element={<Landing />} />
 				<Route path="/home" element={<Home />} />
 				<Route path="/home/:id" element={<Detail />} />
-				<Route path="/editar/:id" element={<EditDetail />}></Route>
+				<Route path="/editar/:id" element={<EditDetail />} />
 				<Route path="/form" element={<Form />} />
-				<Route path="/login" element={<Login />}></Route>
-				<Route path="/signup" element={<SignUp />}></Route>
+				<Route path="/login" element={<Login />} />
+				<Route path="/signup" element={<SignUp />} />
 				<Route path="/MyBooks" element={<MyBooks />} />
 				<Route path="/carrito" element={<Carrito />} />
 				<Route path="/compras" element={<Compras />} />

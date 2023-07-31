@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import { bookId, bookDelete, addToCart } from "../../redux/actions"
 import style from './Detail.module.css'
-import { Link } from "react-router-dom"
-import { FaEdit, FaTrash } from 'react-icons/fa'
 import Swal from "sweetalert2"
+import { useState } from "react"
 
 const Detail = () => {
     const dispatch = useDispatch()
@@ -16,35 +15,44 @@ const Detail = () => {
     const bookDetail = useSelector(state => state.bookId);
     const cart = useSelector((state) => state.cart);
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem("accessToken");
+        const userIsLoggedIn = !!token;
+        setIsLoggedIn(userIsLoggedIn);
+      }, []);
+    
     useEffect(() => {
         dispatch(bookId(id))
     }, [dispatch, id]) 
 
-    const handleDelete = () => {
-        dispatch(bookDelete(id));
-        alert(`El libro ${bookDetail.name} a sido eliminado!`)
-        navigate("/home");
-      };
-
     const addCart = () => {
-        const isBookInCart = cart.find((item) => item.id === bookDetail.id);
-        if (isBookInCart){
-            Swal.fire({
-                title: 'The product is already in the cart',
-                icon: 'warning',
-            });
+
+        if (!isLoggedIn) {
+          Swal.fire({
+            title: "Debes iniciar sesión para agregar productos al carrito",
+            icon: "warning",
+          });
         } else {
+          const isBookInCart = cart.find((item) => item.id === bookDetail.id);
+          if (isBookInCart) {
+            Swal.fire({
+              title: "El producto ya está en el carrito",
+              icon: "warning",
+            });
+          } else {
             dispatch(addToCart(bookDetail));
             Swal.fire({
-                title: 'Item added',
-                icon: 'success',
+              title: "Producto agregado",
+              icon: "success",
             });
-
+    
             const updatedCart = [...cart, bookDetail];
-            localStorage.setItem('cart', JSON.stringify(updatedCart));
-
-        };
-    };
+            localStorage.setItem("cart", JSON.stringify(updatedCart));
+          }
+        }
+      };
 
     return (
         <div className={style.contain}>
@@ -52,7 +60,7 @@ const Detail = () => {
             <div className={style.info}>
                 <div className={style.titleContainer}>
                     <h1 className={style.h1}>{bookDetail.name}</h1>
-{/*                     <Link to={`/editar/${bookDetail.id}`} className={style.iconoEditar}>
+                    {/* <Link to={`/editar/${bookDetail.id}`} className={style.iconoEditar}>
                         <FaEdit />
                     </Link>
                     <button className={style.iconoEditar} onClick={handleDelete}>

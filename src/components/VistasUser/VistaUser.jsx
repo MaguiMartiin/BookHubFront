@@ -1,12 +1,25 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import Swal from "sweetalert2"
 
 const VistaUser = ({ onLogout }) => {
 
+  const navigate = useNavigate()
   const handleLogoutClick = () => {
-    const confirmed = window.confirm("¿Estás seguro que deseas cerrar sesión?");
-    if (confirmed) {
-      onLogout();
-    }
+    Swal.fire({
+      title: "¿Estás seguro que deseas cerrar sesión?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#4caf50",
+      cancelButtonColor: "#f44336",
+      confirmButtonText: "Sí, cerrar sesión",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        onLogout();
+        navigate("/home");
+      }
+    });
   };
 
   return (

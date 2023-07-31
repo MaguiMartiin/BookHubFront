@@ -17,19 +17,20 @@ const Carrito = () => {
 
 	const [selectedQuantities, setSelectedQuantities] = useState({});
 
-	useEffect(() => {
-		if (totalPrice === 0) {
-			const timer = setTimeout(() => {
-				Swal.fire({
-					title: "The cart is empty",
-					icon: "warning",
-				}).then(() => {
-					navigate("/home");
-				});
-			}, 300);
-			return () => clearTimeout(timer);
-		}
-	}, [totalPrice, navigate]);
+	
+  useEffect(() => {
+    if (totalPrice === 0) {
+      const timer = setTimeout(() => {
+        Swal.fire({
+          title: 'El carrito está vacío',
+          icon: 'warning',
+        }).then(() => {
+          navigate('/home');
+        });
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [totalPrice, navigate]);
 
 	useEffect(() => {
 		const calculateTotalPrice = () => {

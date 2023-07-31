@@ -28,6 +28,13 @@ const Landing = () => {
     }, [dispatch])
     const genders = useSelector((state) => state.genders)
 
+    useEffect(() => {
+        const token = localStorage.getItem("accessToken");
+        const userIsLoggedIn = !!token;
+        setIsLoggedIn(userIsLoggedIn);
+      }, []);
+    
+
     return (
         <div className={style.container}>
             <div className={style.div1}>
