@@ -7,8 +7,9 @@ import { AiFillEyeInvisible } from "react-icons/ai";
 import axios from "axios";
 
 const Login = () => {
-	const [isPasswordShow, toggleShowPassword] = useToggle();
-	const navigate = useNavigate();
+
+  const [isPasswordShow, toggleShowPassword] = useToggle();
+  const navigate = useNavigate();
 
 	const handelGo = async () => {
 		try {
@@ -21,8 +22,8 @@ const Login = () => {
 				error
 			);
 		}
-	};
-
+	 };
+	
 	return (
 		<div className="container flex flex-col h-screen justify-center items-center">
 			<div className="flex flex-col w-96 py-8 px-4 bg-secondaryLight dark:bg-secondary rounded-xl border border-secondaryBorderLight dark:border-secondaryBorder">
@@ -37,11 +38,12 @@ const Login = () => {
 								email: values.email,
 								password: values.password,
 							});
-
+ 
 							const { accesoWJT: token } = response.data;
 							localStorage.setItem("accessToken", token);
 							navigate("/home");
 							console.log(response.data);
+
 						} catch (error) {
 							return {
 								errores: error.message,
@@ -171,11 +173,15 @@ const Login = () => {
 					<p class="mx-4 mb-0 text-center font-semibold dark:text-text">OR</p>
 				</div>
 				<div className="flex justify-center">
+<<<<<<<<< Temporary merge branch 1
 					<button
 						onClick={handelGo}
 						className="bg-primary text-white px-4 py-2 rounded hover:bg-red-400 w-full">
-						Ingresa con Google
+						Acceder con Google
 					</button>
+=========
+					<button onClick={handelGo} className="bg-primary text-white px-4 py-2 rounded hover:bg-red-400 w-full">Ingresa con Google</button>
+>>>>>>>>> Temporary merge branch 2
 				</div>
 				<div className="flex flex-col mt-8">
 					<div className="text-center flex-row my-1">

@@ -51,18 +51,26 @@ const Carrito = () => {
 		setSelectedQuantities(initialQuantities);
 	}, [cart]);
 
-	const handleQuantityChange = (bookId, value) => {
-		setSelectedQuantities((prevQuantities) => ({
-			...prevQuantities,
-			[bookId]: Math.max(1, prevQuantities[bookId] + value),
-		}));
-	};
-
 	const handleDeleteItem = (itemId) => {
 		dispatch(deleteFromCart(itemId));
 		const updatedCart = cart.filter((item) => item.id !== itemId);
 		localStorage.setItem("cart", JSON.stringify(updatedCart));
 	};
+  const handleQuantityChange = (bookId, value) => {
+      const res = cart.filter(e=>e.id === bookId)
+      if (res[0].available > selectedQuantities[bookId]) {
+        setSelectedQuantities((prevQuantities) => ({
+          ...prevQuantities,
+          [bookId]: Math.max(1, prevQuantities[bookId] + value), 
+        }));
+      }
+      else if (value <= 0){
+        setSelectedQuantities((prevQuantities) => ({
+          ...prevQuantities,
+          [bookId]: Math.max(1, prevQuantities[bookId] + value), 
+        }));
+      }
+  };
 
 	const itemsMapped = cart.map((item) => ({
 		book_id: item.id,
