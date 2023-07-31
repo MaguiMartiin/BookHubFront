@@ -41,7 +41,7 @@ import style from "./EditDetail.module.css"
         event.preventDefault();
         dispatch(editBook(id, form));
         alert("Libro actualizado!");
-        navigate("/home");
+        navigate("/publicaciones");
     };
 
     const handlerChange = (event) => {
@@ -65,15 +65,15 @@ import style from "./EditDetail.module.css"
                     <label htmlFor="Gender">Género: </label>
                     <select onChange={handlerChange} name="Gender">
                     <option  htmlFor="Gender">{form.Gender}</option>
-                    {genders?.map((e) => {
-                        return (<option type="text" value={e} placeholder={form.Gender} name="Gender">{e}</option>)
+                    {genders?.map((e, index) => {
+                        return (<option key={index} type="text" value={e} placeholder={form.Gender} name="Gender">{e}</option>)
                     })}
                     </select>
                     <label htmlFor="Author">Autor: </label>
                     <select onChange={handlerChange} name="Author">
                     <option htmlFor="Author">{form.Author}</option>
-                    {authors?.map((e) =>{
-                        return (<option type="text" value={e} placeholder={form.Author} name="Author">{e}</option>)
+                    {authors?.map((e, index) =>{
+                        return (<option key={index}type="text" value={e} placeholder={form.Author} name="Author">{e}</option>)
                     })}
                    </select>
                 </div>
