@@ -69,7 +69,8 @@ const Carrito = () => {
 		quantity: cart.length,
 		totalAmount: totalPrice,
 	}));
-
+const handleClick = () => {
+  const accessToken = localStorage.getItem("accessToken");
 	if (!accessToken) {
 		Swal.fire({
 			title: "Para comprar un libro debes iniciar sesión",
@@ -99,6 +100,7 @@ const Carrito = () => {
 				window.location.href = data.url;
 			});
 	}
+}
 
 	return (
 		<div className={style.cartContainer}>
