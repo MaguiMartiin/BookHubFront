@@ -76,10 +76,70 @@ const Carrito = () => {
 		unit_price: item.price,
 	}));
 
+  const handleClick = () => {
+    const accessToken = localStorage.getItem('accessToken');
+  
+    if (!accessToken) {
+      Swal.fire({
+        title: "Para comprar un libro debes iniciar sesión",
+        icon: "warning",
+      });
+    } else {
+      axios.post('/payment', itemsMapped)
+        .then((response) => {
+          return response.data;
+        })
+        .then((data) => {
+          window.location.href = data.init_point;
+        })
+        .catch((error) => {
+          console.error('Error en la solicitud:', error);
+        });
+    }
+  }
+  
 
-	const handleClick = () => {
-		const token =  localStorage.getItem("accessToken");
-
+  return (
+    <div className={style.cartContainer}>
+      <div className={style.cardContainer}>
+        {cart?.map((book) => (
+          <div key={book.id} className={style.card}>
+            <div className={style.imageContainer}>
+              <img src={book.image} alt={book.name} className={style.bookImage} />
+            </div>
+            <div className={style.bookInfo}>
+              <h1>{book.name}</h1>
+              <h2>Precio: ${book.price}</h2>
+              <p>Disponibles: {book.available}</p>
+              <p>Género: {book.Gender?.name}</p>
+              <p>Autor: {book.Author?.name}</p>
+              <div className={style.deleteButtonContainer}>
+              <button className={style.deleteButton} onClick={() => handleDeleteItem(book.id)}>X</button>
+              </div>
+              <div className={style.quantityControls}>
+                <button className={style.quantityButton} onClick={() => handleQuantityChange(book.id, -1)}>-</button>
+                <input
+                  type="number"
+                  value={selectedQuantities[book.id]}
+                  min="1"
+                  readOnly
+                  className={style.quantityInput}
+                />
+                <button className={style.quantityButton} onClick={() => handleQuantityChange(book.id, 1)}>+</button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className={style.totalPriceContainer}>
+        <h3>Total:</h3>
+        <p className={style.totalPrice}>${totalPrice}</p>
+        <button className={style.payButton} onClick={handleClick} > PAY! </button>
+      </div>
+    </div>
+  );
+}
+=======
 		axios
 			.post(
 				"/payment",
