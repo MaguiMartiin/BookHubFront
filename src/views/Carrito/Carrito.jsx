@@ -6,6 +6,7 @@ import { deleteFromCart } from "../../redux/actions";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+const token = localStorage.getItem("accessToken");
 
 const Carrito = () => {
 	const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const Carrito = () => {
 	const cart = useSelector((state) => state.cart);
 
 	const [totalPrice, setTotalPrice] = useState(0);
-	console.log(totalPrice);
+
 	const [selectedQuantities, setSelectedQuantities] = useState({});
 
 	useEffect(() => {
@@ -73,14 +74,26 @@ const Carrito = () => {
 
 	const handleClick = () => {
 		axios
-			.post("http://localhost:3001/payment", {
-				products: itemsMapped,
-				totalPrice: totalPrice,
-				title: "Compra de libros",
+			.post(
+				"http://localhost:3001/payment",
+				{
+					products: itemsMapped,
+					totalPrice: totalPrice,
+					title: "Compra de libros",
+				},
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			)
+			.then((response)=>{
+				console.log(response.data, "response.data");
+				return response.data
 			})
-			.then((response) => {
-				window.location.href = response.data.url;
-			});
+			.then((data) => {
+					window.location.href = data.url;
+			})
 	};
 
 	return (

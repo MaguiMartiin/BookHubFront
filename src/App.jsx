@@ -18,7 +18,7 @@ import Compras from "./components/VistasUser/Compras";
 import axios from "axios";
 import Ventas from "./components/VistasUser/Ventas";
 
-axios.defaults.baseURL = "https://servidor-libreria.onrender.com";
+axios.defaults.baseURL = "http://localhost:3001";
 
 function App() {
 	const location = useLocation();
