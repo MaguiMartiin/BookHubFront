@@ -4,6 +4,7 @@ import { publicId, bookDelete } from "../../redux/actions";
 import { FaDollarSign } from "react-icons/fa";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaEdit, FaTrash } from 'react-icons/fa'
+import Swal from "sweetalert2"
 
 const Ventas = () => {
   const dispatch = useDispatch();
@@ -20,18 +21,27 @@ const Ventas = () => {
   const publicaciones = useSelector((state) => state.bookPublic);
 
   const handleDelete = (id) => {
-    dispatch(bookDelete(id));
-    alert(`El libro ha sido eliminado!`);
-    dispatch(publicId()); // Vuelve a obtener las publicaciones después de eliminar
-  };
+    dispatch(bookDelete(id))
+    .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Libro eliminado!",
+          text: "El libro ha sido eliminado exitosamente.",
+          confirmButtonText: "Aceptar",
+        }).then(() => {
+          dispatch(publicId());
+        })
+      })
+    .catch((error) => {console.error("Error al eliminar el libro:", error)})
+};
 
-  if (loading) {
-    return (
-      <div>
-        <h1>Cargando...</h1>
-      </div>
-    );
-  }
+if (loading) {
+  return (
+    <div className="flex justify-center items-center h-screen">
+      <h1 className="text-4xl text-red-400 font-bold">Cargando...</h1>
+    </div>
+  );
+}
 
   return (
     <div className="flex flex-col my-10">
@@ -41,14 +51,20 @@ const Ventas = () => {
         </div>
       ) : (
         <div className="flex flex-col items-center mt-10">
-          <h1 className="text-3xl font-bold text-pink-500 mb-4">
+          <h1 className="text-3xl font-bold text-red-500 mb-4">
             ¡Aún no has compartido tus tesoros literarios!
           </h1>
           <button
-            className="py-3 px-6 bg-pink-500 text-white rounded-md shadow-md hover:bg-pink-600 mb-4"
-            onClick={() => {}}
+            className="py-3 px-6 bg-red-500 text-white rounded-md shadow-md hover:bg-red-600 mb-4"
+            onClick={() => {navigate("/home")}}
           >
             Volver a Home
+          </button>
+          <button
+            className="py-3 px-6 bg-red-500 text-white rounded-md shadow-md hover:bg-red-600 mb-4"
+            onClick={() => {navigate("/form")}}
+          >
+            Realizar una publicacion
           </button>
         </div>
       )}
