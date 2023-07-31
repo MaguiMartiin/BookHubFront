@@ -1,6 +1,7 @@
-import React from "react";
-import style from "./Carrito.module.css";
-import { useEffect, useState } from "react";
+
+import style from './Carrito.module.css'
+import React from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { deleteFromCart } from '../../redux/actions';
 import Swal from 'sweetalert2';
@@ -11,8 +12,6 @@ const Carrito = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
-
  
   const [totalPrice, setTotalPrice] = useState(0);
   console.log(totalPrice);
@@ -32,7 +31,7 @@ const Carrito = () => {
       return () => clearTimeout(timer);
     }
   }, [totalPrice, navigate]);
-
+  
   useEffect(() => {
     const calculateTotalPrice = () => {
       let total = 0;
@@ -73,7 +72,6 @@ const Carrito = () => {
     totalAmount: totalPrice,
   }));
   
-
 		if (!accessToken) {
 			Swal.fire({
 				title: "Para comprar un libro debes iniciar sesión",
