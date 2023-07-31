@@ -28,13 +28,6 @@ const Detail = () => {
     }, [dispatch, id]) 
 
     const addCart = () => {
-
-        if (!isLoggedIn) {
-          Swal.fire({
-            title: "Debes iniciar sesión para agregar productos al carrito",
-            icon: "warning",
-          });
-        } else {
           const isBookInCart = cart.find((item) => item.id === bookDetail.id);
           if (isBookInCart) {
             Swal.fire({
@@ -52,7 +45,6 @@ const Detail = () => {
             localStorage.setItem("cart", JSON.stringify(updatedCart));
           }
         }
-      };
 
     return (
         <div className={style.contain}>
