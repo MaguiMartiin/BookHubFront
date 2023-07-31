@@ -7,44 +7,47 @@ import { AiFillEyeInvisible } from "react-icons/ai";
 import axios from "axios";
 
 const Login = () => {
+
   const [isPasswordShow, toggleShowPassword] = useToggle();
   const navigate = useNavigate();
 
 	const handelGo = async () => {
 		try {
-		  const res = await axios.get("/auth/google");
-		  // Redireccionar al usuario a la URL de autenticación de Google
-		  window.location.href = res.data.authUrl;
+			const res = await axios.get("/auth/google");
+			// Redireccionar al usuario a la URL de autenticación de Google
+			window.location.href = res.data.authUrl;
 		} catch (error) {
-		  console.error("Error al obtener la URL de autenticación de Google:", error);
+			console.error(
+				"Error al obtener la URL de autenticación de Google:",
+				error
+			);
 		}
-	  };
-	
+	 };
 	
 	return (
 		<div className="container flex flex-col h-screen justify-center items-center">
-			<div  className="flex flex-col w-96 py-8 px-4 bg-secondaryLight dark:bg-secondary rounded-xl border border-secondaryBorderLight dark:border-secondaryBorder">
+			<div className="flex flex-col w-96 py-8 px-4 bg-secondaryLight dark:bg-secondary rounded-xl border border-secondaryBorderLight dark:border-secondaryBorder">
 				<Formik
 					initialValues={{
 						email: "",
 						password: "",
 					}}
 					onSubmit={async (values) => {
-						console.log(values);
 						try {
 							const response = await axios.post("/login", {
 								email: values.email,
 								password: values.password,
 							});
-              
+ 
 							const { accesoWJT: token } = response.data;
-      						localStorage.setItem('accessToken', token);
-							navigate("/home")
+							localStorage.setItem("accessToken", token);
+							navigate("/home");
 							console.log(response.data);
+
 						} catch (error) {
-							console.log({
-								error: error.message,
-							});
+							return {
+								errores: error.message,
+							};
 						}
 					}}
 					validate={(values) => {
@@ -190,19 +193,5 @@ const Login = () => {
 		</div>
 	);
 };
-// const mapStateToProps = (state) => {
-// 	return {
-// 		userSignError: state.userSignError,
-// 		isLogin: state.isLogin,
-// 	};
-// };
 
-// const mapDispatchToProps = (dispatch) => {
-// 	return {
-// 		signIn: (userData) => dispatch(signIn(userData)),
-// 	};
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Login);
-
-export default Login;	
+export default Login;

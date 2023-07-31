@@ -11,7 +11,7 @@ export const ADD_TO_CART = 'ADD_TO_CART'
 export const DELETE_FROM_CART = 'DELETE_FROM_CART'
 export const REFRESH_CART = 'REFRESH_CART'
 export const PUBLICACIONES_ID = 'PUBLICACIONES_ID'
-
+export const REMOVE_TO_CART = 'REMOVE_TO_CART'
 // user..
 
 export const USERS_SIGN_UP_STEP_SET = "USERS_SIGN_UP_STEP_SET";

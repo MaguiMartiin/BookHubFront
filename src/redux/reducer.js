@@ -11,7 +11,8 @@ import {
 	ADD_TO_CART,
 	DELETE_FROM_CART,
 	REFRESH_CART, 
-	PUBLICACIONES_ID
+	PUBLICACIONES_ID,
+	REMOVE_TO_CART
 } from "./action-types";
 
 const initialState = {
@@ -78,26 +79,34 @@ const rootReducer = (state = initialState, action) => {
 			return { ...state, signUpStep: action.payload };
 
 		case ADD_TO_CART:
-			return{
+			return {
 				...state,
 				cart: [...state.cart, action.payload],
-			}
+			};
+		case REMOVE_TO_CART:
+			return {
+				...state,
+				cart: [],
+			};
+
 		case DELETE_FROM_CART:
-			const updateItems = state.cart.filter((item) => item.id !== action.payload)
-      		return {
-        	...state,
-        	cart: updateItems,
-      		};	
+			const updateItems = state.cart.filter(
+				(item) => item.id !== action.payload
+			);
+			return {
+				...state,
+				cart: updateItems,
+			};
 		case REFRESH_CART:
 			return {
 				...state,
 				cart: action.payload,
-			}	
+			};
 		case PUBLICACIONES_ID:
 			return {
 				...state,
-				bookPublic: action.payload
-			}
+				bookPublic: action.payload,
+			};
 
 		default:
 			return state;
