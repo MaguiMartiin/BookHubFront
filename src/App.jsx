@@ -20,17 +20,19 @@ import Ventas from './components/VistasUser/Ventas'
 
 axios.defaults.baseURL = "https://servidor-libreria.onrender.com"
 
-function App() {
-   const location = useLocation();
-   const dispatch = useDispatch();
 
-   useEffect(() => {
-    const carrito = localStorage.getItem('cart');
-    const carritoRefresh = JSON.parse(carrito);
-    if (carritoRefresh ) {
-      dispatch(refreshCart(carritoRefresh));
-    }
-  }, [dispatch]);
+function App() {
+	const location = useLocation();
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		const carrito = localStorage.getItem("cart");
+		const carritoRefresh = JSON.parse(carrito);
+		if (carritoRefresh) {
+			dispatch(refreshCart(carritoRefresh));
+		}
+	}, [dispatch]);
+
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);

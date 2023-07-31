@@ -27,7 +27,6 @@ const Landing = () => {
         dispatch(getGenders())
     }, [dispatch])
     const genders = useSelector((state) => state.genders)
-    console.log(genders);
 
     useEffect(() => {
         const token = localStorage.getItem("accessToken");

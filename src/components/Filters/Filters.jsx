@@ -52,7 +52,6 @@ const Filters = ({setPage}) => {
 
   //genero
   const selectGender = (event) => {
-    //console.log(event.target.value)
     const { value } = event.target;
     setFiltro({
       ...filtro,
@@ -96,7 +95,6 @@ const Filters = ({setPage}) => {
   };
 
   useEffect(() => {
-    //console.log("aaa", filtro);
     dispatch(filter(filtro));
   }, [filtro, dispatch]);
 

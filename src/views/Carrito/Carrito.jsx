@@ -11,11 +11,9 @@ const Carrito = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
 
  
   const [totalPrice, setTotalPrice] = useState(0);
-  console.log(totalPrice);
   const [selectedQuantities, setSelectedQuantities] = useState({});
 
 

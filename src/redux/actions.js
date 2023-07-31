@@ -10,7 +10,9 @@ export const createBook = (payload) =>{
             const response = await axios.post(`/`, payload)
             return dispatch({type: CREATE_BOOK, payload: response.data})
         } catch (error) {
-            console.log(error);
+           return {
+							error: error.message,
+						};
         }
     }
   }
@@ -22,7 +24,9 @@ export const getAllBooks = () => {
           const response = await axios.get(`/book`);
           return dispatch({ type: GET_BOOKS, payload: response.data });
         } catch (error) {
-          console.log(error);
+           return {
+							error: error.message,
+						};
         }
       };
 }
@@ -33,15 +37,17 @@ export const bookId = (id) => {
       const bookDetail = (await axios.get(`/book/${id}`)).data
       return dispatch ({type: BOOK_ID, payload: bookDetail})
     }
-    catch(error){console.log(error)}
+    catch(error){
+       return {
+					error: error.message,
+				};
+    }
   }
 }
   
   export const filter = (book) => {
     return async (dispatch) => {
-      try {
-       // console.log("--->", book);
-  
+      try {  
         let params = {};
   
         if (book.gender === "gender") {
@@ -73,10 +79,11 @@ export const bookId = (id) => {
           .join("&");
   
         const response = await axios.get(`/filter?${queryString}`);
-        //console.log("filter", response.data)
         return dispatch({ type: FILTER, payload: response.data });
       } catch (error) {
-        console.log("error", error);
+        return {
+					error: error.message,
+				};
       }
     };
   };
@@ -89,7 +96,9 @@ export const getGenders = () =>{
       const response = await axios.get(`/gender`)
       return dispatch({ type: GET_GENDERS, payload: response.data })
     } catch (error) {
-      console.log(error);
+       return {
+					error: error.message,
+				};
     }
   }
 }
@@ -100,7 +109,9 @@ export const getAuthor = () =>{
       const response = await axios.get(`/author`)
       return dispatch({ type: GET_AUTHORS, payload: response.data });
     } catch (error) {
-      console.log(error);
+       return {
+					error: error.message,
+				};
     }
   }
 }
@@ -111,7 +122,11 @@ export const editBook = (id, bookData) => {
       const bookEdit = await axios.put(`/book/${id}`, bookData)
       return dispatch ({type: EDIT_BOOK, payload: bookEdit.data})
     }
-    catch(error){console.log(error)}
+    catch(error){
+       return {
+					error: error.message,
+				};
+    }
   }
 }
 
@@ -121,7 +136,11 @@ export const bookDelete = (id) => {
       const bookDelete = (await axios.delete(`/book/${id}`)).data
       return dispatch ({type: DELETE_BOOK, payload: bookDelete})
     }
-    catch(error){console.log(error)}
+    catch(error){
+      return {
+        error: error.message
+      }
+    }
   }
 }
 
@@ -142,7 +161,9 @@ export const getByAuthor = (name) =>{
       const response = await axios.get(`/author`)
       return dispatch({ type: GET_AUTHORS, payload: response.data })
     } catch (error) {
-      console.log(error);
+       return {
+					error: error.message,
+				};
     }
   }
 }
@@ -153,7 +174,9 @@ export const getBookByName = (name) =>{
         const response = await axios.get(`/book/?name=${name}`);
         return dispatch({ type: GET_BOOK_NAME, payload: response.data });
     } catch (error) {
-      console.log(error);
+       return {
+					error: error.message,
+				};
     }
 
   }

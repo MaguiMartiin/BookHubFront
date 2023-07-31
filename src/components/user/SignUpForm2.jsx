@@ -26,13 +26,14 @@ const SingUpForm2 = ({ userData, setSignUpStep }) => {
 					name: values.name,
 					lastName: values.lastName,
 				};
-				console.log(user);
 
 				try {
 					await axios.post("/user/", user);
 					navigate("/login");
 				} catch (error) {
-					console.log(error);
+					 return {
+							error: error.message,
+						};
 				}
 				setSignUpStep(1);
 				setSubmitting(false);
