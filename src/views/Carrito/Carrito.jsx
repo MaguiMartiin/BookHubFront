@@ -76,89 +76,106 @@ const Carrito = () => {
 		unit_price: item.price,
 	}));
 
-  useEffect(() => {
-    const initialQuantities = cart?.reduce((quantities, book) => {
-      quantities[book.id] = 1;
-      return quantities;
-    }, {});
-    setSelectedQuantities(initialQuantities);
-  }, [cart]);
+	useEffect(() => {
+		const initialQuantities = cart?.reduce((quantities, book) => {
+			quantities[book.id] = 1;
+			return quantities;
+		}, {});
+		setSelectedQuantities(initialQuantities);
+	}, [cart]);
 
+	const handleClick = () => {
+		const accessToken = localStorage.getItem("accessToken");
 
-  const handleClick = () => {
-    const accessToken = localStorage.getItem('accessToken');
-  
-    if (!accessToken) {
-      Swal.fire({
-        title: "Para comprar un libro debes iniciar sesión",
-        icon: "warning",
-      });
-    } else {
-     axios
-			.post(
-				"/payment",
-				{
-					products: itemsMapped,
-					totalPrice: totalPrice,
-					title: "Compra de libros",
-				},
-				{
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				}
-			)
-			.then((response) => {
-				const { preference_id } = response.data;
-				localStorage.setItem("compra_id", preference_id);
-				return response.data;
-			})
-			.then((data) => {
-				window.location.href = data.url;
+		if (!accessToken) {
+			Swal.fire({
+				title: "Para comprar un libro debes iniciar sesión",
+				icon: "warning",
 			});
-    }
-  }
-  
+		} else {
+			axios
+				.post(
+					"/payment",
+					{
+						products: itemsMapped,
+						totalPrice: totalPrice,
+						title: "Compra de libros",
+					},
+					{
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+					}
+				)
+				.then((response) => {
+					const { preference_id } = response.data;
+					localStorage.setItem("compra_id", preference_id);
+					return response.data;
+				})
+				.then((data) => {
+					window.location.href = data.url;
+				});
+		}
+	};
 
-  return (
-    <div className={style.cartContainer}>
-      <div className={style.cardContainer}>
-        {cart?.map((book) => (
-          <div key={book.id} className={style.card}>
-            <div className={style.imageContainer}>
-              <img src={book.image} alt={book.name} className={style.bookImage} />
-            </div>
-            <div className={style.bookInfo}>
-              <h1>{book.name}</h1>
-              <h2>Precio: ${book.price}</h2>
-              <p>Disponibles: {book.available}</p>
-              <p>Género: {book.Gender?.name}</p>
-              <p>Autor: {book.Author?.name}</p>
-              <div className={style.deleteButtonContainer}>
-              <button className={style.deleteButton} onClick={() => handleDeleteItem(book.id)}>X</button>
-              </div>
-              <div className={style.quantityControls}>
-                <button className={style.quantityButton} onClick={() => handleQuantityChange(book.id, -1)}>-</button>
-                <input
-                  type="number"
-                  value={selectedQuantities[book.id]}
-                  min="1"
-                  readOnly
-                  className={style.quantityInput}
-                />
-                <button className={style.quantityButton} onClick={() => handleQuantityChange(book.id, 1)}>+</button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className={style.totalPriceContainer}>
-        <h3>Total:</h3>
-        <p className={style.totalPrice}>${totalPrice}</p>
-        <button className={style.payButton} onClick={handleClick} > PAY! </button>
-      </div>
-    </div>
-  );
-}
+	return (
+		<div className={style.cartContainer}>
+			<div className={style.cardContainer}>
+				{cart?.map((book) => (
+					<div key={book.id} className={style.card}>
+						<div className={style.imageContainer}>
+							<img
+								src={book.image}
+								alt={book.name}
+								className={style.bookImage}
+							/>
+						</div>
+						<div className={style.bookInfo}>
+							<h1>{book.name}</h1>
+							<h2>Precio: ${book.price}</h2>
+							<p>Disponibles: {book.available}</p>
+							<p>Género: {book.Gender?.name}</p>
+							<p>Autor: {book.Author?.name}</p>
+							<div className={style.deleteButtonContainer}>
+								<button
+									className={style.deleteButton}
+									onClick={() => handleDeleteItem(book.id)}>
+									X
+								</button>
+							</div>
+							<div className={style.quantityControls}>
+								<button
+									className={style.quantityButton}
+									onClick={() => handleQuantityChange(book.id, -1)}>
+									-
+								</button>
+								<input
+									type="number"
+									value={selectedQuantities[book.id]}
+									min="1"
+									readOnly
+									className={style.quantityInput}
+								/>
+								<button
+									className={style.quantityButton}
+									onClick={() => handleQuantityChange(book.id, 1)}>
+									+
+								</button>
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+			<div className={style.totalPriceContainer}>
+				<h3>Total:</h3>
+				<p className={style.totalPrice}>${totalPrice}</p>
+				<button className={style.payButton} onClick={handleClick}>
+					{" "}
+					PAY!{" "}
+				</button>
+			</div>
+		</div>
+	);
+};
 
 export default Carrito;
