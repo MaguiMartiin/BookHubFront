@@ -38,13 +38,13 @@ const Detail = () => {
           const isBookInCart = cart.find((item) => item.id === bookDetail.id);
           if (isBookInCart) {
             Swal.fire({
-              title: "The product is already in the cart",
+              title: "El producto ya está en el carrito",
               icon: "warning",
             });
           } else {
             dispatch(addToCart(bookDetail));
             Swal.fire({
-              title: "Item added",
+              title: "Producto agregado",
               icon: "success",
             });
     
