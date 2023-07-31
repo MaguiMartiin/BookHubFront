@@ -1,3 +1,4 @@
+
 import style from './Carrito.module.css'
 import React from 'react';
 import { useEffect, useState } from 'react';
@@ -11,8 +12,6 @@ const Carrito = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
-
  
   const [totalPrice, setTotalPrice] = useState(0);
   console.log(totalPrice);
@@ -32,7 +31,7 @@ const Carrito = () => {
       return () => clearTimeout(timer);
     }
   }, [totalPrice, navigate]);
-
+  
   useEffect(() => {
     const calculateTotalPrice = () => {
       let total = 0;
@@ -73,29 +72,37 @@ const Carrito = () => {
     totalAmount: totalPrice,
   }));
   
+		if (!accessToken) {
+			Swal.fire({
+				title: "Para comprar un libro debes iniciar sesión",
+				icon: "warning",
+			});
+		} else {
+			axios
+				.post(
+					"/payment",
+					{
+						products: itemsMapped,
+						totalPrice: totalPrice,
+						title: "Compra de libros",
+					},
+					{
+						headers: {
+							Authorization: `Bearer ${accessToken}`,
+						},
+					}
+				)
+				.then((response) => {
+					const { preference_id } = response.data;
+					localStorage.setItem("compra_id", preference_id);
+					return response.data;
+				})
+				.then((data) => {
+					window.location.href = data.url;
+				});
+		}
 
-  const handleClick = () => {
-    const accessToken = localStorage.getItem('accessToken');
-  
-    if (!accessToken) {
-      Swal.fire({
-        title: "Para comprar un libro debes iniciar sesión",
-        icon: "warning",
-      });
-    } else {
-      axios.post('/payment', itemsMapped)
-        .then((response) => {
-          return response.data;
-        })
-        .then((data) => {
-          window.location.href = data.init_point;
-        })
-        .catch((error) => {
-          console.error('Error en la solicitud:', error);
-        });
-    }
-  }
-  
+
 
   return (
     <div className={style.cartContainer}>
@@ -139,3 +146,4 @@ const Carrito = () => {
 }
 
 export default Carrito;
+
