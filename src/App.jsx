@@ -19,7 +19,7 @@ import Compras from './components/VistasUser/Compras'
 import axios from 'axios';
 import Ventas from './components/VistasUser/Ventas'
 
-axios.defaults.baseURL = "https://servidor-libreria.onrender.com"
+axios.defaults.baseURL = "https://servidor-libreria.onrender.com";
 
 
 function App() {

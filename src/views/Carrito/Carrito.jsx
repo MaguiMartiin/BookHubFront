@@ -6,7 +6,6 @@ import { deleteFromCart } from "../../redux/actions";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-const token = localStorage.getItem("accessToken");
 
 const Carrito = () => {
 	const dispatch = useDispatch();
@@ -17,20 +16,19 @@ const Carrito = () => {
 
 	const [selectedQuantities, setSelectedQuantities] = useState({});
 
-	
-  useEffect(() => {
-    if (totalPrice === 0) {
-      const timer = setTimeout(() => {
-        Swal.fire({
-          title: 'El carrito está vacío',
-          icon: 'warning',
-        }).then(() => {
-          navigate('/home');
-        });
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, [totalPrice, navigate]);
+	useEffect(() => {
+		if (totalPrice === 0) {
+			const timer = setTimeout(() => {
+				Swal.fire({
+					title: "El carrito está vacío",
+					icon: "warning",
+				}).then(() => {
+					navigate("/home");
+				});
+			}, 300);
+			return () => clearTimeout(timer);
+		}
+	}, [totalPrice, navigate]);
 
 	useEffect(() => {
 		const calculateTotalPrice = () => {
@@ -56,21 +54,20 @@ const Carrito = () => {
 		const updatedCart = cart.filter((item) => item.id !== itemId);
 		localStorage.setItem("cart", JSON.stringify(updatedCart));
 	};
-  const handleQuantityChange = (bookId, value) => {
-      const res = cart.filter(e=>e.id === bookId)
-      if (res[0].available > selectedQuantities[bookId]) {
-        setSelectedQuantities((prevQuantities) => ({
-          ...prevQuantities,
-          [bookId]: Math.max(1, prevQuantities[bookId] + value), 
-        }));
-      }
-      else if (value <= 0){
-        setSelectedQuantities((prevQuantities) => ({
-          ...prevQuantities,
-          [bookId]: Math.max(1, prevQuantities[bookId] + value), 
-        }));
-      }
-  };
+	const handleQuantityChange = (bookId, value) => {
+		const res = cart.filter((e) => e.id === bookId);
+		if (res[0].available > selectedQuantities[bookId]) {
+			setSelectedQuantities((prevQuantities) => ({
+				...prevQuantities,
+				[bookId]: Math.max(1, prevQuantities[bookId] + value),
+			}));
+		} else if (value <= 0) {
+			setSelectedQuantities((prevQuantities) => ({
+				...prevQuantities,
+				[bookId]: Math.max(1, prevQuantities[bookId] + value),
+			}));
+		}
+	};
 
 	const itemsMapped = cart.map((item) => ({
 		book_id: item.id,
@@ -79,12 +76,13 @@ const Carrito = () => {
 		unit_price: item.price,
 	}));
 
-	console.log(itemsMapped, "itemsMapped");
 
 	const handleClick = () => {
+		const token =  localStorage.getItem("accessToken");
+
 		axios
 			.post(
-				"http://localhost:3001/payment",
+				"/payment",
 				{
 					products: itemsMapped,
 					totalPrice: totalPrice,
@@ -96,13 +94,14 @@ const Carrito = () => {
 					},
 				}
 			)
-			.then((response)=>{
-				console.log(response.data, "response.data");
-				return response.data
+			.then((response) => {
+				const { preference_id } = response.data;
+				localStorage.setItem("compra_id", preference_id);
+				return response.data;
 			})
 			.then((data) => {
-					window.location.href = data.url;
-			})
+				window.location.href = data.url;
+			});
 	};
 
 	return (
