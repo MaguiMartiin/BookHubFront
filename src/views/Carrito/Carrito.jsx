@@ -83,16 +83,28 @@ const Carrito = () => {
   }));
   
 
-   const handleClick = () => {
-    axios.post('/payment',itemsMapped)
-    .then((response) => {
-      return response.data
-    })
-    .then((data) => {
-      window.location.href = data.init_point
-    })
+  const handleClick = () => {
+    const accessToken = localStorage.getItem('accessToken');
+  
+    if (!accessToken) {
+      Swal.fire({
+        title: "Para comprar un libro debes iniciar sesión",
+        icon: "warning",
+      });
+    } else {
+      axios.post('/payment', itemsMapped)
+        .then((response) => {
+          return response.data;
+        })
+        .then((data) => {
+          window.location.href = data.init_point;
+        })
+        .catch((error) => {
+          console.error('Error en la solicitud:', error);
+        });
+    }
   }
-
+  
 
   return (
     <div className={style.cartContainer}>
