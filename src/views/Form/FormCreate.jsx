@@ -115,7 +115,7 @@ const FormRegistro = () => {
 					}}
 					onSubmit={handleSubmit}>
 					{({ errors, setFieldValue, isSubmitting, values }) => (
-						<div className="flex flex-col lg:grid lg:grid-cols-2 h-fit">
+						<div className="flex flex-col lg:grid lg:grid-cols-2  h-fit">
 							<div className="flex flex-col place-content-center  mr-4 h-full">
 								<Form className="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
 									<div className="mb-5">
