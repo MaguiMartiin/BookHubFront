@@ -32,7 +32,6 @@ useEffect(() => {
 		const { send } = (await axios.get(`/compras/${compra_id}`)).data;
 		console.log(send);
 		if (send === true) {
-			console.log(send, "send");
 			localStorage.removeItem("compra_id");
 			localStorage.removeItem("cart");
 			dispatch(addToCart());

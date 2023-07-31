@@ -1,3 +1,4 @@
+import style from "./Carrito.module.css";
 import React from "react";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -102,7 +103,7 @@ const Carrito = () => {
 					},
 					{
 						headers: {
-							Authorization: `Bearer ${token}`,
+							Authorization: `Bearer ${accessToken}`,
 						},
 					}
 				)
@@ -178,3 +179,4 @@ const Carrito = () => {
 };
 
 export default Carrito;
+
