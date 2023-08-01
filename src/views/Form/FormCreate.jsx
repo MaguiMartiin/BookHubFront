@@ -38,7 +38,6 @@ const FormRegistro = () => {
 		dispatch(getAuthor());
 	}, [dispatch]);
 
-	console.log(authors, "gender_stado_global");
 
 	const [formGo, setFormGo] = useState(false);
 
@@ -70,10 +69,8 @@ const FormRegistro = () => {
 
 
 	const handleSubmit = async (values, { resetForm, setSubmitting }) => {
-		console.log(values);
 	  
 		try {
-		  console.log(values);
 		  const modifiedValues = {
 			...values,
 			GenderId: Number(values.GenderId),

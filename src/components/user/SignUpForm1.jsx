@@ -43,7 +43,9 @@ const SignUpFrorm1 = ({ callBack }) => {
 					}
 					callBack(formData);
 				} catch (error) {
-					console.log(error);
+					 return {
+							error: error.message,
+						};
 				}
 				setSubmitting(false);
 				resetForm();

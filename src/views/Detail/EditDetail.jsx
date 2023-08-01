@@ -55,8 +55,7 @@ import Swal from "sweetalert2"
     const handlerChange = (event) => {
         const property = event.target.name
         const value = event.target.value
-        console.log("name", property)
-        console.log("value", value)
+     
         setForm({...form, [property]: value})
     };
 
