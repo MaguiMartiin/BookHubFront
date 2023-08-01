@@ -13,6 +13,10 @@ import {
 	REFRESH_CART,
 	PUBLICACIONES_ID,
 	REMOVE_TO_CART,
+  GET_PUNTUATION,
+  GET_PUNTUATION_ID,
+  GET_OPINION,
+  GET_OPINION_ID,
 } from "./action-types";
 
 import axios from 'axios';
@@ -44,6 +48,58 @@ export const getAllBooks = () => {
 						};
         }
       };
+}
+
+export const getPuntuation = () => {
+  return async (dispatch) => {
+    try {
+      const puntuation = (await axios.get("/punctuation")).data
+      return dispatch ({type: GET_PUNTUATION, payload: puntuation})
+    } catch (error) {
+      return {
+        error: error.message,
+      }
+    }
+  }
+}
+
+export const getPuntuationId = (id) => {
+  return async (dispatch) => {
+    try {
+      const puntuation = (await axios.get(`/punctuation/${id}`)).data
+      return dispatch ({type: GET_PUNTUATION_ID, payload: puntuation})
+    } catch (error) {
+      return {
+        error: error.message,
+      }
+    }
+  }
+}
+
+export const getOpinion = () => {
+  return async (dispatch) => {
+    try {
+      const opinion = (await axios.get("/comments")).data
+      return dispatch({type: GET_OPINION, payload: opinion})
+    } catch (error) {
+      return {
+        error: error.message,
+      }
+    }
+  }
+}
+
+export const getOpinionId = (id) => {
+  return async (dispatch) => {
+    try {
+      const opinionId = (await axios.get(`/comments/${id}`)).data
+      return dispatch({type: GET_OPINION_ID, payload: opinionId})
+    } catch (error) {
+      return {
+        error: error.message,
+      }
+    }
+  }
 }
 
 export const bookId = (id) => {

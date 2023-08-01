@@ -29,11 +29,8 @@ const VistaUser = ({ onLogout }) => {
             <a href="/compras" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
               Compras
             </a>
-            <a href="/opiniones_reseñas" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-              Opiniones y reseñas
-            </a>
-            <a href="/publicaciones" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-              Publicaciones
+            <a href="/opiniones" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              Opiniones
             </a>
             <a href="MiPerfil" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
               Mi perfil
