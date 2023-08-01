@@ -23,7 +23,7 @@ export default {
 			colors: {
 				celsete: "#08c6ff",
 				turquesa: "#0ffff8",
-				negro: "##0f1b36",
+				negro: "#0f1b36",
 				gris: "#76777c",
 				blanco: "#e2e2e2",
 
