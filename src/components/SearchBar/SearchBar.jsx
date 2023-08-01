@@ -152,7 +152,7 @@ const SearchBar = ({ setPage }) => {
 				<select
 					onChange={handleChange1}
 					value={filtro.fecha}
-					className="block w-full text-[1.5rem] bg-gris text-blanco   mx-1 py-2 border-b border-gris focus:border-celeste hover:border-celeste font-secondary font-bold rounded-md shadow-sm focus:outline-none  mt-4 cursor-pointer">
+					className="block w-full text-[1.5rem] bg-gris text-blanco   mx-1 py-2 border-b border-gris focus:border-rojo  hover:border-rojo  font-secondary font-bold rounded-md shadow-sm focus:outline-none  mt-4 cursor-pointer">
 					{" "}
 					<option value="all">Año</option>
 					{decades.map((decade, i) => (
@@ -164,7 +164,7 @@ const SearchBar = ({ setPage }) => {
 				<select
 					value={filtro.dataAuthor}
 					onChange={selectAuthor}
-					className="block w-full mx-1 py-2 border-b bg-gris text-blanco border-gris focus:border-celeste hover:border-celeste font-secondary font-bold text-[1.5rem]  rounded-md shadow-sm focus:outline-none  mt-4 cursor-pointer">
+					className="block w-full mx-1 py-2 border-b bg-gris text-blanco border-gris focus:border-rojo  hover:border-rojo  font-secondary font-bold text-[1.5rem]  rounded-md shadow-sm focus:outline-none  mt-4 cursor-pointer">
 					<option value="all">Autor</option>
 					{authors?.map((e, i) => (
 						<option key={i} value={e}>
@@ -175,7 +175,7 @@ const SearchBar = ({ setPage }) => {
 				<select
 					value={filtro.dataGender}
 					onChange={selectGender}
-					className="block w-full mx-1 py-2 bg-gris text-blanco  border-b border-gris focus:border-celeste hover:border-celeste font-secondary font-bold text-[1.5rem] rounded-md shadow-sm focus:outline-none  mt-4 cursor-pointer">
+					className="block w-full mx-1 py-2 bg-gris text-blanco  border-b border-gris focus:border-rojo  hover:border-rojo  font-secondary font-bold text-[1.5rem] rounded-md shadow-sm focus:outline-none  mt-4 cursor-pointer">
 					<option value="all">Género</option>
 					{genders?.map((gender, idx) => (
 						<option key={idx} value={gender}>
@@ -188,13 +188,13 @@ const SearchBar = ({ setPage }) => {
 					min="1"
 					value={filtro.dataPrice[0].minimo}
 					placeholder="Mínimo"
-					className="block w-full mx-1 py-2 pl-2 bg-gris text-blanco  border-b border-gris focus:border-celeste hover:border-celeste font-secondary font-bold text-[1.5rem]  rounded-md shadow-sm focus:outline-none  mt-4"
+					className="block w-full mx-1 py-2 pl-2 bg-gris text-blanco  border-b border-gris focus:border-rojo  hover:border-rojo  font-secondary font-bold text-[1.5rem]  rounded-md shadow-sm focus:outline-none  mt-4"
 					onChange={handleMinimo}
 				/>
 				<input
 					type="number"
 					min="1"
-					className="block w-full mx-1 py-2 pl-2 bg-gris text-blanco  border-b border-gris focus:border-celeste hover:border-celeste font-secondary font-bold text-[1.5rem]  rounded-md shadow-sm focus:outline-none mt-4"
+					className="block w-full mx-1 py-2 pl-2 bg-gris text-blanco  border-b border-gris focus:border-rojo  hover:border-rojo  font-secondary font-bold text-[1.5rem]  rounded-md shadow-sm focus:outline-none mt-4"
 					value={filtro.dataPrice[0].maximo}
 					placeholder="Máximo"
 					onChange={handleMaximo}
@@ -205,14 +205,14 @@ const SearchBar = ({ setPage }) => {
 				<input
 					value={filtro.dataSearch}
 					onChange={handleName}
-					className="block w-full mx-4 py-2 border-b pl-2 bg-gris text-blanco  border-gris focus:border-celeste hover:border-celeste font-secondary font-bold text-[1.3rem]  rounded-md shadow-sm focus:outline-none  mt-4 cursor-pointer h-12" // Modifica el valor "h-12" según el tamaño deseado
+					className="block w-full mx-4 py-2 border-b pl-2 bg-gris text-blanco  border-gris focus:border-rojo hover:border-rojo font-secondary font-bold text-[1.3rem]  rounded-md shadow-sm focus:outline-none  mt-4 cursor-pointer h-12" // Modifica el valor "h-12" según el tamaño deseado
 					// className={style.searchBarInput}
 					placeholder="Buscar libros..."
 				/>
 
 				<button
 					onClick={reset}
-					className="block w-52 bg-celeste text-lg text-blanco  px-4 py-2 border border-gray-400 font-secondary font-bold rounded-md shadow-sm focus:outline-non focus:ring focus:border-red-500 mt-4 h-12">
+					className="block w-52 bg-rojo text-lg text-blanco  px-4 py-2 border border-gray-400 font-secondary font-bold rounded-md shadow-sm focus:outline-non  focus:border-red-500 mt-4 h-12">
 					{/* <BiReset>Reset</BiReset> */}
 					Reset
 				</button>

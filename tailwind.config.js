@@ -21,8 +21,8 @@ export default {
 
 		extend: {
 			colors: {
-				celeste: "#45090e",
-				turquesa: "#7e0912",
+				violeta: "#45090e",
+				rojo: "#7e0912",
 
 				negro: "#0f1b36",
 				gris: "#76777c",

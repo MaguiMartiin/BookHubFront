@@ -6,7 +6,7 @@ const Card = ({ book }) => {
   return (
 		<>
 			<Link to={`/home/${book.id}`} className="inline-block h-full w-full ">
-				<div className="flex h-full w-full items-center justify-center overflow-hidden rounded-lg  bg-white hover:border hover:border-blanco bg-gradient-to-r from-celeste to-turquesa   ">
+				<div className="flex h-full w-full items-center justify-center overflow-hidden rounded-lg  bg-white hover:border hover:border-blanco bg-gradient-to-r from-violeta to-rojo   ">
 					<div className="flex justify-center flex-col aspect-square transition-opacity animate-fadeIn p-4 text-center">
 						<img
 							src={book?.image}
