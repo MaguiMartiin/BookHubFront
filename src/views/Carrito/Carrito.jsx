@@ -54,11 +54,14 @@ const Carrito = () => {
 
 
   const handleQuantityChange = (bookId, value) => {
-    setSelectedQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [bookId]: Math.max(1, prevQuantities[bookId] + value), 
-    }));
-  };
+    setSelectedQuantities((prevQuantities) => {
+      const newQuantity = Math.max(1, prevQuantities[bookId] + value);
+      return {
+        ...prevQuantities,
+        [bookId]: Math.min(newQuantity, cart.find((item) => item.id === bookId).available),
+      };
+    });
+  }
 
   const handleDeleteItem = (itemId) => {
     dispatch(deleteFromCart(itemId))
