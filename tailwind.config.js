@@ -21,9 +21,9 @@ export default {
 
 		extend: {
 			colors: {
-				celsete: "#08c6ff",
-				turquesa: "#0ffff8",
-				negro: "##0f1b36",
+				celeste: "#45090e",
+				turquesa: "#7e0912",
+				negro: "#0f1b36",
 				gris: "#76777c",
 				blanco: "#e2e2e2",
 
@@ -35,6 +35,15 @@ export default {
 				customColor2: "#c3418e",
 				customColor3: "#793474",
 				customColor4: "#44295f",
+			},
+			animation: {
+				"slide-left": "slide-left 5s linear infinite",
+			},
+			keyframes: {
+				"slide-left": {
+					"0%": { transform: "translateX(0)" },
+					"100%": { transform: "translateX(calc(-100% + 100px))" }, // Adjust the distance as needed
+				},
 			},
 		},
 	},
