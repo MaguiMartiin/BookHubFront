@@ -1,4 +1,3 @@
-
 import './App.css'
 import React from 'react'
 import { useDispatch } from 'react-redux'
@@ -16,8 +15,9 @@ import SignUp from './views/User/SignUp'
 import Carrito from './views/Carrito/Carrito'
 import MyBooks from './views/MyBooks/MyBooks'
 import Compras from './components/VistasUser/Compras'
-import axios from 'axios';
 import Ventas from './components/VistasUser/Ventas'
+import Opiniones from './components/VistasUser/PuntOp'
+import axios from 'axios';
 
 axios.defaults.baseURL = "https://servidor-libreria.onrender.com";
 
@@ -61,6 +61,7 @@ function App() {
 				<Route path="/carrito" element={<Carrito />} />
 				<Route path="/compras" element={<Compras />} />
 				<Route path="/publicaciones" element={<Ventas />} />
+				<Route path="/opiniones" element={<Opiniones/>}/>
 			</Routes>
 		</div>
 	);

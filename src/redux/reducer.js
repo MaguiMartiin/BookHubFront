@@ -12,7 +12,11 @@ import {
 	DELETE_FROM_CART,
 	REFRESH_CART, 
 	PUBLICACIONES_ID,
-	REMOVE_TO_CART
+	REMOVE_TO_CART,
+	GET_PUNTUATION,
+	GET_PUNTUATION_ID,
+	GET_OPINION,
+	GET_OPINION_ID
 } from "./action-types";
 
 const initialState = {
@@ -24,6 +28,10 @@ const initialState = {
 	authors: [],
 	cart: [],
 	bookPublic: [],
+	puntuations: [],
+	puntuationId: [],
+	opinion: [],
+	opinionId: [],
 	// user
 	signUpStep: 1,
 };
@@ -107,6 +115,26 @@ const rootReducer = (state = initialState, action) => {
 				...state,
 				bookPublic: action.payload,
 			};
+		case GET_PUNTUATION:
+			return {
+				...state,
+				puntuations: action.payload,
+			}
+		case GET_PUNTUATION_ID: 
+			return {
+				...state,
+				puntuationId: action.payload,
+			}
+		case GET_OPINION:
+			return {
+				...state,
+				opinion: action.payload,
+			}
+		case GET_OPINION_ID:
+			return {
+				...state,
+				opinionId: action.payload
+			}
 
 		default:
 			return state;
