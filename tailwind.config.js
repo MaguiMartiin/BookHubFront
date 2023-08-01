@@ -21,9 +21,15 @@ export default {
 
 		extend: {
 			colors: {
+				celsete: "#08c6ff",
+				turquesa: "#0ffff8",
+				negro: "#0f1b36",
+				gris: "#76777c",
+				blanco: "#e2e2e2",
+
 				primary: "#FF988B",
 				primaryLight: "#FAFAFA",
-				secondaryBorderLight: "#E5E5E5",
+				secondaryBorderLight: "#E5E5E5", //blanco
 				customColor0: "#ff90c0",
 				customColor1: "#ff65a9",
 				customColor2: "#c3418e",
