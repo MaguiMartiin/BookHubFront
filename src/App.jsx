@@ -45,7 +45,7 @@ function App() {
 	}, []);
 
 	return (
-		<div>
+		<div className="">
 			{location.pathname !== "/" &&
 				location.pathname !== "/login" &&
 				location.pathname !== "/signup" && <NavBar />}
