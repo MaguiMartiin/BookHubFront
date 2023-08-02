@@ -69,7 +69,6 @@ const Carrito = () => {
 		const updatedCart = cart.filter((item) => item.id !== itemId);
 		localStorage.setItem("cart", JSON.stringify(updatedCart));
 	};
-	console.log(cart);
 	const itemsMapped = cart.map((item) => ({
 		item_id: item.id,
 		title: item.name,
