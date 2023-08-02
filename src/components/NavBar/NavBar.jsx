@@ -7,6 +7,7 @@ import VistaUser from '../VistasUser/VistaUser'
 import { FaUser } from 'react-icons/fa';
 
 const NavBar = () => {
+  const [bg, setBg] = useState(false);
   const cart = useSelector((state) => state.cart);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const toInicio = () => {
@@ -30,47 +31,59 @@ const NavBar = () => {
     cart.splice(0, cart.length);
     setIsLoggedIn(false)
   }
+  useEffect(() => {
+		window.addEventListener("scroll", () => {
+			return window.scrollY > 50 ? setBg(true) : setBg(false);
+		});
+	});
 
   return (
-    <div className={style.contain}>
-      <Link to="/" className={style.h1}>
-        BookHub
-      </Link>
-      <div className={style.div}>
-        <Link to="/home" className={style.link}>
-          Inicio
-        </Link>
-        <Link to="/carrito" className={style.link}>
-          {cart.length > 0 ? (
-            <div className={style.cartIndicator}>
-              <FaCartArrowDown />
-              <div className={style.badge}>{cart.length}</div>
-            </div>
-          ) : (
-            <FaCartArrowDown />
-          )}
-        </Link>
-        {isLoggedIn &&
-        <Link to="/form" className={style.link}>
-          Vender Libro
-        </Link>
-        }
-      </div>
-        {!isLoggedIn&& <button className={style.botonInicio} onClick={toInicio}>
-        Inicia sesión
-        </button>}
-      
-      {isLoggedIn&& 
-      <div>
-        <button onClick={handleUserButtonClick} className={style.userButton}>
-          <FaUser size={32}/> 
-        </button>
-        {showVistaUser && <VistaUser onLogout={handleLogout}/>}
-      </div>
-      }
-
-    </div>
-  );
+		<div className="">
+			<div
+				className={`p-2 flex fixed items-center justify-between flex-wrap  z-10 lg:w-full text-white transition-all duration-300 ${
+					bg ? "bg-rojo" : "bg-transparent"
+				} `}>
+				<Link to="/" className={style.h1}>
+					BookHub
+				</Link>
+				<div className={style.div}>
+					<Link to="/home" className={style.link}>
+						Inicio
+					</Link>
+					<Link to="/carrito" className={style.link}>
+						{cart.length > 0 ? (
+							<div className={style.cartIndicator}>
+								<FaCartArrowDown />
+								<div className={style.badge}>{cart.length}</div>
+							</div>
+						) : (
+							<FaCartArrowDown />
+						)}
+					</Link>
+					{isLoggedIn && (
+						<Link to="/form" className={style.link}>
+							Vender Libro
+						</Link>
+					)}
+				</div>
+				{!isLoggedIn && (
+					<button className={style.botonInicio} onClick={toInicio}>
+						Inicia sesión
+					</button>
+				)}
+				{isLoggedIn && (
+					<div >
+						<button
+							onClick={handleUserButtonClick}
+							className={style.userButton}>
+							<FaUser size={32} />
+						</button>
+						{showVistaUser && <VistaUser onLogout={handleLogout} />}
+					</div>
+				)}
+			</div>
+		</div>
+	);
 };
 
 export default NavBar;
