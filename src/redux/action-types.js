@@ -13,6 +13,10 @@ export const REFRESH_CART = 'REFRESH_CART'
 export const PUBLICACIONES_ID = 'PUBLICACIONES_ID'
 export const REMOVE_TO_CART = 'REMOVE_TO_CART'
 export const GET_PURCHASES = "GET_PURCHASES"
-// user..
+export const GET_PUNTUATION = 'GET_PUNTUATION'
+export const GET_PUNTUATION_ID = 'GET_PUNTUATION_ID'
+export const GET_OPINION = 'GET_OPINION'
+export const GET_OPINION_ID = 'GET_OPINION_ID'
 
+// user..
 export const USERS_SIGN_UP_STEP_SET = "USERS_SIGN_UP_STEP_SET";
