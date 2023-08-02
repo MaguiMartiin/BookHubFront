@@ -13,11 +13,14 @@ import {
 	REFRESH_CART,
 	PUBLICACIONES_ID,
 	REMOVE_TO_CART,
+  GET_PURCHASES
+  
 } from "./action-types";
 
 import axios from 'axios';
 
 const token = localStorage.getItem("accessToken");
+
 
 export const createBook = (payload) =>{
   return async (dispatch) =>{
@@ -196,6 +199,27 @@ export const getBookByName = (name) =>{
 
   }
 }
+
+export const getAllPurchases = () =>{
+  return async (dispatch) =>{
+    try {
+      const config = {
+        headers: {
+          Authorization: ` Bearer ${token}`, 
+        },
+      };
+      const response = await axios.get(`/compras`, config);
+      return dispatch({ type: GET_PURCHASES, payload: response.data });
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  }
+}
+
+
+
 
 export const addToCart = (data) =>{
   if (data){

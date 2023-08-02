@@ -12,7 +12,8 @@ import {
 	DELETE_FROM_CART,
 	REFRESH_CART, 
 	PUBLICACIONES_ID,
-	REMOVE_TO_CART
+	REMOVE_TO_CART, 
+	GET_PURCHASES
 } from "./action-types";
 
 const initialState = {
@@ -24,6 +25,7 @@ const initialState = {
 	authors: [],
 	cart: [],
 	bookPublic: [],
+	myShopping: [],
 	// user
 	signUpStep: 1,
 };
@@ -107,6 +109,11 @@ const rootReducer = (state = initialState, action) => {
 				...state,
 				bookPublic: action.payload,
 			};
+		case GET_PURCHASES:
+			return {
+				...state,
+				myShopping: action.payload,
+			}
 
 		default:
 			return state;
