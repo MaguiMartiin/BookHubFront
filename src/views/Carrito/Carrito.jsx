@@ -1,7 +1,6 @@
-
-import style from './Carrito.module.css'
-import React from 'react';
-import { useEffect, useState } from 'react';
+import style from "./Carrito.module.css";
+import React from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteFromCart } from "../../redux/actions";
 import Swal from "sweetalert2";
@@ -50,57 +49,66 @@ const Carrito = () => {
 		setSelectedQuantities(initialQuantities);
 	}, [cart]);
 
-	const handleQuantityChange = (bookId, value) => {
-		setSelectedQuantities((prevQuantities) => ({
-			...prevQuantities,
-			[bookId]: Math.max(1, prevQuantities[bookId] + value),
-		}));
-	};
+
+  const handleQuantityChange = (bookId, value) => {
+    setSelectedQuantities((prevQuantities) => {
+      const newQuantity = Math.max(1, prevQuantities[bookId] + value);
+	  console.log(newQuantity);
+      return {
+        ...prevQuantities,
+        [bookId]: Math.min(newQuantity, cart.find((item) => item.id === bookId).available),
+      };
+    });
+  }
+  
+
 
 	const handleDeleteItem = (itemId) => {
+		console.log(itemId);
 		dispatch(deleteFromCart(itemId));
 		const updatedCart = cart.filter((item) => item.id !== itemId);
 		localStorage.setItem("cart", JSON.stringify(updatedCart));
 	};
-
+	console.log(cart);
 	const itemsMapped = cart.map((item) => ({
 		item_id: item.id,
 		title: item.name,
-		quantity: cart.length,
+		quantity: selectedQuantities[item.id],
 		totalAmount: totalPrice,
+		image: item.image,
 	}));
-const handleClick = () => {
-  const accessToken = localStorage.getItem("accessToken");
-	if (!accessToken) {
-		Swal.fire({
-			title: "Para comprar un libro debes iniciar sesión",
-			icon: "warning",
-		});
-	} else {
-		axios
-			.post(
-				"/payment",
-				{
-					products: itemsMapped,
-					totalPrice: totalPrice,
-					title: "Compra de libros",
-				},
-				{
-					headers: {
-						Authorization: `Bearer ${accessToken}`,
-					},
-				}
-			)
-			.then((response) => {
-				const { preference_id } = response.data;
-				localStorage.setItem("compra_id", preference_id);
-				return response.data;
-			})
-			.then((data) => {
-				window.location.href = data.url;
+	const handleClick = () => {
+		const accessToken = localStorage.getItem("accessToken");
+		if (!accessToken) {
+			Swal.fire({
+				title: "Para comprar un libro debes iniciar sesión",
+				icon: "warning",
 			});
-	}
-}
+		} else {
+			axios
+				.post(
+					"/payment",
+					{
+						products: itemsMapped,
+						totalPrice: totalPrice,
+						title: "Compra de libros",
+					},
+					{
+						headers: {
+							Authorization: `Bearer ${accessToken}`,
+						},
+					}
+				)
+				.then((response) => {
+					const { preference_id } = response.data;
+					localStorage.setItem("compra_id", preference_id);
+					return response.data;
+				})
+				.then((data) => {
+					window.location.href = data.url;
+				});
+		}
+	};
 
 	return (
 		<div className={style.cartContainer}>
