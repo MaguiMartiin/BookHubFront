@@ -17,6 +17,7 @@ import {
   GET_PUNTUATION_ID,
   GET_OPINION,
   GET_OPINION_ID,
+  GET_PURCHASES
 } from "./action-types";
 
 import axios from 'axios';
@@ -258,6 +259,27 @@ export const getBookByName = (name) =>{
 
   }
 }
+
+export const getAllPurchases = () =>{
+  return async (dispatch) =>{
+    try {
+      const config = {
+        headers: {
+          Authorization: ` Bearer ${token}`, 
+        },
+      };
+      const response = await axios.get(`/compras`, config);
+      return dispatch({ type: GET_PURCHASES, payload: response.data });
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  }
+}
+
+
+
 
 export const addToCart = (data) =>{
   if (data){
