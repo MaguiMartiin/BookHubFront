@@ -17,6 +17,7 @@ import MyBooks from './views/MyBooks/MyBooks'
 import Compras from './components/VistasUser/Compras'
 import Ventas from './components/VistasUser/Ventas'
 import Opiniones from './components/VistasUser/PuntOp'
+import DashboardAdmin from './views/DashboardAdmin/DashboardAdmin'
 import axios from 'axios';
 
 axios.defaults.baseURL = "https://servidor-libreria.onrender.com";
@@ -48,6 +49,7 @@ function App() {
 		<div className="">
 			{location.pathname !== "/" &&
 				location.pathname !== "/login" &&
+				location.pathname !== "/dashboard" &&
 				location.pathname !== "/signup" && <NavBar />}
 			<Routes>
 				<Route exact path="/" element={<Landing />} />
@@ -62,6 +64,7 @@ function App() {
 				<Route path="/compras" element={<Compras />} />
 				<Route path="/publicaciones" element={<Ventas />} />
 				<Route path="/opiniones" element={<Opiniones/>}/>
+				<Route path="/dashboard" element={ <DashboardAdmin/> }/>
 			</Routes>
 		</div>
 	);
