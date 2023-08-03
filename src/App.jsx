@@ -20,7 +20,7 @@ import Opiniones from './components/VistasUser/PuntOp'
 import DashboardAdmin from './views/DashboardAdmin/DashboardAdmin'
 import axios from 'axios';
 
-axios.defaults.baseURL = "https://servidor-libreria.onrender.com";
+axios.defaults.baseURL = "http://localhost:3001";
 
 
 function App() {
