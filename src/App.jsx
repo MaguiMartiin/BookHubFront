@@ -40,12 +40,17 @@ function App() {
 	useEffect(() => {
 		const urlSearchParams = new URLSearchParams(window.location.search);
 		const params = Object.fromEntries(urlSearchParams.entries());
-
+	  
 		if (params.token) {
-			localStorage.setItem("accessToken", params.token);
-			window.location.href = "/home";
+		  const objString = decodeURIComponent(params.token);
+		  const obj = JSON.parse(objString);
+		  // Guardar el token y el valor de admin en el localStorage
+		  localStorage.setItem("accessToken", obj.token);
+		  localStorage.setItem("isAdmin", obj.admin);
+	  
+		  window.location.href = "/home";
 		}
-	}, []);
+	  }, []);
 
 	return (
 		<div className="">
