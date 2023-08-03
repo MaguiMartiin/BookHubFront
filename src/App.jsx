@@ -15,9 +15,9 @@ import SignUp from './views/User/SignUp'
 import Carrito from './views/Carrito/Carrito'
 import MyBooks from './views/MyBooks/MyBooks'
 import Compras from './components/VistasUser/Compras'
-import Ventas from './components/VistasUser/Ventas'
 import Opiniones from './components/VistasUser/PuntOp'
 import axios from 'axios';
+import Perfil from './components/VistasUser/Perfil'
 
 axios.defaults.baseURL = "http://localhost:3001";
 
@@ -60,7 +60,7 @@ function App() {
 				<Route path="/MyBooks" element={<MyBooks />} />
 				<Route path="/carrito" element={<Carrito />} />
 				<Route path="/compras" element={<Compras />} />
-				<Route path="/publicaciones" element={<Ventas />} />
+				<Route path="/perfil" element={<Perfil />} />
 				<Route path="/opiniones" element={<Opiniones/>}/>
 			</Routes>
 		</div>
