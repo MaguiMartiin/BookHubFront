@@ -10,7 +10,7 @@ import {
 	USERS_SIGN_UP_STEP_SET,
 	ADD_TO_CART,
 	DELETE_FROM_CART,
-	REFRESH_CART, 
+	REFRESH_CART,
 	PUBLICACIONES_ID,
 	REMOVE_TO_CART,
 	GET_PUNTUATION,
@@ -129,7 +129,7 @@ const rootReducer = (state = initialState, action) => {
 				...state,
 				puntuations: action.payload,
 			}
-		case GET_PUNTUATION_ID: 
+		case GET_PUNTUATION_ID:
 			return {
 				...state,
 				puntuationId: action.payload,

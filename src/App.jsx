@@ -1,6 +1,6 @@
-import './App.css'
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import './App.css';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { refreshCart } from './redux/actions'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
@@ -19,7 +19,7 @@ import Opiniones from './components/VistasUser/PuntOp'
 import axios from 'axios';
 import Perfil from './components/VistasUser/Perfil'
 
-axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "https://servidor-libreria.onrender.com/";
 
 
 function App() {
@@ -48,6 +48,9 @@ function App() {
 		<div className="">
 			{location.pathname !== "/" &&
 				location.pathname !== "/login" &&
+				location.pathname !== "/dashboard" &&
+				location.pathname !== "/crudBooks/:id" &&
+				location.pathname !== "/editUsers" &&
 				location.pathname !== "/signup" && <NavBar />}
 			<Routes>
 				<Route exact path="/" element={<Landing />} />
@@ -62,6 +65,9 @@ function App() {
 				<Route path="/compras" element={<Compras />} />
 				<Route path="/perfil" element={<Perfil />} />
 				<Route path="/opiniones" element={<Opiniones/>}/>
+				<Route path="/dashboard" element={ <DashboardAdmin/> }/>
+				<Route path="/crudBooks/:id" element={ <CrudBooks/> }/>
+				<Route path="/editUsers" element={ <EditUsers/> }/>
 			</Routes>
 		</div>
 	);
