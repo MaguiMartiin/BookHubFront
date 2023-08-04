@@ -22,11 +22,8 @@ const SearchBar = ({ setPage }) => {
 
 	useEffect(() => {
         if (genreParam) {
-            // Apply the filter based on the genreParam
-			console.log(genreParam, 'asdasdasdasd');
             dispatch(filter({ gender: "gender", dataGender: genreParam }));
         } else {
-            // If there is no genreParam, fetch all books
             dispatch(getAllBooks());
         }
         setPage(1);
