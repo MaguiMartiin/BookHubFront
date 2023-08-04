@@ -135,23 +135,23 @@ const EditUsers = () => {
                 <td className={style.tableData}>{e.name} {e?.lastName}</td>
                 <td className={`${style.tableData} ${style.gender}`}>{e?.email}</td>
                 <td className={style.tableData}>
-                  <p className={style.price}>{e.isActive  ? '🟢' : '🔴'}</p>
+                  <p className={style.price}>{e.isActive  ? '🟢 Si': '🔴 No'}</p>
                 </td>
                 <td className={style.tableData}>
-                  <p className={style.price}>{e.admin  ? '🟢' : '🔴'}</p>
+                  <p className={style.price}>{e.admin  ? '🟢 Si' : '🔴 No'}</p>
                 </td>
                 <td className={`${style.tableData} ${style.actions}`}>
-                  <button className={style.editButton} onClick={()=>handleSuspender(e.id)} >
+                  <button className={e.isActive? style.editButton: style.botonIsAdmin} onClick={()=>handleSuspender(e.id)} >
                   Suspender
                   </button>
                 </td>
                 <td className={`${style.tableData}`}>
-                <button className={style.deleteButton} onClick={()=>handleUnSuspender(e.id)}>
+                <button className={e.isActive? style.botonIsAdmin: style.deleteButton} onClick={()=>handleUnSuspender(e.id)}>
                   Quitar suspensión
                   </button>
                   </td>
                 <td className={`${style.tableData}`}>
-                <button className={style.deleteButton} onClick={()=>handleAdmin(e.id)}>
+                <button className={e.admin? style.botonIsAdmin: style.deleteButton} onClick={()=>handleAdmin(e.id)}>
                 Administrador
                   </button>
                   </td>
