@@ -22,7 +22,6 @@ import axios from 'axios';
 import BackgroundAdmin from './components/DashBoard Components/BackgroundAdmin';
 import RecordSale from './components/DashBoard Components/RecordSale';
 import Perfil from './components/VistasUser/Perfil'
-import Nav from "./components/NavBar/Nav"
 import CrudBooks from "./components/DashBoard Components/CrudBooks"
 import EditUsers from "./components/DashBoard Components/EditUsers"
 import 'slick-carousel/slick/slick.css';
