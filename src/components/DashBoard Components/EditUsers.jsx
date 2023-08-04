@@ -84,7 +84,7 @@ const EditUsers = () => {
   };
 
   const startIndex = (currentPage - 1) * usersPerPage;
-  const visibleUsers = users.slice(startIndex, startIndex + usersPerPage);
+  const visibleUsers = users?.slice(startIndex, startIndex + usersPerPage);
 
   return (
     <div className={style.editUsersContainer}>
@@ -129,7 +129,7 @@ const EditUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {visibleUsers.map((e) => (
+            {visibleUsers?.map((e) => (
               
               <tr key={e.id} className={style.tableRow}>
                 <td className={style.tableData}>{e.name} {e?.lastName}</td>

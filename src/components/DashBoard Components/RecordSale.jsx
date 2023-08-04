@@ -35,7 +35,7 @@ useEffect(()=>{
     <div className={style.dashContain}>
     <div className={style.sidebar}>
         <Link to="/" className={style.titulo1}>BookHub</Link>
-        <Link to="/home">
+        <Link to="/dashboard">
         <button className={style.titulo2}>Volver</button>
           </Link>
         <button className={style.sidebutton} onClick={() => { navigate("/form") }}>

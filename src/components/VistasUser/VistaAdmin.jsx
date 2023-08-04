@@ -30,7 +30,7 @@ export default function VistaAdmin({ onLogout }) {
             <a href="/productos" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
               Productos
             </a>
-            <a href="MiPerfil" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+            <a href="perfil" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
               Mi perfil
             </a>
             <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={handleLogoutClick}>

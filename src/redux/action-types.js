@@ -19,6 +19,13 @@ export const GET_OPINION_ID = 'GET_OPINION_ID';
 export const GET_PURCHASES = "GET_PURCHASES";
 export const GET_USERS = "GET_USERS";
 
+// profile
+export const PERFIL = "PERFIL"
+export const PERFIL_MY_BOOKS = "PERFIL_MY_BOOKS"
+export const PERFIL_BUYS = "PERFIL_BUYS"
+export const PERFIL_EDITAR = "PERFIL_EDITAR"
+
+
 // user..
 
 export const USERS_SIGN_UP_STEP_SET = "USERS_SIGN_UP_STEP_SET";

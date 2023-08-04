@@ -23,8 +23,9 @@ import EditUsers from './components/DashBoard Components/EditUsers';
 import axios from 'axios';
 import BackgroundAdmin from './components/DashBoard Components/BackgroundAdmin';
 import RecordSale from './components/DashBoard Components/RecordSale';
+import Perfil from './components/VistasUser/Perfil'
 
-axios.defaults.baseURL =  "https://servidor-libreria.onrender.com/";
+axios.defaults.baseURL =  "http://localhost:3001"//"https://servidor-libreria.onrender.com/";
 
 
 function App() {
@@ -79,6 +80,7 @@ function App() {
         <Route path="/compras" element={<Compras />} />
         <Route path="/publicaciones" element={<Ventas />} />
         <Route path="/opiniones" element={<Opiniones />} />
+		<Route path="/perfil" element={<Perfil />} />
         {/* Agregar una ruta protegida para el componente DashboardAdmin */}
         {isAdmin ? (
           <Route path="/dashboard" element={<BackgroundAdmin />} />
