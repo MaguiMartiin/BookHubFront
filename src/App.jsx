@@ -59,7 +59,6 @@ function App() {
     <div className="">
       {location.pathname !== "/" &&
         location.pathname !== "/login" &&
-        location.pathname !== "/dashboard" &&
         location.pathname !== "/crudBooks/:id" &&
         location.pathname !== "/editUsers" &&
         location.pathname !== "/signup" && <Nav />}
