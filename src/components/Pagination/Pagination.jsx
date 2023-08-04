@@ -3,7 +3,6 @@ import style from './Pagination.module.css'
 
 const Pagination = ({max, page, setPage}) => {
 
-  //console.log(page, max, setPage);
 
     const handlePrevPage = () => {
         if(page < 2) return;
@@ -16,7 +15,7 @@ const Pagination = ({max, page, setPage}) => {
     console.log(page);
 
     return (
-			<div className="flex items-center justify-center my-4">
+			<div className="flex items-center justify-center my-4 mt-32">
 				<button
 					onClick={handlePrevPage}
 					disabled={page === 1}

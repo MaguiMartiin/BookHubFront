@@ -268,7 +268,7 @@ export const getAllPurchases = () => {
     try {
       const config = {
         headers: {
-          Authorization: ` Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       };
       const response = await axios.get(`/compras`, config);
