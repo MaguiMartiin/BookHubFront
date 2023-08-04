@@ -28,7 +28,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 
-axios.defaults.baseURL = "http://localhost:3001" //"https://servidor-libreria.onrender.com/";
+axios.defaults.baseURL = "https://servidor-libreria.onrender.com/";
 
 
 function App() {
