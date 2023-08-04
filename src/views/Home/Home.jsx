@@ -41,7 +41,7 @@ const Home = () => {
 
 		const getAllcompras = async () => {
 			const { send } = (await axios.get(`/compras/${compra_id}`)).data;
-			console.log(send);
+			//console.log(send);
 			if (send === true) {
 				localStorage.removeItem("compra_id");
 				localStorage.removeItem("cart");

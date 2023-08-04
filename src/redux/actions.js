@@ -52,17 +52,20 @@ export const getAllBooks = () => {
 };
 
 export const getPuntuation = () => {
-	return async (dispatch) => {
-		try {
-			const puntuation = (await axios.get("/punctuation")).data;
-			return dispatch({ type: GET_PUNTUATION, payload: puntuation });
-		} catch (error) {
-			return {
-				error: error.message,
-			};
-		}
-	};
-};
+  return async (dispatch) => {
+    try {
+      const puntuation = (await axios.get("/punctuation",  {headers: {
+        Authorization: `Bearer ${token}`,
+        }})).data
+        console.log(puntuation)
+      return dispatch ({type: GET_PUNTUATION, payload: puntuation})
+    } catch (error) {
+      return {
+        error: error.message,
+      }
+    }
+  }
+}
 
 export const getPuntuationId = (id) => {
 	return async (dispatch) => {
@@ -78,17 +81,20 @@ export const getPuntuationId = (id) => {
 };
 
 export const getOpinion = () => {
-	return async (dispatch) => {
-		try {
-			const opinion = (await axios.get("/comments")).data;
-			return dispatch({ type: GET_OPINION, payload: opinion });
-		} catch (error) {
-			return {
-				error: error.message,
-			};
-		}
-	};
-};
+  return async (dispatch) => {
+    try {
+      const opinion = (await axios.get("/comments",  {headers: {
+        Authorization: `Bearer ${token}`,
+        }})).data
+        console.log(opinion)
+      return dispatch({type: GET_OPINION, payload: opinion})
+    } catch (error) {
+      return {
+        error: error.message,
+      }
+    }
+  }
+}
 
 export const getOpinionId = (id) => {
 	return async (dispatch) => {
