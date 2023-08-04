@@ -96,10 +96,10 @@ const FormRegistro = () => {
 	  };
 
 	return (
-		<div className="w-screen min-h-[100vh] p-10">
+		<div className="w-full min-h-[100vh] pt-24  px-16 ">
 			<div>
-				<h2 className="font-black text-3xl text-center text-black/75">
-					Registro de libros
+				<h2 className="font-black text-[2.5rem] font-secondary  text-center text-rojo">
+					Registra tus libros
 				</h2>
 				<Formik
 					validationSchema={validationSchema}
@@ -115,9 +115,9 @@ const FormRegistro = () => {
 					}}
 					onSubmit={handleSubmit}>
 					{({ errors, setFieldValue, isSubmitting, values }) => (
-						<div className="flex flex-col lg:grid lg:grid-cols-2  h-fit">
-							<div className="flex flex-col place-content-center  mr-4 h-full">
-								<Form className="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
+						<div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-x-4 lg:gap-y-8 mt-10">
+							<div className="flex flex-col place-content-center  h-full">
+								<Form className="bg-white shadow-md rounded-lg py-10 p-4  mb-10">
 									<div className="mb-5">
 										<label
 											htmlFor="name"
@@ -360,9 +360,9 @@ const FormRegistro = () => {
 							</div>
 							{/* ----------------------------------------------------------- */}
 							{/* className="bg-white shadow-md rounded-lg py-10 px-5 mb-10" */}
-							<div className="flex flex-col ml-4  justify-center items-center bg-white shadow-md rounded-lg py-10 px-5 mb-10">
+							<div className="flex flex-col justify-center items-center bg-white shadow-md rounded-lg py-10  mb-10">
 								{/* <div> */}
-								<div className="my-4 flex w-[200px]  items-center relative">
+								<div className=" flex w-[200px]  items-center relative">
 									<div className="absolute left-0 w-[200px]  right-0 top-1/2 h-0.5 bg-pink-300"></div>
 									<p className="mx-4 mb-0 text-center w-[200px] text-2xl  font-semibold relative z-10">
 										(Preview)

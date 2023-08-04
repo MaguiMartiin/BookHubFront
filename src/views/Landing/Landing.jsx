@@ -6,6 +6,7 @@ import img2 from './Landing2.png'
 import testimonio from './Testimonio.png'
 import reseña from './Reseña.png'
 import Carousel from './Carrusel'
+import axios from 'axios'
 
 const Landing = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -35,7 +36,7 @@ const Landing = () => {
       }, []);
 
 
-      const redirectToHomeWithGenre = (genre) => {
+    const redirectToHomeWithGenre = (genre) => {
         const url = `/home?genre=${encodeURIComponent(genre)}`;
         window.location.href = url; 
     };
@@ -72,7 +73,7 @@ const Landing = () => {
                 <div className="space-x-4">
                     {genders.map((cat, index) => {
                         return (
-                            <button onClick={() => redirectToHomeWithGenre(cat)} key={index} class=" mt-4 bg-celsete text-white text-4xl px-6 py-4 rounded-lg font-tertiary mb-2 ">{cat}</button>
+                            <button onClick={() => redirectToHomeWithGenre(cat)} key={index} class=" mt-4 bg-violeta text-white text-4xl px-6 py-4 rounded-lg font-tertiary mb-2 ">{cat}</button>
                         )
                     })}
                 </div>

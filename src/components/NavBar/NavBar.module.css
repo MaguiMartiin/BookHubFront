@@ -15,7 +15,7 @@
 }
 
 .link{
-    color: rgba(255, 216, 212, 1);
+    color: white;
     font-size: 2rem;
     margin-right: 5rem;
     transition: color 0.2s; 
@@ -71,4 +71,13 @@
     cursor: pointer;
     color: white; 
     margin-right: 10rem;
+}
+
+.navbar-default {
+  background-color: transparent;
+}
+
+/* For the scrolled state (with color) */
+.navbar-scrolled {
+  background-color: #4a5568; /* Replace this with the desired color */
 }

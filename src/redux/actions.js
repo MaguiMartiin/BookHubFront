@@ -18,7 +18,8 @@ import {
   GET_OPINION,
   GET_OPINION_ID,
   GET_PURCHASES,
-  GET_USERS
+  GET_USERS, 
+  TOP_BOOKS
 } from "./action-types";
 
 import axios from 'axios';
@@ -55,8 +56,11 @@ export const getAllBooks = () => {
 export const getPuntuation = () => {
   return async (dispatch) => {
     try {
-      const puntuation = (await axios.get("/punctuation")).data
-      return dispatch({ type: GET_PUNTUATION, payload: puntuation })
+      const puntuation = (await axios.get("/punctuation",  {headers: {
+        Authorization: `Bearer ${token}`,
+        }})).data
+        console.log(puntuation)
+      return dispatch ({type: GET_PUNTUATION, payload: puntuation})
     } catch (error) {
       return {
         error: error.message,
@@ -81,8 +85,11 @@ export const getPuntuationId = (id) => {
 export const getOpinion = () => {
   return async (dispatch) => {
     try {
-      const opinion = (await axios.get("/comments")).data
-      return dispatch({ type: GET_OPINION, payload: opinion })
+      const opinion = (await axios.get("/comments",  {headers: {
+        Authorization: `Bearer ${token}`,
+        }})).data
+        console.log(opinion)
+      return dispatch({type: GET_OPINION, payload: opinion})
     } catch (error) {
       return {
         error: error.message,
@@ -314,3 +321,90 @@ export const getAllUsers = () => {
     }
   };
 }
+
+export const searchUsers = (email) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/user?email=${email}`);
+      console.log("email", response);
+      return dispatch({ type: GET_USERS, payload: response.data });
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  };
+}
+
+export const suspenderUsers =  (id) => {
+  return async (dispatch) => {
+    try {
+      if(id){
+        console.log(">--<",id);
+        const response = await axios.put(`/user/${id}/suspend`);
+        console.log("suspender", response.data);
+      }
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  };
+}
+
+export const quitarSuspenderUsers =  (id) => {
+  return async (dispatch) => {
+    try {
+      if(id){
+       const response = await axios.put(`/user/${id}/unsuspend`);
+      console.log("unsuspender", response.data); 
+      }
+    
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  };
+}
+
+export const eliminarUsers =  (id) => {
+  return async (dispatch) => {
+    try {
+      if(id){
+       const response = await axios.delete(`/user/${id}`);
+      }
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  };
+}
+
+export const adminUsers =  (id) => {
+  return async (dispatch) => {
+    try {
+      if(id){
+       const response = await axios.put(`/user/${id}`);
+      }
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  };
+}
+
+export const topBooks = () => {
+  return async (dispatch) => {
+    try {
+      const books = (await axios.get("/punctuation/top")).data
+      return dispatch({type: TOP_BOOKS, payload: books})
+    } catch (error) {
+      return {
+        error: error.message,
+      }
+    }
+  }
+} 

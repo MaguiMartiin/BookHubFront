@@ -1,0 +1,95 @@
+/* BackgroundAdmin.module.css */
+.dashContain {
+    width: 100%;
+    display: flex;
+  }
+  
+  .sidebar {
+    height: 100vh;
+    min-width: 180px;
+    background: rgb(147, 159, 159);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  .sidebutton {
+    padding: 10px;
+    background-color: #505050;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 17px;
+    margin-bottom: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sidebutton:hover {
+    background-color: #176b87;
+  }
+  
+  .sidebutton:active {
+    background-color: #0e3542;
+  }
+  
+  .contenido {
+    flex: 1;
+    display: flex; /* Agregar display flex */
+    flex-direction: column; /* Asegurarse de que el contenido esté en columna */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+  }
+  
+  header {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+  }
+  
+  header .titulo {
+    font-size: 25px;
+    color: #ffffff;
+    margin-left: 30px;
+  }
+  
+ .titulo1 {
+    color: rgb(0, 0, 0);
+    font-size: 35px;
+    font-family: 'Baloo', sans-serif;
+    display: flex;
+    align-items: center;
+    margin-left: 18px;
+  }
+
+  .titulo2 {
+    color: rgb(0, 0, 0);
+    font-size: 15px;
+    font-family: 'Baloo', sans-serif;
+    display: flex;
+    align-items: center;
+    margin-left: 18px;
+  }
+  
+  .hiden {
+    display: none;
+  }
+  
+  /* Media queries para ajustar estilos en diferentes tamaños de pantalla */
+  @media screen and (max-width: 768px) {
+    .dashContain {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+      min-width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+  
+    .contenido {
+      width: 100%;
+    }
+  }
+  

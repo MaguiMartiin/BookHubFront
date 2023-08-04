@@ -11,11 +11,22 @@ const Opiniones = () => {
     }, [dispatch])
     const misPuntuaciones = useSelector(state => state.puntuations)
     const misOpiniones = useSelector(state => state.opinion)
-    console.log();
+    console.log(misPuntuaciones);
+    console.log(misOpiniones);
 
     return (
         <div>
-            <h1>Opiniones</h1>
+            <div>
+                <h1>Opiniones</h1>
+            </div>
+
+            <div>   
+                {misPuntuaciones.length > 0 ? misPuntuaciones.map((e) => {
+                    return(
+                        <h1>{e.comment}</h1>
+                    )
+                }) : null}
+            </div>
         </div>
     )
 }

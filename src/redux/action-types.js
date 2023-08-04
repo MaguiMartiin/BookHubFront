@@ -18,6 +18,7 @@ export const GET_OPINION = 'GET_OPINION';
 export const GET_OPINION_ID = 'GET_OPINION_ID';
 export const GET_PURCHASES = "GET_PURCHASES";
 export const GET_USERS = "GET_USERS";
+export const TOP_BOOKS = 'TOP_BOOKS'
 
 // user..
 
