@@ -20,7 +20,7 @@ const EditUsers = () => {
 
   useEffect(() => {
     dispatch(getAllUsers());
-  }, [dispatch, suspender, unSuspender, delet]);
+  }, [dispatch, suspender, unSuspender, delet, admins]);
 
 //busca por email
   const handleSearch = (e) => {
@@ -59,7 +59,7 @@ const EditUsers = () => {
     dispatch(adminUsers(admins))
     setAdmin("")
     dispatch(getAllUsers());
-}, [suspender, unSuspender, delet]);
+}, [suspender, unSuspender, delet, admins]);
 
   useEffect(() => {
     dispatch(searchUsers(email));
