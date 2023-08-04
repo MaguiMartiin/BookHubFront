@@ -19,16 +19,16 @@ import Ventas from './components/VistasUser/Ventas'
 import Opiniones from './components/VistasUser/PuntOp'
 import Nav from './components/NavBar/Nav'
 import axios from 'axios';
-import BackgroundAdmin from './components/DashBoard Components/BackgroundAdmin';
-import RecordSale from './components/DashBoard Components/RecordSale';
+import BackgroundAdmin from './views/DashboardAdmin/BackgroundAdmin';
+import RecordSale from './components/RecordSaleAdmin/RecordSale';
 import Perfil from './components/VistasUser/Perfil'
 import CrudBooks from "./components/DashBoard Components/CrudBooks"
-import EditUsers from "./components/DashBoard Components/EditUsers"
+import EditUsers from "./components/EditUsers/EditUsers"
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 
-axios.defaults.baseURL =  "https://servidor-libreria.onrender.com/";
+axios.defaults.baseURL = "http://localhost:3001" //"https://servidor-libreria.onrender.com/";
 
 
 function App() {

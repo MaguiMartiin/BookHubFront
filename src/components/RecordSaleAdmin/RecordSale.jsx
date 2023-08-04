@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import style from './Record.module.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import axios from "axios";
 
 export default function RecordSale() {
@@ -50,14 +50,14 @@ useEffect(()=>{
       </div>
       <div className={style.contenido}>
         {/* Contenido principal */}
-        <BarChart width={1100} height={500} data={data}>
-      <CartesianGrid strokeDasharray="4 4" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="ventas" fill="#8884d8" />
-    </BarChart>
+        <LineChart width={1200} height={600} data={data}>
+                    <CartesianGrid strokeDasharray="6 6" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="ventas" stroke="#14a832" activeDot={{ r: 10 }} />
+                </LineChart>
       </div>
    
     </div>
