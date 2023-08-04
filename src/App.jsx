@@ -23,7 +23,7 @@ import EditUsers from './components/DashBoard Components/EditUsers';
 import axios from 'axios';
 import BackgroundAdmin from './components/DashBoard Components/BackgroundAdmin';
 
-axios.defaults.baseURL = "http://localhost:3001" //"https://servidor-libreria.onrender.com/";
+axios.defaults.baseURL = "https://servidor-libreria.onrender.com/";
 
 
 function App() {
