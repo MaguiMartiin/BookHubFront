@@ -320,3 +320,77 @@ export const getAllUsers = () => {
     }
   };
 }
+
+export const searchUsers = (email) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/user?email=${email}`);
+      console.log("email", response);
+      return dispatch({ type: GET_USERS, payload: response.data });
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  };
+}
+
+export const suspenderUsers =  (id) => {
+  return async (dispatch) => {
+    try {
+      if(id){
+        console.log(">--<",id);
+        const response = await axios.put(`/user/${id}/suspend`);
+        console.log("suspender", response.data);
+      }
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  };
+}
+
+export const quitarSuspenderUsers =  (id) => {
+  return async (dispatch) => {
+    try {
+      if(id){
+       const response = await axios.put(`/user/${id}/unsuspend`);
+      console.log("unsuspender", response.data); 
+      }
+    
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  };
+}
+
+export const eliminarUsers =  (id) => {
+  return async (dispatch) => {
+    try {
+      if(id){
+       const response = await axios.delete(`/user/${id}`);
+      }
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  };
+}
+
+export const adminUsers =  (id) => {
+  return async (dispatch) => {
+    try {
+      if(id){
+       const response = await axios.put(`/user/${id}`);
+      }
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  };
+}

@@ -17,12 +17,13 @@ import MyBooks from './views/MyBooks/MyBooks';
 import Compras from './components/VistasUser/Compras';
 import Ventas from './components/VistasUser/Ventas';
 import Opiniones from './components/VistasUser/PuntOp';
-import DashboardAdmin from './views/DashboardAdmin/DashboardAdmin';
+//import DashboardAdmin from './views/DashboardAdmin/DashboardAdmin';
 import CrudBooks from './components/DashBoard Components/CrudBooks';
 import EditUsers from './components/DashBoard Components/EditUsers';
 import axios from 'axios';
+import BackgroundAdmin from './components/DashBoard Components/BackgroundAdmin';
 
-axios.defaults.baseURL = "https://servidor-libreria.onrender.com/"; //"http://localhost:3001"
+axios.defaults.baseURL = "http://localhost:3001" //"https://servidor-libreria.onrender.com/";
 
 
 function App() {
@@ -58,7 +59,8 @@ function App() {
   return (
     <div className="">
       {location.pathname !== "/" &&
-        location.pathname !== "/login" &&
+        location.pathname !== "/login"&&
+        location.pathname !== "/dashboard" &&
         location.pathname !== "/crudBooks/:id" &&
         location.pathname !== "/editUsers" &&
         location.pathname !== "/signup" && <Nav />}
@@ -77,7 +79,7 @@ function App() {
         <Route path="/opiniones" element={<Opiniones />} />
         {/* Agregar una ruta protegida para el componente DashboardAdmin */}
         {isAdmin ? (
-          <Route path="/dashboard" element={<DashboardAdmin />} />
+          <Route path="/dashboard" element={<BackgroundAdmin />} />
         ) : (
           <Route path="/dashboard" element={<Navigate to="/home" replace />} />
         )}
