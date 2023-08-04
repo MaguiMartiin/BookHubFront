@@ -61,11 +61,6 @@ const NavBar = () => {
 							<FaCartArrowDown />
 						)}
 					</Link>
-					{isLoggedIn && (
-						<Link to="/form" className={style.link}>
-							Vender Libro
-						</Link>
-					)}
 				</div>
 				{!isLoggedIn && (
 					<button className={style.botonInicio} onClick={toInicio}>

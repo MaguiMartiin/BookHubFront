@@ -15,7 +15,7 @@
 }
 
 .link{
-    color: rgba(255, 216, 212, 1);
+    color: white;
     font-size: 2rem;
     margin-right: 5rem;
     transition: color 0.2s; 
