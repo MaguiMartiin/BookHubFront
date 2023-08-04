@@ -22,8 +22,9 @@ import CrudBooks from './components/DashBoard Components/CrudBooks';
 import EditUsers from './components/DashBoard Components/EditUsers';
 import axios from 'axios';
 import BackgroundAdmin from './components/DashBoard Components/BackgroundAdmin';
+import RecordSale from './components/DashBoard Components/RecordSale';
 
-axios.defaults.baseURL = "https://servidor-libreria.onrender.com/";
+axios.defaults.baseURL =  "https://servidor-libreria.onrender.com/";
 
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
       {location.pathname !== "/" &&
         location.pathname !== "/login"&&
         location.pathname !== "/dashboard" &&
+        location.pathname !== "/recordSale" &&
         location.pathname !== "/crudBooks/:id" &&
         location.pathname !== "/editUsers" &&
         location.pathname !== "/signup" && <Nav />}
@@ -85,7 +87,16 @@ function App() {
         )}
         {/* Resto de tus rutas */}
         <Route path="/crudBooks/:id" element={<CrudBooks />} />
-        <Route path="/editUsers" element={<EditUsers />} />
+		{isAdmin ? (
+           <Route path="/editUsers" element={<EditUsers />} /> 
+        ) : (
+          <Route path="/editUsers" element={<Navigate to="/home" replace />} />
+        )}
+		{isAdmin ? (
+           <Route path="/recordSale" element={<RecordSale />} />
+        ) : (
+          <Route path="/recordSale" element={<Navigate to="/home" replace />} />
+        )}
       </Routes>
     </div>
   );

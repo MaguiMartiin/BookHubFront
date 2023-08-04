@@ -8,15 +8,18 @@ export default function BackgroundAdmin() {
   return (
     <div className={styles.dashContain}>
     <div className={styles.sidebar}>
-    <Link to="/" className={styles.titulo1}>BookHub</Link>
-    <Link to="/home">
-            <button className={styles.titulo2}>Volver</button>
+        <Link to="/" className={styles.titulo1}>BookHub</Link>
+        <Link to="/home">
+        <button className={styles.titulo2}>Volver</button>
           </Link>
         <button className={styles.sidebutton} onClick={() => { navigate("/form") }}>
             Realizar una publicación
         </button>
         <button className={styles.sidebutton} onClick={() => { navigate("/editUsers") }}>
             Editar Usuarios
+        </button>
+        <button className={styles.sidebutton} onClick={() => { navigate("/recordSale") }}>
+            Registro de Ventas
         </button>
       </div>
       <div className={styles.contenido}>
