@@ -9,10 +9,29 @@ import {
 	getGenders,
 } from "../../redux/actions";
 
+import { useLocation } from "react-router-dom";
+
 import {BiReset} from "react-icons/bi";
 
 const SearchBar = ({ setPage }) => {
 	const dispatch = useDispatch();
+
+	const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const genreParam = queryParams.get("genre");
+
+	useEffect(() => {
+        if (genreParam) {
+            dispatch(filter({ gender: "gender", dataGender: genreParam }));
+        } else {
+            dispatch(getAllBooks());
+        }
+        setPage(1);
+    }, [dispatch, genreParam]);
+
+
+
+
 	const [filtro, setFiltro] = useState({
 		gender: "",
 		dataGender: "",
@@ -145,6 +164,8 @@ const SearchBar = ({ setPage }) => {
 		});
 		setPage(1);
 	};
+
+
 
 	return (
 		<div className="flex justify-between mx-4 gap-10 ">

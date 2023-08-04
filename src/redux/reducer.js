@@ -10,14 +10,15 @@ import {
 	USERS_SIGN_UP_STEP_SET,
 	ADD_TO_CART,
 	DELETE_FROM_CART,
-	REFRESH_CART, 
+	REFRESH_CART,
 	PUBLICACIONES_ID,
 	REMOVE_TO_CART,
 	GET_PUNTUATION,
 	GET_PUNTUATION_ID,
 	GET_OPINION,
 	GET_OPINION_ID,
-	GET_PURCHASES
+	GET_PURCHASES,
+	GET_USERS
 } from "./action-types";
 
 const initialState = {
@@ -34,6 +35,7 @@ const initialState = {
 	opinion: [],
 	opinionId: [],
 	myShopping: [],
+	allUsers: [],
 	// user
 	signUpStep: 1,
 };
@@ -122,7 +124,7 @@ const rootReducer = (state = initialState, action) => {
 				...state,
 				puntuations: action.payload,
 			}
-		case GET_PUNTUATION_ID: 
+		case GET_PUNTUATION_ID:
 			return {
 				...state,
 				puntuationId: action.payload,
@@ -141,6 +143,11 @@ const rootReducer = (state = initialState, action) => {
 			return {
 				...state,
 				myShopping: action.payload,
+			}
+		case GET_USERS:
+			return {
+				...state,
+				allUsers: action.payload,
 			}
 
 		default:

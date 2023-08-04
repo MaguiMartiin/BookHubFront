@@ -50,9 +50,9 @@ const Detail = () => {
         }
 
     return (
-        <div  className="max-w-screen min-h-[100vh] bg-negro ">
+        <div  className="max-w-screen min-h-[100vh] bg-negro pt-24">
             <div className="flex">
-                <div className="flex items-center justify-between ">
+                <div className="flex items-center justify-between">
                     <img src={bookDetail.image} alt={bookDetail.name} class="w-full p-10"/>
                 </div>
                 <div className="flex flex-col justify-center mt-10 w-full items-center">
@@ -63,12 +63,12 @@ const Detail = () => {
                     <h2 class="text-4xl text-white font-primary">Genero: {bookDetail.Gender?.name}</h2>
                     <div className="grid grid-cols-2 gap-6 mt-6">  
                         <div>
-                            <button>Descripción</button>
-                            <h3>{bookDetail.description}</h3>
+                            <button className="bg-gris p-5 font-primary text-white text-xl">Descripción</button>
+                            <h3 class="text-white font-secondary mt-4 text-xl">{bookDetail.description}</h3>
                         </div>
                         <div>
-                            <button>Detalle del producto</button>
-                            <ul>
+                            <button className="bg-gris p-5 font-primary text-white text-xl">Detalle del producto</button>
+                            <ul class="text-white font-secondary mt-4 text-xl">
                                 <li>Tapa blanda: 672 páginas</li>
                                 <li>Idioma: Español</li>
                                 <li>Dimensiones: 15.1 x 4.1 x 23 cm</li>
@@ -78,26 +78,28 @@ const Detail = () => {
                         </div>
                     </div>
                     <div>
-                        <h4>Precio {bookDetail.price}</h4>
-                        <button onClick={addCart}>Agregar al carrito</button>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-6">
-                        <h1>Opiniones del producto</h1>
-                        <div>
-                            <h1>{puntuationId}</h1>
-                        </div>
-                        <div>
-                            {opinionId?.map((e) => {
-                                return(
-                                    <h1>{e.comment}</h1>
-                                    )
-                                })}
-                            <h1>{opinionId.name}</h1>
-                        </div>
+                        <h4 className="flex-none bg-rojo p-3 text-white text-2xl mt-6 rounded-lg font-primary">Precio ${bookDetail.price}</h4>
+                        <button onClick={addCart} className="flex-none bg-rojo p-5 text-white text-2xl mt-6 rounded-lg font-primary">Agregar al carrito</button>
                     </div>
                 </div>
             </div>
+            <div className="flex bg-blanco mt-10">
+                    <div className="flex justify-between p-10">
+                        <h1 class="font-primary text-negro text-9xl ml-20">{puntuationId}</h1>
+                    </div>    
+                    <div className="flex flex-col justify-center mt-8 w-full items-center space-y-6">
+                        <h1 class="font-primary text-negro text-4xl ">Opiniones del producto</h1>
+                        {opinionId?.map((e) => {
+                            return(
+                                <div className="pb-5 border-b border-negro ">
+                                    <h1>{e.comment}</h1>
+                                </div>
+                                )
+                        })}
+                    </div>
+            </div>
+                
+            
         </div>
     )
 

@@ -8,9 +8,24 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllBooks, addToCart, refreshCart } from "../../redux/actions";
 import axios from "axios";
 import Image from "./Image";
+import { useLocation } from "react-router-dom";
+import { filter } from "../../redux/actions";
 
 const Home = () => {
 	const dispatch = useDispatch();
+
+	const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const genreParam = queryParams.get("genre");
+
+	useEffect(() => {
+        if (genreParam) {
+            dispatch(filter({ gender: "gender", dataGender: genreParam }));
+        } else {
+            dispatch(getAllBooks());
+        }
+        setPage(1);
+    }, [dispatch, genreParam]);
 
 	const copyState = useSelector((state) => state.copyState);
 
@@ -26,7 +41,7 @@ const Home = () => {
 
 		const getAllcompras = async () => {
 			const { send } = (await axios.get(`/compras/${compra_id}`)).data;
-			console.log(send);
+			//console.log(send);
 			if (send === true) {
 				localStorage.removeItem("compra_id");
 				localStorage.removeItem("cart");

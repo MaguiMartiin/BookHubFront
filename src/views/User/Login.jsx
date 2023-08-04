@@ -39,8 +39,9 @@ const Login = () => {
 								password: values.password,
 							});
  
-							const { accesoWJT: token } = response.data;
+							const { accesoWJT: token, admin } = response.data;
 							localStorage.setItem("accessToken", token);
+							localStorage.setItem("isAdmin", admin);
 							navigate("/home");
 							console.log(response.data);
 
