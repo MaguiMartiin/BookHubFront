@@ -19,9 +19,6 @@ import {
 	GET_OPINION_ID,
 	GET_PURCHASES,
 	PERFIL,
-	PERFIL_MY_BOOKS,
-	PERFIL_BUYS,
-	PERFIL_EDITAR
 } from "./action-types";
 
 const initialState = {
@@ -153,18 +150,7 @@ const rootReducer = (state = initialState, action) => {
 			return {
 				...state,
 				perfil: action.payload,
-			}
-		case PERFIL_MY_BOOKS:
-			return {
-				...state,
-				perfilMyBooks: action.payload,
-			}
-		case PERFIL_BUYS:
-			return {
-				...state,
-				perfilBuys: action.payload,
-			}
-
+			}		
 		default:
 			return state;
 	}

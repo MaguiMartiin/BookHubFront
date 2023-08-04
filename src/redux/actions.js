@@ -19,9 +19,6 @@ import {
 	GET_OPINION_ID,
 	GET_PURCHASES,
 	PERFIL,
-	PERFIL_MY_BOOKS,
-	PERFIL_BUYS,
-	PERFIL_EDITAR,
 } from "./action-types";
 
 import axios from "axios";
@@ -322,57 +319,6 @@ export const getPerfil = () => {
 	};
 };
 
-export const getPerfilMyBooks =  () => {
-	return async (dispatch) => {
-		try {
-			const config = {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			};
-			const response = await axios.get(`/perfil/myBooks`, config);
-			return dispatch({ type: PERFIL_MY_BOOKS, payload: response.data });
-		} catch (error) {
-			return {
-				error: error.message,
-			};
-		}
-	};
-};
 
-export const getPerfilMyBuys =  () => {
-	return async (dispatch) => {
-		try {
-			const config = {
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			};
-			const response = await axios.get(`/perfil/buys`, config);
-			console.log(response.data);
-			return dispatch({ type: PERFIL_BUYS, payload: response.data });
-		} catch (error) {
-			return {
-				error: error.message,
-			};
-		}
-	};
-};
 
-// export const perfilMyEditar = async(
-//   datos
-// ) =>{
-//   try {
-//     const config = {
-//       headers: {
-//         Authorization: ` Bearer ${token}`,
-//       },
-//     }
-//     const response = await axios.put(`/perfil/editar`, datos, config);
-//     return dispatch({ type: PERFIL_MY_BOOKS, payload: response.data });
-//   } catch (error) {
-//     return {
-//       error: error.message,
-//     }
-//   }
-// }
+

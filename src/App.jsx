@@ -65,9 +65,9 @@ function App() {
 				<Route path="/compras" element={<Compras />} />
 				<Route path="/perfil" element={<Perfil />} />
 				<Route path="/opiniones" element={<Opiniones/>}/>
-				<Route path="/dashboard" element={ <DashboardAdmin/> }/>
-				<Route path="/crudBooks/:id" element={ <CrudBooks/> }/>
-				<Route path="/editUsers" element={ <EditUsers/> }/>
+				{/* <Route path="/dashboard" element={ <DashboardAdmin/> }/> */}
+				{/* <Route path="/crudBooks/:id" element={ <CrudBooks/> }/> */}
+				{/* <Route path="/editUsers" element={ <EditUsers/> }/> */}
 			</Routes>
 		</div>
 	);
