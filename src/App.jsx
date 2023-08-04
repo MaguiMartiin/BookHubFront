@@ -1,25 +1,28 @@
-import './App.css'
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import './App.css';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { refreshCart } from './redux/actions'
-import { Route, Routes, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
-import Landing from './views/Landing/Landing'
-import Home from './views/Home/Home'
-import NavBar from './components/NavBar/NavBar'
-import Detail from './views/Detail/Detail'
-import Form from "./views/Form/FormCreate"
-import Login from './views/User/Login'
-import EditDetail from './views/Detail/EditDetail'
-import SignUp from './views/User/SignUp'
-import Carrito from './views/Carrito/Carrito'
-import MyBooks from './views/MyBooks/MyBooks'
-import Compras from './components/VistasUser/Compras'
-import Ventas from './components/VistasUser/Ventas'
-import Opiniones from './components/VistasUser/PuntOp'
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import Landing from './views/Landing/Landing';
+import Home from './views/Home/Home';
+import NavBar from './components/NavBar/NavBar';
+import Detail from './views/Detail/Detail';
+import Form from "./views/Form/FormCreate";
+import Login from './views/User/Login';
+import EditDetail from './views/Detail/EditDetail';
+import SignUp from './views/User/SignUp';
+import Carrito from './views/Carrito/Carrito';
+import MyBooks from './views/MyBooks/MyBooks';
+import Compras from './components/VistasUser/Compras';
+import Ventas from './components/VistasUser/Ventas';
+import Opiniones from './components/VistasUser/PuntOp';
+import DashboardAdmin from './views/DashboardAdmin/DashboardAdmin';
+import CrudBooks from './components/DashBoard Components/CrudBooks';
+import EditUsers from './components/DashBoard Components/EditUsers';
 import axios from 'axios';
 
-axios.defaults.baseURL = "https://servidor-libreria.onrender.com";
+axios.defaults.baseURL = "https://servidor-libreria.onrender.com/";
 
 
 function App() {
@@ -48,6 +51,9 @@ function App() {
 		<div className="">
 			{location.pathname !== "/" &&
 				location.pathname !== "/login" &&
+				location.pathname !== "/dashboard" &&
+				location.pathname !== "/crudBooks/:id" &&
+				location.pathname !== "/editUsers" &&
 				location.pathname !== "/signup" && <NavBar />}
 			<Routes>
 				<Route exact path="/" element={<Landing />} />
@@ -62,6 +68,9 @@ function App() {
 				<Route path="/compras" element={<Compras />} />
 				<Route path="/publicaciones" element={<Ventas />} />
 				<Route path="/opiniones" element={<Opiniones/>}/>
+				<Route path="/dashboard" element={ <DashboardAdmin/> }/>
+				<Route path="/crudBooks/:id" element={ <CrudBooks/> }/>
+				<Route path="/editUsers" element={ <EditUsers/> }/>
 			</Routes>
 		</div>
 	);
