@@ -38,15 +38,7 @@ export default {
 				customColor3: "#793474",
 				customColor4: "#44295f",
 			},
-			animation: {
-				"slide-left": "slide-left 5s linear infinite",
-			},
-			keyframes: {
-				"slide-left": {
-					"0%": { transform: "translateX(0)" },
-					"100%": { transform: "translateX(calc(-100% + 100px))" }, // Adjust the distance as needed
-				},
-			},
+		
 		},
 	},
 	plugins: [],

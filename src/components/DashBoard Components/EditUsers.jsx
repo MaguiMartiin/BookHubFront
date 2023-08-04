@@ -20,7 +20,7 @@ const EditUsers = () => {
 
   useEffect(() => {
     dispatch(getAllUsers());
-  }, [dispatch, suspender, unSuspender, delet]);
+  }, [dispatch, suspender, unSuspender, delet, admins]);
 
 //busca por email
   const handleSearch = (e) => {
@@ -59,7 +59,7 @@ const EditUsers = () => {
     dispatch(adminUsers(admins))
     setAdmin("")
     dispatch(getAllUsers());
-}, [suspender, unSuspender, delet]);
+}, [suspender, unSuspender, delet, admins]);
 
   useEffect(() => {
     dispatch(searchUsers(email));
@@ -84,7 +84,7 @@ const EditUsers = () => {
   };
 
   const startIndex = (currentPage - 1) * usersPerPage;
-  const visibleUsers = users.slice(startIndex, startIndex + usersPerPage);
+  const visibleUsers = users?.slice(startIndex, startIndex + usersPerPage);
 
   return (
     <div className={style.editUsersContainer}>
@@ -101,6 +101,9 @@ const EditUsers = () => {
         </button>
         <button className={location.pathname !== "/" ? style.boton : style.sidebutton}>
           Editar Usuarios
+        </button>
+        <button className={style.sidebutton} onClick={() => { navigate("/recordSale") }}>
+            Registro de Ventas
         </button>
       </div>
       <div className={style.tableContainer}>
@@ -126,7 +129,7 @@ const EditUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {visibleUsers.map((e) => (
+            {visibleUsers?.map((e) => (
               
               <tr key={e.id} className={style.tableRow}>
                 <td className={style.tableData}>{e.name} {e?.lastName}</td>
