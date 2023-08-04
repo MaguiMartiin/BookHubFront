@@ -71,7 +71,7 @@ const NavBar = () => {
 					<div >
 						<button
 							onClick={handleUserButtonClick}
-							className={style.userButton}>
+							className="">
 							<FaUser size={32} />
 						</button>
 						{showVistaUser && <VistaUser onLogout={handleLogout} />}
