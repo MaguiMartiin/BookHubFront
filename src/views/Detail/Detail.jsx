@@ -91,7 +91,7 @@ const Detail = () => {
                         <h1 class="font-primary text-negro text-4xl ">Opiniones del producto</h1>
                         {opinionId?.map((e) => {
                             return(
-                                <div className="pb-5 border-b border-negro ">
+                                <div className="pb-5 border-b border-negro">
                                     <h1>{e.comment}</h1>
                                 </div>
                                 )

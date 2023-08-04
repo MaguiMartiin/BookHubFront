@@ -6,6 +6,7 @@ import img2 from './Landing2.png'
 import testimonio from './Testimonio.png'
 import reseña from './Reseña.png'
 import Carousel from './Carrusel'
+import axios from 'axios'
 
 const Landing = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -35,7 +36,7 @@ const Landing = () => {
       }, []);
 
 
-      const redirectToHomeWithGenre = (genre) => {
+    const redirectToHomeWithGenre = (genre) => {
         const url = `/home?genre=${encodeURIComponent(genre)}`;
         window.location.href = url; 
     };
