@@ -33,6 +33,12 @@ const Landing = () => {
         const userIsLoggedIn = !!token;
         setIsLoggedIn(userIsLoggedIn);
       }, []);
+
+
+      const redirectToHomeWithGenre = (genre) => {
+        const url = `/home?genre=${encodeURIComponent(genre)}`;
+        window.location.href = url; 
+    };
     
 
     return (
@@ -66,7 +72,7 @@ const Landing = () => {
                 <div className="space-x-4">
                     {genders.map((cat, index) => {
                         return (
-                            <button key={index} class=" mt-4 bg-celsete text-white text-4xl px-6 py-4 rounded-lg font-tertiary mb-2 ">{cat}</button>
+                            <button onClick={() => redirectToHomeWithGenre(cat)} key={index} class=" mt-4 bg-celsete text-white text-4xl px-6 py-4 rounded-lg font-tertiary mb-2 ">{cat}</button>
                         )
                     })}
                 </div>
