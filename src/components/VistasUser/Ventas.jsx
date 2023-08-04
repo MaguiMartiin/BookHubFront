@@ -44,10 +44,10 @@ if (loading) {
 }
 
   return (
-    <div className="flex flex-col my-10">
+    <div className="flex flex-col pt-24">
       {publicaciones?.length > 0 ? (
         <div className="mb-5 text-center">
-          <h1 className="text-4xl font-bold text-red-400 mb-4">Mis publicaciones</h1>
+          <h1 className="text-4xl font-bold text-red-400 mb-4">Mis productos</h1>
         </div>
       ) : (
         <div className="flex flex-col items-center mt-10">

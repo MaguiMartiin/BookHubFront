@@ -17,7 +17,11 @@ import MyBooks from './views/MyBooks/MyBooks'
 import Compras from './components/VistasUser/Compras'
 import Ventas from './components/VistasUser/Ventas'
 import Opiniones from './components/VistasUser/PuntOp'
+import Nav from './components/NavBar/Nav'
 import axios from 'axios';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 
 axios.defaults.baseURL = "https://servidor-libreria.onrender.com/";
 
@@ -48,7 +52,7 @@ function App() {
 		<div className="">
 			{location.pathname !== "/" &&
 				location.pathname !== "/login" &&
-				location.pathname !== "/signup" && <NavBar />}
+				location.pathname !== "/signup" && <Nav />}
 			<Routes>
 				<Route exact path="/" element={<Landing />} />
 				<Route path="/home" element={<Home />} />
@@ -62,6 +66,7 @@ function App() {
 				<Route path="/compras" element={<Compras />} />
 				<Route path="/publicaciones" element={<Ventas />} />
 				<Route path="/opiniones" element={<Opiniones/>}/>
+				<Route path="publicaciones" element={<Ventas/>}/>
 			</Routes>
 		</div>
 	);

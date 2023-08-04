@@ -18,7 +18,8 @@ import {
   GET_OPINION,
   GET_OPINION_ID,
   GET_PURCHASES,
-  GET_USERS
+  GET_USERS, 
+  TOP_BOOKS
 } from "./action-types";
 
 import axios from 'axios';
@@ -394,3 +395,16 @@ export const adminUsers =  (id) => {
     }
   };
 }
+
+export const topBooks = () => {
+  return async (dispatch) => {
+    try {
+      const books = (await axios.get("/punctuation/top")).data
+      return dispatch({type: TOP_BOOKS, payload: books})
+    } catch (error) {
+      return {
+        error: error.message,
+      }
+    }
+  }
+} 
