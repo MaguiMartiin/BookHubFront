@@ -3,7 +3,6 @@ import style from './Pagination.module.css'
 
 const Pagination = ({max, page, setPage}) => {
 
-  console.log(page, max, setPage);
 
     const handlePrevPage = () => {
         if(page < 2) return;
