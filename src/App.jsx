@@ -2,7 +2,7 @@ import './App.css'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { refreshCart } from './redux/actions'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import Landing from './views/Landing/Landing'
 import Home from './views/Home/Home'
@@ -28,7 +28,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 
-axios.defaults.baseURL = "http://localhost:3001"//"https://servidor-libreria.onrender.com/";
+axios.defaults.baseURL = "https://servidor-libreria.onrender.com/";
 
 
 function App() {
