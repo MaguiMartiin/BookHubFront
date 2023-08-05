@@ -68,15 +68,7 @@ const DashboardAdmin = () => {
                     className="py-3 px-6 bg-red-500 text-white rounded-md shadow-md hover:bg-red-600 mb-4"
                     onClick={() => { navigate("/form") }}
                 >
-                    Mis publicaciones
-                </button>
-            </div>
-            <div className="flex flex-col items-center mt-10">
-                <button
-                    className="py-3 px-6 bg-red-500 text-white rounded-md shadow-md hover:bg-red-600 mb-4"
-                    onClick={() => { navigate("/form") }}
-                >
-                    Realizar una nueva publicación
+                    Realizar una publicación
                 </button>
             </div>
             <div className="flex flex-col items-center mt-10">
