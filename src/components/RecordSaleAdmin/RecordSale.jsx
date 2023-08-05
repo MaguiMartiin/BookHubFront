@@ -14,8 +14,8 @@ export default function RecordSale() {
     { name: mes[9]?.mes ?mes[9]?.mes:'abril', ventas: mes[1]?.total?230:mes[9]?.total },
     { name: mes[10]?.mes ?mes[10]?.mes:'mayo', ventas: mes[1]?.total?440:mes[10]?.total },
     { name: mes[11]?.mes ?mes[11]?.mes:'junio', ventas: mes[1]?.total?360:mes[11]?.total },
-    { name: mes[0]?.mes ?mes[0]?.mes: "julio", ventas: mes[0]?.total },
-    { name: mes[1]?.mes ?mes[1]?.mes: "agosto", ventas: mes[1]?.total },
+    { name: mes[0]?.mes ?"julio":mes[0]?.mes, ventas: mes[0]?.total },
+    { name: mes[1]?.mes ?"agosto":mes[1]?.mes, ventas: mes[1]?.total },
     { name: mes[2]?.mes ?mes[2]?.mes:'septiembre', ventas: mes[2]?.total?mes[2]?.total: 0 },
     { name: mes[3]?.mes ?mes[3]?.mes:'octubre', ventas: mes[3]?.total?mes[3]?.total: 0 },
     { name: mes[4]?.mes ?mes[4]?.mes:'noviembre', ventas: mes[4]?.total?mes[4]?.total: 0 },
@@ -50,7 +50,7 @@ useEffect(()=>{
       </div>
       <div className={style.contenido}>
         {/* Contenido principal */}
-        <AreaChart width={1000} height={500} data={data}>
+        <AreaChart width={1150} height={500} data={data}>
                     <CartesianGrid strokeDasharray="6 6" />
                     <XAxis dataKey="name" />
                     <YAxis />
