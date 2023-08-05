@@ -50,7 +50,7 @@ useEffect(()=>{
       </div>
       <div className={style.contenido}>
         {/* Contenido principal */}
-        <AreaChart width={1200} height={600} data={data}>
+        <AreaChart width={1000} height={500} data={data}>
                     <CartesianGrid strokeDasharray="6 6" />
                     <XAxis dataKey="name" />
                     <YAxis />
