@@ -1,31 +1,35 @@
-import "./App.css";
-import Nav from "./components/NavBar/Nav";
-import React from "react";
-import { useDispatch } from "react-redux";
-import { refreshCart } from "./redux/actions";
-import { Route, Routes, useLocation, Navigate } from "react-router-dom";
-import { useEffect } from "react";
-import Landing from "./views/Landing/Landing";
-import Home from "./views/Home/Home";
-import Detail from "./views/Detail/Detail";
-import Form from "./views/Form/FormCreate";
-import Login from "./views/User/Login";
-import EditDetail from "./views/Detail/EditDetail";
-import SignUp from "./views/User/SignUp";
-import Carrito from "./views/Carrito/Carrito";
-import MyBooks from "./views/MyBooks/MyBooks";
-import Compras from "./components/VistasUser/Compras";
-import Ventas from "./components/VistasUser/Ventas";
-import Opiniones from "./components/VistasUser/PuntOp";
-//import DashboardAdmin from './views/DashboardAdmin/DashboardAdmin';
-import CrudBooks from "./components/DashBoard Components/CrudBooks";
-import EditUsers from "./components/DashBoard Components/EditUsers";
-import axios from "axios";
-import BackgroundAdmin from "./components/DashBoard Components/BackgroundAdmin";
-import RecordSale from "./components/DashBoard Components/RecordSale";
-import Perfil from "./components/VistasUser/Perfil";
+import './App.css'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { refreshCart } from './redux/actions'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+import Landing from './views/Landing/Landing'
+import Home from './views/Home/Home'
+//import NavBar from './components/NavBar/NavBar'
+import Detail from './views/Detail/Detail'
+import Form from "./views/Form/FormCreate"
+import Login from './views/User/Login'
+import EditDetail from './views/Detail/EditDetail'
+import SignUp from './views/User/SignUp'
+import Carrito from './views/Carrito/Carrito'
+import MyBooks from './views/MyBooks/MyBooks'
+import Compras from './components/VistasUser/Compras'
+import Ventas from './components/VistasUser/Ventas'
+import Opiniones from './components/VistasUser/PuntOp'
+import Nav from './components/NavBar/Nav'
+import axios from 'axios';
+import BackgroundAdmin from './views/DashboardAdmin/BackgroundAdmin';
+import RecordSale from './components/RecordSaleAdmin/RecordSale';
+import Perfil from './components/VistasUser/Perfil'
+import CrudBooks from "./components/DashBoard Components/CrudBooks"
+import EditUsers from "./components/EditUsers/EditUsers"
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
-axios.defaults.baseURL = "http://localhost:3001"; //"https://servidor-libreria.onrender.com/";
+
+axios.defaults.baseURL = "https://servidor-libreria.onrender.com/";
+
 
 function App() {
 	const location = useLocation();

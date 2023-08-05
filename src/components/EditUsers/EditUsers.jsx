@@ -20,7 +20,7 @@ const EditUsers = () => {
 
   useEffect(() => {
     dispatch(getAllUsers());
-  }, [dispatch, suspender, unSuspender, delet]);
+  }, [dispatch, suspender, unSuspender, delet, admins]);
 
 //busca por email
   const handleSearch = (e) => {
@@ -59,7 +59,7 @@ const EditUsers = () => {
     dispatch(adminUsers(admins))
     setAdmin("")
     dispatch(getAllUsers());
-}, [suspender, unSuspender, delet]);
+}, [suspender, unSuspender, delet, admins]);
 
   useEffect(() => {
     dispatch(searchUsers(email));
@@ -84,7 +84,7 @@ const EditUsers = () => {
   };
 
   const startIndex = (currentPage - 1) * usersPerPage;
-  const visibleUsers = users.slice(startIndex, startIndex + usersPerPage);
+  const visibleUsers = users?.slice(startIndex, startIndex + usersPerPage);
 
   return (
     <div className={style.editUsersContainer}>
@@ -101,6 +101,9 @@ const EditUsers = () => {
         </button>
         <button className={location.pathname !== "/" ? style.boton : style.sidebutton}>
           Editar Usuarios
+        </button>
+        <button className={style.sidebutton} onClick={() => { navigate("/recordSale") }}>
+            Registro de Ventas
         </button>
       </div>
       <div className={style.tableContainer}>
@@ -126,29 +129,29 @@ const EditUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {visibleUsers.map((e) => (
+            {visibleUsers?.map((e) => (
               
               <tr key={e.id} className={style.tableRow}>
                 <td className={style.tableData}>{e.name} {e?.lastName}</td>
                 <td className={`${style.tableData} ${style.gender}`}>{e?.email}</td>
                 <td className={style.tableData}>
-                  <p className={style.price}>{e.isActive  ? '🟢' : '🔴'}</p>
+                  <p className={style.price}>{e.isActive  ? '🟢 Si': '🔴 No'}</p>
                 </td>
                 <td className={style.tableData}>
-                  <p className={style.price}>{e.admin  ? '🟢' : '🔴'}</p>
+                  <p className={style.price}>{e.admin  ? '🟢 Si' : '🔴 No'}</p>
                 </td>
                 <td className={`${style.tableData} ${style.actions}`}>
-                  <button className={style.editButton} onClick={()=>handleSuspender(e.id)} >
+                  <button className={e.isActive? style.editButton: style.botonIsAdmin} onClick={()=>handleSuspender(e.id)} >
                   Suspender
                   </button>
                 </td>
                 <td className={`${style.tableData}`}>
-                <button className={style.deleteButton} onClick={()=>handleUnSuspender(e.id)}>
+                <button className={e.isActive? style.botonIsAdmin: style.deleteButton} onClick={()=>handleUnSuspender(e.id)}>
                   Quitar suspensión
                   </button>
                   </td>
                 <td className={`${style.tableData}`}>
-                <button className={style.deleteButton} onClick={()=>handleAdmin(e.id)}>
+                <button className={e.admin? style.botonIsAdmin: style.deleteButton} onClick={()=>handleAdmin(e.id)}>
                 Administrador
                   </button>
                   </td>
