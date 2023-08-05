@@ -6,11 +6,16 @@
 .search{
   display: flex;
   position: relative;
-  height: 45px;
+  height: 35px;
   width: 770px;
   border-radius: 10px;
-  margin: 3px;
+  margin: 2px;
   left: 300px;
+  outline: none;
+  border: 1px solid rgb(0, 0, 0);
+  padding: 2px;
+ margin-right: 5px;
+ font-size: 20px;
 }
 
 .dashContain {
@@ -54,7 +59,7 @@
   padding: 8px 12px;
   margin: 0 5px;
   font-size: 16px;
-  background-color: #0b3e50;
+  background-color: #022c3c;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -62,9 +67,9 @@
 }
 
 .sidebar {
-  height: 100vh;
+  height: 110vh;
   min-width: 180px;
-  background: rgb(147, 159, 159);
+  background: rgb(205, 205, 205);
   display: flex;
   font-size: 17px;
   flex-direction: column;
@@ -91,7 +96,7 @@
 }
 .sidebutton {
   padding: 10px;
-  background-color: #505050;
+  background-color: #5d5d5d;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -121,8 +126,8 @@
 .tableHeader,
 .tableData {
   padding: 12px;
-  font-size: 17px;
-  border: 1px solid #ddd;
+  font-size: 14px;
+  border: 1px solid #838383;
 }
 
 .tableHeader {
@@ -139,12 +144,12 @@
 }
 
 .gender {
-  font-size: 20px;
+  font-size: 14px;
   text-transform: capitalize;
 }
 
 .price {
-  font-size: 20px;
+  font-size: 14px;
   margin: 0;
   font-size: 16px;
 }
@@ -156,17 +161,17 @@
 
 .editButton,
 .deleteButton {
-  padding: 6px;
-  background-color: #535b5e;
+  padding: 5px;
+  background-color: #535657;
   color: rgb(255, 255, 255);
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
 }
 .deleteBu {
-  padding: 6px;
-  background-color: #9a1a1a;
+  padding: 5px;
+  background-color: #a81414;
   color: white;
   border: none;
   border-radius: 5px;
@@ -175,13 +180,22 @@
 }
 
 .boton {
-  padding: 10px;
+  padding: 5px;
   background-color: #176b87;
   color: #fff;
   border: none;
   cursor: pointer;
   margin-bottom: 5px;
   transition: background-color 0.3s ease;
+}
+.botonIsAdmin {
+  padding: 5px;
+  background-color: #178731;
+  color: #fff;
+  border: none;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  font-size: 13px;
 }
 
 .editButton:hover,

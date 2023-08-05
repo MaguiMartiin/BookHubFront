@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import style from './Record.module.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import axios from "axios";
 
 export default function RecordSale() {
     const navigate = useNavigate();
     const [mes, setMes ] = useState([])
     const data = [
-    { name: mes[1]?.mes ?mes[0]?.mes: "enero", ventas: mes[1]?.total?750 :mes[6]?.total},
+    { name: mes[6]?.mes ?mes[6]?.mes: "enero", ventas: mes[1]?.total?750 :mes[6]?.total},
     { name: mes[7]?.mes ?mes[7]?.mes:'febrero', ventas: mes[1]?.total?380: mes[7]?.total },
     { name: mes[8]?.mes ?mes[8]?.mes:'marzo', ventas: mes[1]?.total?310:mes[8]?.total },
     { name: mes[9]?.mes ?mes[9]?.mes:'abril', ventas: mes[1]?.total?230:mes[9]?.total },
@@ -50,14 +50,15 @@ useEffect(()=>{
       </div>
       <div className={style.contenido}>
         {/* Contenido principal */}
-        <BarChart width={1100} height={500} data={data}>
-      <CartesianGrid strokeDasharray="4 4" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Bar dataKey="ventas" fill="#8884d8" />
-    </BarChart>
+        <AreaChart width={1000} height={500} data={data}>
+                    <CartesianGrid strokeDasharray="6 6" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    {/* Utilizar el componente Area en lugar de Line */}
+                    <Area type="monotone" dataKey="ventas" stroke="#178731" fill="#178731" />
+                </AreaChart>
       </div>
    
     </div>

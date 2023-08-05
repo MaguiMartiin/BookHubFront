@@ -36,6 +36,7 @@ const Landing = () => {
       }, []);
 
 
+
     const redirectToHomeWithGenre = (genre) => {
         const url = `/home?genre=${encodeURIComponent(genre)}`;
         window.location.href = url; 
@@ -73,7 +74,9 @@ const Landing = () => {
                 <div className="space-x-4">
                     {genders.map((cat, index) => {
                         return (
+
                             <button onClick={() => redirectToHomeWithGenre(cat)} key={index} class=" mt-4 bg-violeta text-white text-4xl px-6 py-4 rounded-lg font-tertiary mb-2 ">{cat}</button>
+
                         )
                     })}
                 </div>
