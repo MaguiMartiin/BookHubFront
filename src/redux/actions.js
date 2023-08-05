@@ -19,6 +19,8 @@ import {
 	GET_OPINION_ID,
 	GET_PURCHASES,
 	PERFIL,
+  GET_USERS,
+  TOP_BOOKS
 } from "./action-types";
 
 import axios from "axios";
@@ -52,17 +54,20 @@ export const getAllBooks = () => {
 };
 
 export const getPuntuation = () => {
-	return async (dispatch) => {
-		try {
-			const puntuation = (await axios.get("/punctuation")).data;
-			return dispatch({ type: GET_PUNTUATION, payload: puntuation });
-		} catch (error) {
-			return {
-				error: error.message,
-			};
-		}
-	};
-};
+  return async (dispatch) => {
+    try {
+      const puntuation = (await axios.get("/punctuation",  {headers: {
+        Authorization: `Bearer ${token}`,
+        }})).data
+        console.log(puntuation)
+      return dispatch ({type: GET_PUNTUATION, payload: puntuation})
+    } catch (error) {
+      return {
+        error: error.message,
+      }
+    }
+  }
+}
 
 export const getPuntuationId = (id) => {
 	return async (dispatch) => {
@@ -78,17 +83,21 @@ export const getPuntuationId = (id) => {
 };
 
 export const getOpinion = () => {
-	return async (dispatch) => {
-		try {
-			const opinion = (await axios.get("/comments")).data;
-			return dispatch({ type: GET_OPINION, payload: opinion });
-		} catch (error) {
-			return {
-				error: error.message,
-			};
-		}
-	};
-};
+  return async (dispatch) => {
+    try {
+      const opinion = (await axios.get("/comments",  {headers: {
+        Authorization: `Bearer ${token}`,
+        }})).data
+        console.log(opinion)
+      return dispatch({type: GET_OPINION, payload: opinion})
+    } catch (error) {
+      return {
+        error: error.message,
+      }
+    }
+  }
+}
+
 
 export const getOpinionId = (id) => {
 	return async (dispatch) => {
@@ -179,126 +188,7 @@ export const getGenders = () => {
 	};
 };
 
-export const getAuthor = () => {
-	return async (dispatch) => {
-		try {
-			const response = await axios.get(`/author`);
-			return dispatch({ type: GET_AUTHORS, payload: response.data });
-		} catch (error) {
-			return {
-				error: error.message,
-			};
-		}
-	};
-};
 
-export const editBook = (id, bookData) => {
-	return async function (dispatch) {
-		try {
-			const bookEdit = await axios.put(`/book/${id}`, bookData);
-			return dispatch({ type: EDIT_BOOK, payload: bookEdit.data });
-		} catch (error) {
-			return {
-				error: error.message,
-			};
-		}
-	};
-};
-
-export const bookDelete = (id) => {
-	return async function (dispatch) {
-		try {
-			const bookDelete = (await axios.delete(`/book/${id}`)).data;
-			return dispatch({ type: DELETE_BOOK, payload: bookDelete });
-		} catch (error) {
-			return {
-				error: error.message,
-			};
-		}
-	};
-};
-
-export const publicId = () => {
-	return async function (dispatch) {
-		try {
-			const bookPublic = (
-				await axios.get("/perfil/myBooks", {
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				})
-			).data;
-			return dispatch({ type: PUBLICACIONES_ID, payload: bookPublic });
-		} catch (error) {
-			console.log(error);
-		}
-	};
-};
-
-export const getByAuthor = (name) => {
-	return async (dispatch) => {
-		try {
-			const response = await axios.get(`/author`);
-			return dispatch({ type: GET_AUTHORS, payload: response.data });
-		} catch (error) {
-			return {
-				error: error.message,
-			};
-		}
-	};
-};
-
-export const getBookByName = (name) => {
-	return async (dispatch) => {
-		try {
-			const response = await axios.get(`/book/?name=${name}`);
-			return dispatch({ type: GET_BOOK_NAME, payload: response.data });
-		} catch (error) {
-			return {
-				error: error.message,
-			};
-		}
-	};
-};
-
-export const getAllPurchases = () => {
-	return async (dispatch) => {
-		try {
-			const config = {
-				headers: {
-					Authorization: ` Bearer ${token}`,
-				},
-			};
-			const response = await axios.get(`/compras`, config);
-			return dispatch({ type: GET_PURCHASES, payload: response.data });
-		} catch (error) {
-			return {
-				error: error.message,
-			};
-		}
-	};
-};
-
-export const addToCart = (data) => {
-	if (data) {
-		return { type: ADD_TO_CART, payload: data };
-	}
-	console.log("cart");
-
-	return { type: REMOVE_TO_CART };
-};
-
-export const deleteFromCart = (itemId) => {
-	return { type: DELETE_FROM_CART, payload: itemId };
-};
-
-export const refreshCart = (cart) => {
-	if (cart) {
-		return { type: REFRESH_CART, payload: cart };
-	}
-	console.log("cart");
-	return { type: REMOVE_TO_CART };
-};
 // profile
 export const getPerfil = () => {
 	return async (dispatch) => {
@@ -322,3 +212,228 @@ export const getPerfil = () => {
 
 
 
+export const getAuthor = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/author`)
+      return dispatch({ type: GET_AUTHORS, payload: response.data });
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  }
+}
+
+export const editBook = (id, bookData) => {
+  return async function (dispatch) {
+    try {
+      const bookEdit = await axios.put(`/book/${id}`, bookData)
+      return dispatch({ type: EDIT_BOOK, payload: bookEdit.data })
+    }
+    catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  }
+}
+
+export const bookDelete = (id) => {
+  return async function (dispatch) {
+    try {
+      const bookDelete = (await axios.delete(`/book/${id}`)).data
+      return dispatch({ type: DELETE_BOOK, payload: bookDelete })
+    }
+    catch (error) {
+      return {
+        error: error.message
+      }
+    }
+  }
+}
+
+export const publicId = () => {
+  return async function (dispatch) {
+    try {
+      const bookPublic = (await axios.get("/perfil/myBooks", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      })).data
+      return dispatch({ type: PUBLICACIONES_ID, payload: bookPublic })
+    } catch (error) { console.log(error) }
+  }
+}
+
+export const getByAuthor = (name) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/author`)
+      return dispatch({ type: GET_AUTHORS, payload: response.data })
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  }
+}
+
+export const getBookByName = (name) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/book/?name=${name}`);
+      return dispatch({ type: GET_BOOK_NAME, payload: response.data });
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+
+  }
+}
+
+export const getAllPurchases = () => {
+  return async (dispatch) => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const response = await axios.get(`/compras`, config);
+      return dispatch({ type: GET_PURCHASES, payload: response.data });
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  }
+}
+
+
+
+
+export const addToCart = (data) => {
+  if (data) {
+    return { type: ADD_TO_CART, payload: data }
+
+  }
+  console.log("cart");
+
+  return { type: REMOVE_TO_CART };
+}
+
+
+
+export const deleteFromCart = (itemId) => {
+  return { type: DELETE_FROM_CART, payload: itemId }
+}
+
+export const refreshCart = (cart) => {
+  if (cart) {
+    return { type: REFRESH_CART, payload: cart }
+  }
+  console.log("cart");
+  return { type: REMOVE_TO_CART };
+}
+
+export const getAllUsers = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/user`);
+      return dispatch({ type: GET_USERS, payload: response.data });
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  };
+}
+
+export const searchUsers = (email) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/user?email=${email}`);
+      console.log("email", response);
+      return dispatch({ type: GET_USERS, payload: response.data });
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  };
+}
+
+export const suspenderUsers =  (id) => {
+  return async (dispatch) => {
+    try {
+      if(id){
+        console.log(">--<",id);
+        const response = await axios.put(`/user/${id}/suspend`);
+        console.log("suspender", response.data);
+      }
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  };
+}
+
+export const quitarSuspenderUsers =  (id) => {
+  return async (dispatch) => {
+    try {
+      if(id){
+       const response = await axios.put(`/user/${id}/unsuspend`);
+      console.log("unsuspender", response.data); 
+      }
+    
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  };
+}
+
+export const eliminarUsers =  (id) => {
+  return async (dispatch) => {
+    try {
+      if(id){
+       const response = await axios.delete(`/user/${id}`);
+      }
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  };
+}
+
+export const adminUsers =  (id) => {
+  return async (dispatch) => {
+    try {
+      if(id){
+       const response = await axios.put(`/user/${id}/admin`);
+      }
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  };
+}
+
+export const topBooks = () => {
+  return async (dispatch) => {
+    try {
+      const books = (await axios.get("/punctuation/top")).data
+      return dispatch({type: TOP_BOOKS, payload: books})
+    } catch (error) {
+      return {
+        error: error.message,
+      }
+    }
+  }
+} 

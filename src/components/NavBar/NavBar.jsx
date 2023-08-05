@@ -27,6 +27,7 @@ const NavBar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken")
+    localStorage.removeItem("isAdmin")
     localStorage.removeItem("cart")
     cart.splice(0, cart.length);
     setIsLoggedIn(false)
@@ -60,11 +61,6 @@ const NavBar = () => {
 							<FaCartArrowDown />
 						)}
 					</Link>
-					{isLoggedIn && (
-						<Link to="/form" className={style.link}>
-							Vender Libro
-						</Link>
-					)}
 				</div>
 				{!isLoggedIn && (
 					<button className={style.botonInicio} onClick={toInicio}>

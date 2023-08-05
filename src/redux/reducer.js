@@ -19,6 +19,8 @@ import {
 	GET_OPINION_ID,
 	GET_PURCHASES,
 	PERFIL,
+	GET_USERS,
+	TOP_BOOKS
 } from "./action-types";
 
 const initialState = {
@@ -38,6 +40,8 @@ const initialState = {
 	perfil: {},
 	perfilMyBooks: [],
 	perfilBuys: [],
+	allUsers: [],
+	topBooks:[],
 	// user
 	signUpStep: 1,
 };
@@ -151,6 +155,17 @@ const rootReducer = (state = initialState, action) => {
 				...state,
 				perfil: action.payload,
 			}		
+		case GET_USERS:
+			return {
+				...state,
+				allUsers: action.payload,
+			}
+		case TOP_BOOKS: 
+			return {
+				...state,
+				topBooks: action.payload
+			}
+
 		default:
 			return state;
 	}
