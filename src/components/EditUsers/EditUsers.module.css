@@ -67,7 +67,7 @@
 }
 
 .sidebar {
-  height: 100vh;
+  height: 110vh;
   min-width: 180px;
   background: rgb(205, 205, 205);
   display: flex;
@@ -126,7 +126,7 @@
 .tableHeader,
 .tableData {
   padding: 12px;
-  font-size: 17px;
+  font-size: 14px;
   border: 1px solid #838383;
 }
 
@@ -144,12 +144,12 @@
 }
 
 .gender {
-  font-size: 20px;
+  font-size: 14px;
   text-transform: capitalize;
 }
 
 .price {
-  font-size: 20px;
+  font-size: 14px;
   margin: 0;
   font-size: 16px;
 }
