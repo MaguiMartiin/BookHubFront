@@ -18,9 +18,9 @@ import {
 	GET_OPINION,
 	GET_OPINION_ID,
 	GET_PURCHASES,
-	PERFIL,
 	GET_USERS,
-	TOP_BOOKS
+	TOP_BOOKS,
+	PERFIL,
 } from "./action-types";
 
 const initialState = {
