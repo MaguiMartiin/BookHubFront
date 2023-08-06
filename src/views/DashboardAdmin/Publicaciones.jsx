@@ -5,8 +5,9 @@ import { FaDollarSign } from "react-icons/fa";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaEdit, FaTrash } from 'react-icons/fa'
 import Swal from "sweetalert2"
+import axios from 'axios'
 
-const Ventas = () => {
+const Publicaciones = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
@@ -19,6 +20,15 @@ const Ventas = () => {
   }, [dispatch, id]);
 
   const publicaciones = useSelector((state) => state.bookPublic);
+
+  const suspendBook = async (id) => {
+    try {
+      const suspend = await axios.put(`/book/${id}/suspend`)
+      console.log(suspend.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const handleDelete = (id) => {
     dispatch(bookDelete(id))
@@ -44,31 +54,7 @@ if (loading) {
 }
 
   return (
-    <div className="flex flex-col pt-24">
-      {publicaciones?.length > 0 ? (
-        <div className="mb-5 text-center">
-          <h1 className="text-4xl font-bold text-red-400 mb-4">Mis productos</h1>
-        </div>
-      ) : (
-        <div className="flex flex-col items-center mt-10">
-          <h1 className="text-3xl font-bold text-red-500 mb-4">
-            ¡Aún no has compartido tus tesoros literarios!
-          </h1>
-          <button
-            className="py-3 px-6 bg-red-500 text-white rounded-md shadow-md hover:bg-red-600 mb-4"
-            onClick={() => {navigate("/home")}}
-          >
-            Volver a Home
-          </button>
-          <button
-            className="py-3 px-6 bg-red-500 text-white rounded-md shadow-md hover:bg-red-600 mb-4"
-            onClick={() => {navigate("/form")}}
-          >
-            Realizar una publicacion
-          </button>
-        </div>
-      )}
-
+    <div className="flex flex-col items-center pt-24">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {publicaciones?.length > 0 ? (
           publicaciones.map((libro) => (
@@ -90,16 +76,31 @@ if (loading) {
                     Editar <FaEdit className="ml-1" />
                   </button>
                 </Link>
+                <button onClick={() => suspendBook(libro.id)}>
+                  Suspender
+                </button>
                 <button className="flex items-center" onClick={() => handleDelete(libro.id)}>
                   Eliminar <FaTrash className="ml-1" />
                 </button>
               </div>
             </div>
           ))
-        ) : null}
+        ) : (
+          <div className="flex flex-col justify-center mt-10 w-full items-center">
+            <h1 className="text-3xl font-primary text-blanco mb-4">
+              ¡Aún no has compartido tus tesoros literarios!
+            </h1>
+            <button class="bg-gris text-white text-2xl px-6 py-4 rounded-lg font-primary" onClick={() => {navigate("/home")}}>
+              Volver a Home
+            </button>
+            <button class="bg-gris text-white text-2xl px-6 py-4 rounded-lg font-primary mt-8" onClick={() => {navigate("/form")}}>
+              Realizar una publicacion
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
-export default Ventas;
+export default Publicaciones;

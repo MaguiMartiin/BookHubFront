@@ -15,7 +15,7 @@ import SignUp from './views/User/SignUp'
 import Carrito from './views/Carrito/Carrito'
 import MyBooks from './views/MyBooks/MyBooks'
 import Compras from './components/VistasUser/Compras'
-import Ventas from './components/VistasUser/Ventas'
+import Publicaciones from './views/DashboardAdmin/Publicaciones'
 import Opiniones from './components/VistasUser/PuntOp'
 import Nav from './components/NavBar/Nav'
 import axios from 'axios';
@@ -76,7 +76,7 @@ function App() {
         <Route path="/MyBooks" element={<MyBooks />} />
         <Route path="/carrito" element={<Carrito />} />
         <Route path="/compras" element={<Compras />} />
-        <Route path="/publicaciones" element={<Ventas />} />
+        <Route path="/publicaciones" element={<Publicaciones />} />
         <Route path="/opiniones" element={<Opiniones />} />
 		<Route path="/perfil" element={<Perfil />} />
         {/* Agregar una ruta protegida para el componente DashboardAdmin */}
