@@ -46,15 +46,19 @@ function App() {
 	useEffect(() => {
 		const urlSearchParams = new URLSearchParams(window.location.search);
 		const params = Object.fromEntries(urlSearchParams.entries());
-
+	
 		if (params.token) {
-			localStorage.setItem("accessToken", params.token);
-			window.location.href = "/home";
-		}
+			const { token, admin, vendedor } = JSON.parse(params.token);
+			localStorage.setItem("isAdmin", admin);
+			localStorage.setItem("isVendedor", vendedor);
+			localStorage.setItem("accessToken", token );
+		
+			window.location.href = "/home";}
 	}, []);
 
   // Comprobar si el usuario es administrador
   const isAdmin = localStorage.getItem("isAdmin") === "true";
+  const isVendedor = localStorage.getItem("isVendedor") === "true";
 
   return (
     <div className="">
@@ -80,7 +84,7 @@ function App() {
         <Route path="/opiniones" element={<Opiniones />} />
 		<Route path="/perfil" element={<Perfil />} />
         {/* Agregar una ruta protegida para el componente DashboardAdmin */}
-        {isAdmin ? (
+        {isAdmin || isVendedor ? (
           <Route path="/dashboard" element={<BackgroundAdmin />} />
         ) : (
           <Route path="/dashboard" element={<Navigate to="/home" replace />} />

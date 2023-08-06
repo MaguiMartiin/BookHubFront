@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 export default function BackgroundAdmin() {
     const navigate = useNavigate();
+    const isAdmin = JSON.parse(localStorage.getItem('isAdmin')); // Convertir a booleano
   return (
     <div className={styles.dashContain}>
     <div className={styles.sidebar}>
@@ -18,12 +19,12 @@ export default function BackgroundAdmin() {
         <button className={styles.sidebutton} onClick={() => { navigate("/form") }}>
             Realizar una nueva publicación
         </button>
-        <button className={styles.sidebutton} onClick={() => { navigate("/editUsers") }}>
+       {isAdmin && <button className={styles.sidebutton} onClick={() => { navigate("/editUsers") }}>
             Editar Usuarios
-        </button>
-        <button className={styles.sidebutton} onClick={() => { navigate("/recordSale") }}>
+        </button>}
+       {isAdmin && <button className={styles.sidebutton} onClick={() => { navigate("/recordSale") }}>
             Registro de Ventas
-        </button>
+        </button>}
       </div>
       <div className={styles.contenido}>
         {/* Contenido principal */}

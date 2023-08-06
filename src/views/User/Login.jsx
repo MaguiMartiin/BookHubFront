@@ -38,10 +38,11 @@ const Login = () => {
 								email: values.email,
 								password: values.password,
 							});
- 
-							const { accesoWJT: token, admin } = response.data;
+							console.log(response.data);
+							const { accesoWJT: token, admin, vendedor } = response.data;
 							localStorage.setItem("accessToken", token);
 							localStorage.setItem("isAdmin", admin);
+							localStorage.setItem("isVendedor", vendedor);
 							navigate("/home");
 							console.log(response.data);
 
