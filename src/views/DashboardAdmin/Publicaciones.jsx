@@ -20,6 +20,7 @@ const Publicaciones = () => {
   }, [dispatch, id]);
 
   const publicaciones = useSelector((state) => state.bookPublic);
+  console.log(publicaciones);
 
   const suspendBook = async (id) => {
     try {
@@ -68,9 +69,9 @@ if (loading) {
 
   return (
     <div className="flex flex-col items-center pt-24">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-        {publicaciones?.length > 0 ? (
-          publicaciones.map((libro) => (
+      {publicaciones?.length > 0 ? (
+        publicaciones.map((libro) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-6">
             <div key={libro.id} className="bg-gradient-to-r from-violeta to-rojo p-6 shadow-xl rounded-lg">
               <div className="flex justify-end">
                 <Link to={`/editar/${libro.id}`}>
@@ -106,6 +107,7 @@ if (loading) {
                 </button>
               </div>
             </div>
+          </div>
           ))
         ) : (
           <div className="flex flex-col justify-center mt-10 w-full items-center">
@@ -119,9 +121,8 @@ if (loading) {
               Realizar una publicacion
             </button>
           </div>
-        )}
+        ) }
       </div>
-    </div>
   );
 };
 

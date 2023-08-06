@@ -15,9 +15,9 @@ const Opiniones = () => {
     console.log(misOpiniones);
 
     return (
-        <div>
+        <div className="flex flex-col items-center pt-24">
             <div>
-                <h1>Opiniones</h1>
+                <h1 className="text-blanco">Opiniones</h1>
             </div>
 
             <div>   
