@@ -38,8 +38,11 @@ useEffect(()=>{
         <Link to="/dashboard">
         <button className={style.titulo2}>Volver</button>
           </Link>
+          <button className={style.sidebutton} onClick={() => { navigate("/publicaciones") }}>
+            Mis publicaciones
+        </button>
         <button className={style.sidebutton} onClick={() => { navigate("/form") }}>
-            Realizar una publicación
+            Realizar una nueva publicación
         </button>
         <button className={style.sidebutton} onClick={() => { navigate("/editUsers") }}>
             Editar Usuarios
