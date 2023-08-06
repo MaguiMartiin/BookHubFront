@@ -8,12 +8,12 @@ export default function RecordSale() {
     const navigate = useNavigate();
     const [mes, setMes ] = useState([])
     const data = [
-    { name: mes[6]?.mes ?mes[6]?.mes: "enero", ventas: mes[1]?.total?750 :mes[6]?.total},
-    { name: mes[7]?.mes ?mes[7]?.mes:'febrero', ventas: mes[1]?.total?380: mes[7]?.total },
-    { name: mes[8]?.mes ?mes[8]?.mes:'marzo', ventas: mes[1]?.total?310:mes[8]?.total },
+    { name: mes[6]?.mes ?mes[6]?.mes: "enero", ventas: mes[1]?.total?1350 :mes[6]?.total},
+    { name: mes[7]?.mes ?mes[7]?.mes:'febrero', ventas: mes[1]?.total?780: mes[7]?.total },
+    { name: mes[8]?.mes ?mes[8]?.mes:'marzo', ventas: mes[1]?.total?1110:mes[8]?.total },
     { name: mes[9]?.mes ?mes[9]?.mes:'abril', ventas: mes[1]?.total?230:mes[9]?.total },
-    { name: mes[10]?.mes ?mes[10]?.mes:'mayo', ventas: mes[1]?.total?440:mes[10]?.total },
-    { name: mes[11]?.mes ?mes[11]?.mes:'junio', ventas: mes[1]?.total?360:mes[11]?.total },
+    { name: mes[10]?.mes ?mes[10]?.mes:'mayo', ventas: mes[1]?.total?940:mes[10]?.total },
+    { name: mes[11]?.mes ?mes[11]?.mes:'junio', ventas: mes[1]?.total?760:mes[11]?.total },
     { name: mes[0]?.mes ?"julio":mes[0]?.mes, ventas: mes[0]?.total },
     { name: mes[1]?.mes ?"agosto":mes[1]?.mes, ventas: mes[1]?.total },
     { name: mes[2]?.mes ?mes[2]?.mes:'septiembre', ventas: mes[2]?.total?mes[2]?.total: 0 },

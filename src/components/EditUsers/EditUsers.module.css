@@ -67,7 +67,7 @@
 }
 
 .sidebar {
-  height: 110vh;
+  height: 115vh;
   min-width: 180px;
   background: rgb(205, 205, 205);
   display: flex;
@@ -126,7 +126,7 @@
 .tableHeader,
 .tableData {
   padding: 12px;
-  font-size: 14px;
+  font-size: 13px;
   border: 1px solid #838383;
 }
 
@@ -161,13 +161,13 @@
 
 .editButton,
 .deleteButton {
-  padding: 5px;
+  padding: 6px;
   background-color: #535657;
   color: rgb(255, 255, 255);
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 14px;
 }
 .deleteBu {
   padding: 5px;
@@ -195,14 +195,25 @@
   border: none;
   margin-bottom: 5px;
   border-radius: 5px;
-  font-size: 13px;
+  font-size: 14px;
+}
+.botonAdmin {
+  padding: 5px;
+  background-color: #178731;
+  color: #fff;
+  border: none;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  font-size: 14px;
 }
 
+.botonIsAdmin:hover,
 .editButton:hover,
 .deleteButton:hover {
   background-color: #238094;
 }
 
+.botonIsAdmin:active,
 .editButton:active,
 .deleteButton:active {
   background-color: #87171e; /* Cambia el color que deseas cuando el botón está activo */
