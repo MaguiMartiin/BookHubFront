@@ -42,29 +42,28 @@ const NavBar = () => {
   return (
 		<div className="">
 			<div
-				className={`p-2 flex fixed items-center justify-between flex-wrap  z-10 lg:w-full text-white transition-all duration-300 ${
+				className={`p-6 f flex fixed items-center justify-between flex-wrap  z-10 lg:w-full text-white transition-all duration-300 ${
 					bg ? "bg-rojo" : "bg-transparent"
 				} `}>
-				<Link to="/" className={style.h1}>
+				<Link to="/" class="text-6xl text-white font-primary" >
 					BookHub
 				</Link>
-				<div className={style.div}>
-					<Link to="/home" className={style.link}>
-						Inicio
-					</Link>
-					<Link to="/carrito" className={style.link}>
-						{cart.length > 0 ? (
-							<div className={style.cartIndicator}>
-								<FaCartArrowDown />
-								<div className={style.badge}>{cart.length}</div>
-							</div>
-						) : (
+				<Link to="/home" className={style.link}>
+					Inicio
+				</Link>
+				<Link to="/carrito" className={style.link}>
+					{cart.length > 0 ? (
+						<div className={style.cartIndicator}>
 							<FaCartArrowDown />
-						)}
-					</Link>
-				</div>
+							<div className={style.badge}>{cart.length}</div>
+						</div>
+					) : (
+						<FaCartArrowDown />
+					)}
+				</Link>
+				
 				{!isLoggedIn && (
-					<button className={style.botonInicio} onClick={toInicio}>
+					<button className="bg-gris text-white text-xl px-6 py-4 rounded-lg font-primary" onClick={toInicio}>
 						Inicia sesión
 					</button>
 				)}

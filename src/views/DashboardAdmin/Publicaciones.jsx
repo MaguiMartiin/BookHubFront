@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { publicId, bookDelete } from "../../redux/actions";
 import { FaDollarSign } from "react-icons/fa";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { FaEdit, FaTrash } from 'react-icons/fa'
+import { FaEdit, FaTrash, FaBookOpen } from 'react-icons/fa'
 import Swal from "sweetalert2"
 import axios from 'axios'
 
@@ -20,6 +20,7 @@ const Publicaciones = () => {
   }, [dispatch, id]);
 
   const publicaciones = useSelector((state) => state.bookPublic);
+  console.log(publicaciones);
 
   const suspendBook = async (id) => {
     try {
@@ -56,21 +57,25 @@ const Publicaciones = () => {
 
 if (loading) {
   return (
-    <div className="flex justify-center items-center h-screen">
-      <h1 className="text-4xl text-red-400 font-bold">Cargando...</h1>
+    <div className="flex flex-col justify-center items-center h-screen">
+    <div className="mb-4">
+      <FaBookOpen className="text-6xl text-blanco animate-spin" />
     </div>
+    <h1 className="text-4xl text-blanco font-bold">Cargando...</h1>
+    <p className="text-lg text-gray-600">Preparando tus tesoros literarios</p>
+  </div>
   );
 }
 
   return (
     <div className="flex flex-col items-center pt-24">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-        {publicaciones?.length > 0 ? (
-          publicaciones.map((libro) => (
+      {publicaciones?.length > 0 ? (
+        publicaciones.map((libro) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-6">
             <div key={libro.id} className="bg-gradient-to-r from-violeta to-rojo p-6 shadow-xl rounded-lg">
               <div className="flex justify-end">
                 <Link to={`/editar/${libro.id}`}>
-                    <button className="flex items-center text-blanco ">
+                    <button className="flex items-center text-blanco text-xl">
                       Editar <FaEdit className="ml-1" />
                     </button>
                 </Link>
@@ -97,11 +102,12 @@ if (loading) {
               </div>
 
               <div>
-                <button className="flex items-center text-blanco mt-4" onClick={() => handleDelete(libro.id)}>
+                <button className="flex items-center text-blanco mt-4 text-xl" onClick={() => handleDelete(libro.id)}>
                   Eliminar <FaTrash className="ml-1 text-blanco" />
                 </button>
               </div>
             </div>
+          </div>
           ))
         ) : (
           <div className="flex flex-col justify-center mt-10 w-full items-center">
@@ -115,9 +121,8 @@ if (loading) {
               Realizar una publicacion
             </button>
           </div>
-        )}
+        ) }
       </div>
-    </div>
   );
 };
 
