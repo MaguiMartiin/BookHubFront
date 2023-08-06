@@ -5,6 +5,7 @@ import { useToggle } from "../../components/user/UseToggle";
 import { AiFillEye } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Login = () => {
 
@@ -47,9 +48,12 @@ const Login = () => {
 							console.log(response.data);
 
 						} catch (error) {
-							return {
-								errores: error.message,
-							};
+							Swal.fire({
+								title: 'Error',
+								text: error.response?.data?.error || 'invalid credentials',
+								icon: 'error',
+								confirmButtonText: 'Accept',
+							  });
 						}
 					}}
 					validate={(values) => {
