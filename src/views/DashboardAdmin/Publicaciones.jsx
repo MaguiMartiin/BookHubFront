@@ -24,7 +24,16 @@ const Publicaciones = () => {
   const suspendBook = async (id) => {
     try {
       const suspend = await axios.put(`/book/${id}/suspend`)
-      console.log(suspend.data);
+      window.location.reload()
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const quitSuspendBook = async (id) => {
+    try {
+      const suspend = await axios.put(`/book/${id}/unsuspend`)
+      window.location.reload()
     } catch (error) {
       console.log(error);
     }
@@ -55,32 +64,41 @@ if (loading) {
 
   return (
     <div className="flex flex-col items-center pt-24">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         {publicaciones?.length > 0 ? (
           publicaciones.map((libro) => (
-            <div key={libro.id} className="bg-pink-100 p-6 shadow-xl rounded-lg">
-              <div className="relative w-full h-52 mb-4 rounded-lg overflow-hidden">
-                <img src={libro.image} alt="libro" className="object-cover w-full h-full" />
+            <div key={libro.id} className="bg-gradient-to-r from-violeta to-rojo p-6 shadow-xl rounded-lg">
+              <div className="flex justify-end">
+                <Link to={`/editar/${libro.id}`}>
+                    <button className="flex items-center text-blanco ">
+                      Editar <FaEdit className="ml-1" />
+                    </button>
+                </Link>
+              </div>  
+              <p className="text-blanco"> Estado del libro: {libro.isActive ? '🟢 Activo': '🔴 Inactivo'}</p>
+              <div className="relative w-full h-80 mb-4 rounded-lg overflow-hidden mt-2">
+                <img src={libro.image} alt="libro" className="object-cover w-full h-full"/>
               </div>
-              <h1 className="text-2xl font-bold text-red-400 mb-2">{libro.name}</h1>
-              <h2 className="text-lg text-customColor7 mb-2">{libro.Author?.name}</h2>
-              <h2 className="text-lg text-customColor7 mb-4">{libro.Gender?.name}</h2>
+              <h1 className="text-2xl font-bold text-blanco mb-2">{libro.name}</h1>
+              <h2 className="text-lg text-blanco mb-2">{libro.Author?.name}</h2>
+              <h2 className="text-lg text-blanco mb-2">{libro.Gender?.name}</h2>
               <div className="flex items-center">
-                <FaDollarSign size="1.3rem" className="text-customColor7" />
-                <h1 className="ml-1 text-customColor7">{libro.price}</h1>
+                <FaDollarSign size="1.3rem" className="text-blanco" />
+                <h1 className="ml-1 text-blanco">{libro.price}</h1>
               </div>
 
-              <div className="flex items-center space-x-2 mt-2">
-                <Link to={`/editar/${libro.id}`}>
-                  <button className="flex items-center">
-                    Editar <FaEdit className="ml-1" />
-                  </button>
-                </Link>
-                <button onClick={() => suspendBook(libro.id)}>
+              <div className="flex items-center justify-center space-x-2 mt-3">
+                <button className="text-blanco bg-gris p-2 mx-6 font-primary rounded-lg" onClick={() => suspendBook(libro.id)}>
                   Suspender
                 </button>
-                <button className="flex items-center" onClick={() => handleDelete(libro.id)}>
-                  Eliminar <FaTrash className="ml-1" />
+                <button className="text-blanco bg-gris p-2 font-primary rounded-lg" onClick={() => quitSuspendBook(libro.id)}>
+                  Quitar suspención
+                </button>
+              </div>
+
+              <div>
+                <button className="flex items-center text-blanco mt-4" onClick={() => handleDelete(libro.id)}>
+                  Eliminar <FaTrash className="ml-1 text-blanco" />
                 </button>
               </div>
             </div>
