@@ -53,7 +53,7 @@ export const getAllBooks = () => {
 	};
 };
 
-export const getPuntuation = () => {
+/* export const getPuntuation = () => {
   return async (dispatch) => {
     try {
       const puntuation = (await axios.get("/punctuation",  {headers: {
@@ -67,7 +67,7 @@ export const getPuntuation = () => {
       }
     }
   }
-}
+} */
 
 export const getPuntuationId = (id) => {
 	return async (dispatch) => {

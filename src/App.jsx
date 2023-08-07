@@ -26,6 +26,7 @@ import CrudBooks from "./components/DashBoard Components/CrudBooks"
 import EditUsers from "./components/EditUsers/EditUsers"
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import FormOp from './components/VistasUser/FormOp'
 
 
 axios.defaults.baseURL = "https://servidor-libreria.onrender.com/";
@@ -78,7 +79,8 @@ function App() {
         <Route path="/compras" element={<Compras />} />
         <Route path="/publicaciones" element={<Publicaciones />} />
         <Route path="/opiniones" element={<Opiniones />} />
-		<Route path="/perfil" element={<Perfil />} />
+		    <Route path="/perfil" element={<Perfil />} />
+        <Route path="/formOp"element={<FormOp/>}/>
         {/* Agregar una ruta protegida para el componente DashboardAdmin */}
         {isAdmin ? (
           <Route path="/dashboard" element={<BackgroundAdmin />} />
