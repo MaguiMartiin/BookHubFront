@@ -9,19 +9,15 @@ import Swal from "sweetalert2"
 export default function RecordSale() {
     const navigate = useNavigate();
     const [mes, setMes ] = useState([])
+    const [user, setUser ] = useState([])
     const data = [
-    { name: mes[6]?.mes ?mes[6]?.mes: "enero", ventas: mes[1]?.total?1350 :mes[6]?.total, usuarios: 440},
-    { name: mes[7]?.mes ?mes[7]?.mes:'febrero', ventas: mes[1]?.total?780: mes[7]?.total, usuarios: 40 },
-    { name: mes[8]?.mes ?mes[8]?.mes:'marzo', ventas: mes[1]?.total?1110:mes[8]?.total, usuarios: 140 },
-    { name: mes[9]?.mes ?mes[9]?.mes:'abril', ventas: mes[1]?.total?230:mes[9]?.total, usuarios: 340 },
-    { name: mes[10]?.mes ?mes[10]?.mes:'mayo', ventas: mes[1]?.total?940:mes[10]?.total, usuarios: 110  },
-    { name: mes[11]?.mes ?mes[11]?.mes:'junio', ventas: mes[1]?.total?760:mes[11]?.total, usuarios: 540  },
-    { name: mes[0]?.mes ?"julio":mes[0]?.mes, ventas: mes[0]?.total, usuarios: 540  },
-    { name: mes[1]?.mes ?"agosto":mes[1]?.mes, ventas: mes[1]?.total,usuarios: 740  },
-    { name: mes[2]?.mes ?mes[2]?.mes:'septiembre', ventas: mes[2]?.total?mes[2]?.total: 0,usuarios: 0  },
-    { name: mes[3]?.mes ?mes[3]?.mes:'octubre', ventas: mes[3]?.total?mes[3]?.total: 0, usuarios: 0  },
-    { name: mes[4]?.mes ?mes[4]?.mes:'noviembre', ventas: mes[4]?.total?mes[4]?.total: 0, usuarios: 0  },
-    { name: mes[5]?.mes ?mes[5]?.mes:'diciembre', ventas: mes[5]?.total?mes[5]?.total: 0, usuarios: 0  },
+    { name: mes[0]?.dia ? mes[0]?.dia: "Domingo", VENTAS: mes[0]?.total?mes[0]?.total : 0, USUARIOS: user[0]?.total? Number(user[0]?.total): 0},
+    { name: mes[1]?.dia ? mes[1]?.dia: "Lunes",   VENTAS: mes[1]?.total?mes[1]?.total : 0, USUARIOS: user[1]?.total? Number(user[1]?.total): 0},
+    { name: mes[2]?.dia ? mes[2]?.dia: "Martes",  VENTAS: mes[2]?.total?mes[2]?.total : 0, USUARIOS: user[2]?.total? Number(user[2]?.total): 0 },
+    { name: mes[3]?.dia ? mes[3]?.dia: "Miercoles", VENTAS: mes[3]?.total?mes[3]?.total : 0, USUARIOS: user[3]?.total? Number(user[3]?.total): 0 },
+    { name: mes[4]?.dia ? mes[4]?.dia: "Jueves",  VENTAS: mes[4]?.total?mes[4]?.total : 0, USUARIOS: user[4]?.total? Number(user[4]?.total): 0 },
+    { name: mes[5]?.dia ? mes[5]?.dia: "Viernes", VENTAS: mes[5]?.total?mes[5]?.total : 0, USUARIOS: user[5]?.total? Number(user[5]?.total): 0 },
+    { name: mes[6]?.dia ? mes[6]?.dia: "Sabado",  VENTAS: mes[6]?.total?mes[6]?.total : 0, USUARIOS: user[6]?.total? Number(user[6]?.total): 0},
 ]
 
 const cart = useSelector((state) => state.cart);
@@ -57,6 +53,11 @@ useEffect(()=>{
         setMes([
             ...res
         ])
+        const resUser = (await axios.get("/user/all")).data
+        console.log("precio", resUser);
+        setUser([
+            ...resUser
+        ])
     }
     ress()
 },[])
@@ -89,8 +90,8 @@ useEffect(()=>{
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Line type="monotone" dataKey="ventas" stroke="#249102" activeDot={{ r: 10 }} />
-                    <Line type="monotone" dataKey="usuarios" stroke="#ca0000" activeDot={{ r: 10 }} />
+                    <Line type="monotone" dataKey="VENTAS" stroke="#249102" activeDot={{ r: 10 }} />
+                    <Line type="monotone" dataKey="USUARIOS" stroke="#ca0000" activeDot={{ r: 10 }} />
                 </LineChart>
       </div>
    
