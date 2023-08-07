@@ -71,7 +71,7 @@ export default function NavAdmin() {
                       <div >
                           <button
                               onClick={handleUserButtonClick}
-                              className={style.userButton}>
+                              className="">
                               <FaUser size={32} />
                           </button>
                           {showVistaUser && <VistaAdmin onLogout={handleLogout} />}

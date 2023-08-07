@@ -44,6 +44,9 @@ const VistaUser = ({ onLogout }) => {
 						className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
 						Perfil
 					</a>
+					<Link to="/user/restablecer" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+						Restablecer contraseña
+					</Link>
 					<button
 						className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
 						onClick={handleLogoutClick}>
