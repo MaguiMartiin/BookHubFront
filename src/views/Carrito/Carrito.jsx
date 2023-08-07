@@ -110,10 +110,11 @@ const Carrito = () => {
 	};
 
 	return (
+		<div className="font-secondary">
 		<div className={style.cartContainer}>
 			<div className={style.cardContainer}>
 				{cart?.map((book) => (
-					<div key={book.id} className={style.card}>
+					<div key={book.id} style={{ width: '865px'}} className=" text-blanco relative flex rounded-lg p-20 m-16 bg-white hover:border hover:border-blanco bg-gradient-to-r from-violeta to-rojo shadow-lg transform hover:scale-105 transition-transform">
 						<div className={style.imageContainer}>
 							<img
 								src={book.image}
@@ -122,7 +123,7 @@ const Carrito = () => {
 							/>
 						</div>
 						<div className={style.bookInfo}>
-							<h1>{book.name}</h1>
+							<h1>{book.name.toUpperCase()}</h1>
 							<h2>Precio: ${book.price}</h2>
 							<p>Disponibles: {book.available}</p>
 							<p>Género: {book.Gender?.name}</p>
@@ -165,6 +166,7 @@ const Carrito = () => {
 					PAY!{" "}
 				</button>
 			</div>
+		</div>
 		</div>
 	);
 };
