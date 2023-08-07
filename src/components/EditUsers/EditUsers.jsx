@@ -20,6 +20,7 @@ const EditUsers = () => {
   const [admins, setAdmin] = useState("");
   const [vendedor, setVendedor] = useState("");
   const [userVendedor, setUserVendedor] = useState("");
+  const isAdmin = localStorage.getItem("isAdmin") === "true";
 
   useEffect(() => {
     dispatch(getAllUsers());
@@ -37,20 +38,24 @@ const EditUsers = () => {
   const handleSuspender = (id) => {
     console.log(id);
     setSuspender(id)
+    setEmail("")
   };
 //quitar suspencion user
   const handleUnSuspender = (id) => {
     setUnSuspender(id)
+    setEmail("")
   };
 
 //eliminar user
   const handleDelete = (id) => {
     setDelet(id)
+    setEmail("")
   };
 
 //convertir adim a user
   const handleAdmin = (id) => {
     setAdmin(id)
+    setEmail("")
   };
 
 //convertir vendedor a user
@@ -161,6 +166,7 @@ const EditUsers = () => {
             type="text" 
             placeholder='Buscar Usuario Por Email' 
             className={style.search}
+            value={email}
             onChange={handleSearch} 
             />
 
@@ -202,9 +208,9 @@ const EditUsers = () => {
                   </button>
                   </td>
                 <td className={`${style.tableData}`}>
-                  <button className={style.deleteBu} onClick={()=>handleDelete(e.id)}>
+                 {!e.admin && <button className={style.deleteBu} onClick={()=>handleDelete(e.id)}>
                     <FaTrash />
-                  </button>
+                  </button>}
                   </td>
               </tr>
             ))}
