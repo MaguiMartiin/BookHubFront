@@ -25,10 +25,12 @@
     transition: background-color 0.3s ease;
   }
   
+  .titulo2:hover,
   .sidebutton:hover {
     background-color: #176b87;
   }
   
+  .titulo2:active,
   .sidebutton:active {
     background-color: #0e3542;
   }
@@ -64,6 +66,20 @@
   }
 
   .titulo2 {
+    padding: 10px;
+    background-color: #505050;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0px;
+    margin-top: auto; /* Empuja el botón hacia abajo */
+  }
+  
+  .titulo3 {
     color: rgb(0, 0, 0);
     font-size: 15px;
     font-family: 'Baloo', sans-serif;

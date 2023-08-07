@@ -50,7 +50,6 @@ function App() {
 		if (params.token) {
 			const { token, admin, vendedor } = JSON.parse(params.token);
 			localStorage.setItem("isAdmin", admin);
-			localStorage.setItem("isVendedor", vendedor);
 			localStorage.setItem("accessToken", token );
 		
 			window.location.href = "/home";}
@@ -58,7 +57,6 @@ function App() {
 
   // Comprobar si el usuario es administrador
   const isAdmin = localStorage.getItem("isAdmin") === "true";
-  const isVendedor = localStorage.getItem("isVendedor") === "true";
 
   return (
     <div className="">
@@ -84,7 +82,7 @@ function App() {
         <Route path="/opiniones" element={<Opiniones />} />
 		<Route path="/perfil" element={<Perfil />} />
         {/* Agregar una ruta protegida para el componente DashboardAdmin */}
-        {isAdmin || isVendedor ? (
+        {isAdmin ? (
           <Route path="/dashboard" element={<BackgroundAdmin />} />
         ) : (
           <Route path="/dashboard" element={<Navigate to="/home" replace />} />

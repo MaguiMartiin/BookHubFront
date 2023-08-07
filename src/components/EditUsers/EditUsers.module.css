@@ -87,6 +87,20 @@
 }
 
 .titulo2 {
+  padding: 10px;
+  background-color: #505050;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0px;
+  margin-top: auto; /* Empuja el botón hacia abajo */
+}
+
+.titulo3 {
   color: rgb(0, 0, 0);
   font-size: 15px;
   font-family: 'Baloo', sans-serif;
@@ -94,6 +108,7 @@
   align-items: center;
   margin-left: 18px;
 }
+
 .sidebutton {
   padding: 10px;
   background-color: #5d5d5d;
@@ -207,12 +222,14 @@
   font-size: 14px;
 }
 
+.titulo2:hover,
 .botonIsAdmin:hover,
 .editButton:hover,
 .deleteButton:hover {
   background-color: #238094;
 }
 
+.titulo2:active,
 .botonIsAdmin:active,
 .editButton:active,
 .deleteButton:active {

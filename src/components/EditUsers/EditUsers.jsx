@@ -4,6 +4,7 @@ import { getAllUsers, searchUsers, suspenderUsers, quitarSuspenderUsers, elimina
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import style from './EditUsers.module.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Swal from "sweetalert2"
 
 const EditUsers = () => {
   const location = useLocation();
@@ -102,6 +103,33 @@ const EditUsers = () => {
 
   const startIndex = (currentPage - 1) * usersPerPage;
   const visibleUsers = users?.slice(startIndex, startIndex + usersPerPage);
+  const cart = useSelector((state) => state.cart);
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken")
+    localStorage.removeItem("isAdmin")
+    localStorage.removeItem("cart")
+    cart.splice(0, cart.length);
+  }
+
+  const handleLogoutClick = () => {
+    console.log("login")
+    Swal.fire({
+      title: "¿Estás seguro que deseas cerrar sesión?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#4caf50",
+      cancelButtonColor: "#f44336",
+      confirmButtonText: "Sí, cerrar sesión",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleLogout();
+        navigate("/home");
+      }
+    });
+  };
+
 
   return (
     <div className={style.editUsersContainer}>
@@ -111,8 +139,8 @@ const EditUsers = () => {
           BookHub
         </Link>
         <Link to="/dashboard">
-          <button className={style.titulo2}>Volver</button>
-        </Link>
+        <button className={style.titulo3}>Volver</button>
+          </Link>
         <button className={style.sidebutton} onClick={() => { navigate("/publicaciones") }}>
             Mis publicaciones
         </button>
@@ -125,6 +153,7 @@ const EditUsers = () => {
         <button className={style.sidebutton} onClick={() => { navigate("/recordSale") }}>
             Registro de Ventas
         </button>
+        <button className={style.titulo2} onClick={handleLogoutClick}>Cerrar Sesión</button>
       </div>
       <div className={style.tableContainer}>
 
@@ -141,10 +170,8 @@ const EditUsers = () => {
               <th className={style.tableHeader}>Nombre y Apellido</th>
               <th className={style.tableHeader}>Email</th>
               <th className={style.tableHeader}>Esta Activo</th>
-              <th className={style.tableHeader}>Es Vendedor</th>
               <th className={style.tableHeader}>Es Admin</th>
               <th className={style.tableHeader}>Suspender o Quitar suspensión</th>
-              <th className={style.tableHeader}>Vendedor o Usuario</th>
               <th className={style.tableHeader}>Administrador</th>
               <th className={style.tableHeader}>Eliminar</th>
             </tr>
@@ -159,9 +186,6 @@ const EditUsers = () => {
                   <p className={style.price}>{e.isActive  ? '🟢 Si': '🔴 No'}</p>
                 </td>
                 <td className={style.tableData}>
-                  <p className={style.price}>{e.vendedor  ? '🟢 Si' : '🔴 No'}</p>
-                </td>
-                <td className={style.tableData}>
                   <p className={style.price}>{e.admin  ? '🟢 Si' : '🔴 No'}</p>
                 </td>
                 <td className={`${style.tableData} ${style.actions}`}>
@@ -172,13 +196,6 @@ const EditUsers = () => {
                   </button>}
                 </td>
                 
-                <td className={`${style.tableData}`}>
-               {e?.vendedor?<button className={style.botonIsAdmin} onClick={()=>handleUserVendedor(e.id)}>
-               Usuario
-                  </button> : <button className={e.vendedor? style.botonIsAdmin: style.deleteButton} onClick={()=>handleVendedor(e.id)}>
-                Vendedor
-                  </button>}
-                  </td>
                 <td className={`${style.tableData}`}>
                 <button className={e.admin? style.botonAdmin: style.deleteButton} onClick={()=>handleAdmin(e.id)}>
                 Administrador
