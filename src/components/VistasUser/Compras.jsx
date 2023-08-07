@@ -59,7 +59,7 @@ const Compras = () => {
         </div>
       ) : (
         <div>
-          <div className="mb-10 text-center">
+          <div className=" mt-20 mb-10 text-center">
             <h1 className="text-4xl text-blanco font-bold underline font-secondary">Compras realizadas</h1>
           </div>
           <div className="grid grid-cols-1 gap-8">
