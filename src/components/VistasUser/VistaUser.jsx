@@ -45,7 +45,7 @@ const VistaUser = ({ onLogout }) => {
 						Perfil
 					</a>
 					<button
-						className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+						className=" flex items-center block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
 						onClick={handleLogoutClick}>
 						Cerrar sesión
 					</button>
