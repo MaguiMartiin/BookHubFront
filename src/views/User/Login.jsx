@@ -27,7 +27,7 @@ const Login = () => {
 	
 	return (
 		<div className="container flex flex-col h-screen justify-center items-center">
-			<div className="flex flex-col w-96 py-8 px-4 bg-secondaryLight dark:bg-secondary rounded-xl border border-secondaryBorderLight dark:border-secondaryBorder">
+			<div className="flex flex-col w-96 py-8 px-4 bg-blanco dark:bg-secondary rounded-xl border border-secondaryBorderLight dark:border-secondaryBorder">
 				<Formik
 					initialValues={{
 						email: "",
@@ -88,7 +88,7 @@ const Login = () => {
 						<Form>
 							<div className="flex flex-col my-2">
 								<div className="mb-5 text-center">
-									<h1 className="text-3xl text-customColor4 font-bold">
+									<h1 className="text-3xl text-rojo font-bold">
 										Bienvenido!
 									</h1>
 								</div>
@@ -140,9 +140,9 @@ const Login = () => {
 									<div className="absolute inset-y-0 right-0 flex items-end pr-2 pb-1 ">
 										<button onClick={toggleShowPassword} type="button">
 											{isPasswordShow ? (
-												<AiFillEye size="1.5rem" color="#ff988b" />
+												<AiFillEye size="1.5rem" color="negro" />
 											) : (
-												<AiFillEyeInvisible size="1.5rem" color="#ff988b" />
+												<AiFillEyeInvisible size="1.5rem" color="negro" />
 											)}
 										</button>
 									</div>
@@ -168,7 +168,7 @@ const Login = () => {
 
 							<button
 								type="submit"
-								className="bg-primary text-white px-4 py-2 rounded hover:bg-red-400 w-full">
+								className="bg-negro text-white px-4 py-2 rounded hover:bg-gris w-full">
 								Iniciar sesión
 							</button>
 						</Form>
@@ -178,18 +178,18 @@ const Login = () => {
 					<p class="mx-4 mb-0 text-center font-semibold dark:text-text">OR</p>
 				</div>
 				<div className="flex justify-center">
-					<button onClick={handelGo} className="bg-primary text-white px-4 py-2 rounded hover:bg-red-400 w-full">Ingresa con Google</button>
+					<button onClick={handelGo} className="bg-negro text-white px-4 py-2 rounded hover:bg-gris w-full">Ingresa con Google</button>
 				</div>
 				<div className="flex flex-col mt-8">
 					<div className="text-center flex-row my-1">
 						¿No tenes cuenta?{" "}
-						<Link to="/signup" className="text-customColor1 font-semibold">
+						<Link to="/signup" className="text-negro font-semibold">
 							Registrate.
 						</Link>
 					</div>
 					<div class="text-center flex-row my-">
 						Volver al{" "}
-						<Link to="/home" className="text-customColor1 font-semibold">
+						<Link to="/home" className="text-negro font-semibold">
 							home.
 						</Link>
 					</div>

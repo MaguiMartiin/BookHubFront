@@ -54,7 +54,7 @@ const SignUpFrorm1 = ({ callBack }) => {
 			{({ errors, touched }) => (
 				<Form>
 					{/* <div className="mb-5"> */}
-					<h2 className="text-3xl text-center text-customColor4 font-bold ">
+					<h2 className="text-3xl text-center text-rojo font-bold ">
 						Crear cuenta
 					</h2>
 
@@ -103,9 +103,9 @@ const SignUpFrorm1 = ({ callBack }) => {
 							<div className="absolute inset-y-0 right-0 flex items-end pr-2 pb-1 ">
 								<button onClick={toggleShowPassword} type="button">
 									{isPasswordShow ? (
-										<AiFillEye size="1.5rem" color="#ff988b" />
+										<AiFillEye size="1.5rem" color="rojo" />
 									) : (
-										<AiFillEyeInvisible size="1.5rem" color="#ff988b" />
+										<AiFillEyeInvisible size="1.5rem" color="rojo" />
 									)}
 								</button>
 							</div>
@@ -152,7 +152,7 @@ const SignUpFrorm1 = ({ callBack }) => {
 					</div>
 					<button
 						type="submit"
-						className="bg-primary text-white px-4 py-2 rounded hover:bg-red-400 w-full mt-4">
+						className="bg-negro text-white px-4 py-2 rounded hover:bg-gris w-full mt-4">
 						siguiente
 					</button>
 				</Form>
