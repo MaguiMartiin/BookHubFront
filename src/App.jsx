@@ -15,7 +15,7 @@ import SignUp from './views/User/SignUp'
 import Carrito from './views/Carrito/Carrito'
 import MyBooks from './views/MyBooks/MyBooks'
 import Compras from './components/VistasUser/Compras'
-import Ventas from './components/VistasUser/Ventas'
+import Publicaciones from './views/DashboardAdmin/Publicaciones'
 import Opiniones from './components/VistasUser/PuntOp'
 import Nav from './components/NavBar/Nav'
 import axios from 'axios';
@@ -26,9 +26,10 @@ import CrudBooks from "./components/DashBoard Components/CrudBooks"
 import EditUsers from "./components/EditUsers/EditUsers"
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import FormOp from './components/VistasUser/FormOp'
 
 
-axios.defaults.baseURL = "https://servidor-libreria.onrender.com/";
+axios.defaults.baseURL = "https://servidor-libreria.onrender.com";
 
 
 function App() {
@@ -48,13 +49,18 @@ function App() {
 		const params = Object.fromEntries(urlSearchParams.entries());
 
 		if (params.token) {
-			localStorage.setItem("accessToken", params.token);
+			const objString = decodeURIComponent(params.token);
+			const obj = JSON.parse(objString);
+			// Guardar el token y el valor de admin en el localStorage
+			localStorage.setItem("accessToken", obj.token);
+			localStorage.setItem("isAdmin", obj.admin);
+
 			window.location.href = "/home";
 		}
 	}, []);
 
-  // Comprobar si el usuario es administrador
-  const isAdmin = localStorage.getItem("isAdmin") === "true";
+	// Comprobar si el usuario es administrador
+	const isAdmin = localStorage.getItem("isAdmin") === "true";
 
   return (
     <div className="">
@@ -76,9 +82,10 @@ function App() {
         <Route path="/MyBooks" element={<MyBooks />} />
         <Route path="/carrito" element={<Carrito />} />
         <Route path="/compras" element={<Compras />} />
-        <Route path="/publicaciones" element={<Ventas />} />
+        <Route path="/publicaciones" element={<Publicaciones />} />
         <Route path="/opiniones" element={<Opiniones />} />
-		<Route path="/perfil" element={<Perfil />} />
+		    <Route path="/perfil" element={<Perfil />} />
+        <Route path="/formOp"element={<FormOp/>}/>
         {/* Agregar una ruta protegida para el componente DashboardAdmin */}
         {isAdmin ? (
           <Route path="/dashboard" element={<BackgroundAdmin />} />

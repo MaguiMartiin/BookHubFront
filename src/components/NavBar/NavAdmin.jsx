@@ -38,40 +38,38 @@ export default function NavAdmin() {
     return (
           <div className="">
               <div
-                  className={`p-2 flex fixed items-center justify-between flex-wrap  z-10 lg:w-full text-white transition-all duration-300 ${
-                      bg ? "bg-rojo" : "bg-transparent"
-                  } `}>
-                  <Link to="/" className={style.h1}>
-                      BookHub
-                  </Link>
-                  <div className={style.div}>
-                      <Link to="/home" className={style.link}>
-                          Inicio
-                      </Link>
+                className={`p-6 flex fixed items-center justify-between flex-wrap  z-10 lg:w-full text-white transition-all duration-300 ${ bg ? "bg-rojo" : "bg-transparent"} `}>
+                <Link to="/" class="text-6xl text-white font-primary">
+                    BookHub
+                </Link>
+                 
+                <Link to="/home" className={style.link}>
+                    Inicio
+                </Link>
                     {isLoggedIn && (
                     <div>
-                     <Link to="/dashboard" className={style.link}>
+                    <Link to="/dashboard" className={style.link}>
                         Dashboard
-                        </Link>
-                      </div>
-                  )}
-                      <Link to="/carrito" className={style.link}>
-                          {cart.length > 0 ? (
-                              <div className={style.cartIndicator}>
-                                  <FaCartArrowDown />
-                                  <div className={style.badge}>{cart.length}</div>
-                              </div>
-                          ) : (
-                              <FaCartArrowDown />
-                          )}
-                      </Link>
-                  </div>
+                    </Link>
+                    </div>
+                    )}
+                <Link to="/carrito" className={style.link}>
+                    {cart.length > 0 ? (
+                        <div className={style.cartIndicator}>
+                            <FaCartArrowDown />
+                            <div className={style.badge}>{cart.length}</div>
+                            </div>
+                    ) : (
+                            <FaCartArrowDown />
+                        )}
+                </Link>
+                  
                   {isLoggedIn && (
                     
                       <div >
                           <button
                               onClick={handleUserButtonClick}
-                              className={style.userButton}>
+                              className="">
                               <FaUser size={32} />
                           </button>
                           {showVistaUser && <VistaAdmin onLogout={handleLogout} />}
