@@ -7,7 +7,8 @@ import Swal from "sweetalert2"
 
 export default function BackgroundAdmin() {
     const navigate = useNavigate();
-    const cart = useSelector((state) => state.cart);
+    const cart = useSelector((state) => state.cart); 
+    const isAdmin = localStorage.getItem("isAdmin") === "true";
 
     const handleLogout = () => {
       localStorage.removeItem("accessToken")
@@ -50,7 +51,7 @@ export default function BackgroundAdmin() {
        {<button className={styles.sidebutton} onClick={() => { navigate("/editUsers") }}>
             Editar Usuarios
         </button>}
-       {<button className={styles.sidebutton} onClick={() => { navigate("/recordSale") }}>
+       {!isAdmin&&<button className={styles.sidebutton} onClick={() => { navigate("/recordSale") }}>
             Registro de Ventas
         </button>}
 

@@ -155,9 +155,9 @@ const EditUsers = () => {
         <button className={location.pathname !== "/" ? style.boton : style.sidebutton}>
           Editar Usuarios
         </button>
-        <button className={style.sidebutton} onClick={() => { navigate("/recordSale") }}>
+       {!isAdmin && <button className={style.sidebutton} onClick={() => { navigate("/recordSale") }}>
             Registro de Ventas
-        </button>
+        </button>}
         <button className={style.titulo2} onClick={handleLogoutClick}>Cerrar Sesión</button>
       </div>
       <div className={style.tableContainer}>
