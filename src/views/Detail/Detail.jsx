@@ -92,7 +92,7 @@ const Detail = () => {
                         <h1 class="font-primary text-negro text-9xl ml-5 mr-2">{puntuationId}</h1>
                         <StarRating rating={puntuationId} size="3rem"/>
                     </div>    
-                    <div className="flex flex-col justify-center mt-8 w-full space-y-4">
+                    <div className="flex flex-col justify-center mt-10 w-full space-y-4">
                         <h1 class="font-primary text-negro text-4xl text-center">Opiniones del producto</h1>
                         {opinionId?.map((e) => {
                             return(

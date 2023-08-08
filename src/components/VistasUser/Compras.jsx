@@ -49,7 +49,7 @@ const Compras = () => {
   const books = Object.values(groupedBooks);
 
   return (
-    <div className="flex flex-col items-center py-10 bg-negro min-h-screen">
+    <div className="flex flex-col items-center py-10 bg-negro min-h-screen pt-24">
       {books.length === 0 ? (
         <div className="flex flex-col items-center justify-center font-secondary" style={{ height: "45vh" }}>
           <p className="text-2xl mb-4 text-blanco font-bold">POR AHORA NO HAS COMPRADO NINGÚN LIBRO</p>
