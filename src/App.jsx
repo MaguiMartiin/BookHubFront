@@ -15,7 +15,7 @@ import SignUp from './views/User/SignUp'
 import Carrito from './views/Carrito/Carrito'
 import MyBooks from './views/MyBooks/MyBooks'
 import Compras from './components/VistasUser/Compras'
-import Ventas from './components/VistasUser/Ventas'
+import Publicaciones from './views/DashboardAdmin/Publicaciones'
 import Opiniones from './components/VistasUser/PuntOp'
 import Nav from './components/NavBar/Nav'
 import axios from 'axios';
@@ -26,6 +26,7 @@ import CrudBooks from "./components/DashBoard Components/CrudBooks"
 import EditUsers from "./components/EditUsers/EditUsers"
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import FormOp from './components/VistasUser/FormOp'
 
 
 axios.defaults.baseURL = "https://servidor-libreria.onrender.com";
@@ -61,50 +62,51 @@ function App() {
 	// Comprobar si el usuario es administrador
 	const isAdmin = localStorage.getItem("isAdmin") === "true";
 
-	return (
-		<div className="">
-			{location.pathname !== "/" &&
-				location.pathname !== "/login" &&
-				location.pathname !== "/dashboard" &&
-				location.pathname !== "/recordSale" &&
-				location.pathname !== "/crudBooks/:id" &&
-				location.pathname !== "/editUsers" &&
-				location.pathname !== "/signup" && <Nav />}
-			<Routes>
-				<Route exact path="/" element={<Landing />} />
-				<Route path="/home" element={<Home />} />
-				<Route path="/home/:id" element={<Detail />} />
-				<Route path="/editar/:id" element={<EditDetail />} />
-				<Route path="/form" element={<Form />} />
-				<Route path="/login" element={<Login />} />
-				<Route path="/signup" element={<SignUp />} />
-				<Route path="/MyBooks" element={<MyBooks />} />
-				<Route path="/carrito" element={<Carrito />} />
-				<Route path="/compras" element={<Compras />} />
-				<Route path="/publicaciones" element={<Ventas />} />
-				<Route path="/opiniones" element={<Opiniones />} />
-				<Route path="/perfil" element={<Perfil />} />
-				{/* Agregar una ruta protegida para el componente DashboardAdmin */}
-				{isAdmin ? (
-					<Route path="/dashboard" element={<BackgroundAdmin />} />
-				) : (
-					<Route path="/dashboard" element={<Navigate to="/home" replace />} />
-				)}
-				{/* Resto de tus rutas */}
-				<Route path="/crudBooks/:id" element={<CrudBooks />} />
-				{isAdmin ? (
-					<Route path="/editUsers" element={<EditUsers />} />
-				) : (
-					<Route path="/editUsers" element={<Navigate to="/home" replace />} />
-				)}
-				{isAdmin ? (
-					<Route path="/recordSale" element={<RecordSale />} />
-				) : (
-					<Route path="/recordSale" element={<Navigate to="/home" replace />} />
-				)}
-			</Routes>
-		</div>
-	);
+  return (
+    <div className="">
+      {location.pathname !== "/" &&
+        location.pathname !== "/login"&&
+        location.pathname !== "/dashboard" &&
+        location.pathname !== "/recordSale" &&
+        location.pathname !== "/crudBooks/:id" &&
+        location.pathname !== "/editUsers" &&
+        location.pathname !== "/signup" && <Nav />}
+      <Routes>
+        <Route exact path="/" element={<Landing />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/home/:id" element={<Detail />} />
+        <Route path="/editar/:id" element={<EditDetail />} />
+        <Route path="/form" element={<Form />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/MyBooks" element={<MyBooks />} />
+        <Route path="/carrito" element={<Carrito />} />
+        <Route path="/compras" element={<Compras />} />
+        <Route path="/publicaciones" element={<Publicaciones />} />
+        <Route path="/opiniones" element={<Opiniones />} />
+		    <Route path="/perfil" element={<Perfil />} />
+        <Route path="/formOp"element={<FormOp/>}/>
+        {/* Agregar una ruta protegida para el componente DashboardAdmin */}
+        {isAdmin ? (
+          <Route path="/dashboard" element={<BackgroundAdmin />} />
+        ) : (
+          <Route path="/dashboard" element={<Navigate to="/home" replace />} />
+        )}
+        {/* Resto de tus rutas */}
+        <Route path="/crudBooks/:id" element={<CrudBooks />} />
+		{isAdmin ? (
+           <Route path="/editUsers" element={<EditUsers />} /> 
+        ) : (
+          <Route path="/editUsers" element={<Navigate to="/home" replace />} />
+        )}
+		{isAdmin ? (
+           <Route path="/recordSale" element={<RecordSale />} />
+        ) : (
+          <Route path="/recordSale" element={<Navigate to="/home" replace />} />
+        )}
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
