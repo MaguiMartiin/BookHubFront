@@ -1,0 +1,173 @@
+.editGenderContainer {
+    width: 100%;
+    display: flex;
+  }
+  
+  .sidebar {
+    height: 120vh;
+    min-width: 220px;
+    background: rgb(205, 205, 205);
+    display: flex;
+    font-size: 18px;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  
+  .titulo1 {
+    color: rgb(0, 0, 0);
+    font-size: 40px;
+    font-family: 'Baloo', sans-serif;
+    display: flex;
+    align-items: center;
+    margin-left: 18px;
+  }
+  
+  .titulo2 {
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+    font-family: 'Baloo', sans-serif;
+    display: flex;
+    align-items: center;
+    margin-left: 18px;
+  }
+  
+  .sidebutton {
+    padding: 12px;
+    background-color: #5d5d5d;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 7px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sidebutton:hover {
+    background-color: #176b87;
+  }
+  
+  .sidebutton:active {
+    background-color: #c1c4c4;
+  }
+  
+  .boton {
+    padding: 8px;
+    background-color: #176b87;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 7px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .tableHeader,
+  .tableData {
+    padding: 16px;
+    font-size: 16px;
+    border: 1px solid #838383;
+  }
+  
+  .tableHeader {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  .tableRow:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .tableRow:nth-child(odd) {
+    background-color: #c4c1c1;
+  }
+  
+  .editButtonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .editBu {
+    padding: 8px;
+    background-color: #0e6902;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+  }
+  
+  .tableContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    width: 90%;
+  }
+  
+  .genderTable {
+    width: 90%;
+    max-width: 600px;
+    border-collapse: collapse;
+    margin: 0 auto;
+  }
+  
+  .inputContainer {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-right: 12px;
+  }
+  
+  .inputButton {
+    padding: 12px 20px;
+    background-color: #176b87;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+
+  .create {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.create p {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.createBut {
+    padding: 12px 20px;
+    background-color: #176b87;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.createBut:hover {
+    background-color: #0e4e6a;
+}
+
+.createBut:active {
+    background-color: #c1c4c4;
+}

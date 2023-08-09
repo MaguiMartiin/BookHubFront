@@ -6,12 +6,13 @@ import cloudinary from "./Cloudinary";
 import { useDispatch, useSelector } from "react-redux";
 import { getGenders, getAuthor } from "../../redux/actions";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { IoIosAddCircle } from "react-icons/io";
 import { AiOutlineCalendar } from "react-icons/ai";
 import {BsFillFileEarmarkPersonFill} from "react-icons/bs";
 import {BiSolidBook} from "react-icons/bi";
 import { FaDollarSign, FaHashtag } from "react-icons/fa";
+import style from "./FormCreate.module.css"
 
 const FormRegistro = () => {
 	const dispatch = useDispatch();
@@ -98,6 +99,9 @@ const FormRegistro = () => {
 	return (
 		<div className="w-full min-h-[100vh] pt-24  px-16 ">
 			<div>
+			<Link to="/dashboard">
+                    <button className={style.titulo2}>Volver</button>
+                </Link>
 				<h2 className="font-black text-[2.5rem] font-secondary  text-center text-rojo">
 					Registra tus libros
 				</h2>

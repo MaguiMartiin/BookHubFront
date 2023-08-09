@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom"
 import { bookId, addToCart, getPuntuationId, getOpinionId } from "../../redux/actions"
 import Swal from "sweetalert2"
 import { useState } from "react"
+import StarRating from "./Starts"
 
 const Detail = () => {
     const dispatch = useDispatch()
@@ -29,6 +30,7 @@ const Detail = () => {
 
     const puntuationId = useSelector(state => state.puntuationId)
     const opinionId = useSelector(state => state.opinionId)
+    console.log(opinionId);
 
     const addCart = () => {
           const isBookInCart = cart.find((item) => item.id === bookDetail.id);
@@ -83,21 +85,27 @@ const Detail = () => {
                     </div>
                 </div>
             </div>
+            
+            {opinionId?.length > 0 ? (
             <div className="flex bg-blanco mt-10">
                     <div className="flex justify-between p-10">
-                        <h1 class="font-primary text-negro text-9xl ml-20">{puntuationId}</h1>
+                        <h1 class="font-primary text-negro text-9xl ml-5 mr-2">{puntuationId}</h1>
+                        <StarRating rating={puntuationId} size="3rem"/>
                     </div>    
-                    <div className="flex flex-col justify-center mt-8 w-full items-center space-y-6">
-                        <h1 class="font-primary text-negro text-4xl ">Opiniones del producto</h1>
+                    <div className="flex flex-col justify-center mt-10 w-full space-y-4">
+                        <h1 class="font-primary text-negro text-4xl text-center">Opiniones del producto</h1>
                         {opinionId?.map((e) => {
                             return(
-                                <div className="pb-5 border-b border-negro">
-                                    <h1>{e.comment}</h1>
+                                <div className="pb-5 border-b border-negro p-2">
+                                    <h1>{e.name}</h1>
+                                    <StarRating rating={e.punctuation} />
+                                    <h1 className="mt-2">{e.comment}</h1>
                                 </div>
                                 )
                         })}
                     </div>
             </div>
+            ) : null}
                 
             
         </div>

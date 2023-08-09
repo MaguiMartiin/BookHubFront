@@ -4,22 +4,31 @@ import { Link, useNavigate } from 'react-router-dom';
 
 
 export default function BackgroundAdmin() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <div className={styles.dashContain}>
-    <div className={styles.sidebar}>
+      <div className={styles.sidebar}>
         <Link to="/" className={styles.titulo1}>BookHub</Link>
         <Link to="/home">
-        <button className={styles.titulo2}>Volver</button>
-          </Link>
+          <button className={styles.titulo2}>Home</button>
+        </Link>
+        <button className={styles.sidebutton} onClick={() => { navigate("/publicaciones") }}>
+          Mis publicaciones
+        </button>
         <button className={styles.sidebutton} onClick={() => { navigate("/form") }}>
-            Realizar una publicación
+          Realizar una nueva publicación
         </button>
         <button className={styles.sidebutton} onClick={() => { navigate("/editUsers") }}>
-            Editar Usuarios
+          Editar Usuarios
         </button>
         <button className={styles.sidebutton} onClick={() => { navigate("/recordSale") }}>
-            Registro de Ventas
+          Registro de Ventas
+        </button>
+        <button className={styles.sidebutton} onClick={() => { navigate("/editGender") }}>
+            Editar o Crear Género
+        </button>
+        <button className={styles.sidebutton} onClick={() => { navigate("/editAutor") }}>
+            Editar o crear Autor 
         </button>
       </div>
       <div className={styles.contenido}>
@@ -28,7 +37,7 @@ export default function BackgroundAdmin() {
           <h1 className={styles.titulo}>DashBoard Principal</h1>
         </header>
       </div>
-   
+
     </div>
   );
 }

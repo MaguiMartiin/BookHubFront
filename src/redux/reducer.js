@@ -18,9 +18,13 @@ import {
 	GET_OPINION,
 	GET_OPINION_ID,
 	GET_PURCHASES,
-	PERFIL,
 	GET_USERS,
-	TOP_BOOKS
+	TOP_BOOKS,
+	EDIT_GENDERS,
+	EDIT_AUTHOR,
+	PERFIL,
+	CREATE_GENDER,
+	CREATE_AUTHOR
 } from "./action-types";
 
 const initialState = {
@@ -60,6 +64,17 @@ const rootReducer = (state = initialState, action) => {
 				allBooks: [...state.allBooks, action.payload],
 				copyState: [...state.copyState, action.payload],
 			};
+		case CREATE_GENDER:
+			return {
+				...state,
+				genders: [...state.genders, action.payload],
+			}
+		case CREATE_AUTHOR:
+			return{
+				...state,
+				authors: [...state.authors, action.payload]
+			}
+
 		case FILTER:
 			return {
 				...state,
@@ -70,6 +85,21 @@ const rootReducer = (state = initialState, action) => {
 				...state,
 				genders: action.payload,
 			};
+		case EDIT_GENDERS:
+				return {
+					...state,
+					genders: state.genders.map((gender, index) =>
+						index === action.payload.index ? action.payload.editedGender : gender
+					),
+				};
+		case EDIT_AUTHOR:
+				return {
+					...state,
+					authors: state.authors.map((authors, index) =>
+						index === action.payload.index ? action.payload.editedAuthor : authors
+					),
+				};		
+				
 		case GET_AUTHORS:
 			return {
 				...state,

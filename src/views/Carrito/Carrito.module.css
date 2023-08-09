@@ -2,18 +2,18 @@
     height: auto;
     min-height: 100vh;
     width: 100%;
-    background-color: #FFD8D4;
     display: flex;
     flex-direction: row; 
     align-items: flex-start;
     justify-content: space-between; 
     padding: 20px;
+    padding-top: 60px;
     z-index: -10;
   }
   
   .card {
     display: flex;
-    background-color: #FF988B; 
+    background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.267); 
     border-radius: 8px; 
     padding: 20px; 
@@ -74,6 +74,7 @@
     width: 100%;
     max-width: 300px;
     margin-top: 20px;
+    margin-left: 50px;
     position:sticky;
     right: 50px;
     top: 25%;
@@ -101,7 +102,7 @@
   .quantityButton {
     font-size: 18px;
     padding: 8px 12px;
-    background-color: #FF988B;
+    background-color: #f56565;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -110,7 +111,7 @@
   }
   
   .quantityButton:hover {
-    background-color: #FF7A66;
+    background-color: #f13d3d;
   }
   
   .quantityInput {
@@ -121,6 +122,7 @@
     border: 1px solid #ddd;
     background-color: #fff;
     border-radius: 4px;
+    color: black;
   }
   
   .totalPrice {
@@ -140,8 +142,8 @@
     font-size: 16px;
     width: 30px;
     height: 30px;
-    background-color: #e02d15;
-    color: #fff;
+    background-color: #f56565;
+    color: #ffffff;
     border: none;
     cursor: pointer;
     border-radius: 50%;
@@ -152,10 +154,11 @@
     top: 10px;
     right: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font:bolder;
   }
     
   .deleteButton:hover {
-    background-color: #e95510;
+    background-color: #f13d3d;
   }
 
   .payButton{

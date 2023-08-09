@@ -19,6 +19,11 @@ export const GET_OPINION_ID = 'GET_OPINION_ID';
 export const GET_PURCHASES = "GET_PURCHASES";
 export const GET_USERS = "GET_USERS";
 export const TOP_BOOKS = 'TOP_BOOKS'
+export const EDIT_GENDERS = 'EDIT_GENDERS'
+export const EDIT_AUTHOR = 'EDIT_AUTHOR'
+export const CREATE_GENDER = 'CREATE_GENDER'
+export const CREATE_AUTHOR = 'CREATE_AUTHOR'
+
 
 // profile
 export const PERFIL = "PERFIL"
