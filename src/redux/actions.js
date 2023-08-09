@@ -1,26 +1,28 @@
 import {
-  GET_BOOKS,
-  CREATE_BOOK,
-  FILTER,
-  GET_GENDERS,
-  BOOK_ID,
-  GET_BOOK_NAME,
-  EDIT_BOOK,
-  DELETE_BOOK,
-  GET_AUTHORS,
-  ADD_TO_CART,
-  DELETE_FROM_CART,
-  REFRESH_CART,
-  PUBLICACIONES_ID,
-  REMOVE_TO_CART,
-  GET_PUNTUATION,
-  GET_PUNTUATION_ID,
-  GET_OPINION,
-  GET_OPINION_ID,
-  GET_PURCHASES,
-  GET_USERS, 
-  PERFIL,
-  TOP_BOOKS
+	GET_BOOKS,
+	CREATE_BOOK,
+	FILTER,
+	GET_GENDERS,
+	BOOK_ID,
+	GET_BOOK_NAME,
+	EDIT_BOOK,
+	DELETE_BOOK,
+	GET_AUTHORS,
+	ADD_TO_CART,
+	DELETE_FROM_CART,
+	REFRESH_CART,
+	PUBLICACIONES_ID,
+	REMOVE_TO_CART,
+	GET_PUNTUATION,
+	GET_PUNTUATION_ID,
+	GET_OPINION,
+	GET_OPINION_ID,
+	GET_PURCHASES,
+	PERFIL,
+  GET_USERS,
+  TOP_BOOKS,
+  EDIT_GENDERS,
+  EDIT_AUTHOR
 } from "./action-types";
 
 import axios from "axios";
@@ -237,6 +239,37 @@ export const editBook = (id, bookData) => {
     }
   }
 }
+
+export const updateGender = (index, genderData) => {
+  return async (dispatch) => {
+      try {
+          const response = await axios.put(`/gender/${index}`, genderData);
+          if (response.status === 200) {
+              dispatch({ type: EDIT_GENDERS, payload: { index, editedGender: genderData.newName } });
+          }
+      } catch (error) {
+          return {
+              error: error.message,
+          };
+      }
+  };
+}
+
+export const updateAuthor = (index, authorData) => {
+  return async (dispatch) => {
+      try {
+          const response = await axios.put(`/author/${index}`, authorData);
+          if (response.status === 200) {
+              dispatch({ type: EDIT_AUTHOR, payload: { index, editedAuthor: authorData.newName } });
+          }
+      } catch (error) {
+          return {
+              error: error.message,
+          };
+      }
+  };
+}
+
 
 export const bookDelete = (id) => {
   return async function (dispatch) {
