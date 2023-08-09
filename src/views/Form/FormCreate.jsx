@@ -112,6 +112,8 @@ const FormRegistro = () => {
 						AuthorId: "",
 						GenderId: "",
 						releaseDate: "",
+						language: "",
+						pages: 0,
 					}}
 					onSubmit={handleSubmit}>
 					{({ errors, setFieldValue, isSubmitting, values }) => (
