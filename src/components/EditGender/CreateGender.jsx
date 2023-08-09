@@ -29,7 +29,7 @@ const CreateGender = () => {
                 }).then(() => {
                     dispatch(getGenders());
                 }).then(() => {
-                    navigate('/editGender')
+                    navigate('/dashboard')
                 })
             } catch (error) {
                 console.error("Error al crear el género:", error);

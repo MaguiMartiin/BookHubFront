@@ -99,8 +99,8 @@ const EditAutor = () => {
                 <table className={style.genderTable}>
                     <thead>
                         <tr>
-                            <th className={style.tableHeader}> GÉNEROS </th>
-                            <th className={style.tableHeader}>EDITAR GÉNEROS</th>
+                            <th className={style.tableHeader}> AUTOR </th>
+                            <th className={style.tableHeader}>EDITAR AUTOR</th>
                         </tr>
                     </thead>
                     <tbody>
