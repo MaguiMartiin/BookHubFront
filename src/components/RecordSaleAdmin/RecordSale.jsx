@@ -35,9 +35,12 @@ export default function RecordSale() {
         <div className={style.dashContain}>
             <div className={style.sidebar}>
                 <Link to="/" className={style.titulo1}>BookHub</Link>
-                <Link to="/dashboard">
-                    <button className={style.titulo2}>Volver</button>
+                <Link to="/home">
+                    <button className={style.titulo2}>Home</button>
                 </Link>
+                <button className={style.sidebutton} onClick={() => { navigate("/publicaciones") }}>
+                    Mis publicaciones
+                </button>
                 <button className={style.sidebutton} onClick={() => { navigate("/form") }}>
                     Realizar una publicación
                 </button>

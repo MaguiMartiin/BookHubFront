@@ -43,7 +43,7 @@ const EditGender = () => {
                     showConfirmButton: false,
                     timer: 1500
                 }).then(() => {
-                    navigate("/dashboard");
+                    navigate("/editGender");
                     dispatch(getGenders());
                 });
             } catch (error) {
