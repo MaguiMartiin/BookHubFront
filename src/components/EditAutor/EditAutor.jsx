@@ -6,6 +6,9 @@ import { getAuthor, updateAuthor } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
+import axios from "axios";
+import { EDIT_AUTHOR } from "../../redux/action-types";
+
 
 const EditAutor = () => {
     const navigate = useNavigate();
@@ -41,13 +44,26 @@ const EditAutor = () => {
                     showConfirmButton: false,
                     timer: 1500
                 }).then(() => {
-                    navigate("/dashboard");
+                    dispatch(getAuthor());
                 });
             } catch (error) {
                 console.error("Error al actualizar el Autor:", error);
             }
         }
     };
+
+
+    // const deleteGender = async (index) => {
+    //     try {
+    //         const response = await axios.delete(`/author/${index}`);
+    //         if (response.status === 200) {
+    //             const updatedAutores = autores.filter((_, idx) => idx !== index);
+    //             dispatch({ type: EDIT_AUTHOR, payload: updatedAutores });
+    //         }
+    //     } catch (error) {
+    //         console.error("Error al eliminar el autor:", error);
+    //     }
+    // };
 
 
     return (
@@ -69,10 +85,10 @@ const EditAutor = () => {
             Registro de Ventas
         </button>
         <button className={style.sidebutton} onClick={() => { navigate("/editGender") }}>
-            Editar Género 
+        Editar o Crear Género 
         </button>
         <button className={location.pathname !== "/" ? style.boton : style.sidebutton} onClick={() => { navigate("/editAutor") }} >
-            Editar Autor 
+        Editar o Crear Autor
         </button>
             </div> 
             <div className={style.tableContainer}>
@@ -103,7 +119,7 @@ const EditAutor = () => {
                                         <button className={style.editBu} onClick={() => handleEditGender(idx)}>
                                             <FaEdit />
                                         </button>
-                                        {/* <button className={style.deleteBu} onClick={() => deleteGender(gender)}>
+                                        {/* <button className={style.deleteBu} onClick={() => deleteGender(auth)}>
                                             Eliminar
                                         </button> */}
                                         </div>
@@ -113,6 +129,13 @@ const EditAutor = () => {
                         ))}
                     </tbody>
                 </table>
+                <div className={style.create}>
+                    <p>Deseas crear un nuevo Autor?</p>
+                    <Link to="/createAutor">   
+          <button className={style.createBut}>Crear Autor</button>
+                    </Link>
+              
+            </div>
             </div>
         </div>
     )
