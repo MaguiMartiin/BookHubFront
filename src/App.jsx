@@ -48,20 +48,17 @@ function App() {
     }
   }, [dispatch]);
 
-  useEffect(() => {
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries());
-
-    if (params.token) {
-      const objString = decodeURIComponent(params.token);
-      const obj = JSON.parse(objString);
-      // Guardar el token y el valor de admin en el localStorage
-      localStorage.setItem("accessToken", obj.token);
-      localStorage.setItem("isAdmin", obj.admin);
-
-      window.location.href = "/home";
-    }
-  }, []);
+	useEffect(() => {
+		const urlSearchParams = new URLSearchParams(window.location.search);
+		const params = Object.fromEntries(urlSearchParams.entries());
+	
+		if (params.token) {
+			const { token, admin, vendedor } = JSON.parse(params.token);
+			localStorage.setItem("isAdmin", admin);
+			localStorage.setItem("accessToken", token );
+		
+			window.location.href = "/home";}
+	}, []);
 
   // Comprobar si el usuario es administrador
   const isAdmin = localStorage.getItem("isAdmin") === "true";

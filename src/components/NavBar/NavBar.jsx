@@ -28,6 +28,7 @@ const NavBar = () => {
   const handleLogout = () => {
     localStorage.removeItem("accessToken")
     localStorage.removeItem("isAdmin")
+    localStorage.removeItem("isVendedor")
     localStorage.removeItem("cart")
     cart.splice(0, cart.length);
     setIsLoggedIn(false)

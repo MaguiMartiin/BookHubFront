@@ -31,6 +31,13 @@
     align-items: center;
     margin-left: 18px;
   }
+  .titulo3 {
+    color: rgb(255, 255, 255);
+    display: flex;
+    position: relative;
+    font-size: 17px;
+    left: 70px;
+  }
   
   .sidebutton {
     padding: 12px;
