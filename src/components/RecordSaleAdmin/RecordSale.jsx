@@ -7,17 +7,17 @@ import { useSelector } from 'react-redux';
 import Swal from "sweetalert2"
 
 export default function RecordSale() {
+  const token = localStorage.getItem("accessToken");
     const navigate = useNavigate();
     const [mes, setMes ] = useState([])
-    const [user, setUser ] = useState([])
     const data = [
-    { name: mes[0]?.dia ? mes[0]?.dia: "Domingo", VENTAS: mes[0]?.total?mes[0]?.total : 0, USUARIOS: user[0]?.total? Number(user[0]?.total): 0},
-    { name: mes[1]?.dia ? mes[1]?.dia: "Lunes",   VENTAS: mes[1]?.total?mes[1]?.total : 0, USUARIOS: user[1]?.total? Number(user[1]?.total): 0},
-    { name: mes[2]?.dia ? mes[2]?.dia: "Martes",  VENTAS: mes[2]?.total?mes[2]?.total : 0, USUARIOS: user[2]?.total? Number(user[2]?.total): 0 },
-    { name: mes[3]?.dia ? mes[3]?.dia: "Miercoles", VENTAS: mes[3]?.total?mes[3]?.total : 0, USUARIOS: user[3]?.total? Number(user[3]?.total): 0 },
-    { name: mes[4]?.dia ? mes[4]?.dia: "Jueves",  VENTAS: mes[4]?.total?mes[4]?.total : 0, USUARIOS: user[4]?.total? Number(user[4]?.total): 0 },
-    { name: mes[5]?.dia ? mes[5]?.dia: "Viernes", VENTAS: mes[5]?.total?mes[5]?.total : 0, USUARIOS: user[5]?.total? Number(user[5]?.total): 0 },
-    { name: mes[6]?.dia ? mes[6]?.dia: "Sabado",  VENTAS: mes[6]?.total?mes[6]?.total : 0, USUARIOS: user[6]?.total? Number(user[6]?.total): 0},
+    { name: mes[0]?.dia ? mes[0]?.dia: "Domingo", VENTAS: mes[0]?.ventas?mes[0]?.ventas : 0},
+    { name: mes[1]?.dia ? mes[1]?.dia: "Lunes",   VENTAS: mes[1]?.ventas?mes[1]?.ventas : 0},
+    { name: mes[2]?.dia ? mes[2]?.dia: "Martes",  VENTAS: mes[2]?.ventas?mes[2]?.ventas : 0},
+    { name: mes[3]?.dia ? mes[3]?.dia: "Miercoles", VENTAS: mes[3]?.ventas?mes[3]?.ventas : 0},
+    { name: mes[4]?.dia ? mes[4]?.dia: "Jueves",  VENTAS: mes[4]?.ventas?mes[4]?.ventas : 0 },
+    { name: mes[5]?.dia ? mes[5]?.dia: "Viernes", VENTAS: mes[5]?.ventas?mes[5]?.ventas : 0 },
+    { name: mes[6]?.dia ? mes[6]?.dia: "Sabado",  VENTAS: mes[6]?.ventas?mes[6]?.ventas : 0},
 ]
 
 const cart = useSelector((state) => state.cart);
@@ -48,15 +48,12 @@ const handleLogoutClick = () => {
 };
 useEffect(()=>{
     const ress = async () => {
-        const res = (await axios.get("/compras/all")).data
+        const res = (await axios.get("/compras/all",{headers: {
+          Authorization: `Bearer ${token}`,
+          }})).data
         console.log("precio", res);
         setMes([
             ...res
-        ])
-        const resUser = (await axios.get("/user/all")).data
-        console.log("precio", resUser);
-        setUser([
-            ...resUser
         ])
     }
     ress()
@@ -97,7 +94,6 @@ useEffect(()=>{
                     <Tooltip />
                     <Legend />
                     <Line type="monotone" dataKey="VENTAS" stroke="#249102" activeDot={{ r: 10 }} />
-                    <Line type="monotone" dataKey="USUARIOS" stroke="#ca0000" activeDot={{ r: 10 }} />
                 </LineChart>
       </div>
    
