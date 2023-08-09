@@ -500,11 +500,25 @@ export const adminUsers =  (id) => {
   };
 }
 
-export const noAdminUsers =  (id) => {
+export const vendedorUsers =  (id) => {
   return async (dispatch) => {
     try {
       if(id){
-       const response = await axios.put(`/user/${id}/unadmin`);
+       const response = await axios.put(`/user/${id}/vendedorUser`);
+      }
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  };
+}
+
+export const usersVendedor =  (id) => {
+  return async (dispatch) => {
+    try {
+      if(id){
+       const response = await axios.put(`/user/${id}/userVendedor`);
       }
     } catch (error) {
       return {

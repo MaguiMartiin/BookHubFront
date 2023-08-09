@@ -73,8 +73,8 @@ const EditAutor = () => {
                 <Link to="/" className={style.titulo1}>
                     BookHub
                 </Link>
-                <Link to="/home">
-                    <button className={style.titulo2}>Home</button>
+                <Link to="/home" className={style.sidebutton}>
+                    <button className={style.titulo3}>Inicio</button>
                 </Link>
                 <button className={style.sidebutton} onClick={() => { navigate("/publicaciones") }}>
                     Mis publicaciones
@@ -82,17 +82,18 @@ const EditAutor = () => {
                 <button className={style.sidebutton} onClick={() => { navigate("/form") }}>
                     Realizar una publicación
                 </button>
-                <button className={style.sidebutton} onClick={() => { navigate("/editUsers") }}>
-                    Editar Usuarios
-                </button>
-                <button className={style.sidebutton} onClick={() => { navigate("/recordSale") }}>
-                    Registro de Ventas
-                </button>
+                
                 <button className={style.sidebutton} onClick={() => { navigate("/editGender") }}>
                     Editar o Crear Género
                 </button>
                 <button className={location.pathname !== "/" ? style.boton : style.sidebutton} onClick={() => { navigate("/editAutor") }} >
                     Editar o Crear Autor
+                </button>
+                <button className={style.sidebutton} onClick={() => { navigate("/editUsers") }}>
+                    Editar Usuarios
+                </button>
+                <button className={style.sidebutton} onClick={() => { navigate("/recordSale") }}>
+                    Registro de Ventas
                 </button>
             </div>
             <div className={style.tableContainer}>
