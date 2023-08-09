@@ -20,7 +20,9 @@ import {
 	GET_PURCHASES,
 	PERFIL,
   GET_USERS,
-  TOP_BOOKS
+  TOP_BOOKS,
+  EDIT_GENDERS,
+  EDIT_AUTHOR
 } from "./action-types";
 
 import axios from "axios";
@@ -238,6 +240,37 @@ export const editBook = (id, bookData) => {
     }
   }
 }
+
+export const updateGender = (index, genderData) => {
+  return async (dispatch) => {
+      try {
+          const response = await axios.put(`/gender/${index}`, genderData);
+          if (response.status === 200) {
+              dispatch({ type: EDIT_GENDERS, payload: { index, editedGender: genderData.newName } });
+          }
+      } catch (error) {
+          return {
+              error: error.message,
+          };
+      }
+  };
+}
+
+export const updateAuthor = (index, authorData) => {
+  return async (dispatch) => {
+      try {
+          const response = await axios.put(`/author/${index}`, authorData);
+          if (response.status === 200) {
+              dispatch({ type: EDIT_AUTHOR, payload: { index, editedAuthor: authorData.newName } });
+          }
+      } catch (error) {
+          return {
+              error: error.message,
+          };
+      }
+  };
+}
+
 
 export const bookDelete = (id) => {
   return async function (dispatch) {

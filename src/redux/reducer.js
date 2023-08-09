@@ -20,7 +20,9 @@ import {
 	GET_PURCHASES,
 	PERFIL,
 	GET_USERS,
-	TOP_BOOKS
+	TOP_BOOKS,
+	EDIT_GENDERS,
+	EDIT_AUTHOR
 } from "./action-types";
 
 const initialState = {
@@ -70,6 +72,21 @@ const rootReducer = (state = initialState, action) => {
 				...state,
 				genders: action.payload,
 			};
+		case EDIT_GENDERS:
+				return {
+					...state,
+					genders: state.genders.map((gender, index) =>
+						index === action.payload.index ? action.payload.editedGender : gender
+					),
+				};
+		case EDIT_AUTHOR:
+				return {
+					...state,
+					authors: state.authors.map((authors, index) =>
+						index === action.payload.index ? action.payload.editedAuthor : authors
+					),
+				};		
+				
 		case GET_AUTHORS:
 			return {
 				...state,

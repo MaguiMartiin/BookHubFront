@@ -24,6 +24,8 @@ import RecordSale from './components/RecordSaleAdmin/RecordSale';
 import Perfil from './components/VistasUser/Perfil'
 import CrudBooks from "./components/DashBoard Components/CrudBooks"
 import EditUsers from "./components/EditUsers/EditUsers"
+import EditGender from './components/EditGender/EditGender'
+import EditAutor from './components/EditAutor/EditAutor'
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -64,6 +66,8 @@ function App() {
         location.pathname !== "/recordSale" &&
         location.pathname !== "/crudBooks/:id" &&
         location.pathname !== "/editUsers" &&
+        location.pathname !== "/editGender" &&
+        location.pathname !== "/editAutor" &&
         location.pathname !== "/signup" && <Nav />}
       <Routes>
         <Route exact path="/" element={<Landing />} />
@@ -97,6 +101,16 @@ function App() {
         ) : (
           <Route path="/recordSale" element={<Navigate to="/home" replace />} />
         )}
+    {isAdmin ? (
+           <Route path="/editGender" element={<EditGender/>} />
+        ) : (
+          <Route path="/editGender" element={<Navigate to="/home" replace />} />
+        )}    
+    {isAdmin ? (
+           <Route path="/editAutor" element={<EditAutor/>} />
+        ) : (
+          <Route path="/editAutor" element={<Navigate to="/home" replace />} />
+        )}    
       </Routes>
     </div>
   );
