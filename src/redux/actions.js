@@ -55,7 +55,7 @@ export const getAllBooks = () => {
 	};
 };
 
-export const getPuntuation = () => {
+/* export const getPuntuation = () => {
   return async (dispatch) => {
     try {
       const puntuation = (await axios.get("/punctuation",  {headers: {
@@ -69,7 +69,7 @@ export const getPuntuation = () => {
       }
     }
   }
-}
+} */
 
 export const getPuntuationId = (id) => {
 	return async (dispatch) => {
@@ -99,7 +99,6 @@ export const getOpinion = () => {
     }
   }
 }
-
 
 export const getOpinionId = (id) => {
 	return async (dispatch) => {
@@ -289,12 +288,13 @@ export const bookDelete = (id) => {
 export const publicId = () => {
   return async function (dispatch) {
     try {
-      const bookPublic = (await axios.get("/perfil/myBooks", {
+      const token = localStorage.getItem("accessToken");
+      const bookPublic = await axios.get("/perfil/myBooks", {
         headers: {
           Authorization: `Bearer ${token}`,
         }
-      })).data
-      return dispatch({ type: PUBLICACIONES_ID, payload: bookPublic })
+      })
+      return dispatch({ type: PUBLICACIONES_ID, payload: bookPublic.data })
     } catch (error) { console.log(error) }
   }
 }

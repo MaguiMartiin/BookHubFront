@@ -18,11 +18,11 @@ import {
 	GET_OPINION,
 	GET_OPINION_ID,
 	GET_PURCHASES,
-	PERFIL,
 	GET_USERS,
 	TOP_BOOKS,
 	EDIT_GENDERS,
-	EDIT_AUTHOR
+	EDIT_AUTHOR,
+	PERFIL,
 } from "./action-types";
 
 const initialState = {

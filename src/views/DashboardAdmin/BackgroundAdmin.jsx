@@ -12,8 +12,11 @@ export default function BackgroundAdmin() {
         <Link to="/home">
         <button className={styles.titulo2}>Volver</button>
           </Link>
+        <button className={styles.sidebutton} onClick={() => { navigate("/publicaciones") }}>
+            Mis publicaciones
+        </button>
         <button className={styles.sidebutton} onClick={() => { navigate("/form") }}>
-            Realizar una publicación
+            Realizar una nueva publicación
         </button>
         <button className={styles.sidebutton} onClick={() => { navigate("/editUsers") }}>
             Editar Usuarios
