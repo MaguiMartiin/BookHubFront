@@ -51,10 +51,10 @@ export default function RecordSale() {
                     Registro de Ventas
                 </button>
                 <button className={style.sidebutton} onClick={() => { navigate("/editGender") }}>
-                    Editar Género
+                Editar o Crear Género
                 </button>
                 <button className={style.sidebutton} onClick={() => { navigate("/editAutor") }}>
-                    Editar Autor
+                Editar o Crear Autor
                 </button>
             </div>
             <div className={style.contenido}>
