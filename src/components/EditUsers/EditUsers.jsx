@@ -26,7 +26,7 @@ const EditUsers = () => {
     dispatch(getAllUsers());
   }, [dispatch, suspender, unSuspender, delet, admins, vendedor, userVendedor]);
 
-//busca por email
+  //busca por email
   const handleSearch = (e) => {
     const { value } = e.target;
     console.log(value);
@@ -34,26 +34,26 @@ const EditUsers = () => {
     setCurrentPage(1)
   };
 
-//suspender user
+  //suspender user
   const handleSuspender = (id) => {
     console.log(id);
     setSuspender(id)
     setEmail("")
   };
-//quitar suspencion user
+  //quitar suspencion user
   const handleUnSuspender = (id) => {
     setUnSuspender(id)
     setEmail("")
   };
 
-//eliminar user
+  //eliminar user
   const handleDelete = (id) => {
     setDelet(id)
     setEmail("")
   };
 
-//convertir adim a user
-  const handleAdmin = (id) => {
+  //convertir user a admin
+  const handleIsAdmin = (id) => {
     setAdmin(id)
     setEmail("")
   };
@@ -66,6 +66,15 @@ const EditUsers = () => {
 //convertir vendedor a user
   const handleUserVendedor = (id) => {
     setUserVendedor(id)
+  };
+
+  //convertir admin a user
+  const handleNoAdmin = (id) => {
+    setNoAdmin(id);
+  };
+
+  const handleAdmin = (id) => {
+    handleNoAdmin(id) || handleIsAdmin(id);
   };
 
   useEffect(() => {
@@ -138,31 +147,32 @@ const EditUsers = () => {
 
   return (
     <div className={style.editUsersContainer}>
-      
+
       <div className={style.sidebar}>
         <Link to="/" className={style.titulo1}>
           BookHub
+        </Link> 
+        <Link to="/home" className={style.sidebutton}>
+          <button className={style.titulo3}>Inicio</button>
         </Link>
-        <Link to="/dashboard">
-        <button className={style.titulo3}>Volver</button>
-          </Link>
         <button className={style.sidebutton} onClick={() => { navigate("/publicaciones") }}>
             Mis publicaciones
         </button>
         <button className={style.sidebutton} onClick={() => { navigate("/form") }}>
             Realizar una nueva publicación
         </button>
+        
+        <button className={style.sidebutton} onClick={() => { navigate("/editGender") }}>
+            Editar o crear Género 
+        </button>
+        <button className={style.sidebutton} onClick={() => { navigate("/editAutor") }}>
+            Editar o crear Autor 
+        </button>
         <button className={location.pathname !== "/" ? style.boton : style.sidebutton}>
           Editar Usuarios
         </button>
        <button className={style.sidebutton} onClick={() => { navigate("/recordSale") }}>
             Registro de Ventas
-        </button>
-        <button className={style.sidebutton} onClick={() => { navigate("/editGender") }}>
-            Editar Género 
-        </button>
-        <button className={style.sidebutton} onClick={() => { navigate("/editAutor") }}>
-            Editar Autor 
         </button>
         <button className={style.titulo2} onClick={handleLogoutClick}>Cerrar Sesión</button>
       </div>
@@ -190,15 +200,15 @@ const EditUsers = () => {
           </thead>
           <tbody>
             {visibleUsers?.map((e) => (
-              
+
               <tr key={e.id} className={style.tableRow}>
                 <td className={style.tableData}>{e.name} {e?.lastName}</td>
                 <td className={`${style.tableData} ${style.gender}`}>{e?.email}</td>
                 <td className={style.tableData}>
-                  <p className={style.price}>{e.isActive  ? '🟢 Si': '🔴 No'}</p>
+                  <p className={style.price}>{e.isActive ? '🟢 Si' : '🔴 No'}</p>
                 </td>
                 <td className={style.tableData}>
-                  <p className={style.price}>{e.admin  ? '🟢 Si' : '🔴 No'}</p>
+                  <p className={style.price}>{e.admin ? '🟢 Si' : '🔴 No'}</p>
                 </td>
                 <td className={`${style.tableData} ${style.actions}`}>
                  {e.isActive? <button className={e.isActive? style.editButton: style.botonIsAdmin} onClick={()=>handleSuspender(e.id)} >
@@ -212,7 +222,7 @@ const EditUsers = () => {
                 <button className={e.admin? style.botonAdmin: style.deleteButton} onClick={()=>handleAdmin(e.id)}>
                 Administrador
                   </button>
-                  </td>
+                </td>
                 <td className={`${style.tableData}`}>
                  {!e.admin && <button className={style.deleteBu} onClick={()=>handleDelete(e.id)}>
                     <FaTrash />

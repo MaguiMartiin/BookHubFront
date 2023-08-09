@@ -9,7 +9,7 @@ import Swal from "sweetalert2"
 export default function RecordSale() {
   const token = localStorage.getItem("accessToken");
     const navigate = useNavigate();
-    const [mes, setMes ] = useState([])
+    const [mes, setMes] = useState([])
     const data = [
     { name: mes[0]?.dia ? mes[0]?.dia: "Domingo", VENTAS: mes[0]?.ventas?mes[0]?.ventas : 0},
     { name: mes[1]?.dia ? mes[1]?.dia: "Lunes",   VENTAS: mes[1]?.ventas?mes[1]?.ventas : 0},
@@ -62,26 +62,27 @@ useEffect(()=>{
     <div className={style.dashContain}>
     <div className={style.sidebar}>
         <Link to="/" className={style.titulo1}>BookHub</Link>
-        <Link to="/dashboard">
-        <button className={style.titulo3}>Volver</button>
-          </Link>
+        <Link to="/home" className={style.sidebutton}>
+          <button className={style.titulo3}>Inicio</button>
+        </Link>
           <button className={style.sidebutton} onClick={() => { navigate("/publicaciones") }}>
             Mis publicaciones
         </button>
         <button className={style.sidebutton} onClick={() => { navigate("/form") }}>
             Realizar una nueva publicación
         </button>
-        <button className={style.sidebutton} onClick={() => { navigate("/editUsers") }}>
-            Editar Usuarios
-        </button>
-        <button className={location.pathname !== "/" ? style.boton : style.sidebutton} onClick={() => { navigate("/recordSale") }}>
-            Registro de Ventas
-        </button>
+        
         <button className={style.sidebutton} onClick={() => { navigate("/editGender") }}>
             Editar Género 
         </button>
         <button className={style.sidebutton} onClick={() => { navigate("/editAutor") }}>
             Editar Autor 
+        </button>
+        <button className={style.sidebutton} onClick={() => { navigate("/editUsers") }}>
+            Editar Usuarios
+        </button>
+        <button className={location.pathname !== "/" ? style.boton : style.sidebutton} onClick={() => { navigate("/recordSale") }}>
+            Registro de Ventas
         </button>
         <button className={style.titulo2} onClick={handleLogoutClick}>Cerrar Sesión</button>
       </div>

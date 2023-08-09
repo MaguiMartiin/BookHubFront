@@ -22,7 +22,9 @@ import {
   GET_USERS,
   TOP_BOOKS,
   EDIT_GENDERS,
-  EDIT_AUTHOR
+  EDIT_AUTHOR,
+  CREATE_GENDER,
+  CREATE_AUTHOR
 } from "./action-types";
 
 import axios from "axios";
@@ -269,6 +271,33 @@ export const updateAuthor = (index, authorData) => {
       }
   };
 }
+
+export const postGender = (newGender) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post('/gender', {name: newGender})
+      return dispatch({ type: CREATE_GENDER, payload: response.data });
+    } catch (error) {
+      return {
+        error: error.message,
+    };
+    }
+  }
+}
+
+export const postAuthor = (newAuthor) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post('/author', {name: newAuthor})
+      return dispatch({ type: CREATE_AUTHOR, payload: response.data });
+    } catch (error) {
+      return {
+        error: error.message,
+    };
+    }
+  }
+}
+
 
 
 export const bookDelete = (id) => {

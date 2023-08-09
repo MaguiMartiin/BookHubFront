@@ -36,31 +36,33 @@ export default function BackgroundAdmin() {
     
   return (
     <div className={styles.dashContain}>
-    <div className={styles.sidebar}>
+      <div className={styles.sidebar}>
         <Link to="/" className={styles.titulo1}>BookHub</Link>
-        <Link to="/home">
-            <button className={styles.titulo3}>Volver</button>
+        <Link to="/home" className={styles.sidebutton}>
+          <button className={styles.titulo3} >Inicio</button>
         </Link>
         <button className={styles.sidebutton} onClick={() => { navigate("/publicaciones") }}>
-            Mis publicaciones
+          Mis publicaciones
         </button>
         <button className={styles.sidebutton} onClick={() => { navigate("/form") }}>
-            Realizar una nueva publicación
+          Realizar una nueva publicación
         </button>
-       {<button className={styles.sidebutton} onClick={() => { navigate("/editUsers") }}>
+     
+
+        <button className={styles.sidebutton} onClick={() => { navigate("/editGender") }}>
+            Editar o Crear Género
+        </button>
+        <button className={styles.sidebutton} onClick={() => { navigate("/editAutor") }}>
+            Editar o crear Autor 
+        </button>
+        {<button className={styles.sidebutton} onClick={() => { navigate("/editUsers") }}>
             Editar Usuarios
         </button>}
        {<button className={styles.sidebutton} onClick={() => { navigate("/recordSale") }}>
             Registro de Ventas
         </button>}
-
-        <button className={styles.sidebutton} onClick={() => { navigate("/editGender") }}>
-            Editar Género 
-        </button>
-        <button className={styles.sidebutton} onClick={() => { navigate("/editAutor") }}>
-            Editar Autor 
-        </button>
-        <button className={styles.titulo2} onClick={handleLogoutClick}>Cerrar Sesión</button>
+        <button className={styles.titulo2} onClick={handleLogoutClick}>Cerrar Sesión</button> 
+         
       </div>
       <div className={styles.contenido}>
         {/* Contenido principal */}
@@ -68,7 +70,7 @@ export default function BackgroundAdmin() {
           <h1 className={styles.titulo}>DashBoard Principal</h1>
         </header>
       </div>
-   
+
     </div>
   );
 }

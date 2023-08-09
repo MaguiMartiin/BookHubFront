@@ -1,0 +1,8 @@
+.titulo2 {
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-family: 'Baloo', sans-serif;
+    display: flex;
+    align-items: center;
+    margin-left: 18px;
+  }
