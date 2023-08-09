@@ -30,6 +30,7 @@ import CreateGender from './components/EditGender/CreateGender'
 import CreateAutor from './components/EditAutor/CreateAutor'
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import FormPunt from './components/VistasUser/FormOpinion/FromPunt'
 
 
 axios.defaults.baseURL = "https://servidor-libreria.onrender.com";
@@ -90,12 +91,8 @@ function App() {
         <Route path="/carrito" element={<Carrito />} />
         <Route path="/compras" element={<Compras />} />
         <Route path="/opiniones" element={<Opiniones />} />
-<<<<<<< HEAD
-		    <Route path="/perfil" element={<Perfil />} />
-=======
         <Route path="/perfil" element={<Perfil />} />
-        <Route path="/formOp" element={<FormOp />} />
->>>>>>> 3f68b93c983b23b378ed416a9cd79447319624c7
+        <Route path="/formOp" element={<FormPunt />} />
         {/* Agregar una ruta protegida para el componente DashboardAdmin */}
         {isAdmin ? (
           <Route path="/dashboard" element={<BackgroundAdmin />} />

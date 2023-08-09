@@ -53,6 +53,7 @@ const FormPunt = ({ id, name, image }) => {
         confirmButtonText: "Accept",
         timer: 2000,
       })
+      window.location.reload()
     } catch (error) {
       console.error("Error al crear la puntuación:", error)
     }

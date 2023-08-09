@@ -23,12 +23,9 @@ import {
 	EDIT_GENDERS,
 	EDIT_AUTHOR,
 	PERFIL,
-<<<<<<< HEAD
-	RESEÑA_PENDENTE
-=======
 	CREATE_GENDER,
-	CREATE_AUTHOR
->>>>>>> 3f68b93c983b23b378ed416a9cd79447319624c7
+	CREATE_AUTHOR,
+	RESEÑA_PENDENTE
 } from "./action-types";
 
 const initialState = {
