@@ -1,0 +1,13 @@
+.splide__pagination__page.is-active {
+    background-color: #000000; 
+}
+
+.splide__pagination__page  {
+    border: 0.5px solid #161616;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.39);
+  }
+
+
+.splide__arrow{
+    font-size: 25px;
+}
