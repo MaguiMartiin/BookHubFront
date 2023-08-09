@@ -69,7 +69,7 @@ const Landing = () => {
                 <img src={img2} alt="image landing"  class="w-1/6"/>
             </div>
 
-            <div className="flex flex-col justify-center p-6 w-full items-center">
+            <div className="flex flex-col justify-center p-6 w-full items-center mt-24">
                 <h1 class="font-primary text-white text-7xl">Categorías</h1>
                 <div className="space-x-4">
                     {genders.map((cat, index) => {

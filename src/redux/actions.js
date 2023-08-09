@@ -1,4 +1,5 @@
 import {
+<<<<<<< HEAD
   GET_BOOKS,
   CREATE_BOOK,
   FILTER,
@@ -22,6 +23,34 @@ import {
   PERFIL,
   TOP_BOOKS,
   RESEÑA_PENDENTE
+=======
+	GET_BOOKS,
+	CREATE_BOOK,
+	FILTER,
+	GET_GENDERS,
+	BOOK_ID,
+	GET_BOOK_NAME,
+	EDIT_BOOK,
+	DELETE_BOOK,
+	GET_AUTHORS,
+	ADD_TO_CART,
+	DELETE_FROM_CART,
+	REFRESH_CART,
+	PUBLICACIONES_ID,
+	REMOVE_TO_CART,
+	GET_PUNTUATION,
+	GET_PUNTUATION_ID,
+	GET_OPINION,
+	GET_OPINION_ID,
+	GET_PURCHASES,
+	PERFIL,
+  GET_USERS,
+  TOP_BOOKS,
+  EDIT_GENDERS,
+  EDIT_AUTHOR,
+  CREATE_GENDER,
+  CREATE_AUTHOR
+>>>>>>> 3f68b93c983b23b378ed416a9cd79447319624c7
 } from "./action-types";
 
 import axios from "axios";
@@ -111,7 +140,6 @@ export const getOpinion = () => {
     }
   }
 }
-
 
 export const getOpinionId = (id) => {
 	return async (dispatch) => {
@@ -252,6 +280,64 @@ export const editBook = (id, bookData) => {
     }
   }
 }
+
+export const updateGender = (index, genderData) => {
+  return async (dispatch) => {
+      try {
+          const response = await axios.put(`/gender/${index}`, genderData);
+          if (response.status === 200) {
+              dispatch({ type: EDIT_GENDERS, payload: { index, editedGender: genderData.newName } });
+          }
+      } catch (error) {
+          return {
+              error: error.message,
+          };
+      }
+  };
+}
+
+export const updateAuthor = (index, authorData) => {
+  return async (dispatch) => {
+      try {
+          const response = await axios.put(`/author/${index}`, authorData);
+          if (response.status === 200) {
+              dispatch({ type: EDIT_AUTHOR, payload: { index, editedAuthor: authorData.newName } });
+          }
+      } catch (error) {
+          return {
+              error: error.message,
+          };
+      }
+  };
+}
+
+export const postGender = (newGender) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post('/gender', {name: newGender})
+      return dispatch({ type: CREATE_GENDER, payload: response.data });
+    } catch (error) {
+      return {
+        error: error.message,
+    };
+    }
+  }
+}
+
+export const postAuthor = (newAuthor) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post('/author', {name: newAuthor})
+      return dispatch({ type: CREATE_AUTHOR, payload: response.data });
+    } catch (error) {
+      return {
+        error: error.message,
+    };
+    }
+  }
+}
+
+
 
 export const bookDelete = (id) => {
   return async function (dispatch) {
@@ -431,6 +517,20 @@ export const adminUsers =  (id) => {
     try {
       if(id){
        const response = await axios.put(`/user/${id}/admin`);
+      }
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  };
+}
+
+export const noAdminUsers =  (id) => {
+  return async (dispatch) => {
+    try {
+      if(id){
+       const response = await axios.put(`/user/${id}/unadmin`);
       }
     } catch (error) {
       return {

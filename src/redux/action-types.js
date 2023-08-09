@@ -19,7 +19,16 @@ export const GET_OPINION_ID = 'GET_OPINION_ID';
 export const GET_PURCHASES = "GET_PURCHASES";
 export const GET_USERS = "GET_USERS";
 export const TOP_BOOKS = 'TOP_BOOKS'
+<<<<<<< HEAD
 export const RESEÑA_PENDENTE = 'RESEÑA_PENDENTE'
+=======
+export const EDIT_GENDERS = 'EDIT_GENDERS'
+export const EDIT_AUTHOR = 'EDIT_AUTHOR'
+export const CREATE_GENDER = 'CREATE_GENDER'
+export const CREATE_AUTHOR = 'CREATE_AUTHOR'
+
+
+>>>>>>> 3f68b93c983b23b378ed416a9cd79447319624c7
 // profile
 export const PERFIL = "PERFIL"
 export const PERFIL_MY_BOOKS = "PERFIL_MY_BOOKS"
