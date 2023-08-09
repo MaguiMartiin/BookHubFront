@@ -9,9 +9,11 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { IoIosAddCircle } from "react-icons/io";
 import { AiOutlineCalendar } from "react-icons/ai";
-import {BsFillFileEarmarkPersonFill} from "react-icons/bs";
-import {BiSolidBook} from "react-icons/bi";
+import { BsFillFileEarmarkPersonFill } from "react-icons/bs";
+import { BiSolidBook } from "react-icons/bi";
 import { FaDollarSign, FaHashtag } from "react-icons/fa";
+import {BsBookmarksFill} from "react-icons/bs"
+import {GrLanguage} from "react-icons/gr"
 
 const FormRegistro = () => {
 	const dispatch = useDispatch();
@@ -19,13 +21,13 @@ const FormRegistro = () => {
 	const token = localStorage.getItem("accessToken");
 	const genders = useSelector((state) => state.genders);
 	const authors = useSelector((state) => state.authors);
-    console.log("token", token)
+	console.log("token", token);
 	// useEffect(() => {
 	// 	const token = localStorage.getItem("accessToken");
 	// 	if(!token){
 	// 		Swal.fire({
 	// 			title: 'Necesitas inciar sesión para vender un libro',
-    //       		icon: 'warning',
+	//       		icon: 'warning',
 	// 		})
 	// 		.then(() =>{
 	// 			navigate('/home');
@@ -37,7 +39,6 @@ const FormRegistro = () => {
 		dispatch(getGenders());
 		dispatch(getAuthor());
 	}, [dispatch]);
-
 
 	const [formGo, setFormGo] = useState(false);
 
@@ -67,40 +68,41 @@ const FormRegistro = () => {
 		AuthorId: Yup.number().required("Requiere autor"),
 	});
 
-
 	const handleSubmit = async (values, { resetForm, setSubmitting }) => {
-	  
+		console.log(values, "values");
 		try {
-		  const modifiedValues = {
-			...values,
-			GenderId: Number(values.GenderId),
-			AuthorId: Number(values.AuthorId),
-		  };
-		  await axios.post("/book", modifiedValues, {headers: {
-			Authorization: `Bearer ${token}`,
-		  }})
-		  Swal.fire({
-			icon: "success",
-			title: "Libro creado correctamente",
-			confirmButtonText: "Accept",
-			timer: 2000,
-		  }).then(() => {
-			navigate("/home");
-		  });
-		  setFormGo(true);
+			const modifiedValues = {
+				...values,
+				GenderId: Number(values.GenderId),
+				AuthorId: Number(values.AuthorId),
+			};
+			await axios.post("/book", modifiedValues, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
+			Swal.fire({
+				icon: "success",
+				title: "Libro creado correctamente",
+				confirmButtonText: "Accept",
+				timer: 2000,
+			}).then(() => {
+				navigate("/home");
+			});
+			setFormGo(true);
 		} catch (error) {
-		  console.error("Error en la solicitud:", error);
+			console.error("Error en la solicitud:", error);
 		} finally {
-		  setSubmitting(false);
+			setSubmitting(false);
 		}
-	  };
+	};
 
 	return (
 		<div className="w-full min-h-[100vh] pt-24  px-16 ">
 			<div>
-				<h2 className="font-black text-[2.5rem] font-secondary  text-center text-rojo">
+				{/* <h2 className="font-black text-[2.5rem] font-secondary  text-center text-blanco">
 					Registra tus libros
-				</h2>
+				</h2> */}
 				<Formik
 					validationSchema={validationSchema}
 					initialValues={{
@@ -112,8 +114,8 @@ const FormRegistro = () => {
 						AuthorId: "",
 						GenderId: "",
 						releaseDate: "",
+						pages: "",
 						language: "",
-						pages: 0,
 					}}
 					onSubmit={handleSubmit}>
 					{({ errors, setFieldValue, isSubmitting, values }) => (
@@ -128,7 +130,7 @@ const FormRegistro = () => {
 										</label>
 										<Field
 											id="name"
-											className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-400 focus:shadow-outline"
+											className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-gris/75 focus:shadow-outline"
 											type="text"
 											name="name"
 											placeholder="Nombre del libro"
@@ -151,7 +153,7 @@ const FormRegistro = () => {
 											</label>
 											<Field
 												id="price"
-												className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-400 focus:shadow-outline"
+												className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-gris/75 focus:shadow-outline"
 												type="number"
 												name="price"
 												placeholder="Ingresa el precio"
@@ -173,7 +175,7 @@ const FormRegistro = () => {
 											</label>
 											<Field
 												id="available"
-												className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-400 focus:shadow-outline"
+												className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-gris/75 focus:shadow-outline"
 												type="number"
 												name="available"
 												placeholder="Libros disponibles "
@@ -201,7 +203,7 @@ const FormRegistro = () => {
 												as="select"
 												id="gender"
 												name="GenderId" // Change "gender" to "GenderId"
-												className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-400 focus:shadow-outline">
+												className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-gris focus:shadow-outline">
 												<option value="" disabled>
 													Selecciona un género
 												</option>
@@ -234,7 +236,7 @@ const FormRegistro = () => {
 												as="select"
 												id="author"
 												name="AuthorId" // Change "author" to "AuthorId"
-												className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-400 focus:shadow-outline">
+												className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-gris focus:shadow-outline">
 												<option value="" disabled>
 													Selecciona un autor
 												</option>
@@ -274,7 +276,7 @@ const FormRegistro = () => {
 															min="1950-01-01"
 															max="2023-12-31"
 															{...field}
-															className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-400 focus:shadow-outline"
+															className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-gris focus:shadow-outline"
 														/>
 													</>
 												)}
@@ -309,7 +311,7 @@ const FormRegistro = () => {
 												/>
 												<label
 													htmlFor="image"
-													className="inline-block w-full p-2 bg-red-300 text-white font-semibold rounded-lg shadow-md hover:cursor-pointer">
+													className="inline-block w-full p-2 bg-rojo text-white font-semibold rounded-lg shadow-md hover:cursor-pointer">
 													<IoIosAddCircle
 														style={{ fontSize: "24px" }}
 														className="inline mr-2 cursor-pointer"
@@ -324,6 +326,65 @@ const FormRegistro = () => {
 											/>
 										</div>
 									</div>
+
+									<div className="flex">
+										{/* pages */}
+										{/* <div className="flex justify-center w-full"> */}
+										<div className="mb-5 w-full mr-2">
+											<label
+												htmlFor="pages"
+												className="block text-gray-700 text-sm uppercase font-bold mb-2">
+												Páginas
+											</label>
+											<Field
+												id="pages"
+												className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-gris focus:shadow-outline"
+												type="number"
+												name="pages"
+												placeholder="Número de páginas"
+											/>
+											<ErrorMessage
+												name="pages"
+												component={() => (
+													<p className="text-red-500 text-xs italic">
+														{errors.pages}
+													</p>
+												)}
+											/>
+											{/* </div> */}
+										</div>
+
+										<div className="flex w-full">
+											{/* language */}
+											<div className="mb-5 w-full">
+												<label
+													htmlFor="language"
+													className="block text-gray-700 text-sm uppercase font-bold mb-2">
+													Idioma
+												</label>
+												<Field
+													as="select"
+													id="language"
+													name="language"
+													className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-gris focus:shadow-outline">
+													<option value="" disabled>
+														Selecciona un idioma
+													</option>
+													<option value="Espanol">Español</option>
+													<option value="Ingles">Inglés</option>
+												</Field>
+												<ErrorMessage
+													name="language"
+													component={() => (
+														<p className="text-red-500 text-xs italic">
+															{errors.language}
+														</p>
+													)}
+												/>
+											</div>
+										</div>
+									</div>
+
 									<div className="mb-5">
 										<label
 											htmlFor="description"
@@ -335,7 +396,7 @@ const FormRegistro = () => {
 											as="textarea"
 											type="text"
 											name="description"
-											className="shadow appearance-none border placeholder-gray-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-red-400 focus:shadow-outline h-40"
+											className="shadow appearance-none border placeholder-gray-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-gris focus:shadow-outline h-40"
 											placeholder="Descripción..."
 										/>
 										<ErrorMessage
@@ -349,7 +410,7 @@ const FormRegistro = () => {
 									</div>
 									<div>
 										<button
-											className="bg-primary w-full  hover:bg-secondary text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+											className="bg-rojo  w-full  hover:bg-secondary text-blanco font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 											type="submit"
 											disabled={isSubmitting}>
 											{isSubmitting ? "Enviando..." : "Guardar"}
@@ -453,9 +514,27 @@ const FormRegistro = () => {
 											</span>{" "}
 										</span>
 									</div>
+									<div className="w-4 font-semibold"></div>
+									<div className="flex flex-row gap-2">
+										<BsBookmarksFill size="1.3rem" />
+										<span>
+											<span className="font-semibold">
+												{values.pages ? values.pages : "Pages"}
+											</span>{" "}
+										</span>
+									</div>
+									<div className="w-4 font-semibold"></div>
+									<div className="flex flex-row gap-2">
+										<GrLanguage size="1.3rem" />
+										<span>
+											<span className="font-semibold">
+												{values.language ? values.language : "Language"}
+											</span>{" "}
+										</span>
+									</div>
 								</div>
 
-								<div className="flex flex-row justify-center items-center gap-2 w-full min-h-fit overflow-y-scroll mt-2">
+								<div className="flex flex-row justify-center items-center gap-2 w-full  mt-2 mx-4">
 									{values.description
 										? values.description
 										: "Descripción de tu evento."}

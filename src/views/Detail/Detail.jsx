@@ -6,7 +6,7 @@ import { bookId, addToCart, getPuntuationId, getOpinionId } from "../../redux/ac
 import Swal from "sweetalert2"
 import { useState } from "react"
 import StarRating from "./Starts"
-
+import {MdAddShoppingCart} from "react-icons/md"
 const Detail = () => {
     const dispatch = useDispatch()
     const {id} = useParams()
@@ -30,7 +30,6 @@ const Detail = () => {
 
     const puntuationId = useSelector(state => state.puntuationId)
     const opinionId = useSelector(state => state.opinionId)
-    console.log(opinionId);
 
     const addCart = () => {
           const isBookInCart = cart.find((item) => item.id === bookDetail.id);
@@ -52,64 +51,88 @@ const Detail = () => {
         }
 
     return (
-        <div  className="max-w-screen min-h-[100vh] bg-negro pt-24">
-            <div className="flex">
-                <div className="flex items-center justify-between">
-                    <img src={bookDetail.image} alt={bookDetail.name} class="w-full p-10"/>
-                </div>
-                <div className="flex flex-col justify-center mt-10 w-full items-center">
-                    <div >
-                        <h1 class="text-6xl text-white font-primary">{bookDetail.name}</h1>
-                    </div>
-                    <h2 class="text-4xl text-white font-primary mt-2">Autor: {bookDetail.Author?.name}</h2>
-                    <h2 class="text-4xl text-white font-primary">Genero: {bookDetail.Gender?.name}</h2>
-                    <div className="grid grid-cols-2 gap-6 mt-6">  
-                        <div>
-                            <button className="bg-gris p-5 font-primary text-white text-xl">Descripción</button>
-                            <h3 class="text-white font-secondary mt-4 text-xl">{bookDetail.description}</h3>
-                        </div>
-                        <div>
-                            <button className="bg-gris p-5 font-primary text-white text-xl">Detalle del producto</button>
-                            <ul class="text-white font-secondary mt-4 text-xl">
-                                <li>Tapa blanda: 672 páginas</li>
-                                <li>Idioma: Español</li>
-                                <li>Dimensiones: 15.1 x 4.1 x 23 cm</li>
-                                <li>Fecha de publicación: 1 de marzo de 2009</li>
-                                <li>Disponible en formato físico.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 className="flex-none bg-rojo p-3 text-white text-2xl mt-6 rounded-lg font-primary">Precio ${bookDetail.price}</h4>
-                        <button onClick={addCart} className="flex-none bg-rojo p-5 text-white text-2xl mt-6 rounded-lg font-primary">Agregar al carrito</button>
-                    </div>
-                </div>
-            </div>
-            
-            {opinionId?.length > 0 ? (
-            <div className="flex bg-blanco mt-10">
-                    <div className="flex justify-between p-10">
-                        <h1 class="font-primary text-negro text-9xl ml-5 mr-2">{puntuationId}</h1>
-                        <StarRating rating={puntuationId} size="3rem"/>
-                    </div>    
-                    <div className="flex flex-col justify-center mt-10 w-full space-y-4">
-                        <h1 class="font-primary text-negro text-4xl text-center">Opiniones del producto</h1>
-                        {opinionId?.map((e) => {
-                            return(
-                                <div className="pb-5 border-b border-negro p-2">
-                                    <h1>{e.name}</h1>
-                                    <StarRating rating={e.punctuation} />
-                                    <h1 className="mt-2">{e.comment}</h1>
-                                </div>
-                                )
-                        })}
-                    </div>
-            </div>
-            ) : null}
-                
-            
-        </div>
-    )
+			<div className="max-w-screen min-h-[100vh] bg-negro pt-24">
+				<div className="grid grid-cols-3  gap-4 xl:w-100vw">
+					<div className="w-full p-10">
+						<img src={bookDetail.image} alt={bookDetail.name} className="" />
+						<div className="flex items-center gap-2 justify-between mt-2">
+							<h2 className="text-2xl text-white font-secondary">
+								Autor: {bookDetail.Author?.name}
+							</h2>
+							<h2 className="text-2xl text-white font-secondary">
+								Genero: {bookDetail.Gender?.name}
+							</h2>
+						</div>
+					</div>
+					<div className="col-span-2 m-8">
+						<div className="mb-5">
+							<h1 className="text-6xl text-white font-primary">
+								{bookDetail.name}
+							</h1>
+						</div>
+
+						<div className=" ">
+							<div className="mb-5">
+								<button className="bg-gris p-3 font-primary text-white text-xl">
+									Descripción
+								</button>
+								<h3 className="text-white font-secondary mt-4 text-xl">
+									{bookDetail.description}
+								</h3>
+							</div>
+							<div>
+								<button className="bg-gris p-3 font-primary text-white text-xl">
+									Detalle del producto
+								</button>
+								<ul className="text-white font-secondary mt-4 text-xl">
+									<li>Tapa blanda: {Number(bookDetail.pages)} páginas</li>
+									<li>Idioma: {bookDetail.language}</li>
+									{/* <li>Dimensiones: 15.1 x 4.1 x 23 cm</li> */}
+									<li>Fecha de publicación: {bookDetail.releaseDate}</li>
+									{/* <li>Disponible en formato físico.</li> */}
+								</ul>
+							</div>
+						</div>
+						<div className="flex justify-between">
+							<h4 className="flex items-center bg-rojo p-3 text-white text-2xl mt-6 rounded-lg font-primary">
+								Precio ${bookDetail.price}
+							</h4>
+							<button
+								onClick={addCart}
+								className="flex items-center bg-rojo p-5 text-white text-2xl mt-6 rounded-lg font-primary">
+								<MdAddShoppingCart   />
+								<span className="pl-2">Agregar al carrito</span>
+							</button>
+						</div>
+					</div>
+				</div>
+
+				{opinionId?.length > 0 ? (
+					<div className="flex bg-blanco mt-10">
+						<div className="flex justify-between p-10">
+							<h1 class="font-primary text-negro text-9xl ml-5 mr-2">
+								{puntuationId}
+							</h1>
+							<StarRating rating={puntuationId} size="3rem" />
+						</div>
+						<div className="flex flex-col justify-center mt-10 w-full space-y-4">
+							<h1 className="font-primary text-negro text-4xl text-center">
+								Opiniones del producto
+							</h1>
+							{opinionId?.map((e) => {
+								return (
+									<div className="pb-5 border-b border-negro p-2">
+										<h1>{e.name}</h1>
+										<StarRating rating={e.punctuation} />
+										<h1 className="mt-2">{e.comment}</h1>
+									</div>
+								);
+							})}
+						</div>
+					</div>
+				) : null}
+			</div>
+		);
 
 }
 
