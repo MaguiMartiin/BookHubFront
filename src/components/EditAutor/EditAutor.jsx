@@ -11,7 +11,7 @@ const EditAutor = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    
+
     useEffect(() => {
         dispatch(getAuthor());
     }, [dispatch]);
@@ -41,7 +41,7 @@ const EditAutor = () => {
                     showConfirmButton: false,
                     timer: 1500
                 }).then(() => {
-                    navigate("/dashboard");
+                    navigate("/editAutor");
                 });
             } catch (error) {
                 console.error("Error al actualizar el Autor:", error);
@@ -53,28 +53,29 @@ const EditAutor = () => {
     return (
         <div className={style.editGenderContainer}>
             <div className={style.sidebar}>
-            <Link to="/" className={style.titulo1}>
-          BookHub
-        </Link>
-        <Link to="/dashboard">
-          <button className={style.titulo2}>Volver</button>
-        </Link>
-        <button className={style.sidebutton} onClick={() => { navigate("/form") }}>
-          Realizar una publicación
-        </button>
-        <button className={style.sidebutton} onClick={() => { navigate("/editUsers") }}>
-          Editar Usuarios
-        </button>
-        <button className={style.sidebutton} onClick={() => { navigate("/recordSale") }}>
-            Registro de Ventas
-        </button>
-        <button className={style.sidebutton} onClick={() => { navigate("/editGender") }}>
-            Editar Género 
-        </button>
-        <button className={location.pathname !== "/" ? style.boton : style.sidebutton} onClick={() => { navigate("/editAutor") }} >
-            Editar Autor 
-        </button>
-            </div> 
+                <Link to="/" className={style.titulo1}>BookHub</Link>
+                <Link to="/home">
+                    <button className={style.titulo2}>Home</button>
+                </Link>
+                <button className={style.sidebutton} onClick={() => { navigate("/publicaciones") }}>
+                    Mis publicaciones
+                </button>
+                <button className={style.sidebutton} onClick={() => { navigate("/form") }}>
+                    Realizar una publicación
+                </button>
+                <button className={style.sidebutton} onClick={() => { navigate("/editUsers") }}>
+                    Editar Usuarios
+                </button>
+                <button className={style.sidebutton} onClick={() => { navigate("/recordSale") }}>
+                    Registro de Ventas
+                </button>
+                <button className={style.sidebutton} onClick={() => { navigate("/editGender") }}>
+                    Editar Género
+                </button>
+                <button className={location.pathname !== "/" ? style.boton : style.sidebutton} onClick={() => { navigate("/editAutor") }} >
+                    Editar Autor
+                </button>
+            </div>
             <div className={style.tableContainer}>
                 <table className={style.genderTable}>
                     <thead>
@@ -100,10 +101,10 @@ const EditAutor = () => {
                                         </div>
                                     ) : (
                                         <div className={style.editButtonContainer}>
-                                        <button className={style.editBu} onClick={() => handleEditGender(idx)}>
-                                            <FaEdit />
-                                        </button>
-                                        {/* <button className={style.deleteBu} onClick={() => deleteGender(gender)}>
+                                            <button className={style.editBu} onClick={() => handleEditGender(idx)}>
+                                                <FaEdit />
+                                            </button>
+                                            {/* <button className={style.deleteBu} onClick={() => deleteGender(gender)}>
                                             Eliminar
                                         </button> */}
                                         </div>

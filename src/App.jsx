@@ -35,39 +35,39 @@ axios.defaults.baseURL = "https://servidor-libreria.onrender.com";
 
 
 function App() {
-	const location = useLocation();
-	const dispatch = useDispatch();
+  const location = useLocation();
+  const dispatch = useDispatch();
 
-	useEffect(() => {
-		const carrito = localStorage.getItem("cart");
-		const carritoRefresh = JSON.parse(carrito);
-		if (carritoRefresh) {
-			dispatch(refreshCart(carritoRefresh));
-		}
-	}, [dispatch]);
+  useEffect(() => {
+    const carrito = localStorage.getItem("cart");
+    const carritoRefresh = JSON.parse(carrito);
+    if (carritoRefresh) {
+      dispatch(refreshCart(carritoRefresh));
+    }
+  }, [dispatch]);
 
-	useEffect(() => {
-		const urlSearchParams = new URLSearchParams(window.location.search);
-		const params = Object.fromEntries(urlSearchParams.entries());
+  useEffect(() => {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
 
-		if (params.token) {
-			const objString = decodeURIComponent(params.token);
-			const obj = JSON.parse(objString);
-			// Guardar el token y el valor de admin en el localStorage
-			localStorage.setItem("accessToken", obj.token);
-			localStorage.setItem("isAdmin", obj.admin);
+    if (params.token) {
+      const objString = decodeURIComponent(params.token);
+      const obj = JSON.parse(objString);
+      // Guardar el token y el valor de admin en el localStorage
+      localStorage.setItem("accessToken", obj.token);
+      localStorage.setItem("isAdmin", obj.admin);
 
-			window.location.href = "/home";
-		}
-	}, []);
+      window.location.href = "/home";
+    }
+  }, []);
 
-	// Comprobar si el usuario es administrador
-	const isAdmin = localStorage.getItem("isAdmin") === "true";
+  // Comprobar si el usuario es administrador
+  const isAdmin = localStorage.getItem("isAdmin") === "true";
 
   return (
     <div className="">
       {location.pathname !== "/" &&
-        location.pathname !== "/login"&&
+        location.pathname !== "/login" &&
         location.pathname !== "/dashboard" &&
         location.pathname !== "/recordSale" &&
         location.pathname !== "/crudBooks/:id" &&
@@ -86,38 +86,42 @@ function App() {
         <Route path="/MyBooks" element={<MyBooks />} />
         <Route path="/carrito" element={<Carrito />} />
         <Route path="/compras" element={<Compras />} />
-        <Route path="/publicaciones" element={<Publicaciones />} />
         <Route path="/opiniones" element={<Opiniones />} />
-		    <Route path="/perfil" element={<Perfil />} />
-        <Route path="/formOp"element={<FormOp/>}/>
+        <Route path="/perfil" element={<Perfil />} />
+        <Route path="/formOp" element={<FormOp />} />
         {/* Agregar una ruta protegida para el componente DashboardAdmin */}
         {isAdmin ? (
           <Route path="/dashboard" element={<BackgroundAdmin />} />
-        ) : (
-          <Route path="/dashboard" element={<Navigate to="/home" replace />} />
-        )}
-        {/* Resto de tus rutas */}
+          ) : (
+            <Route path="/dashboard" element={<Navigate to="/home" replace />} />
+            )}
         <Route path="/crudBooks/:id" element={<CrudBooks />} />
-		{isAdmin ? (
-           <Route path="/editUsers" element={<EditUsers />} /> 
+        {/* Resto de tus rutas */}
+        {isAdmin ? (
+          <Route path="/publicaciones" element={<Publicaciones />} />
+        ) : (
+          <Route path="/publicaciones" element={<Navigate to="/home" replace />} />
+        )} 
+        {isAdmin ? (
+          <Route path="/editUsers" element={<EditUsers />} />
         ) : (
           <Route path="/editUsers" element={<Navigate to="/home" replace />} />
         )}
-		{isAdmin ? (
-           <Route path="/recordSale" element={<RecordSale />} />
+        {isAdmin ? (
+          <Route path="/recordSale" element={<RecordSale />} />
         ) : (
           <Route path="/recordSale" element={<Navigate to="/home" replace />} />
         )}
-    {isAdmin ? (
-           <Route path="/editGender" element={<EditGender/>} />
+        {isAdmin ? (
+          <Route path="/editGender" element={<EditGender />} />
         ) : (
           <Route path="/editGender" element={<Navigate to="/home" replace />} />
-        )}    
-    {isAdmin ? (
-           <Route path="/editAutor" element={<EditAutor/>} />
+        )}
+        {isAdmin ? (
+          <Route path="/editAutor" element={<EditAutor />} />
         ) : (
           <Route path="/editAutor" element={<Navigate to="/home" replace />} />
-        )}    
+        )}
       </Routes>
     </div>
   );
