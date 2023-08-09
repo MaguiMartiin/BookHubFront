@@ -25,10 +25,10 @@ export default function BackgroundAdmin() {
             Registro de Ventas
         </button>
         <button className={styles.sidebutton} onClick={() => { navigate("/editGender") }}>
-            Editar Género 
+            Editar o Crear Género 
         </button>
         <button className={styles.sidebutton} onClick={() => { navigate("/editAutor") }}>
-            Editar Autor 
+            Editar o Crear Autor 
         </button>
       </div>
       <div className={styles.contenido}>

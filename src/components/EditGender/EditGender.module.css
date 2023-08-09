@@ -2,7 +2,7 @@
     width: 100%;
     display: flex;
   }
-  
+
   .sidebar {
     height: 120vh;
     min-width: 220px;
@@ -100,10 +100,12 @@
   
   .tableContainer {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 90vh;
     width: 90%;
+    margin-top: 10px;
   }
   
   .genderTable {
@@ -111,6 +113,7 @@
     max-width: 600px;
     border-collapse: collapse;
     margin: 0 auto;
+    margin-top: 10px;
   }
   
   .inputContainer {
@@ -137,3 +140,37 @@
     font-size: 14px;
   }
   
+
+
+  .create {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.create p {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.createBut {
+    padding: 12px 20px;
+    background-color: #176b87;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.createBut:hover {
+    background-color: #0e4e6a;
+}
+
+.createBut:active {
+    background-color: #c1c4c4;
+}

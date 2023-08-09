@@ -20,6 +20,7 @@ const EditGender = () => {
 
     const [editingIndex, setEditingIndex] = useState(null);
     const [editedGender, setEditedGender] = useState("");
+    
 
     const handleEditGender = (index) => {
         setEditedGender(genders[index]);
@@ -42,7 +43,7 @@ const EditGender = () => {
                     showConfirmButton: false,
                     timer: 1500
                 }).then(() => {
-                    navigate("/dashboard");
+                    dispatch(getGenders());
                 });
             } catch (error) {
                 console.error("Error al actualizar el género:", error);
@@ -51,18 +52,20 @@ const EditGender = () => {
     };
 
 
-    const deleteGender = async (index) => {
-        try {
-            const response = await axios.delete(`/gender/${index}`);
-            if (response.status === 200) {
-                // Filtrar el género eliminado del estado
-                const updatedGenders = genders.filter((_, idx) => idx !== index);
-                dispatch({ type: EDIT_GENDERS, payload: updatedGenders });
-            }
-        } catch (error) {
-            console.error("Error al eliminar el género:", error);
-        }
-    };
+   
+
+
+    // const deleteGender = async (index) => {
+    //     try {
+    //         const response = await axios.delete(`/gender/${index}`);
+    //         if (response.status === 200) {
+    //             const updatedGenders = genders.filter((_, idx) => idx !== index);
+    //             dispatch({ type: EDIT_GENDERS, payload: updatedGenders });
+    //         }
+    //     } catch (error) {
+    //         console.error("Error al eliminar el género:", error);
+    //     }
+    // };
 
     return (
         <div className={style.editGenderContainer}>
@@ -83,12 +86,13 @@ const EditGender = () => {
             Registro de Ventas
         </button>
         <button className={location.pathname !== "/" ? style.boton : style.sidebutton} onClick={() => { navigate("/editGender") }}>
-        Editar Género
+        Editar o Crear Género
         </button>
         <button className={style.sidebutton} onClick={() => { navigate("/editAutor") }}>
-            Editar Autor 
+        Editar o Crear Autor 
         </button>
             </div>  
+    
             <div className={style.tableContainer}>
                 <table className={style.genderTable}>
                     <thead>
@@ -127,7 +131,15 @@ const EditGender = () => {
                         ))}
                     </tbody>
                 </table>
+                <div className={style.create}>
+                    <p>Deseas crear un nuevo Género?</p>
+                    <Link to="/createGender">   
+          <button className={style.createBut}>Crear Género</button>
+                    </Link>
+              
             </div>
+            </div>
+    
         </div>
     );
 }
