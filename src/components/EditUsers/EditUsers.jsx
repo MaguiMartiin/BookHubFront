@@ -121,10 +121,10 @@ const EditUsers = () => {
           Registro de Ventas
         </button>
         <button className={style.sidebutton} onClick={() => { navigate("/editGender") }}>
-          Editar Género
+            Editar o crear Género 
         </button>
         <button className={style.sidebutton} onClick={() => { navigate("/editAutor") }}>
-          Editar Autor
+            Editar o crear Autor 
         </button>
       </div>
       <div className={style.tableContainer}>

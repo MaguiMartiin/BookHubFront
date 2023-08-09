@@ -23,6 +23,8 @@ import {
 	EDIT_GENDERS,
 	EDIT_AUTHOR,
 	PERFIL,
+	CREATE_GENDER,
+	CREATE_AUTHOR
 } from "./action-types";
 
 const initialState = {
@@ -62,6 +64,17 @@ const rootReducer = (state = initialState, action) => {
 				allBooks: [...state.allBooks, action.payload],
 				copyState: [...state.copyState, action.payload],
 			};
+		case CREATE_GENDER:
+			return {
+				...state,
+				genders: [...state.genders, action.payload],
+			}
+		case CREATE_AUTHOR:
+			return{
+				...state,
+				authors: [...state.authors, action.payload]
+			}
+
 		case FILTER:
 			return {
 				...state,

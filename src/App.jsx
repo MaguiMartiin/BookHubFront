@@ -26,6 +26,8 @@ import CrudBooks from "./components/DashBoard Components/CrudBooks"
 import EditUsers from "./components/EditUsers/EditUsers"
 import EditGender from './components/EditGender/EditGender'
 import EditAutor from './components/EditAutor/EditAutor'
+import CreateGender from './components/EditGender/CreateGender'
+import CreateAutor from './components/EditAutor/CreateAutor'
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import FormOp from './components/VistasUser/FormOp'
@@ -74,6 +76,8 @@ function App() {
         location.pathname !== "/editUsers" &&
         location.pathname !== "/editGender" &&
         location.pathname !== "/editAutor" &&
+        location.pathname !== "/createGender" &&
+        location.pathname !== "/createAutor" &&
         location.pathname !== "/signup" && <Nav />}
       <Routes>
         <Route exact path="/" element={<Landing />} />
@@ -122,6 +126,16 @@ function App() {
         ) : (
           <Route path="/editAutor" element={<Navigate to="/home" replace />} />
         )}
+        {isAdmin ? (
+           <Route path="/createGender" element={<CreateGender/>} />
+        ) : (
+          <Route path="/createGender" element={<Navigate to="/home" replace />} />
+        )}    
+        {isAdmin ? (
+           <Route path="/createAutor" element={<CreateAutor/>} />
+        ) : (
+          <Route path="/createAutor" element={<Navigate to="/home" replace />} />
+        )}        
       </Routes>
     </div>
   );
