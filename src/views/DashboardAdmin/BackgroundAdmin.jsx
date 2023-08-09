@@ -55,6 +55,12 @@ export default function BackgroundAdmin() {
             Registro de Ventas
         </button>}
 
+        <button className={styles.sidebutton} onClick={() => { navigate("/editGender") }}>
+            Editar Género 
+        </button>
+        <button className={styles.sidebutton} onClick={() => { navigate("/editAutor") }}>
+            Editar Autor 
+        </button>
         <button className={styles.titulo2} onClick={handleLogoutClick}>Cerrar Sesión</button>
       </div>
       <div className={styles.contenido}>

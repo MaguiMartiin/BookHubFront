@@ -158,6 +158,12 @@ const EditUsers = () => {
        {!isAdmin && <button className={style.sidebutton} onClick={() => { navigate("/recordSale") }}>
             Registro de Ventas
         </button>}
+        <button className={style.sidebutton} onClick={() => { navigate("/editGender") }}>
+            Editar Género 
+        </button>
+        <button className={style.sidebutton} onClick={() => { navigate("/editAutor") }}>
+            Editar Autor 
+        </button>
         <button className={style.titulo2} onClick={handleLogoutClick}>Cerrar Sesión</button>
       </div>
       <div className={style.tableContainer}>

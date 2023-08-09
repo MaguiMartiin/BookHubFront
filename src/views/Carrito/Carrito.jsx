@@ -13,7 +13,6 @@ const Carrito = () => {
 	const cart = useSelector((state) => state.cart);
 
 	const [totalPrice, setTotalPrice] = useState(0);
-	console.log(totalPrice);
 	const [selectedQuantities, setSelectedQuantities] = useState({});
 
 	useEffect(() => {
@@ -75,6 +74,7 @@ const Carrito = () => {
 		quantity: selectedQuantities[item.id],
 		totalAmount: totalPrice,
 		image: item.image,
+		ventaId: "",
 	}));
 	const handleClick = () => {
 		const accessToken = localStorage.getItem("accessToken");
@@ -91,6 +91,7 @@ const Carrito = () => {
 						products: itemsMapped,
 						totalPrice: totalPrice,
 						title: "Compra de libros",
+
 					},
 					{
 						headers: {
