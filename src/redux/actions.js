@@ -20,7 +20,8 @@ import {
   GET_PURCHASES,
   GET_USERS, 
   PERFIL,
-  TOP_BOOKS
+  TOP_BOOKS,
+  RESEÑA_PENDENTE
 } from "./action-types";
 
 import axios from "axios";
@@ -68,6 +69,19 @@ export const getAllBooks = () => {
     }
   }
 } */
+
+export const reseñaLibro = () => {
+  return async (dispatch) => {
+    try {
+      const reseñaPend = (await axios.get("/opinion", {headers: {
+        Authorization: `Bearer ${token}`,
+        }})).data
+      return dispatch({type: RESEÑA_PENDENTE, payload: reseñaPend})     
+    } catch (error) {
+      return {error: error.message}
+    }
+  }
+}
 
 export const getPuntuationId = (id) => {
 	return async (dispatch) => {

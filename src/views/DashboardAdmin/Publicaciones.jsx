@@ -68,10 +68,10 @@ if (loading) {
 }
 
   return (
-    <div className="flex flex-col items-center pt-24">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-6 pt-28 ">
       {publicaciones?.length > 0 ? (
         publicaciones.map((libro) => (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-6">
+          <div >
             <div key={libro.id} className="bg-gradient-to-r from-violeta to-rojo p-6 shadow-xl rounded-lg">
               <div className="flex justify-end">
                 <Link to={`/editar/${libro.id}`}>
