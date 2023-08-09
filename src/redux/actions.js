@@ -13,7 +13,7 @@ import {
 	REFRESH_CART,
 	PUBLICACIONES_ID,
 	REMOVE_TO_CART,
-	GET_PUNTUATION,
+	RESEÑA_PENDENTE,
 	GET_PUNTUATION_ID,
 	GET_OPINION,
 	GET_OPINION_ID,
@@ -72,6 +72,19 @@ export const getAllBooks = () => {
     }
   }
 } */
+
+export const reseñaLibro = () => {
+  return async (dispatch) => {
+    try {
+      const reseñaPend = (await axios.get("/opinion", {headers: {
+        Authorization: `Bearer ${token}`,
+        }})).data
+      return dispatch({type: RESEÑA_PENDENTE, payload: reseñaPend})     
+    } catch (error) {
+      return {error: error.message}
+    }
+  }
+}
 
 export const getPuntuationId = (id) => {
 	return async (dispatch) => {

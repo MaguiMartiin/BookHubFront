@@ -29,7 +29,7 @@ const CreateAutor = () => {
                 }).then(() => {
                     dispatch(getAuthor());
                 }).then(() => {
-                    navigate('/editAutor')
+                    navigate('/dashboard')
                 })
             } catch (error) {
                 console.error("Error al crear el autor:", error);
