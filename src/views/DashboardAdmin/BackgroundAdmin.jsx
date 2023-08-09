@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Back.module.css';
 import { Link, useNavigate } from 'react-router-dom';
+import Publicaciones from './Publicaciones';
 
 
 export default function BackgroundAdmin() {
@@ -12,17 +13,8 @@ export default function BackgroundAdmin() {
         <Link to="/home">
           <button className={styles.titulo2}>Home</button>
         </Link>
-        <button className={styles.sidebutton} onClick={() => { navigate("/publicaciones") }}>
-          Mis publicaciones
-        </button>
         <button className={styles.sidebutton} onClick={() => { navigate("/form") }}>
           Realizar una nueva publicación
-        </button>
-        <button className={styles.sidebutton} onClick={() => { navigate("/editUsers") }}>
-          Editar Usuarios
-        </button>
-        <button className={styles.sidebutton} onClick={() => { navigate("/recordSale") }}>
-          Registro de Ventas
         </button>
         <button className={styles.sidebutton} onClick={() => { navigate("/editGender") }}>
             Editar o Crear Género
@@ -30,11 +22,16 @@ export default function BackgroundAdmin() {
         <button className={styles.sidebutton} onClick={() => { navigate("/editAutor") }}>
             Editar o crear Autor 
         </button>
+        <button className={styles.sidebutton} onClick={() => { navigate("/editUsers") }}>
+          Editar Usuarios
+        </button>
+        <button className={styles.sidebutton} onClick={() => { navigate("/recordSale") }}>
+          Registro de Ventas
+        </button>
       </div>
       <div className={styles.contenido}>
-        {/* Contenido principal */}
         <header>
-          <h1 className={styles.titulo}>DashBoard Principal</h1>
+          <Publicaciones/>
         </header>
       </div>
 
