@@ -487,6 +487,20 @@ export const adminUsers =  (id) => {
   };
 }
 
+export const noAdminUsers =  (id) => {
+  return async (dispatch) => {
+    try {
+      if(id){
+       const response = await axios.put(`/user/${id}/unadmin`);
+      }
+    } catch (error) {
+      return {
+        error: error.message,
+      };
+    }
+  };
+}
+
 export const topBooks = () => {
   return async (dispatch) => {
     try {

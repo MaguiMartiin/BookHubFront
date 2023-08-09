@@ -17,10 +17,10 @@ const CreateAutor = () => {
         if (createGender) {
             try {
                 // const newGender = { name: createGender };
-                await dispatch(postAuthor(createGender)); 
+                await dispatch(postAuthor(createGender));
                 setCreateGender("")
 
-              
+
                 Swal.fire({
                     title: "Autor creado",
                     icon: "success",
@@ -29,7 +29,7 @@ const CreateAutor = () => {
                 }).then(() => {
                     dispatch(getAuthor());
                 }).then(() => {
-                    navigate('/dashboard')
+                    navigate('/editAutor')
                 })
             } catch (error) {
                 console.error("Error al crear el autor:", error);
@@ -41,28 +41,31 @@ const CreateAutor = () => {
     return (
         <div className={style.editGenderContainer} >
             <div className={style.sidebar}>
-            <Link to="/" className={style.titulo1}>
-          BookHub
-        </Link>
-        <Link to="/dashboard">
-          <button className={style.titulo2}>Volver</button>
-        </Link>
-        <button className={style.sidebutton} onClick={() => { navigate("/form") }}>
-          Realizar una publicación
-        </button>
-        <button className={style.sidebutton} onClick={() => { navigate("/editUsers") }}>
-          Editar Usuarios
-        </button>
-        <button className={style.sidebutton} onClick={() => { navigate("/recordSale") }}>
-            Registro de Ventas
-        </button>
-        <button className={style.sidebutton} onClick={() => { navigate("/editGender") }}>
-        Editar o Crear Género 
-        </button>
-        <button className={location.pathname !== "/" ? style.boton : style.sidebutton} onClick={() => { navigate("/editAutor") }} >
-        Editar o Crear Autor
-        </button>
-            </div>  
+                <Link to="/" className={style.titulo1}>
+                    BookHub
+                </Link>
+                <Link to="/home">
+                    <button className={style.titulo2}>Home</button>
+                </Link>
+                <button className={style.sidebutton} onClick={() => { navigate("/publicaciones") }}>
+                    Mis publicaciones
+                </button>
+                <button className={style.sidebutton} onClick={() => { navigate("/form") }}>
+                    Realizar una publicación
+                </button>
+                <button className={style.sidebutton} onClick={() => { navigate("/editUsers") }}>
+                    Editar Usuarios
+                </button>
+                <button className={style.sidebutton} onClick={() => { navigate("/recordSale") }}>
+                    Registro de Ventas
+                </button>
+                <button className={style.sidebutton} onClick={() => { navigate("/editGender") }}>
+                    Editar o Crear Género
+                </button>
+                <button className={location.pathname !== "/" ? style.boton : style.sidebutton} onClick={() => { navigate("/editAutor") }} >
+                    Editar o Crear Autor
+                </button>
+            </div>
             <div className={style.formContainer}>
                 <p className={style.formTitle}>Crear Autor</p>
                 <input
@@ -73,15 +76,15 @@ const CreateAutor = () => {
                     placeholder="Ingrese el nombre del autor"
                 />
                 <div className={style.backButton}>
-            <button className={style.inputButton} onClick={submitNewGender}>
-                    Crear Autor
-                </button>
-                <Link to="/editAutor">
-                    <button className={style.inputButton}>Volver</button>
-                </Link>
+                    <button className={style.inputButton} onClick={submitNewGender}>
+                        Crear Autor
+                    </button>
+                    <Link to="/editAutor">
+                        <button className={style.inputButton}>Volver</button>
+                    </Link>
+                </div>
             </div>
-            </div>
-            
+
         </div>
     )
 }
