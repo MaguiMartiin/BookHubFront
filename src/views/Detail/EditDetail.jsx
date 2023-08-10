@@ -68,7 +68,7 @@ import { FaDollarSign, FaHashtag } from "react-icons/fa";
             confirmButtonText: "Aceptar",
           });
           setFormGo(true);
-          navigate("/publicaciones");
+          navigate("/home");
         } catch (error) {console.error("Error al actualizar el libro:", error)}
         finally {
             setSubmitting(false);
