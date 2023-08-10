@@ -26,7 +26,7 @@ const VistaUser = ({ onLogout }) => {
   return (
 		<div className="relative">
 			<div
-				className="origin-top-right   absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 "
+				className="origin-top-right   absolute right-0 mt-14 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 "
 				style={{ zIndex: 3 }}>
 				<div className="py-1">
 					<a

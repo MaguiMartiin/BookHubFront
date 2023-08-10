@@ -3,79 +3,93 @@ import { Link } from "react-router-dom";
 import style from "./NavBar.module.css";
 import { FaCartArrowDown } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import VistaUser from '../VistasUser/VistaUser'
-import { FaUser } from 'react-icons/fa';
+import VistaUser from "../VistasUser/VistaUser";
+import { FaUser } from "react-icons/fa";
+import { AiOutlineHome } from "react-icons/ai";
 
 const NavBar = () => {
-  const [bg, setBg] = useState(false);
-  const cart = useSelector((state) => state.cart);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const toInicio = () => {
-    window.location.href = "/login";
-  };
+	const [bg, setBg] = useState(false);
+	const cart = useSelector((state) => state.cart);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const toInicio = () => {
+		window.location.href = "/login";
+	};
 
-  useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    const userIsLoggedIn = !!token;
-    setIsLoggedIn(userIsLoggedIn);
-  }, []);
+	useEffect(() => {
+		const token = localStorage.getItem("accessToken");
+		const userIsLoggedIn = !!token;
+		setIsLoggedIn(userIsLoggedIn);
+	}, []);
 
-  const [showVistaUser, setShowVistaUser] = useState(false);
-  const handleUserButtonClick = () => {
-    setShowVistaUser(!showVistaUser);
-  };
+	const [showVistaUser, setShowVistaUser] = useState(false);
+	const handleUserButtonClick = () => {
+		setShowVistaUser(!showVistaUser);
+	};
 
-  const handleLogout = () => {
-    localStorage.removeItem("accessToken")
-    localStorage.removeItem("isAdmin")
-    localStorage.removeItem("cart")
-    cart.splice(0, cart.length);
-    setIsLoggedIn(false)
-  }
-  useEffect(() => {
+	const handleLogout = () => {
+		localStorage.removeItem("accessToken");
+		localStorage.removeItem("isAdmin");
+		localStorage.removeItem("cart");
+		cart.splice(0, cart.length);
+		setIsLoggedIn(false);
+	};
+	useEffect(() => {
 		window.addEventListener("scroll", () => {
 			return window.scrollY > 50 ? setBg(true) : setBg(false);
 		});
 	});
 
-  return (
+	return (
 		<div className="">
 			<div
-				className={`p-6 f flex fixed items-center justify-between flex-wrap  z-10 lg:w-full text-white transition-all duration-300 ${
-					bg ? "bg-rojo" : "bg-transparent"
+				className={`p-2 grid grid-cols-3  flex-wrap fixed  z-10 lg:w-full text-white transition-all duration-300 ${
+					bg ? "bg-rojo" : "bg-rojo/10 backdrop-blur"
 				} `}>
-				<Link to="/" class="text-6xl text-white font-primary" >
+				<Link to="/" class="text-6xl text-white font-primary">
 					BookHub
 				</Link>
-				<Link to="/home" className={style.link}>
-					Inicio
-				</Link>
-				<Link to="/carrito" className={style.link}>
-					{cart.length > 0 ? (
-						<div className={style.cartIndicator}>
-							<FaCartArrowDown />
-							<div className={style.badge}>{cart.length}</div>
-						</div>
-					) : (
-						<FaCartArrowDown />
-					)}
-				</Link>
-				
-				{!isLoggedIn && (
-					<button className="bg-gris text-white text-xl px-6 py-4 rounded-lg font-primary" onClick={toInicio}>
-						Inicia sesión
-					</button>
-				)}
-				{isLoggedIn && (
-					<div >
+				<div className="flex gap-12 justify-center items-center">
+					<Link
+						to="/home"
+						className={` hover:text-gray-400 font-bold flex flex-col justify-center items-center`}>
+						<AiOutlineHome size={32} />
+						<span>Inicio</span>
+					</Link>
+					<Link
+						to="/carrito"
+						className={` hover:text-gray-400 font-bold flex flex-col justify-center items-center`}>
+						{cart.length > 0 ? (
+							<div className={style.cartIndicator}>
+								<FaCartArrowDown size={32} />
+								<span>Carrito</span>
+								<div className={style.badge}>{cart.length}</div>
+							</div>
+						) : (
+							<div>
+								<FaCartArrowDown size={32} />
+
+								<span>Carrito</span>
+							</div>
+						)}
+					</Link>
+				</div>
+				<div className="flex justify-end">
+					{!isLoggedIn && (
 						<button
-							onClick={handleUserButtonClick}
-							className="">
-							<FaUser size={32} />
+							className="bg-gris text-white text-xl px-6 py-4 rounded-lg font-primary"
+							onClick={toInicio}>
+							Inicia sesión
 						</button>
-						{showVistaUser && <VistaUser onLogout={handleLogout} />}
-					</div>
-				)}
+					)}
+					{isLoggedIn && (
+						<div className="flex justify-end">
+							<button onClick={handleUserButtonClick} className="">
+								<FaUser size={32} />
+							</button>
+							{showVistaUser && <VistaUser onLogout={handleLogout} />}
+						</div>
+					)}
+				</div>
 			</div>
 		</div>
 	);

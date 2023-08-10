@@ -17,7 +17,7 @@
 .link{
     color: white;
     font-size: 2rem;
-    margin-right: 5rem;
+    /* margin-right: 5rem; */
     transition: color 0.2s; 
 }
 .link:hover {

@@ -52,7 +52,7 @@ const Detail = () => {
 
     return (
 			<div className="max-w-screen min-h-[100vh] bg-negro pt-24">
-				<div className="grid grid-cols-3  gap-4 xl:w-100vw">
+				<div className="grid grid-cols-3  xl:w-100vw">
 					<div className="w-full p-10">
 						<img src={bookDetail.image} alt={bookDetail.name} className="" />
 						<div className="flex items-center gap-2 justify-between mt-2">
