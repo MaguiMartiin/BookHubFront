@@ -23,6 +23,10 @@ const FormPunt = ({ id, name, image }) => {
       console.error("La puntuación debe estar entre 1 y 5")
       return
     }
+    if (comment.trim() === "") {
+      console.error("El comentario es obligatorio");
+      return;
+  }
     try {
       const puntuación = await axios.post(
         "/punctuation", {
@@ -49,7 +53,7 @@ const FormPunt = ({ id, name, image }) => {
       handleCloseModal()
       Swal.fire({
         icon: "success",
-        title: "Libro creado correctamente",
+        title: "Opinión realizada correctamente",
         confirmButtonText: "Accept",
         timer: 2000,
       })
