@@ -19,12 +19,13 @@ import {
 	GET_OPINION_ID,
 	GET_PURCHASES,
 	PERFIL,
-  GET_USERS,
-  TOP_BOOKS,
-  EDIT_GENDERS,
-  EDIT_AUTHOR,
-  CREATE_GENDER,
-  CREATE_AUTHOR
+	GET_USERS,
+	TOP_BOOKS,
+	EDIT_GENDERS,
+	EDIT_AUTHOR,
+	CREATE_GENDER,
+	CREATE_AUTHOR,
+	UPDATE_PROFILE,
 } from "./action-types";
 
 import axios from "axios";
@@ -540,3 +541,20 @@ export const topBooks = () => {
     }
   }
 } 
+
+export const updateProfile = (data) => {
+  return async (dispatch) => {
+    try {
+      const profile = await axios.put("/perfil/editar", data, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
+      return dispatch({type: UPDATE_PROFILE, payload: profile.data})
+    } catch (error) {
+      return {
+        error: error.message,
+      }
+    }
+  }
+}

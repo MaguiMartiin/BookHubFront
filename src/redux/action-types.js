@@ -24,7 +24,7 @@ export const EDIT_GENDERS = 'EDIT_GENDERS'
 export const EDIT_AUTHOR = 'EDIT_AUTHOR'
 export const CREATE_GENDER = 'CREATE_GENDER'
 export const CREATE_AUTHOR = 'CREATE_AUTHOR'
-
+export const UPDATE_PROFILE = 'UPDATE_PROFILE'
 
 // profile
 export const PERFIL = "PERFIL"
