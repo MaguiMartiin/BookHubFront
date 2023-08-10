@@ -25,7 +25,7 @@ export default function VistaAdmin({ onLogout }) {
 
   return (
     <div className="relative">
-        <div className="origin-top-right   absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 " style={{ zIndex: 3 }}>
+        <div className="origin-top-right   absolute right-0 mt-14 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 " style={{ zIndex: 3 }}>
           <div className="py-1">
             <a href="perfil" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
               Mi perfil

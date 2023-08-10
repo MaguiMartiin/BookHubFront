@@ -73,6 +73,7 @@ const Carrito = () => {
 		title: item.name,
 		quantity: selectedQuantities[item.id],
 		totalAmount: totalPrice,
+		price: item.price,
 		image: item.image,
 		ventaId: "",
 	}));
