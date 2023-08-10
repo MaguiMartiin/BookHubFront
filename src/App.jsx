@@ -33,7 +33,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import FormOp from './components/VistasUser/FormOp'
 
 
-axios.defaults.baseURL = "http://localhost:3001";
+axios.defaults.baseURL = "https://servidor-libreria.onrender.com";
 
 
 function App() {
