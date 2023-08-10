@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import { useToggle } from "../../components/user/UseToggle";
@@ -6,12 +6,17 @@ import { AiFillEye } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+import { useDispatch } from "react-redux";
+import { getPerfil } from "../../redux/actions";
 const Login = () => {
+
+	const dispatch = useDispatch();
 
   const [isPasswordShow, toggleShowPassword] = useToggle();
   const navigate = useNavigate();
-
+useEffect(() => {
+  dispatch(getPerfil());
+})
 	const handelGo = async () => {
 		try {
 			const res = await axios.get("/auth/google");

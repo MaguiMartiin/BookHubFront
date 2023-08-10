@@ -10,6 +10,7 @@ import axios from "axios";
 import Image from "./Image";
 import { useLocation } from "react-router-dom";
 import { filter } from "../../redux/actions";
+import { getPerfil } from "../../redux/actions";
 
 const Home = () => {
 	const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const Home = () => {
     const genreParam = queryParams.get("genre");
 
 	useEffect(() => {
+		dispatch(getPerfil());
         if (genreParam) {
             dispatch(filter({ gender: "gender", dataGender: genreParam }));
         } else {
@@ -28,7 +30,8 @@ const Home = () => {
     }, [dispatch, genreParam]);
 
 	const copyState = useSelector((state) => state.copyState);
-
+	const perfil = useSelector((state) => state.perfil);
+	console.log(perfil);
 	// agregando:
 
 	const cart = useSelector((state) => state.cart);
