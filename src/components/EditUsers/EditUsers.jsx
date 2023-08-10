@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllUsers, searchUsers, suspenderUsers, quitarSuspenderUsers, eliminarUsers, adminUsers } from '../../redux/actions';
+import { getAllUsers, searchUsers, suspenderUsers, quitarSuspenderUsers, eliminarUsers, adminUsers, noAdminUsers } from '../../redux/actions';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import style from './EditUsers.module.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -17,36 +17,46 @@ const EditUsers = () => {
   const [unSuspender, setUnSuspender] = useState("");
   const [delet, setDelet] = useState("");
   const [admins, setAdmin] = useState("");
+  const [noAdmins, setNoAdmin] = useState("");
 
   useEffect(() => {
     dispatch(getAllUsers());
   }, [dispatch, suspender, unSuspender, delet, admins]);
 
-//busca por email
+  //busca por email
   const handleSearch = (e) => {
     const { value } = e.target;
     console.log(value);
     setEmail(value)
   };
 
-//suspender user
+  //suspender user
   const handleSuspender = (id) => {
     console.log(id);
     setSuspender(id)
   };
-//quitar suspencion user
+  //quitar suspencion user
   const handleUnSuspender = (id) => {
     setUnSuspender(id)
   };
 
-//eliminar user
+  //eliminar user
   const handleDelete = (id) => {
     setDelet(id)
   };
 
-//convertir adim a user
-  const handleAdmin = (id) => {
+  //convertir user a admin
+  const handleIsAdmin = (id) => {
     setAdmin(id)
+  };
+
+  //convertir admin a user
+  const handleNoAdmin = (id) => {
+    setNoAdmin(id);
+  };
+
+  const handleAdmin = (id) => {
+    handleNoAdmin(id) || handleIsAdmin(id);
   };
 
   useEffect(() => {
@@ -58,8 +68,10 @@ const EditUsers = () => {
     setDelet("")
     dispatch(adminUsers(admins))
     setAdmin("")
+    dispatch(noAdminUsers(noAdmins))
+    setNoAdmin("")
     dispatch(getAllUsers());
-}, [suspender, unSuspender, delet, admins]);
+  }, [suspender, unSuspender, delet, admins, noAdmins]);
 
   useEffect(() => {
     dispatch(searchUsers(email));
@@ -88,14 +100,17 @@ const EditUsers = () => {
 
   return (
     <div className={style.editUsersContainer}>
-      
+
       <div className={style.sidebar}>
         <Link to="/" className={style.titulo1}>
           BookHub
         </Link>
-        <Link to="/dashboard">
-          <button className={style.titulo2}>Volver</button>
+        <Link to="/home">
+          <button className={style.titulo2}>Home</button>
         </Link>
+        <button className={style.sidebutton} onClick={() => { navigate("/publicaciones") }}>
+          Mis publicaciones
+        </button>
         <button className={style.sidebutton} onClick={() => { navigate("/form") }}>
           Realizar una publicación
         </button>
@@ -103,17 +118,23 @@ const EditUsers = () => {
           Editar Usuarios
         </button>
         <button className={style.sidebutton} onClick={() => { navigate("/recordSale") }}>
-            Registro de Ventas
+          Registro de Ventas
+        </button>
+        <button className={style.sidebutton} onClick={() => { navigate("/editGender") }}>
+            Editar o crear Género 
+        </button>
+        <button className={style.sidebutton} onClick={() => { navigate("/editAutor") }}>
+            Editar o crear Autor 
         </button>
       </div>
       <div className={style.tableContainer}>
 
-      <input 
-            type="text" 
-            placeholder='Buscar Usuario Por Email' 
-            className={style.search}
-            onChange={handleSearch} 
-            />
+        <input
+          type="text"
+          placeholder='Buscar Usuario Por Email'
+          className={style.search}
+          onChange={handleSearch}
+        />
 
         <table className={style.usersTable}>
           <thead>
@@ -130,36 +151,36 @@ const EditUsers = () => {
           </thead>
           <tbody>
             {visibleUsers?.map((e) => (
-              
+
               <tr key={e.id} className={style.tableRow}>
                 <td className={style.tableData}>{e.name} {e?.lastName}</td>
                 <td className={`${style.tableData} ${style.gender}`}>{e?.email}</td>
                 <td className={style.tableData}>
-                  <p className={style.price}>{e.isActive  ? '🟢 Si': '🔴 No'}</p>
+                  <p className={style.price}>{e.isActive ? '🟢 Si' : '🔴 No'}</p>
                 </td>
                 <td className={style.tableData}>
-                  <p className={style.price}>{e.admin  ? '🟢 Si' : '🔴 No'}</p>
+                  <p className={style.price}>{e.admin ? '🟢 Si' : '🔴 No'}</p>
                 </td>
                 <td className={`${style.tableData} ${style.actions}`}>
-                  <button className={e.isActive? style.editButton: style.botonIsAdmin} onClick={()=>handleSuspender(e.id)} >
-                  Suspender
+                  <button className={e.isActive ? style.editButton : style.botonIsAdmin} onClick={() => handleSuspender(e.id)} >
+                    Suspender
                   </button>
                 </td>
                 <td className={`${style.tableData}`}>
-                <button className={e.isActive? style.botonIsAdmin: style.deleteButton} onClick={()=>handleUnSuspender(e.id)}>
-                  Quitar suspensión
+                  <button className={e.isActive ? style.botonIsAdmin : style.deleteButton} onClick={() => handleUnSuspender(e.id)}>
+                    Quitar suspensión
                   </button>
-                  </td>
+                </td>
                 <td className={`${style.tableData}`}>
-                <button className={e.admin? style.botonIsAdmin: style.deleteButton} onClick={()=>handleAdmin(e.id)}>
-                Administrador
+                  <button className={e.admin ? style.botonIsAdmin : style.deleteButton} onClick={() => handleAdmin(e.id)}>
+                    Administrador
                   </button>
-                  </td>
+                </td>
                 <td className={`${style.tableData}`}>
-                  <button className={style.deleteBu} onClick={()=>handleDelete(e.id)}>
+                  <button className={style.deleteBu} onClick={() => handleDelete(e.id)}>
                     <FaTrash />
                   </button>
-                  </td>
+                </td>
               </tr>
             ))}
           </tbody>

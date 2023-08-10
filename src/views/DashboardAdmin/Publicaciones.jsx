@@ -114,8 +114,8 @@ if (loading) {
             <h1 className="text-3xl font-primary text-blanco mb-4">
               ¡Aún no has compartido tus tesoros literarios!
             </h1>
-            <button class="bg-gris text-white text-2xl px-6 py-4 rounded-lg font-primary" onClick={() => {navigate("/home")}}>
-              Volver a Home
+            <button class="bg-gris text-white text-2xl px-6 py-4 rounded-lg font-primary" onClick={() => {navigate("/dashboard")}}>
+              Volver
             </button>
             <button class="bg-gris text-white text-2xl px-6 py-4 rounded-lg font-primary mt-8" onClick={() => {navigate("/form")}}>
               Realizar una publicacion
