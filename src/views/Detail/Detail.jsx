@@ -1,12 +1,15 @@
 import React from "react"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
-import { bookId, addToCart, getPuntuationId, getOpinionId } from "../../redux/actions"
+import { useParams, useNavigate } from "react-router-dom"
+import { bookId, addToCart, getPuntuationId, getOpinionId, bookDelete } from "../../redux/actions"
 import Swal from "sweetalert2"
 import { useState } from "react"
 import StarRating from "./Starts"
 import {MdAddShoppingCart} from "react-icons/md"
+import { Link } from "react-router-dom"
+import { FaEdit, FaTrash } from "react-icons/fa"
+
 const Detail = () => {
     const dispatch = useDispatch()
     const {id} = useParams()
@@ -15,6 +18,23 @@ const Detail = () => {
     const cart = useSelector((state) => state.cart);
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+	const isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
+	const navigate = useNavigate()
+	const handleDelete = (id) => {
+		dispatch(bookDelete(id))
+		.then(() => {
+			Swal.fire({
+			  icon: "success",
+			  title: "Libro eliminado!",
+			  text: "El libro ha sido eliminado exitosamente.",
+			  confirmButtonText: "Aceptar",
+			}).then(() => {
+			  navigate("/home")
+			})
+		  })
+		.catch((error) => {console.error("Error al eliminar el libro:", error)})
+	};
 
     useEffect(() => {
         const token = localStorage.getItem("accessToken");
@@ -54,6 +74,14 @@ const Detail = () => {
 			<div className="max-w-screen min-h-[100vh] bg-negro pt-24">
 				<div className="grid grid-cols-3  xl:w-100vw">
 					<div className="w-full p-10">
+						<div className="flex items-center justify-between">
+							<Link to={`/editar/${bookDetail.id}`}>
+								<button className="flex items-center mt-4 text-blanco text-xl"> Editar <FaEdit className="ml-1" />
+								</button>
+							</Link>
+							<button className="flex items-center text-blanco mt-4 text-xl" onClick={() => handleDelete(bookDetail.id)}> Eliminar <FaTrash className="ml-1 text-blanco" />
+							</button>
+						</div>
 						<img src={bookDetail.image} alt={bookDetail.name} className="" />
 						<div className="flex items-center gap-2 justify-between mt-2">
 							<h2 className="text-2xl text-white font-secondary">
