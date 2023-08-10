@@ -53,7 +53,7 @@ const EditUsers = () => {
   };
 
   //convertir user a admin
-  const handleIsAdmin = (id) => {
+  const handleAdmin = (id) => {
     setAdmin(id)
     setEmail("")
   };
@@ -68,7 +68,7 @@ const EditUsers = () => {
     setUserVendedor(id)
   };
 
-  //convertir admin a user
+/*  //convertir admin a user
   const handleNoAdmin = (id) => {
     setNoAdmin(id);
   };
@@ -76,7 +76,7 @@ const EditUsers = () => {
   const handleAdmin = (id) => {
     handleNoAdmin(id) || handleIsAdmin(id);
   };
-
+*/
   useEffect(() => {
     dispatch(suspenderUsers(suspender))
     setSuspender("")
