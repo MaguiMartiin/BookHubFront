@@ -123,7 +123,7 @@ const Landing = () => {
 				<h1 className="text-blanco font-primary text-4xl">Sobre nosotros</h1>
 				<div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-5 p-5">
 					<div className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
-						<div className="h-96 w-72">
+						<div className="h-96 w-80">
 							<img
 								className="h-full w-full object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
 								src={Franco}
@@ -136,11 +136,11 @@ const Landing = () => {
 								Franco Farid Silva Flores
 							</h1>
 							<div className="flex gap-4 py-8">
-								<div className=" flex  items-center flex-col justify-center">
-									<a
-										href="https://www.linkedin.com/feed/"
-										target="_blank"
-										className="flex flex-col items-center">
+								<a
+									href="https://www.linkedin.com/in/franco-silva-389b69265/"
+									target="_blank"
+									className="flex flex-col items-center">
+									<div className=" flex  items-center flex-col justify-center">
 										{/* <div className=" "> */}
 										<FiLinkedin
 											className="stroke-white transition duration-300 ease-in-out"
@@ -150,12 +150,14 @@ const Landing = () => {
 											Linkedin
 										</span>
 										{/* </div> */}
-									</a>
-								</div>
-								<div className="flex items-center flex-col">
-									<FiGithub className=" stroke-white" size={32} />
-									<span className="text-white">Github</span>
-								</div>
+									</div>
+								</a>
+								<a href="https://github.com/Franco22s" target="_blank">
+									<div className="flex items-center flex-col">
+										<FiGithub className=" stroke-white" size={32} />
+										<span className="text-white">Github</span>
+									</div>
+								</a>
 							</div>
 						</div>
 					</div>
@@ -173,11 +175,11 @@ const Landing = () => {
 								Ricardo Dionel Díaz
 							</h1>
 							<div className="flex gap-4 py-8">
-								<div className=" flex  items-center flex-col justify-center">
-									<a
-										href="https://www.linkedin.com/feed/"
-										target="_blank"
-										className="flex flex-col items-center">
+								<a
+									href="https://www.linkedin.com/in/ricardo-dionel-diaz-1b6802236"
+									target="_blank"
+									className="flex flex-col items-center">
+									<div className=" flex  items-center flex-col justify-center">
 										{/* <div className=" "> */}
 										<FiLinkedin
 											className="stroke-white transition duration-300 ease-in-out"
@@ -187,12 +189,14 @@ const Landing = () => {
 											Linkedin
 										</span>
 										{/* </div> */}
-									</a>
-								</div>
-								<div className="flex items-center flex-col">
-									<FiGithub className=" stroke-white" size={32} />
-									<span className="text-white">Github</span>
-								</div>
+									</div>
+								</a>
+								<a href="https://github.com/Dionel22" target="_blank">
+									<div className="flex items-center flex-col">
+										<FiGithub className=" stroke-white" size={32} />
+										<span className="text-white">Github</span>
+									</div>
+								</a>
 							</div>
 						</div>
 					</div>
@@ -210,11 +214,11 @@ const Landing = () => {
 								Gabriel Yopasa Angulo
 							</h1>
 							<div className="flex gap-4 py-8">
-								<div className=" flex  items-center flex-col justify-center">
-									<a
-										href="https://www.linkedin.com/feed/"
-										target="_blank"
-										className="flex flex-col items-center">
+								<a
+									href="https://www.linkedin.com/in/gabriel-yopasa-angulo-208665265/"
+									target="_blank"
+									className="flex flex-col items-center">
+									<div className=" flex  items-center flex-col justify-center">
 										{/* <div className=" "> */}
 										<FiLinkedin
 											className="stroke-white transition duration-300 ease-in-out"
@@ -224,12 +228,14 @@ const Landing = () => {
 											Linkedin
 										</span>
 										{/* </div> */}
-									</a>
-								</div>
-								<div className="flex items-center flex-col">
-									<FiGithub className=" stroke-white" size={32} />
-									<span className="text-white">Github</span>
-								</div>
+									</div>
+								</a>
+								<a href="https://github.com/GaboYopasa" target="_blank">
+									<div className="flex items-center flex-col">
+										<FiGithub className=" stroke-white" size={32} />
+										<span className="text-white">Github</span>
+									</div>
+								</a>
 							</div>
 						</div>
 					</div>
@@ -247,11 +253,11 @@ const Landing = () => {
 								Magali Alejandra Martin
 							</h1>
 							<div className="flex gap-4 py-8">
-								<div className=" flex  items-center flex-col justify-center">
-									<a
-										href="https://www.linkedin.com/feed/"
-										target="_blank"
-										className="flex flex-col items-center">
+								<a
+									href="https://www.linkedin.com/in/magali-alejandra-martin/"
+									target="_blank"
+									className="flex flex-col items-center">
+									<div className=" flex  items-center flex-col justify-center">
 										{/* <div className=" "> */}
 										<FiLinkedin
 											className="stroke-white transition duration-300 ease-in-out"
@@ -261,12 +267,14 @@ const Landing = () => {
 											Linkedin
 										</span>
 										{/* </div> */}
-									</a>
-								</div>
-								<div className="flex items-center flex-col">
-									<FiGithub className=" stroke-white" size={32} />
-									<span className="text-white">Github</span>
-								</div>
+									</div>
+								</a>
+								<a href="https://github.com/MaguiMartiin" target="_blank">
+									<div className="flex items-center flex-col">
+										<FiGithub className=" stroke-white" size={32} />
+										<span className="text-white">Github</span>
+									</div>
+								</a>
 							</div>
 						</div>
 					</div>
@@ -284,11 +292,11 @@ const Landing = () => {
 								Yonatan Llanto Aquino
 							</h1>
 							<div className="flex gap-4 py-8">
-								<div className=" flex  items-center flex-col justify-center">
-									<a
-										href="https://www.linkedin.com/feed/"
-										target="_blank"
-										className="flex flex-col items-center">
+								<a
+									href="https://www.linkedin.com/in/yonatanllanto/"
+									target="_blank"
+									className="flex flex-col items-center">
+									<div className=" flex  items-center flex-col justify-center">
 										{/* <div className=" "> */}
 										<FiLinkedin
 											className="stroke-white transition duration-300 ease-in-out"
@@ -298,16 +306,15 @@ const Landing = () => {
 											Linkedin
 										</span>
 										{/* </div> */}
-									</a>
-								</div>
-								<div className="flex items-center flex-col">
-									<FiGithub className=" stroke-white" size={32} />
-									<span className="text-white">Github</span>
-								</div>
+									</div>
+								</a>
+								<a href="https://github.com/YonatanLLa" target="_blank">
+									<div className="flex items-center flex-col">
+										<FiGithub className=" stroke-white" size={32} />
+										<span className="text-white">Github</span>
+									</div>
+								</a>
 							</div>
-							{/* <button className="rounded-full bg-neutral-900 py-2 px-3.5 font-com text-sm capitalize text-white shadow shadow-black/60">
-								<a href=""></a>
-							</button> */}
 						</div>
 					</div>
 				</div>
