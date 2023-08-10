@@ -67,8 +67,8 @@ import { FaDollarSign, FaHashtag } from "react-icons/fa";
             text: "El libro ha sido actualizado exitosamente.",
             confirmButtonText: "Aceptar",
           });
-          setFormGo(true);
-          navigate("/home");
+          setFormGo(true)
+          navigate("/home")
         } catch (error) {console.error("Error al actualizar el libro:", error)}
         finally {
             setSubmitting(false);
