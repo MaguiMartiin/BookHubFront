@@ -19,55 +19,56 @@ const FormPunt = ({ id, name, image }) => {
 	const handleShowModal = () => {
 		setShowModal(true);
 	};
-
-	const handleCloseModal = () => {
+  
+  const handleCloseModal = () => {
 		setShowModal(false);
-	};
+	}
 
-	const handleSubmit = async () => {
-		if (rating < 1 || rating > 5) {
-			console.error("La puntuación debe estar entre 1 y 5");
-			return;
-		}
-		try {
-			const puntuación = await axios.post(
-				"/punctuation",
-				{
-					punctuation: rating,
-					id: id,
-				},
-				{
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				}
-			);
-			const comments = await axios.post(
-				"/comments",
-				{
-					comment: comment,
-					id: id,
-				},
-				{
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				}
-			);
-			console.log("Puntuación creada con éxito:", puntuación.data);
-			console.log("Comentario creado con éxito:", comments.data);
-			handleCloseModal();
-			Swal.fire({
-				icon: "success",
-				title: "Libro creado correctamente",
-				confirmButtonText: "Accept",
-				timer: 2000,
-			});
-			window.location.reload();
-		} catch (error) {
-			console.error("Error al crear la puntuación:", error);
-		}
-	};
+    const handleSubmit = async () => {
+    if (rating < 1 || rating > 5) {
+      console.error("La puntuación debe estar entre 1 y 5")
+      return
+    }
+    if (comment.trim() === "") {
+      console.error("El comentario es obligatorio");
+      return;
+  }
+    try {
+      const puntuación = await axios.post(
+        "/punctuation", {
+          punctuation: rating,
+          id: id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }      
+      )
+      const comments = await axios.post("/comments", {
+        comment: comment,
+        id: id,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      } 
+      )
+      console.log("Puntuación creada con éxito:", puntuación.data)
+      console.log("Comentario creado con éxito:", comments.data);
+      handleCloseModal()
+      Swal.fire({
+        icon: "success",
+        title: "Opinión realizada correctamente",
+        confirmButtonText: "Accept",
+        timer: 2000,
+      })
+      window.location.reload()
+    } catch (error) {
+      console.error("Error al crear la puntuación:", error)
+    }
+  };
+
 
 	const handleRatingChange = (value) => {
 		setRating(value);
