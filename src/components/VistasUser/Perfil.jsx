@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-	getPerfil,
-	getAllPurchases,
-} from "../../redux/actions";
+import { getPerfil, getAllPurchases } from "../../redux/actions";
 import MyBuys from "./perfil/MyBuys";
 import ImageParallax from "./perfil/ImageParallax";
 import profile from "../../assets/profile/usuario.png";
 import { Link } from "react-router-dom";
 import UpProfile from "./perfil/UpProfile";
-import {HiOutlineArrowNarrowRight} from "react-icons/hi"
+import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { motion } from "framer-motion";
 
 const Perfil = () => {
@@ -19,19 +16,18 @@ const Perfil = () => {
 
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
+	
 	useEffect(() => {
-		dispatch(getPerfil())
+		dispatch(getPerfil());
 		dispatch(getAllPurchases());
 	}, []);
 
-	const deleteCard = () => {
-	  
-	}
 
 	const handleModal = () => {
 		setIsModalOpen(!isModalOpen);
-	}
-console.log(perfil);
+	};
+
+	
 	return (
 		<div className="text-white w-full h-screen border border-red-400">
 			<div>
@@ -57,10 +53,7 @@ console.log(perfil);
 				</div>
 			</div>
 			<div className="flex justify-between items-center h-[18rem] mx-[10rem]">
-				{/* <div>
-					<MyBooks books={books} />
-					<Link to="/compras">mas informacion</Link>
-				</div> */}
+				
 				<div>
 					<MyBuys buys={purchases} />
 					<Link to="/compras" className="text-lg font-bold">

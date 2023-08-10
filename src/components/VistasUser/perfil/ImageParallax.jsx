@@ -13,7 +13,7 @@ const Image = () => {
 	};
 
 	return (
-		<div className="parallax-container h-96 overflow-hidden -z-50 ">
+		<div className="parallax-container h-72 overflow-hidden -z-50 ">
 			<motion.div
 				className="parallax-image"
 				variants={parallaxVariants}
