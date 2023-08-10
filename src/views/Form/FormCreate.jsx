@@ -105,8 +105,7 @@ const FormRegistro = () => {
                     <button className={style.titulo2}>Volver</button>
                 </Link>
 
-					Registra tus libros
-				</h2> */}
+				
 				<Formik
 					validationSchema={validationSchema}
 					initialValues={{
