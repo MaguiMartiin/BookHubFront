@@ -15,6 +15,8 @@ const Carousel = () => {
   }, [dispatch]);
 
   const topBook = useSelector(state => state.topBooks);
+  console.log(topBook);
+
 
   const splideOptions = {
     type: 'slide',
@@ -30,10 +32,11 @@ const Carousel = () => {
       <div className="max-w-screen-lg mx-auto p-6 bg-gray-100 rounded-lg ">
         <h1 className="text-3xl font-bold mb-2 text-center text-violeta">LIBROS MÁS COMPRADOS</h1>
         <Splide options={splideOptions}>
-          {topBook.map(book => (
+          {topBook?.slice(0,5).map(book => (
             <SplideSlide key={book.id}>
               <div className="flex flex-col items-center h-[400px] justify-center">
-                <img src={book.image} alt={book.name} className="w-64 h-80 object-cover rounded-lg shadow-xl transform transition-transform hover:scale-105" />
+                <img src={book.image} alt={book.name} className="w-64 h-80 object-cover rounded-lg shadow-xl transform transition-transform hover:scale-105 mb-4" />
+                <p className='font-bold text-violeta text-xl'>{book.name.toUpperCase()}</p>
               </div>
             </SplideSlide>
           ))}

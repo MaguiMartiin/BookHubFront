@@ -1,75 +1,103 @@
 import React, { useEffect, useState } from 'react';
 import style from './Record.module.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import axios from "axios";
+import { useSelector } from 'react-redux';
+import Swal from "sweetalert2"
 
 export default function RecordSale() {
+  const token = localStorage.getItem("accessToken");
     const navigate = useNavigate();
     const [mes, setMes] = useState([])
     const data = [
-        { name: mes[6]?.mes ? mes[6]?.mes : "enero", ventas: mes[1]?.total ? 750 : mes[6]?.total },
-        { name: mes[7]?.mes ? mes[7]?.mes : 'febrero', ventas: mes[1]?.total ? 380 : mes[7]?.total },
-        { name: mes[8]?.mes ? mes[8]?.mes : 'marzo', ventas: mes[1]?.total ? 310 : mes[8]?.total },
-        { name: mes[9]?.mes ? mes[9]?.mes : 'abril', ventas: mes[1]?.total ? 230 : mes[9]?.total },
-        { name: mes[10]?.mes ? mes[10]?.mes : 'mayo', ventas: mes[1]?.total ? 440 : mes[10]?.total },
-        { name: mes[11]?.mes ? mes[11]?.mes : 'junio', ventas: mes[1]?.total ? 360 : mes[11]?.total },
-        { name: mes[0]?.mes ? "julio" : mes[0]?.mes, ventas: mes[0]?.total },
-        { name: mes[1]?.mes ? "agosto" : mes[1]?.mes, ventas: mes[1]?.total },
-        { name: mes[2]?.mes ? mes[2]?.mes : 'septiembre', ventas: mes[2]?.total ? mes[2]?.total : 0 },
-        { name: mes[3]?.mes ? mes[3]?.mes : 'octubre', ventas: mes[3]?.total ? mes[3]?.total : 0 },
-        { name: mes[4]?.mes ? mes[4]?.mes : 'noviembre', ventas: mes[4]?.total ? mes[4]?.total : 0 },
-        { name: mes[5]?.mes ? mes[5]?.mes : 'diciembre', ventas: mes[5]?.total ? mes[5]?.total : 0 },
-    ]
-    useEffect(() => {
-        const ress = async () => {
-            const res = (await axios.get("/compras/all")).data
-            console.log("precio", res);
-            setMes([
-                ...res
-            ])
-        }
-        ress()
-    }, [])
-    return (
-        <div className={style.dashContain}>
-            <div className={style.sidebar}>
-                <Link to="/" className={style.titulo1}>BookHub</Link>
-                <Link to="/home">
-                    <button className={style.titulo2}>Home</button>
-                </Link>
-                <button className={style.sidebutton} onClick={() => { navigate("/publicaciones") }}>
-                    Mis publicaciones
-                </button>
-                <button className={style.sidebutton} onClick={() => { navigate("/form") }}>
-                    Realizar una publicación
-                </button>
-                <button className={style.sidebutton} onClick={() => { navigate("/editUsers") }}>
-                    Editar Usuarios
-                </button>
-                <button className={location.pathname !== "/" ? style.boton : style.sidebutton} onClick={() => { navigate("/recordSale") }}>
-                    Registro de Ventas
-                </button>
-                <button className={style.sidebutton} onClick={() => { navigate("/editGender") }}>
-                Editar o Crear Género
-                </button>
-                <button className={style.sidebutton} onClick={() => { navigate("/editAutor") }}>
-                Editar o Crear Autor
-                </button>
-            </div>
-            <div className={style.contenido}>
-                {/* Contenido principal */}
-                <AreaChart width={1150} height={500} data={data}>
-                    <CartesianGrid strokeDasharray="6 6" />
+    { name: mes[0]?.dia ? mes[0]?.dia: "Domingo", VENTAS: mes[0]?.ventas?mes[0]?.ventas : 0},
+    { name: mes[1]?.dia ? mes[1]?.dia: "Lunes",   VENTAS: mes[1]?.ventas?mes[1]?.ventas : 0},
+    { name: mes[2]?.dia ? mes[2]?.dia: "Martes",  VENTAS: mes[2]?.ventas?mes[2]?.ventas : 0},
+    { name: mes[3]?.dia ? mes[3]?.dia: "Miercoles", VENTAS: mes[3]?.ventas?mes[3]?.ventas : 0},
+    { name: mes[4]?.dia ? mes[4]?.dia: "Jueves",  VENTAS: mes[4]?.ventas?mes[4]?.ventas : 0 },
+    { name: mes[5]?.dia ? mes[5]?.dia: "Viernes", VENTAS: mes[5]?.ventas?mes[5]?.ventas : 0 },
+    { name: mes[6]?.dia ? mes[6]?.dia: "Sabado",  VENTAS: mes[6]?.ventas?mes[6]?.ventas : 0},
+]
+
+const cart = useSelector((state) => state.cart);
+
+const handleLogout = () => {
+  localStorage.removeItem("accessToken")
+  localStorage.removeItem("isAdmin")
+  localStorage.removeItem("cart")
+  cart.splice(0, cart.length);
+}
+
+const handleLogoutClick = () => {
+  console.log("login")
+  Swal.fire({
+    title: "¿Estás seguro que deseas cerrar sesión?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#4caf50",
+    cancelButtonColor: "#f44336",
+    confirmButtonText: "Sí, cerrar sesión",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      handleLogout();
+      navigate("/home");
+    }
+  });
+};
+useEffect(()=>{
+    const ress = async () => {
+        const res = (await axios.get("/compras/all",{headers: {
+          Authorization: `Bearer ${token}`,
+          }})).data
+        console.log("precio", res);
+        setMes([
+            ...res
+        ])
+    }
+    ress()
+},[])
+  return (
+    <div className={style.dashContain}>
+    <div className={style.sidebar}>
+        <Link to="/" className={style.titulo1}>BookHub</Link>
+        <Link to="/home" className={style.sidebutton}>
+          <button className={style.titulo3}>Inicio</button>
+        </Link>
+          <button className={style.sidebutton} onClick={() => { navigate("/publicaciones") }}>
+            Mis publicaciones
+        </button>
+        <button className={style.sidebutton} onClick={() => { navigate("/form") }}>
+            Realizar una nueva publicación
+        </button>
+        
+        <button className={style.sidebutton} onClick={() => { navigate("/editGender") }}>
+            Editar Género 
+        </button>
+        <button className={style.sidebutton} onClick={() => { navigate("/editAutor") }}>
+            Editar Autor 
+        </button>
+        <button className={style.sidebutton} onClick={() => { navigate("/editUsers") }}>
+            Editar Usuarios
+        </button>
+        <button className={location.pathname !== "/" ? style.boton : style.sidebutton} onClick={() => { navigate("/recordSale") }}>
+            Registro de Ventas
+        </button>
+        <button className={style.titulo2} onClick={handleLogoutClick}>Cerrar Sesión</button>
+      </div>
+      <div className={style.contenido}>
+        {/* Contenido principal */}
+        <LineChart width={1100} height={500} data={data}>
+                    <CartesianGrid strokeDasharray="4 4" />
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    {/* Utilizar el componente Area en lugar de Line */}
-                    <Area type="monotone" dataKey="ventas" stroke="#178731" fill="#178731" />
-                </AreaChart>
-            </div>
-
-        </div>
-    );
+                    <Line type="monotone" dataKey="VENTAS" stroke="#249102" activeDot={{ r: 10 }} />
+                </LineChart>
+      </div>
+   
+    </div>
+  );
 }
