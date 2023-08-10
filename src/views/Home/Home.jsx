@@ -10,6 +10,7 @@ import axios from "axios";
 import Image from "./Image";
 import { useLocation } from "react-router-dom";
 import { filter } from "../../redux/actions";
+import { getPerfil } from "../../redux/actions";
 
 const Home = () => {
 	const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const Home = () => {
     const genreParam = queryParams.get("genre");
 
 	useEffect(() => {
+		dispatch(getPerfil());
         if (genreParam) {
             dispatch(filter({ gender: "gender", dataGender: genreParam }));
         } else {
@@ -28,7 +30,8 @@ const Home = () => {
     }, [dispatch, genreParam]);
 
 	const copyState = useSelector((state) => state.copyState);
-
+	const perfil = useSelector((state) => state.perfil);
+	console.log(perfil);
 	// agregando:
 
 	const cart = useSelector((state) => state.cart);
@@ -70,7 +73,7 @@ const Home = () => {
 				<SearchBar setPage={setPage} />
 			</header>
 
-			<div className="max-w-screen-2xl h-[670px] px-40 mt-4 xl:h-[690]">
+			<div className="max-w-screen-2xl  px-40 mt-4 ">
 				<div className="grid grid-flow-row gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-4 uppercase  ">
 					{currentData?.slice(0, 3).map((book, idx) => (
 						<div key={idx} className={style.card}>

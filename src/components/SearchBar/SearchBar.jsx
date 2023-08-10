@@ -7,6 +7,7 @@ import {
 	getAllBooks,
 	getAuthor,
 	getGenders,
+	getPerfil
 } from "../../redux/actions";
 
 import { useLocation } from "react-router-dom";
@@ -63,6 +64,7 @@ const SearchBar = ({ setPage }) => {
 	useEffect(() => {
 		dispatch(getGenders());
 		dispatch(getAuthor());
+		dispatch(getPerfil());
 	}, [dispatch]);
 
 	const decades = [];
