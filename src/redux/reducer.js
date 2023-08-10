@@ -25,7 +25,8 @@ import {
 	PERFIL,
 	CREATE_GENDER,
 	CREATE_AUTHOR,
-	RESEÑA_PENDENTE
+	RESEÑA_PENDENTE,
+	UPDATE_PROFILE
 } from "./action-types";
 
 const initialState = {
@@ -202,6 +203,11 @@ const rootReducer = (state = initialState, action) => {
 			return {
 				...state,
 				reseñaLibro: action.payload
+			}
+		case UPDATE_PROFILE:
+			return {
+				...state,
+				perfil: action.payload
 			}
 		default:
 			return state;

@@ -30,6 +30,7 @@ const Login = ({ handleModal, setIsModalOpen }) => {
 
 							// navigate("/perfil");
 							resetForm();
+							window.location.reload();
 						
 						} catch (error) {
 							console.error("Error en la solicitud:", error);
