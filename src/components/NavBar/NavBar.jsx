@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import VistaUser from "../VistasUser/VistaUser";
 import { FaUser } from "react-icons/fa";
 import { AiOutlineHome } from "react-icons/ai";
+import NavPerfil from "./NavPerfil";
 
 const NavBar = () => {
 	const [bg, setBg] = useState(false);
@@ -45,12 +46,14 @@ const NavBar = () => {
 	return (
 		<div className="">
 			<div
-				className={`p-2 grid grid-cols-3  flex-wrap fixed  z-10 lg:w-full text-white transition-all duration-300 ${
+				className={` grid grid-cols-3  flex-wrap fixed  z-10 lg:w-full text-white transition-all duration-300 ${
 					bg ? "bg-rojo" : "bg-rojo/10 backdrop-blur"
 				} `}>
-				<Link to="/" class="text-6xl text-white font-primary">
-					BookHub
-				</Link>
+					<div className="flex items-center">
+						<Link to="/" className="flex items-center text-6xl text-white font-primary">
+							BookHub
+						</Link>
+					</div>
 				<div className="flex gap-12 justify-center items-center">
 					<Link
 						to="/home"
@@ -79,7 +82,7 @@ const NavBar = () => {
 				<div className="flex justify-end">
 					{!isLoggedIn && (
 						<button
-							className="bg-gris text-white text-xl px-6 py-4 rounded-lg font-primary"
+							className="bg-gris text-white m-2 text-xl px-6 py-4 rounded-lg font-primary"
 							onClick={toInicio}>
 							Inicia sesión
 						</button>
@@ -87,7 +90,7 @@ const NavBar = () => {
 					{isLoggedIn && (
 						<div className="flex justify-end">
 							<button onClick={handleUserButtonClick} className="">
-								<FaUser size={32} />
+								<NavPerfil size={32} />
 							</button>
 							{showVistaUser && <VistaUser onLogout={handleLogout} />}
 						</div>

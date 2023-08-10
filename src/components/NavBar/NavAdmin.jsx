@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { FaUser } from "react-icons/fa";
 import VistaAdmin from "../VistasUser/VistaAdmin";
 import { AiOutlineHome, AiOutlineDashboard } from "react-icons/ai";
+import NavPerfil from "./NavPerfil";
 
 export default function NavAdmin() {
 	const [bg, setBg] = useState(false);
@@ -39,13 +40,13 @@ export default function NavAdmin() {
 	return (
 		<div className="">
 			<div
-				className={`p-2 grid grid-cols-3  flex-wrap fixed  z-10 lg:w-full text-white transition-all duration-300 ${
+				className={` grid grid-cols-3  flex-wrap fixed  z-10 lg:w-full text-white transition-all duration-300 ${
 					bg ? "bg-rojo" : "bg-rojo/10 backdrop-blur"
 				} `}>
 				{/* <div className=""> */}
 				<Link
 					to="/"
-					class="text-6xl text-white   font-primary  hover:text-gray-400">
+					className="text-6xl text-white font-primary  hover:text-gray-400 flex items-center">
 					BookHub
 				</Link>
 
@@ -92,7 +93,9 @@ export default function NavAdmin() {
 						<button
 							onClick={handleUserButtonClick}
 							className={` hover:text-gray-400`}>
-							<FaUser size={32} />
+								<div className="flex flex-col m-0 p-0">
+									<NavPerfil size={32} />
+								</div>
 						</button>
 						{showVistaUser && <VistaAdmin  onLogout={handleLogout} />}
 					</div>
