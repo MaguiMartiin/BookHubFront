@@ -102,7 +102,7 @@ const FormRegistro = () => {
 			<Link to="/dashboard">
                     <button className={style.titulo2}>Volver</button>
                 </Link>
-				<h2 className="font-black text-[2.5rem] font-secondary  text-center text-rojo">
+				<h2 className="font-black text-[2.5rem] font-primary  text-center text-gris">
 					Registra tus libros
 				</h2>
 				<Formik
@@ -311,7 +311,7 @@ const FormRegistro = () => {
 												/>
 												<label
 													htmlFor="image"
-													className="inline-block w-full p-2 bg-red-300 text-white font-semibold rounded-lg shadow-md hover:cursor-pointer">
+													className="inline-block w-full p-2 bg-rojo text-white font-semibold rounded-lg shadow-md hover:cursor-pointer">
 													<IoIosAddCircle
 														style={{ fontSize: "24px" }}
 														className="inline mr-2 cursor-pointer"
@@ -351,7 +351,7 @@ const FormRegistro = () => {
 									</div>
 									<div>
 										<button
-											className="bg-primary w-full  hover:bg-secondary text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+											className="bg-rojo w-full  hover:bg-secondary text-blanco font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 											type="submit"
 											disabled={isSubmitting}>
 											{isSubmitting ? "Enviando..." : "Guardar"}
@@ -367,18 +367,18 @@ const FormRegistro = () => {
 							<div className="flex flex-col justify-center items-center bg-white shadow-md rounded-lg py-10  mb-10">
 								{/* <div> */}
 								<div className=" flex w-[200px]  items-center relative">
-									<div className="absolute left-0 w-[200px]  right-0 top-1/2 h-0.5 bg-pink-300"></div>
+									<div className="absolute left-0 w-[200px]  right-0 top-1/2 h-0.5 bg-rojo"></div>
 									<p className="mx-4 mb-0 text-center w-[200px] text-2xl  font-semibold relative z-10">
 										(Preview)
 									</p>
-									<div className="absolute left-0 right-0 w-[200px] top-1/2 h-0.5 bg-pink-500"></div>
+									<div className="absolute left-0 right-0 w-[200px] top-1/2 h-0.5 bg-rojo"></div>
 								</div>
 								<h2 className="text-4xl text-center font-semibold mb-4">
 									{values.name ? values.name : "Nombre de tu evento"}
 								</h2>
 
 								<div className="flex flex-col items-center mt-4">
-									<div className="h-60 w-60 lg:h-96 lg:w-96 bg-gradient-to-r from-red-300 to-pink-500 rounded-xl border border-secondaryBorder">
+									<div className="h-60 w-60 lg:h-96 lg:w-96 bg-gradient-to-r from-rojo to-violeta rounded-xl border border-secondaryBorder">
 										{values.image ? (
 											<img
 												src={

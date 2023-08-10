@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Back.module.css';
 import { Link, useNavigate } from 'react-router-dom';
+import Publicaciones from './Publicaciones';
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2"
 
@@ -41,33 +42,25 @@ export default function BackgroundAdmin() {
         <Link to="/home" className={styles.sidebutton}>
           <button className={styles.titulo3} >Inicio</button>
         </Link>
-        <button className={styles.sidebutton} onClick={() => { navigate("/publicaciones") }}>
-          Mis publicaciones
-        </button>
         <button className={styles.sidebutton} onClick={() => { navigate("/form") }}>
           Realizar una nueva publicación
         </button>
-     
-
         <button className={styles.sidebutton} onClick={() => { navigate("/editGender") }}>
-            Editar o Crear Género
+          Editar o Crear Género
         </button>
         <button className={styles.sidebutton} onClick={() => { navigate("/editAutor") }}>
-            Editar o crear Autor 
+          Editar o crear Autor 
         </button>
-        {<button className={styles.sidebutton} onClick={() => { navigate("/editUsers") }}>
-            Editar Usuarios
-        </button>}
-       {<button className={styles.sidebutton} onClick={() => { navigate("/recordSale") }}>
-            Registro de Ventas
-        </button>}
-        <button className={styles.titulo2} onClick={handleLogoutClick}>Cerrar Sesión</button> 
-         
+        <button className={styles.sidebutton} onClick={() => { navigate("/editUsers") }}>
+          Editar Usuarios
+        </button>
+        <button className={styles.sidebutton} onClick={() => { navigate("/recordSale") }}>
+          Registro de Ventas
+        </button>
       </div>
       <div className={styles.contenido}>
-        {/* Contenido principal */}
         <header>
-          <h1 className={styles.titulo}>DashBoard Principal</h1>
+          <Publicaciones/>
         </header>
       </div>
 

@@ -155,13 +155,9 @@ const EditUsers = () => {
         <Link to="/home" className={style.sidebutton}>
           <button className={style.titulo3}>Inicio</button>
         </Link>
-        <button className={style.sidebutton} onClick={() => { navigate("/publicaciones") }}>
-            Mis publicaciones
-        </button>
         <button className={style.sidebutton} onClick={() => { navigate("/form") }}>
-            Realizar una nueva publicación
+          Realizar una publicación
         </button>
-        
         <button className={style.sidebutton} onClick={() => { navigate("/editGender") }}>
             Editar o crear Género 
         </button>
@@ -171,10 +167,9 @@ const EditUsers = () => {
         <button className={location.pathname !== "/" ? style.boton : style.sidebutton}>
           Editar Usuarios
         </button>
-       <button className={style.sidebutton} onClick={() => { navigate("/recordSale") }}>
-            Registro de Ventas
+        <button className={style.sidebutton} onClick={() => { navigate("/recordSale") }}>
+          Registro de Ventas
         </button>
-        <button className={style.titulo2} onClick={handleLogoutClick}>Cerrar Sesión</button>
       </div>
       <div className={style.tableContainer}>
 
