@@ -16,6 +16,7 @@ const Detail = () => {
     
     const bookDetail = useSelector(state => state.bookId);
     const cart = useSelector((state) => state.cart);
+	const isAdmins = localStorage.getItem("isAdmin") === "true";
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -75,12 +76,12 @@ const Detail = () => {
 				<div className="grid grid-cols-3  xl:w-100vw">
 					<div className="w-full p-10">
 						<div className="flex items-center justify-between">
-							<Link to={`/editar/${bookDetail.id}`}>
+							{isAdmins && <Link to={`/editar/${bookDetail.id}`}>
 								<button className="flex items-center mt-4 text-blanco text-xl"> Editar <FaEdit className="ml-1" />
 								</button>
-							</Link>
-							<button className="flex items-center text-blanco mt-4 text-xl" onClick={() => handleDelete(bookDetail.id)}> Eliminar <FaTrash className="ml-1 text-blanco" />
-							</button>
+							</Link>}
+							{isAdmins &&<button className="flex items-center text-blanco mt-4 text-xl" onClick={() => handleDelete(bookDetail.id)}> Eliminar <FaTrash className="ml-1 text-blanco" />
+							</button>}
 						</div>
 						<img src={bookDetail.image} alt={bookDetail.name} className="" />
 						<div className="flex items-center gap-2 justify-between mt-2">
