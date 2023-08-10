@@ -39,7 +39,7 @@ const Login = () => {
 								email: values.email,
 								password: values.password,
 							});
- 
+							console.log(response.data);
 							const { accesoWJT: token, admin } = response.data;
 							localStorage.setItem("accessToken", token);
 							localStorage.setItem("isAdmin", admin);

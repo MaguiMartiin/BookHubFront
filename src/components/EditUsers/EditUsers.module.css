@@ -10,7 +10,7 @@
   width: 770px;
   border-radius: 10px;
   margin: 2px;
-  left: 300px;
+  left: 200px;
   outline: none;
   border: 1px solid rgb(0, 0, 0);
   padding: 2px;
@@ -67,7 +67,7 @@
 }
 
 .sidebar {
-  height: 110vh;
+  height: 115vh;
   min-width: 180px;
   background: rgb(205, 205, 205);
   display: flex;
@@ -87,13 +87,27 @@
 }
 
 .titulo2 {
-  color: rgb(0, 0, 0);
+  padding: 10px;
+  background-color: #505050;
+  color: #fff;
+  border: none;
+  cursor: pointer;
   font-size: 15px;
-  font-family: 'Baloo', sans-serif;
   display: flex;
+  justify-content: center;
   align-items: center;
-  margin-left: 18px;
+  margin-left: 0px;
+  margin-top: auto; /* Empuja el botón hacia abajo */
 }
+
+.titulo3 {
+  color: rgb(255, 255, 255);
+  display: flex;
+  position: relative;
+  font-size: 17px;
+  left: 90px;
+}
+
 .sidebutton {
   padding: 10px;
   background-color: #5d5d5d;
@@ -126,7 +140,7 @@
 .tableHeader,
 .tableData {
   padding: 12px;
-  font-size: 14px;
+  font-size: 13px;
   border: 1px solid #838383;
 }
 
@@ -161,13 +175,13 @@
 
 .editButton,
 .deleteButton {
-  padding: 5px;
+  padding: 6px;
   background-color: #535657;
   color: rgb(255, 255, 255);
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 14px;
 }
 .deleteBu {
   padding: 5px;
@@ -195,14 +209,27 @@
   border: none;
   margin-bottom: 5px;
   border-radius: 5px;
-  font-size: 13px;
+  font-size: 14px;
+}
+.botonAdmin {
+  padding: 5px;
+  background-color: #178731;
+  color: #fff;
+  border: none;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  font-size: 14px;
 }
 
+.titulo2:hover,
+.botonIsAdmin:hover,
 .editButton:hover,
 .deleteButton:hover {
   background-color: #238094;
 }
 
+.titulo2:active,
+.botonIsAdmin:active,
 .editButton:active,
 .deleteButton:active {
   background-color: #87171e; /* Cambia el color que deseas cuando el botón está activo */

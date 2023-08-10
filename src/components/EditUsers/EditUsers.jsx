@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAllUsers, searchUsers, suspenderUsers, quitarSuspenderUsers, eliminarUsers, adminUsers, noAdminUsers } from '../../redux/actions';
+import { getAllUsers, searchUsers, suspenderUsers, quitarSuspenderUsers, eliminarUsers, adminUsers, vendedorUsers, usersVendedor } from '../../redux/actions';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import style from './EditUsers.module.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Swal from "sweetalert2"
 
 const EditUsers = () => {
   const location = useLocation();
@@ -17,37 +18,54 @@ const EditUsers = () => {
   const [unSuspender, setUnSuspender] = useState("");
   const [delet, setDelet] = useState("");
   const [admins, setAdmin] = useState("");
-  const [noAdmins, setNoAdmin] = useState("");
+  const [vendedor, setVendedor] = useState("");
+  const [userVendedor, setUserVendedor] = useState("");
+  const isAdmin = localStorage.getItem("isAdmin") === "true";
 
   useEffect(() => {
     dispatch(getAllUsers());
-  }, [dispatch, suspender, unSuspender, delet, admins]);
+  }, [dispatch, suspender, unSuspender, delet, admins, vendedor, userVendedor]);
 
   //busca por email
   const handleSearch = (e) => {
     const { value } = e.target;
     console.log(value);
     setEmail(value)
+    setCurrentPage(1)
   };
 
   //suspender user
   const handleSuspender = (id) => {
     console.log(id);
     setSuspender(id)
+    setEmail("")
   };
   //quitar suspencion user
   const handleUnSuspender = (id) => {
     setUnSuspender(id)
+    setEmail("")
   };
 
   //eliminar user
   const handleDelete = (id) => {
     setDelet(id)
+    setEmail("")
   };
 
   //convertir user a admin
   const handleIsAdmin = (id) => {
     setAdmin(id)
+    setEmail("")
+  };
+
+//convertir vendedor a user
+  const handleVendedor = (id) => {
+    setVendedor(id)
+  };
+
+//convertir vendedor a user
+  const handleUserVendedor = (id) => {
+    setUserVendedor(id)
   };
 
   //convertir admin a user
@@ -68,10 +86,12 @@ const EditUsers = () => {
     setDelet("")
     dispatch(adminUsers(admins))
     setAdmin("")
-    dispatch(noAdminUsers(noAdmins))
-    setNoAdmin("")
+    dispatch(vendedorUsers(vendedor))
+    setVendedor("")
+    dispatch(usersVendedor(userVendedor))
+    setUserVendedor("")
     dispatch(getAllUsers());
-  }, [suspender, unSuspender, delet, admins, noAdmins]);
+}, [suspender, unSuspender, delet, admins, vendedor, userVendedor]);
 
   useEffect(() => {
     dispatch(searchUsers(email));
@@ -97,6 +117,33 @@ const EditUsers = () => {
 
   const startIndex = (currentPage - 1) * usersPerPage;
   const visibleUsers = users?.slice(startIndex, startIndex + usersPerPage);
+  const cart = useSelector((state) => state.cart);
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken")
+    localStorage.removeItem("isAdmin")
+    localStorage.removeItem("cart")
+    cart.splice(0, cart.length);
+  }
+
+  const handleLogoutClick = () => {
+    console.log("login")
+    Swal.fire({
+      title: "¿Estás seguro que deseas cerrar sesión?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#4caf50",
+      cancelButtonColor: "#f44336",
+      confirmButtonText: "Sí, cerrar sesión",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleLogout();
+        navigate("/home");
+      }
+    });
+  };
+
 
   return (
     <div className={style.editUsersContainer}>
@@ -104,21 +151,12 @@ const EditUsers = () => {
       <div className={style.sidebar}>
         <Link to="/" className={style.titulo1}>
           BookHub
+        </Link> 
+        <Link to="/home" className={style.sidebutton}>
+          <button className={style.titulo3}>Inicio</button>
         </Link>
-        <Link to="/home">
-          <button className={style.titulo2}>Home</button>
-        </Link>
-        <button className={style.sidebutton} onClick={() => { navigate("/publicaciones") }}>
-          Mis publicaciones
-        </button>
         <button className={style.sidebutton} onClick={() => { navigate("/form") }}>
           Realizar una publicación
-        </button>
-        <button className={location.pathname !== "/" ? style.boton : style.sidebutton}>
-          Editar Usuarios
-        </button>
-        <button className={style.sidebutton} onClick={() => { navigate("/recordSale") }}>
-          Registro de Ventas
         </button>
         <button className={style.sidebutton} onClick={() => { navigate("/editGender") }}>
             Editar o crear Género 
@@ -126,15 +164,22 @@ const EditUsers = () => {
         <button className={style.sidebutton} onClick={() => { navigate("/editAutor") }}>
             Editar o crear Autor 
         </button>
+        <button className={location.pathname !== "/" ? style.boton : style.sidebutton}>
+          Editar Usuarios
+        </button>
+        <button className={style.sidebutton} onClick={() => { navigate("/recordSale") }}>
+          Registro de Ventas
+        </button>
       </div>
       <div className={style.tableContainer}>
 
-        <input
-          type="text"
-          placeholder='Buscar Usuario Por Email'
-          className={style.search}
-          onChange={handleSearch}
-        />
+      <input 
+            type="text" 
+            placeholder='Buscar Usuario Por Email' 
+            className={style.search}
+            value={email}
+            onChange={handleSearch} 
+            />
 
         <table className={style.usersTable}>
           <thead>
@@ -143,8 +188,7 @@ const EditUsers = () => {
               <th className={style.tableHeader}>Email</th>
               <th className={style.tableHeader}>Esta Activo</th>
               <th className={style.tableHeader}>Es Admin</th>
-              <th className={style.tableHeader}>Suspender</th>
-              <th className={style.tableHeader}>Quitar suspensión</th>
+              <th className={style.tableHeader}>Suspender o Quitar suspensión</th>
               <th className={style.tableHeader}>Administrador</th>
               <th className={style.tableHeader}>Eliminar</th>
             </tr>
@@ -162,25 +206,23 @@ const EditUsers = () => {
                   <p className={style.price}>{e.admin ? '🟢 Si' : '🔴 No'}</p>
                 </td>
                 <td className={`${style.tableData} ${style.actions}`}>
-                  <button className={e.isActive ? style.editButton : style.botonIsAdmin} onClick={() => handleSuspender(e.id)} >
-                    Suspender
+                 {e.isActive? <button className={e.isActive? style.editButton: style.botonIsAdmin} onClick={()=>handleSuspender(e.id)} >
+                  Suspender
+                  </button>: <button className={style.botonIsAdmin} onClick={()=>handleUnSuspender(e.id)}>
+                  Quitar suspensión
+                  </button>}
+                </td>
+                
+                <td className={`${style.tableData}`}>
+                <button className={e.admin? style.botonAdmin: style.deleteButton} onClick={()=>handleAdmin(e.id)}>
+                Administrador
                   </button>
                 </td>
                 <td className={`${style.tableData}`}>
-                  <button className={e.isActive ? style.botonIsAdmin : style.deleteButton} onClick={() => handleUnSuspender(e.id)}>
-                    Quitar suspensión
-                  </button>
-                </td>
-                <td className={`${style.tableData}`}>
-                  <button className={e.admin ? style.botonIsAdmin : style.deleteButton} onClick={() => handleAdmin(e.id)}>
-                    Administrador
-                  </button>
-                </td>
-                <td className={`${style.tableData}`}>
-                  <button className={style.deleteBu} onClick={() => handleDelete(e.id)}>
+                 {!e.admin && <button className={style.deleteBu} onClick={()=>handleDelete(e.id)}>
                     <FaTrash />
-                  </button>
-                </td>
+                  </button>}
+                  </td>
               </tr>
             ))}
           </tbody>

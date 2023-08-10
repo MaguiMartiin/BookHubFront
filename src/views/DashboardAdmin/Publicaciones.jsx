@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { publicId, bookDelete } from "../../redux/actions";
+import { publicId, bookDelete, getAllBooks } from "../../redux/actions";
 import { FaDollarSign } from "react-icons/fa";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { FaEdit, FaTrash, FaBookOpen } from 'react-icons/fa'
@@ -14,12 +14,13 @@ const Publicaciones = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    dispatch(getAllBooks())
     dispatch(publicId()).then(() => {
       setLoading(false);
     });
   }, [dispatch, id]);
 
-  const publicaciones = useSelector((state) => state.bookPublic);
+  const publicaciones = useSelector((state) => state.copyState); 
   console.log(publicaciones);
 
   const suspendBook = async (id) => {
@@ -62,16 +63,16 @@ if (loading) {
       <FaBookOpen className="text-6xl text-blanco animate-spin" />
     </div>
     <h1 className="text-4xl text-blanco font-bold">Cargando...</h1>
-    <p className="text-lg text-gray-600">Preparando tus tesoros literarios</p>
+    <p className="text-lg text-gray-600">Preparando los tesoros literarios</p>
   </div>
   );
 }
 
   return (
-    <div className="flex flex-col items-center pt-24">
-      {publicaciones?.length > 0 ? (
-        publicaciones.map((libro) => (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-6 pt-28 ">
+      {
+        publicaciones?.map((libro) => (
+          <div >
             <div key={libro.id} className="bg-gradient-to-r from-violeta to-rojo p-6 shadow-xl rounded-lg">
               <div className="flex justify-end">
                 <Link to={`/editar/${libro.id}`}>
@@ -109,19 +110,7 @@ if (loading) {
             </div>
           </div>
           ))
-        ) : (
-          <div className="flex flex-col justify-center mt-10 w-full items-center">
-            <h1 className="text-3xl font-primary text-blanco mb-4">
-              ¡Aún no has compartido tus tesoros literarios!
-            </h1>
-            <button class="bg-gris text-white text-2xl px-6 py-4 rounded-lg font-primary" onClick={() => {navigate("/dashboard")}}>
-              Volver
-            </button>
-            <button class="bg-gris text-white text-2xl px-6 py-4 rounded-lg font-primary mt-8" onClick={() => {navigate("/form")}}>
-              Realizar una publicacion
-            </button>
-          </div>
-        ) }
+        }
       </div>
   );
 };
