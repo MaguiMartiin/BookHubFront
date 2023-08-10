@@ -15,7 +15,7 @@ const Pagination = ({max, page, setPage}) => {
     console.log(page);
 
     return (
-			<div className="flex items-center justify-center my-4 mt-32">
+			<div className="flex items-center justify-center my-4 mt-8">
 				<button
 					onClick={handlePrevPage}
 					disabled={page === 1}

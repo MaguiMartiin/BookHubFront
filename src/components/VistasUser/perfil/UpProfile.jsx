@@ -1,21 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form, ErrorMessage, Field } from "formik";
-import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import {IoIosAddCircle} from "react-icons/io";
-import cloudinary from "../../../views/Form/Cloudinary"
+import { IoIosAddCircle } from "react-icons/io";
+import cloudinary from "../../../views/Form/Cloudinary";
 import { LuDelete } from "react-icons/lu";
+
 const token = localStorage.getItem("accessToken");
 
 const Login = ({ handleModal, setIsModalOpen }) => {
-	// console.log(isModalOpen, setIsModalOpen);
-	const navigate = useNavigate();
-
-	// const deleteClick = () => {
-		// if (isModalOpen) {
-			// isModalOpen = false;
-		// }
-	// };
 
 	return (
 		<div className="container flex flex-col h-screen justify-center items-center ">
@@ -26,7 +18,7 @@ const Login = ({ handleModal, setIsModalOpen }) => {
 						image: null,
 						lastName: "",
 					}}
-					onSubmit={async (values, {  resetForm }) => {
+					onSubmit={async (values, { resetForm }) => {
 						console.log(values, "values");
 						try {
 							const res = await axios.put("/perfil/editar", values, {
@@ -35,12 +27,15 @@ const Login = ({ handleModal, setIsModalOpen }) => {
 								},
 								// console.log(res);
 							});
+
+							// navigate("/perfil");
 							resetForm();
+						
 						} catch (error) {
 							console.error("Error en la solicitud:", error);
 						}
 					}}>
-					{({ errors, touched, setFieldValue, values}) => (
+					{({ errors, touched, setFieldValue, values }) => (
 						<Form>
 							<div className="flex flex-col my-2">
 								<div className="mb-5 text-center">
@@ -87,8 +82,12 @@ const Login = ({ handleModal, setIsModalOpen }) => {
 												setFieldValue("image", response);
 											}}
 										/>
-										<div className={`${typeof values.image === "string" ? "w-32 h-32" : "w-0 h-0"}`} >
-											
+										<div
+											className={`${
+												typeof values.image === "string"
+													? "w-32 h-32"
+													: "w-0 h-0"
+											}`}>
 											<img src={values.image} alt="" />
 										</div>
 										<label
@@ -106,7 +105,10 @@ const Login = ({ handleModal, setIsModalOpen }) => {
 
 							<button
 								type="submit"
-								className="bg-violeta text-white px-4 py-2 rounded hover:bg-red-400 w-full"> Enviar </button>
+								className="bg-violeta text-white px-4 py-2 rounded hover:bg-red-400 w-full">
+								{" "}
+								Enviar{" "}
+							</button>
 						</Form>
 					)}
 				</Formik>
