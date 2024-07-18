@@ -75,21 +75,14 @@ const Home = () => {
 
 			<div className="max-w-screen-2xl  px-40 mt-4 ">
 				<div className="grid grid-flow-row gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-4 uppercase  ">
-					{currentData?.slice(0, 3).map((book, idx) => (
-						<div key={idx} className={style.card}>
-							<Card book={book} />
-						</div>
-					))}
-				</div>
-				<div className="grid grid-flow-row gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-					{currentData?.slice(3, 6).map((book, idx) => (
+					{currentData?.slice(0, 6).map((book, idx) => (
 						<div key={idx} className={style.card}>
 							<Card book={book} />
 						</div>
 					))}
 				</div>
 			</div>
-			<div className="flex justify-center">
+			<div className="flex justify-center mb-8">
 				<Pagination page={page} setPage={setPage} perPage={perPage} max={max} />
 			</div>
 		</div>

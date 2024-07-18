@@ -32,7 +32,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import FormPunt from "./components/VistasUser/FormOpinion/FromPunt";
 
-axios.defaults.baseURL = "https://bookhub-backend-e97y.onrender.com"
+axios.defaults.baseURL = "http://localhost:3001"
 function App() {
 	const location = useLocation();
 	const dispatch = useDispatch();
