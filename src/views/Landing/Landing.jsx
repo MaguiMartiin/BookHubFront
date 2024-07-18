@@ -12,6 +12,8 @@ import {
 } from "./Nostros";
 import Carousel from "./Carrusel";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
+import NavBar from "../../components/NavBar/NavBar";
+import { FaBook, FaStar, FaShoppingCart } from "react-icons/fa";
 
 const Landing = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -47,7 +49,7 @@ const Landing = () => {
 
 	return (
 		<div className="max-w-screen min-h-[100vh] bg-negro">
-			<div className="w-full flex items-center justify-between p-6">
+			{/* <div className="w-full flex items-center justify-between p-6">
 				<h1 className="text-6xl text-white font-primary">BookHub</h1>
 				{!isLoggedIn && (
 					<button
@@ -56,52 +58,55 @@ const Landing = () => {
 						Inicia Sesión
 					</button>
 				)}
+			</div> */}
+			<div className="flex mb-[4rem]">
+				<NavBar/>
 			</div>
 
-			<div className="flex items-center justify-between">
+			<div className="flex items-center justify-between pt-6">
 				<img src={landing} alt="image landing" className="w-1/6" />
-				<div className="flex flex-col justify-center p-6 w-full items-center">
-					<h1 className="font-secondary text-white text-7xl">
-						Descubre un universo de conocimiento y aventuras literarias en
-						BookHub
+				<div className="flex flex-col justify-center p-8 w-full items-center text-center space-y-7 text-white">
+					<h1 className="font-tertiary text-5xl">
+						Descubre un universo de conocimiento y aventuras literarias.
 					</h1>
-					<h2 className="font-tertiary text-white text-4xl mt-6">
-						BookHub es la plataforma definitiva para los amantes de la lectura.
-						Nuestra extensa colección de libros de diversos géneros te permitirá
-						descubrir nuevos títulos y autores que se adapten a tus intereses y
-						preferencias. Únete a nuestra comunidad de lectores apasionados para
-						compartir tus reseñas y descubrimientos literarios. ¡Embárcate en un
-						emocionante viaje de conocimiento y entretenimiento con BookHub!
+					<h2 className="font-secondary text-3xl ">
+						Explora nuevos títulos y autores, y comparte tus reseñas con nuestra comunidad de lectores apasionados. ¡Únete a BookHub!
 					</h2>
 					<button
 						onClick={toHome}
 						className="bg-gris text-white text-2xl px-6 py-4 rounded-lg font-primary">
-						¡Explorá!
+						¡A explorar!
 					</button>
 				</div>
 			</div>
 
 			<div className="flex items-center justify-between">
 				<div className="flex flex-col justify-center p-6 w-full items-center">
-					<h1 className="font-primary text-white text-7xl">
-						En BookHub tendrás{" "}
+					<h1 className="font-primary text-white text-6xl">
+						Con nosotros tendrás
 					</h1>
-					<h2 className="font-tertiary text-white text-4xl mt-6">
-						Acceso a una amplia biblioteca de libros
-					</h2>
-					<h2 className="font-tertiary text-white text-4xl mt-6">
-						Reseñas y recomendaciones personalizadas
-					</h2>
-					<h2 className="font-tertiary text-white text-4xl mt-6">
-						Compra y venta de libros
-					</h2>
+					<div className="mt-6 flex flex-col space-y-4">
+						<div className="flex items-center">
+							<FaBook className="text-white mr-2" />
+							<span className="text-white text-lg">Acceso a una amplia biblioteca de libros</span>
+						</div>
+						<div className="flex items-center">
+							<FaStar className="text-white mr-2" />
+							<span className="text-white text-lg">Reseñas y recomendaciones personalizadas</span>
+						</div>
+						<div className="flex items-center">
+							<FaShoppingCart className="text-white mr-2" />
+							<span className="text-white text-lg">Compra y venta de libros</span>
+						</div>
+					</div>
+
 				</div>
 				<img src={landing2} alt="image landing" className="w-1/6" />
 			</div>
 
 			<div className="flex flex-col justify-center p-6 w-full items-center mt-24">
-				<h1 className="font-primary text-white text-7xl">Categorías</h1>
-				<div className="space-x-4">
+				<h1 className="font-primary text-white text-5xl">Los mejores libros por categorias</h1>
+				<div className="space-x-4 p-6 text-center">
 					{genders.map((cat, index) => {
 						return (
 							<button
