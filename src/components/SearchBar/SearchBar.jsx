@@ -170,12 +170,12 @@ const SearchBar = ({ setPage }) => {
 
 
 	return (
-		<div className="flex justify-between mx-4 gap-10 ">
-			<div className=" flex px-2">
+		<div className="flex justify-between w-full p-4 ">
+			<div className=" flex w-1/2 space-x-3 mt-4">
 				<select
 					onChange={handleChange1}
 					value={filtro.fecha}
-					className="block w-full text-[1.5rem] bg-gris text-blanco   mx-1 py-2 border-b border-gris focus:border-rojo  hover:border-rojo  font-secondary font-bold rounded-md shadow-sm focus:outline-none  mt-4 cursor-pointer">
+					className="block w-full text-xl bg-gris text-blanco border-b border-gris font-secondary font-bold rounded-md shadow-sm cursor-pointer h-12 overflow-auto">
 					{" "}
 					<option value="all">Año</option>
 					{decades.map((decade, i) => (
@@ -187,7 +187,7 @@ const SearchBar = ({ setPage }) => {
 				<select
 					value={filtro.dataAuthor}
 					onChange={selectAuthor}
-					className="block w-full mx-1 py-2 border-b bg-gris text-blanco border-gris focus:border-rojo  hover:border-rojo  font-secondary font-bold text-[1.5rem]  rounded-md shadow-sm focus:outline-none  mt-4 cursor-pointer">
+					className="block w-full text-xl bg-gris text-blanco border-b border-gris font-secondary font-bold rounded-md shadow-sm cursor-pointer h-12 overflow-auto">
 					<option value="all">Autor</option>
 					{authors?.map((e, i) => (
 						<option key={i} value={e}>
@@ -198,7 +198,7 @@ const SearchBar = ({ setPage }) => {
 				<select
 					value={filtro.dataGender}
 					onChange={selectGender}
-					className="block w-full mx-1 py-2 bg-gris text-blanco  border-b border-gris focus:border-rojo  hover:border-rojo  font-secondary font-bold text-[1.5rem] rounded-md shadow-sm focus:outline-none  mt-4 cursor-pointer">
+					className="block w-full text-xl bg-gris text-blanco border-b border-gris font-secondary font-bold rounded-md shadow-sm cursor-pointer h-12 overflow-auto">
 					<option value="all">Género</option>
 					{genders?.map((gender, idx) => (
 						<option key={idx} value={gender}>
@@ -211,20 +211,20 @@ const SearchBar = ({ setPage }) => {
 					min="1"
 					value={filtro.dataPrice[0].minimo}
 					placeholder="Mínimo"
-					className="block w-full mx-1 py-2 pl-2 bg-gris text-blanco  border-b border-gris focus:border-rojo  hover:border-rojo  font-secondary font-bold text-[1.5rem]  rounded-md shadow-sm focus:outline-none  mt-4"
+					className="block w-full text-xl bg-gris text-blanco border-b border-gris font-secondary font-bold rounded-md shadow-sm cursor-pointer h-12 overflow-auto"
 					onChange={handleMinimo}
 				/>
 				<input
 					type="number"
 					min="1"
-					className="block w-full mx-1 py-2 pl-2 bg-gris text-blanco  border-b border-gris focus:border-rojo  hover:border-rojo  font-secondary font-bold text-[1.5rem]  rounded-md shadow-sm focus:outline-none mt-4"
+					className="block w-full text-xl bg-gris text-blanco border-b border-gris font-secondary font-bold rounded-md shadow-sm cursor-pointer h-12 overflow-auto"
 					value={filtro.dataPrice[0].maximo}
 					placeholder="Máximo"
 					onChange={handleMaximo}
 				/>
 			</div>
 
-			<form className="flex">
+			<form className="flex w-1/3">
 				<input
 					value={filtro.dataSearch}
 					onChange={handleName}

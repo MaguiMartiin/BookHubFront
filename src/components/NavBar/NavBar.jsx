@@ -46,11 +46,11 @@ const NavBar = () => {
 	return (
 		<div className="">
 			<div
-				className={` grid grid-cols-3  flex-wrap fixed  z-10 lg:w-full text-white transition-all duration-300 ${
+				className={` grid grid-cols-3  flex-wrap fixed  z-10 lg:w-full text-white transition-all duration-300 p-2 ${
 					bg ? "bg-rojo" : "bg-rojo/10 backdrop-blur"
 				} `}>
 					<div className="flex items-center">
-						<Link to="/" className="flex items-center text-6xl text-white font-primary">
+						<Link to="/" className="flex items-center text-5xl text-white font-primary">
 							BookHub
 						</Link>
 					</div>
@@ -58,7 +58,7 @@ const NavBar = () => {
 					<Link
 						to="/home"
 						className={` hover:text-gray-400 font-bold flex flex-col justify-center items-center`}>
-						<AiOutlineHome size={32} />
+						<AiOutlineHome size={25} />
 						<span>Inicio</span>
 					</Link>
 					<Link
@@ -66,14 +66,13 @@ const NavBar = () => {
 						className={` hover:text-gray-400 font-bold flex flex-col justify-center items-center`}>
 						{cart.length > 0 ? (
 							<div className={style.cartIndicator}>
-								<FaCartArrowDown size={32} />
+								<FaCartArrowDown size={25} />
 								<span>Carrito</span>
 								<div className={style.badge}>{cart.length}</div>
 							</div>
 						) : (
-							<div>
-								<FaCartArrowDown size={32} />
-
+							<div className="flex flex-col justify-center items-center"> 
+								<FaCartArrowDown size={25} />
 								<span>Carrito</span>
 							</div>
 						)}
@@ -90,7 +89,7 @@ const NavBar = () => {
 					{isLoggedIn && (
 						<div className="flex justify-end">
 							<button onClick={handleUserButtonClick} className="">
-								<NavPerfil size={32} />
+								<NavPerfil size={25} />
 							</button>
 							{showVistaUser && <VistaUser onLogout={handleLogout} />}
 						</div>
