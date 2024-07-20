@@ -37,7 +37,7 @@ const Home = () => {
 	const cart = useSelector((state) => state.cart);
 
 	const [page, setPage] = useState(1);
-	const [perPage, setPerPage] = useState(6);
+	const [perPage, setPerPage] = useState(12);
 
 	useEffect(() => {
 		const compra_id = localStorage.getItem("compra_id");
@@ -74,8 +74,8 @@ const Home = () => {
 			</header>
 
 			<div className="max-w-screen-2xl  px-40 mt-4 ">
-				<div className="grid grid-flow-row gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-4 uppercase  ">
-					{currentData?.slice(0, 6).map((book, idx) => (
+				<div className="grid grid-flow-row gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 mb-4 uppercase  ">
+					{currentData?.slice(0, 12).map((book, idx) => (
 						<div key={idx} className={style.card}>
 							<Card book={book} />
 						</div>
