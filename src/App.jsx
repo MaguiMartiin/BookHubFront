@@ -31,6 +31,7 @@ import CreateAutor from "./components/EditAutor/CreateAutor";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import FormPunt from "./components/VistasUser/FormOpinion/FromPunt";
+import Loading from "./components/Loading/Loading";
 
 axios.defaults.baseURL = "https://bookhub-backend-e97y.onrender.com"
 function App() {
@@ -78,7 +79,7 @@ function App() {
 				<Route path="/home" element={<Home />} />
 				<Route path="/home/:id" element={<Detail />} />
 				<Route path="/editar/:id" element={<EditDetail />} />
-				<Route path="/form" element={<Form />} />
+				<Route path="/form" element={<Loading />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<SignUp />} />
 				<Route path="/MyBooks" element={<MyBooks />} />

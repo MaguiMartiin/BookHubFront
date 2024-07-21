@@ -11,6 +11,7 @@ import Image from "./Image";
 import { useLocation } from "react-router-dom";
 import { filter } from "../../redux/actions";
 import { getPerfil } from "../../redux/actions";
+import Footer from "../../components/Footer/Footer";
 
 const Home = () => {
 	const dispatch = useDispatch();
@@ -84,6 +85,9 @@ const Home = () => {
 			</div>
 			<div className="flex justify-center mb-8">
 				<Pagination page={page} setPage={setPage} perPage={perPage} max={max} />
+			</div>
+			<div>
+				<Footer/>
 			</div>
 		</div>
 	);
