@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getGenders } from "../../redux/actions";
-import {
-	landing,
-	landing2,
-	Magui,
-	Yonatan,
-	Ricardo,
-	Franco,
-	Gabriel,
-} from "./Nostros";
+import { landing, landing2 } from "../SobreNosotros/Nostros";
 import Carousel from "./Carrusel";
-import { FiGithub, FiLinkedin } from "react-icons/fi";
 import NavBar from "../../components/NavBar/NavBar";
 import { FaBook, FaStar, FaShoppingCart } from "react-icons/fa";
+import Footer from "../../components/Footer/Footer";
 
 const Landing = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -49,21 +41,11 @@ const Landing = () => {
 
 	return (
 		<div className="max-w-screen min-h-[100vh] bg-negro">
-			{/* <div className="w-full flex items-center justify-between p-6">
-				<h1 className="text-6xl text-white font-primary">BookHub</h1>
-				{!isLoggedIn && (
-					<button
-						onClick={toInicio}
-						className="bg-gris text-white text-xl px-6 py-4 rounded-lg font-primary">
-						Inicia Sesión
-					</button>
-				)}
-			</div> */}
 			<div className="flex mb-[4rem]">
 				<NavBar/>
 			</div>
 
-			<div className="flex items-center justify-between pt-6">
+			<div className="flex items-center justify-between pt-8">
 				<img src={landing} alt="image landing" className="w-1/6" />
 				<div className="flex flex-col justify-center p-8 w-full items-center text-center space-y-7 text-white">
 					<h1 className="font-tertiary text-5xl">
@@ -123,206 +105,8 @@ const Landing = () => {
 			<div>
 				<Carousel />
 			</div>
-
-			<div className="flex flex-col justify-center w-full items-center">
-				<h1 className="text-blanco font-primary text-4xl">Sobre nosotros</h1>
-				<div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-5 p-5">
-					<div className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
-						<div className="h-96 w-80">
-							<img
-								className="h-full w-full object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
-								src={Franco}
-								alt="Franco"
-							/>
-						</div>
-						<div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black group-hover:from-black/70 group-hover:via-black/60 group-hover:to-black/70"></div>
-						<div className="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0">
-							<h1 className="font-dmserif text-3xl font-bold text-white">
-								Franco Farid Silva Flores
-							</h1>
-							<div className="flex gap-4 py-8">
-								<a
-									href="https://www.linkedin.com/in/franco-silva-389b69265/"
-									target="_blank"
-									className="flex flex-col items-center">
-									<div className=" flex  items-center flex-col justify-center">
-										{/* <div className=" "> */}
-										<FiLinkedin
-											className="stroke-white transition duration-300 ease-in-out"
-											size={32}
-										/>
-										<span className="text-white  transition duration-300 ease-in-out">
-											Linkedin
-										</span>
-										{/* </div> */}
-									</div>
-								</a>
-								<a href="https://github.com/Franco22s" target="_blank">
-									<div className="flex items-center flex-col">
-										<FiGithub className=" stroke-white" size={32} />
-										<span className="text-white">Github</span>
-									</div>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
-						<div className="h-96 w-72">
-							<img
-								className="h-full w-full object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
-								src={Ricardo}
-								alt="Ricardo"
-							/>
-						</div>
-						<div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black group-hover:from-black/70 group-hover:via-black/60 group-hover:to-black/70"></div>
-						<div className="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0">
-							<h1 className="font-dmserif text-3xl font-bold text-white">
-								Ricardo Dionel Díaz
-							</h1>
-							<div className="flex gap-4 py-8">
-								<a
-									href="https://www.linkedin.com/in/ricardo-dionel-diaz-1b6802236"
-									target="_blank"
-									className="flex flex-col items-center">
-									<div className=" flex  items-center flex-col justify-center">
-										{/* <div className=" "> */}
-										<FiLinkedin
-											className="stroke-white transition duration-300 ease-in-out"
-											size={32}
-										/>
-										<span className="text-white  transition duration-300 ease-in-out">
-											Linkedin
-										</span>
-										{/* </div> */}
-									</div>
-								</a>
-								<a href="https://github.com/Dionel22" target="_blank">
-									<div className="flex items-center flex-col">
-										<FiGithub className=" stroke-white" size={32} />
-										<span className="text-white">Github</span>
-									</div>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
-						<div className="h-96 w-72">
-							<img
-								className="h-full w-full object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
-								src={Gabriel}
-								alt="Gabriel"
-							/>
-						</div>
-						<div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black group-hover:from-black/70 group-hover:via-black/60 group-hover:to-black/70"></div>
-						<div className="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0">
-							<h1 className="font-dmserif text-3xl font-bold text-white">
-								Gabriel Yopasa Angulo
-							</h1>
-							<div className="flex gap-4 py-8">
-								<a
-									href="https://www.linkedin.com/in/gabriel-yopasa-angulo-208665265/"
-									target="_blank"
-									className="flex flex-col items-center">
-									<div className=" flex  items-center flex-col justify-center">
-										{/* <div className=" "> */}
-										<FiLinkedin
-											className="stroke-white transition duration-300 ease-in-out"
-											size={32}
-										/>
-										<span className="text-white  transition duration-300 ease-in-out">
-											Linkedin
-										</span>
-										{/* </div> */}
-									</div>
-								</a>
-								<a href="https://github.com/GaboYopasa" target="_blank">
-									<div className="flex items-center flex-col">
-										<FiGithub className=" stroke-white" size={32} />
-										<span className="text-white">Github</span>
-									</div>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
-						<div className="h-96 w-72">
-							<img
-								className="h-full w-full object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
-								src={Magui}
-								alt="Magui"
-							/>
-						</div>
-						<div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black group-hover:from-black/70 group-hover:via-black/60 group-hover:to-black/70"></div>
-						<div className="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0">
-							<h1 className="font-dmserif text-3xl font-bold text-white">
-								Magali Alejandra Martin
-							</h1>
-							<div className="flex gap-4 py-8">
-								<a
-									href="https://www.linkedin.com/in/magali-alejandra-martin/"
-									target="_blank"
-									className="flex flex-col items-center">
-									<div className=" flex  items-center flex-col justify-center">
-										{/* <div className=" "> */}
-										<FiLinkedin
-											className="stroke-white transition duration-300 ease-in-out"
-											size={32}
-										/>
-										<span className="text-white  transition duration-300 ease-in-out">
-											Linkedin
-										</span>
-										{/* </div> */}
-									</div>
-								</a>
-								<a href="https://github.com/MaguiMartiin" target="_blank">
-									<div className="flex items-center flex-col">
-										<FiGithub className=" stroke-white" size={32} />
-										<span className="text-white">Github</span>
-									</div>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div className="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/30">
-						<div className="h-96 w-72">
-							<img
-								className="h-full w-full object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
-								src={Yonatan}
-								alt="Yonatan"
-							/>
-						</div>
-						<div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black group-hover:from-black/70 group-hover:via-black/60 group-hover:to-black/70"></div>
-						<div className="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0">
-							<h1 className="font-dmserif text-3xl font-bold text-white">
-								Yonatan Llanto Aquino
-							</h1>
-							<div className="flex gap-4 py-8">
-								<a
-									href="https://www.linkedin.com/in/yonatanllanto/"
-									target="_blank"
-									className="flex flex-col items-center">
-									<div className=" flex  items-center flex-col justify-center">
-										{/* <div className=" "> */}
-										<FiLinkedin
-											className="stroke-white transition duration-300 ease-in-out"
-											size={32}
-										/>
-										<span className="text-white  transition duration-300 ease-in-out">
-											Linkedin
-										</span>
-										{/* </div> */}
-									</div>
-								</a>
-								<a href="https://github.com/YonatanLLa" target="_blank">
-									<div className="flex items-center flex-col">
-										<FiGithub className=" stroke-white" size={32} />
-										<span className="text-white">Github</span>
-									</div>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
+			<div>
+				<Footer/>
 			</div>
 		</div>
 	);
