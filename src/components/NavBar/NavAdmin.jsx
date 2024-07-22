@@ -40,7 +40,7 @@ export default function NavAdmin() {
 	return (
 		<div className="">
 			<div
-				className={` grid grid-cols-3  flex-wrap fixed  z-10 lg:w-full text-white transition-all duration-300 p-2 w-full ${
+				className={` grid grid-cols-3  flex-wrap fixed  z-10 lg:w-full text-white transition-all duration-300 p-2 w-full h-24 ${
 					bg ? "bg-rojo" : "bg-rojo/10 backdrop-blur"
 				} `}>
 				<div  className="flex items-center">
