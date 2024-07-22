@@ -46,8 +46,8 @@ const NavBar = () => {
 	return (
 		<div className="">
 			<div
-				className={` grid grid-cols-3  flex-wrap fixed  z-10 lg:w-full text-white transition-all duration-300 p-2 w-full ${
-					bg ? "bg-rojo" : "bg-rojo/10 backdrop-blur h-24	"
+				className={` grid grid-cols-3  flex-wrap fixed  z-10 lg:w-full text-white transition-all duration-300 p-2 w-full h-24 ${
+					bg ? "bg-rojo" : "bg-rojo/10 backdrop-blur"
 				} `}>
 					<div className="flex items-center">
 						<Link to="/" className="flex items-center text-5xl text-white font-primary">
