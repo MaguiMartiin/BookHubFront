@@ -31,7 +31,6 @@ import CreateAutor from "./components/EditAutor/CreateAutor";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import FormPunt from "./components/VistasUser/FormOpinion/FromPunt";
-import Loading from "./components/Loading/Loading";
 import SobreNosotros from "./views/SobreNosotros/SobreNosotros";
 
 axios.defaults.baseURL = "https://bookhub-backend-e97y.onrender.com"
