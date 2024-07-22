@@ -43,32 +43,20 @@ export default function NavAdmin() {
 				className={` grid grid-cols-3  flex-wrap fixed  z-10 lg:w-full text-white transition-all duration-300 p-2 w-full ${
 					bg ? "bg-rojo" : "bg-rojo/10 backdrop-blur"
 				} `}>
-				{/* <div className=""> */}
-				<Link
-					to="/"
-					className="text-5xl text-white font-primary hover:text-gray-400 flex items-center">
-					BookHub
-				</Link>
-
-				{/* </div> */}
-				<div className="flex gap-12 justify-center items-center">
-
+				<div  className="flex items-center">
+					<Link
+						to="/"
+						className="text-5xl text-white font-primary hover:text-gray-400 flex items-center">
+						BookHub
+					</Link>
+				</div>
+				<div className="flex gap-10 justify-center items-center">
 					<Link
 						to="/home"
 						className={` hover:text-gray-400 font-bold flex flex-col justify-center items-center w-16`}>
 						<AiOutlineHome size={25} />
 						<span>Inicio</span>
 					</Link>
-					{isLoggedIn && (
-						<div>
-							<Link
-								to="/dashboard"
-								className={` hover:text-gray-400 font-bold flex flex-col justify-center items-center  w-16`}>
-								<AiOutlineDashboard size={25} />
-								<span>Dashboard</span>
-							</Link>
-						</div>
-					)}
 					<Link
 						to="/carrito"
 						className={` hover:text-gray-400 font-bold flex flex-col justify-center items-center w-16`}>
@@ -85,6 +73,16 @@ export default function NavAdmin() {
 							</div>
 						)}
 					</Link>
+					{isLoggedIn && (
+						<div>
+							<Link
+								to="/dashboard"
+								className={` hover:text-gray-400 font-bold flex flex-col justify-center items-center  w-16`}>
+								<AiOutlineDashboard size={25} />
+								<span>Dashboard</span>
+							</Link>
+						</div>
+					)}
 				</div>
 
 				{isLoggedIn && (
