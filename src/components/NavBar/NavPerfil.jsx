@@ -15,18 +15,15 @@ const NavPerfil = ({ handleModal }) => {
 	return (
 		<div className="realtive m-0">
 			<div className="flex flex-col justify-center items-center rounded-lg p-2 px-8">
-				<div className="flex flex-col justify-center  items-center rounded-full w-10 h-10 ">
+				<div className="flex gap-6 justify-center  items-center rounded-full w-10 h-10 ">
 					<img
 						src={perfil.image === null ? profile : perfil.image}
 						alt="perfil"
 						className="rounded-full w-10 h-10 object-cover cursor-pointer"
 						onClick={handleModal}
 					/>
+					<BiSolidDownArrow size={12} />
 				</div>
-				<span className="flex items-center">
-					<span className="text-md font-secondary pr-[2px] ">Yo</span>
-					<BiSolidDownArrow size={10} />
-				</span>
 			</div>
 		</div>
 	);
