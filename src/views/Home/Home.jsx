@@ -1,96 +1,111 @@
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllBooks, addToCart, refreshCart, filter, getPerfil } from "../../redux/actions";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import Card from "../../components/Card/Card";
 import Pagination from "../../components/Pagination/Pagination";
-import React from "react";
-import style from "./Home.module.css";
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getAllBooks, addToCart, refreshCart } from "../../redux/actions";
-import axios from "axios";
-import Image from "./Image";
-import { useLocation } from "react-router-dom";
-import { filter } from "../../redux/actions";
-import { getPerfil } from "../../redux/actions";
 import Footer from "../../components/Footer/Footer";
+import Image from "./Image";
+import style from "./Home.module.css";
+import Loading from "../../components/Loading/Loading"; 
+import { FaBookDead } from "react-icons/fa";
 
 const Home = () => {
-	const dispatch = useDispatch();
-
-	const location = useLocation();
+    const dispatch = useDispatch();
+    const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const genreParam = queryParams.get("genre");
 
-	useEffect(() => {
-		dispatch(getPerfil());
-        if (genreParam) {
-            dispatch(filter({ gender: "gender", dataGender: genreParam }));
-        } else {
-            dispatch(getAllBooks());
-        }
-        setPage(1);
+    const [loading, setLoading] = useState(true); 
+    const [page, setPage] = useState(1);
+    const [perPage] = useState(12);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            dispatch(getPerfil());
+            if (genreParam) {
+                await dispatch(filter({ gender: "gender", dataGender: genreParam }));
+            } else {
+                await dispatch(getAllBooks());
+            }
+            setLoading(false);
+            setPage(1);
+        };
+        fetchData();
     }, [dispatch, genreParam]);
 
-	const copyState = useSelector((state) => state.copyState);
-	const perfil = useSelector((state) => state.perfil);
-	console.log(perfil);
-	// agregando:
+    const copyState = useSelector((state) => state.copyState);
 
-	const cart = useSelector((state) => state.cart);
+    useEffect(() => {
+        const fetchCompras = async () => {
+            const compra_id = localStorage.getItem("compra_id");
+            const { send } = (await axios.get(`/compras/${compra_id}`)).data;
+            if (send === true) {
+                localStorage.removeItem("compra_id");
+                localStorage.removeItem("cart");
+                dispatch(addToCart());
+                dispatch(refreshCart());
+            }
+        };
 
-	const [page, setPage] = useState(1);
-	const [perPage, setPerPage] = useState(12);
+        fetchCompras();
+        dispatch(getAllBooks());
+        setPage(1);
+    }, [dispatch]);
 
-	useEffect(() => {
-		const compra_id = localStorage.getItem("compra_id");
+    const idxLast = page * perPage;
+    const idxFirst = idxLast - perPage;
+    const currentData = copyState?.slice(idxFirst, idxLast);
+    const max = Math.ceil(copyState?.length / perPage);
 
-		const getAllcompras = async () => {
-			const { send } = (await axios.get(`/compras/${compra_id}`)).data;
-			//console.log(send);
-			if (send === true) {
-				localStorage.removeItem("compra_id");
-				localStorage.removeItem("cart");
-				dispatch(addToCart());
-				dispatch(refreshCart());
-			}
-		};
+    return (
+        <div className="flex flex-col ">
+            <div>
+                <Image />
+            </div>
 
-		getAllcompras();
-		dispatch(getAllBooks());
-		setPage(1);
-	}, [dispatch]);
+            <header className="">
+                <SearchBar setPage={setPage} setLoading={setLoading} />
+            </header>
 
-	const idxLast = page * perPage;
-	const idxFirst = idxLast - perPage;
-	const currentData = copyState?.slice(idxFirst, idxLast);
-	const max = Math.ceil(copyState?.length / perPage);
-
-	return (
-		<div className="flex flex-col ">
-			<div>
-				<Image/>
-			</div>
-			
-			<header className="">
-				<SearchBar setPage={setPage} />
-			</header>
-
-			<div className="max-w-screen-2xl  px-40 mt-4 ">
-				<div className="grid grid-flow-row gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 mb-4 uppercase  ">
-					{currentData?.slice(0, 12).map((book, idx) => (
-						<div key={idx} className={style.card}>
-							<Card book={book} />
+            <div className="max-w-screen-2xl px-40 mt-4">
+                {loading ? (
+                    <Loading /> 
+                ) : currentData?.length > 0 ? (
+                    <div className="grid grid-flow-row gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 mb-4 uppercase">
+                        {currentData.map((book, idx) => (
+                            <div key={idx} className={style.card}>
+                                <Card book={book} />
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+					<div className="flex flex-col justify-center items-center text-2xl font-bold text-white p-[2rem] space-y-5 h-[20rem]">
+                        <div className="text-6xl space-x-4 flex text-center">
+							<FaBookDead />
+							<h1> ¡Lo sentimos! </h1>
 						</div>
-					))}
-				</div>
-			</div>
-			<div className="flex justify-center mb-8">
-				<Pagination page={page} setPage={setPage} perPage={perPage} max={max} />
-			</div>
-			<div>
-				<Footer/>
-			</div>
-		</div>
-	);
+                        <h2>
+                            No pudimos encontrar ningún libro que coincida con tu búsqueda.
+                        </h2>
+                    </div>
+                )}
+            </div>
+            <div className="flex justify-center mb-8">
+				{!loading && currentData?.length > 0 && (
+					<div className="flex justify-center mb-8">
+						<Pagination page={page} setPage={setPage} perPage={perPage} max={max} />
+					</div>
+				)}
+            </div>
+            <div>
+                <Footer />
+            </div>
+        </div>
+    );
 };
 
 export default Home;
