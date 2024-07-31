@@ -95,7 +95,11 @@ const Home = () => {
                 )}
             </div>
             <div className="flex justify-center mb-8">
-                <Pagination page={page} setPage={setPage} perPage={perPage} max={max} />
+				{!loading && currentData?.length > 0 && (
+					<div className="flex justify-center mb-8">
+						<Pagination page={page} setPage={setPage} perPage={perPage} max={max} />
+					</div>
+				)}
             </div>
             <div>
                 <Footer />
