@@ -9,6 +9,8 @@ import StarRating from "./Starts"
 import {MdAddShoppingCart} from "react-icons/md"
 import { Link } from "react-router-dom"
 import { FaEdit, FaTrash } from "react-icons/fa"
+import Footer from "../../components/Footer/Footer"
+import Loading from '../../components/Loading/Loading'
 
 const Detail = () => {
     const dispatch = useDispatch()
@@ -19,6 +21,7 @@ const Detail = () => {
 	const isAdmins = localStorage.getItem("isAdmin") === "true";
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [loading, setLoading] = useState(true);
 
 	const isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
 	const navigate = useNavigate()
@@ -44,9 +47,11 @@ const Detail = () => {
       }, []);
     
     useEffect(() => {
+        setLoading(true);
         dispatch(bookId(id))
-        dispatch(getPuntuationId(id))
-        dispatch(getOpinionId(id))
+            .then(() => dispatch(getPuntuationId(id)))
+            .then(() => dispatch(getOpinionId(id)))
+            .finally(() => setLoading(false));
     }, [dispatch, id]) 
 
     const puntuationId = useSelector(state => state.puntuationId)
@@ -71,10 +76,18 @@ const Detail = () => {
           }
         }
 
+	if(loading){
+		return (
+			<div className="flex items-center justify-center h-[50rem]">
+				<Loading />
+			</div>
+		)
+	}
+
     return (
-			<div className="max-w-screen min-h-[100vh] bg-negro pt-24">
-				<div className="grid grid-cols-3  xl:w-100vw">
-					<div className="w-full p-10">
+			<div className="max-w-screen min-h-[100vh] bg-negro pt-20 ">
+				<div className="flex w-full xl:w-100vw p-10 h-[40rem]">
+					<div className="w-1/3 p-10">
 						<div className="flex items-center justify-between">
 							{isAdmins && <Link to={`/editar/${bookDetail.id}`}>
 								<button className="flex items-center mt-4 text-blanco text-xl"> Editar <FaEdit className="ml-1" />
@@ -83,19 +96,24 @@ const Detail = () => {
 							{isAdmins &&<button className="flex items-center text-blanco mt-4 text-xl" onClick={() => handleDelete(bookDetail.id)}> Eliminar <FaTrash className="ml-1 text-blanco" />
 							</button>}
 						</div>
-						<img src={bookDetail.image} alt={bookDetail.name} className="" />
-						<div className="flex items-center gap-2 justify-between mt-2">
-							<h2 className="text-2xl text-white font-secondary">
-								Autor: {bookDetail.Author?.name}
-							</h2>
-							<h2 className="text-2xl text-white font-secondary">
-								Genero: {bookDetail.Gender?.name}
-							</h2>
+						<div className="flex justify-center">
+							<img src={bookDetail.image} alt={bookDetail.name} className=" w-[15rem] h-[23rem] object-cover" />
+						</div>
+						<div className="flex flex-col pt-5  ">
+							<div className="flex flex-col items-center">
+
+								<h2 className="text-2xl text-white font-secondary">
+									Autor: {bookDetail.Author?.name}
+								</h2>
+								<h2 className="text-2xl text-white font-secondary">
+									Genero: {bookDetail.Gender?.name}
+								</h2>
+							</div>
 						</div>
 					</div>
-					<div className="col-span-2 m-8">
+					<div className="col-span-2 m-8 w-1/2">
 						<div className="mb-5">
-							<h1 className="text-6xl text-white font-primary">
+							<h1 className="text-5xl text-white font-primary">
 								{bookDetail.name}
 							</h1>
 						</div>
@@ -160,6 +178,9 @@ const Detail = () => {
 						</div>
 					</div>
 				) : null}
+				<div>
+					<Footer/>
+				</div>
 			</div>
 		);
 
