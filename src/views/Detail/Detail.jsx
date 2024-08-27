@@ -52,6 +52,7 @@ const Detail = () => {
             .then(() => dispatch(getPuntuationId(id)))
             .then(() => dispatch(getOpinionId(id)))
             .finally(() => setLoading(false));
+			setTimeout(() => window.scrollTo(0, 0), 0);
     }, [dispatch, id]) 
 
     const puntuationId = useSelector(state => state.puntuationId)
@@ -63,12 +64,26 @@ const Detail = () => {
             Swal.fire({
               title: "El producto ya está en el carrito",
               icon: "warning",
+			  timer: 1500,
+			  toast: true,
+			  showConfirmButton: false,
+			  didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			  }
             });
           } else {
             dispatch(addToCart(bookDetail));
             Swal.fire({
-              title: "Producto agregado",
+              title: "Producto agregado al carrito",
               icon: "success",
+			  timer: 2000,
+			  toast: true,
+			  showConfirmButton: false,
+			  didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			  }
             });
     
             const updatedCart = [...cart, bookDetail];
@@ -87,7 +102,7 @@ const Detail = () => {
     return (
 			<div className="max-w-screen min-h-[100vh] bg-negro pt-20 ">
 				<div className="flex w-full xl:w-100vw p-10 h-[40rem]">
-					<div className="w-1/3 p-10">
+					<div className="w-1/2 p-10">
 						<div className="flex items-center justify-between">
 							{isAdmins && <Link to={`/editar/${bookDetail.id}`}>
 								<button className="flex items-center mt-4 text-blanco text-xl"> Editar <FaEdit className="ml-1" />
@@ -141,12 +156,12 @@ const Detail = () => {
 							</div>
 						</div>
 						<div className="flex justify-between">
-							<h4 className="flex items-center bg-rojo p-3 text-white text-2xl mt-6 rounded-lg font-primary">
+							<h4 className="flex items-center bg-rojo p-[1rem] text-white text-xl mt-6 rounded-lg font-primary">
 								Precio ${bookDetail.price}
 							</h4>
 							<button
 								onClick={addCart}
-								className="flex items-center bg-rojo p-5 text-white text-2xl mt-6 rounded-lg font-primary">
+								className="flex items-center bg-rojo p-[1rem] text-white text-xl mt-6 rounded-lg font-primary">
 								<MdAddShoppingCart   />
 								<span className="pl-2">Agregar al carrito</span>
 							</button>
