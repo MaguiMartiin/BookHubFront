@@ -52,7 +52,7 @@ const Detail = () => {
             .then(() => dispatch(getPuntuationId(id)))
             .then(() => dispatch(getOpinionId(id)))
             .finally(() => setLoading(false));
-			 window.scrollTo(0, 0);
+			setTimeout(() => window.scrollTo(0, 0), 0);
     }, [dispatch, id]) 
 
     const puntuationId = useSelector(state => state.puntuationId)
@@ -64,12 +64,26 @@ const Detail = () => {
             Swal.fire({
               title: "El producto ya está en el carrito",
               icon: "warning",
+			  timer: 1500,
+			  toast: true,
+			  showConfirmButton: false,
+			  didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			  }
             });
           } else {
             dispatch(addToCart(bookDetail));
             Swal.fire({
-              title: "Producto agregado",
+              title: "Producto agregado al carrito",
               icon: "success",
+			  timer: 2000,
+			  toast: true,
+			  showConfirmButton: false,
+			  didOpen: (toast) => {
+				toast.addEventListener('mouseenter', Swal.stopTimer)
+				toast.addEventListener('mouseleave', Swal.resumeTimer)
+			  }
             });
     
             const updatedCart = [...cart, bookDetail];
